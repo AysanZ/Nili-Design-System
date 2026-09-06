@@ -18,7 +18,7 @@ import {
 } from '@icons';
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon',
+  title: 'Core Elements/Icons',
   component: Icon,
   parameters: {
     docs: {

@@ -14,7 +14,15 @@ export interface AvatarProps extends Omit<
   'color' | 'children'
 > {
   size?: AvatarSize;
-  /** Background/foreground pair for the fallback surface. */
+  /**
+   * Background/foreground pair for the fallback surface.
+   *
+   * Figma has no colour axis on Avatar — it draws one `⚪️ Solid BG` On/Off.
+   * The six tones are an extension, and they exist for `AvatarGroup`: a stack
+   * of six identical grey circles is unreadable, and tinting them is the
+   * cheapest way to tell them apart before the images load. `soft` is the
+   * Figma default and matches its Solid BG exactly.
+   */
   tone?: AvatarTone;
 
   /**

@@ -5,7 +5,7 @@ import { FileUploadArea, FileUploadCard, FileFormatIcon, ImageUpload } from '.';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof FileUploadArea> = {
-  title: 'Components/File Upload',
+  title: 'Base Components/File Upload',
   component: FileUploadArea,
   parameters: {
     docs: {

@@ -5,7 +5,7 @@ import { Badge, StatusBadge } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Badge> = {
-  title: 'Components/Badge',
+  title: 'Base Components/Badge',
   component: Badge,
   parameters: {
     docs: {

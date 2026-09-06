@@ -10,6 +10,7 @@ import {
   textInputAffixVariants,
   textInputShortcutVariants,
   textInputSuffixVariants,
+  textInputPrefixVariants,
   textInputAttachedVariants,
   TEXT_INPUT_TYPE_PRESETS,
 } from './text-input.styles';
@@ -45,6 +46,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       type = 'basic',
       htmlType,
       label,
+      sublabel,
+      information = false,
+      informationLabel,
+      labelAction,
       hint,
       error,
       required,
@@ -60,6 +65,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       select,
       button,
       suffix,
+      prefix,
+      selectPosition,
       latin,
       disabled,
       id,
@@ -84,8 +91,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     // The leading edge can be an emoji picker or an attached dropdown; the
     // trailing edge a shortcut chip, a card brand, a suffix or a button. None
     // of them costs anything when the slot is empty.
-    const leadingAttached = type === 'dropdown' ? select : undefined;
-    const trailingAttached = type === 'button' ? button : undefined;
+    // Figma puts the country code before a phone number and the currency
+    // after an amount, so the side comes from the type unless overridden.
+    const selectSide = selectPosition ?? preset.selectSide ?? 'end';
+    const leadingAttached = selectSide === 'start' ? select : undefined;
+    const trailingAttached =
+      type === 'button' ? button : selectSide === 'end' ? select : undefined;
 
     return (
       <div className={cn('flex w-full flex-col gap-1', rootClassName)}>
@@ -93,6 +104,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <Label
             htmlFor={inputId}
             required={required}
+            sublabel={sublabel}
+            information={information}
+            informationLabel={informationLabel}
+            hint={labelAction}
             disabled={Boolean(disabled)}
           >
             {label}
@@ -127,6 +142,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
               className={textInputAdornmentVariants({ side: 'start', size })}
             >
               {startIcon}
+            </span>
+          )}
+
+          {prefix != null && (
+            <span className={cn(textInputPrefixVariants(), 'ps-3')}>
+              {prefix}
             </span>
           )}
 

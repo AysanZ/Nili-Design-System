@@ -204,7 +204,10 @@
     "continueWith": "ادامه با",
     "showMore": "نمایش بیشتر",
     "today": "امروز",
-    "section": "بخش"
+    "section": "بخش",
+    "lineSpacing": "خط با فاصله",
+    "textAndLine": "متن و خط",
+    "solidText": "متن پررنگ"
   },
   "colorPicker": {
     "spectrum": "اشباع و روشنایی",
@@ -332,7 +335,9 @@
     "currentPage": "صفحهٔ {{page}}",
     "ellipsis": "صفحه‌های بیشتر",
     "summary": "صفحهٔ {{page}} از {{total}}",
-    "results": "{{total}} نتیجه"
+    "results": "{{total}} نتیجه",
+    "perPage": "{{size}} / صفحه",
+    "perPageLabel": "ردیف در هر صفحه"
   },
   "progressBar": {
     "label": "در حال بارگذاری فایل‌ها",
@@ -379,7 +384,11 @@
     "summary": "{{value}} از {{max}}",
     "reviews": "{{value}} ({{total}} نظر)",
     "average": "میانگین امتیاز",
-    "yours": "امتیاز شما"
+    "yours": "امتیاز شما",
+    "barLabel": "تجربه شما چطور بود؟",
+    "barItem": "{{score}} از {{total}}",
+    "barComment": "دلیلش را بگویید!",
+    "barCommentLabel": "نظر شما"
   },
   "slider": {
     "volume": "صدا",
@@ -441,7 +450,23 @@
     "password": "گذرواژه",
     "amount": "مبلغ",
     "currency": "ریال",
-    "iban": "شبا"
+    "iban": "شبا",
+    "tagLabel": "شهرها",
+    "tagPlaceholder": "برچسب اضافه کنید...",
+    "tagHint": "برای افزودن برچسب Enter بزنید",
+    "removeTag": "حذف برچسب",
+    "counterLabel": "تعداد مهمان",
+    "counterHint": "بین ۱ تا ۱۰",
+    "decrement": "کاهش",
+    "increment": "افزایش",
+    "digitLabel": "کد تأیید",
+    "digitHint": "کد را به تلفن شما فرستادیم",
+    "digitGroup": "کد تأیید",
+    "digitCell": "رقم {{index}} از {{total}}",
+    "digitError": "این کد درست نیست",
+    "inlineLabel": "نام و نام خانوادگی",
+    "inlinePlaceholder": "متن نمونه...",
+    "inlineEdit": "ویرایش"
   },
   "textArea": {
     "bio": "دربارهٔ شما",

@@ -13,7 +13,7 @@ const PEOPLE: AvatarGroupItem[] = [
 ];
 
 const meta: Meta<typeof AvatarGroup> = {
-  title: 'Components/Avatar Group',
+  title: 'Base Components/Avatar/Avatar Group',
   component: AvatarGroup,
   parameters: {
     docs: {

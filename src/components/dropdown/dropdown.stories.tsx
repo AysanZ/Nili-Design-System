@@ -8,7 +8,7 @@ import { Button } from '@components/button';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Components/Dropdown',
+  title: 'Base Components/Dropdown',
   component: Dropdown,
   parameters: {
     docs: {

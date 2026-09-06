@@ -13,7 +13,7 @@ import { Toggle, ToggleGroup } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof ToggleGroup> = {
-  title: 'Components/Toggle',
+  title: 'Base Components/Switch Toggle',
   component: ToggleGroup,
   parameters: {
     docs: {

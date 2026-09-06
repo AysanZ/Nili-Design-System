@@ -5,7 +5,7 @@ import { Slider } from '.';
 import type { SliderValue } from '.';
 
 const meta: Meta<typeof Slider> = {
-  title: 'Components/Slider',
+  title: 'Base Components/Slider',
   component: Slider,
   parameters: {
     docs: {

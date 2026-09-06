@@ -25,6 +25,23 @@ export interface ToggleGroupProps extends Omit<
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   disabled?: boolean;
-  /** Accessible name for the set, e.g. `'حالت نمایش'`. */
-  label?: string;
+  /**
+   * Figma `🔖 Label` — the visible label above the group, drawn with the same
+   * `Label` component the rest of the file uses.
+   *
+   * Until v1.1 this was only the group's `aria-label` and rendered nothing,
+   * so the label Figma draws above every Switch Toggle was missing. When there
+   * is no visible label, pass `ariaLabel` instead.
+   */
+  label?: ReactNode;
+  /** Figma Label's `💬 Sublabel` — the muted "(Optional)". */
+  sublabel?: ReactNode;
+  /** Figma Label's `ℹ️ Information` glyph. `true` uses the default icon. */
+  information?: boolean | ReactNode;
+  /** Accessible name for that glyph. */
+  informationLabel?: string;
+  /** Accessible name for the set when no visible `label` is rendered. */
+  ariaLabel?: string;
+  /** Applied to the wrapper rather than to the group row. */
+  rootClassName?: string;
 }

@@ -39,6 +39,10 @@ export interface PaginationLabels {
   ellipsis?: string;
   /** Compact readout, e.g. `'Page ۳ of ۱۰'`. Used when `type="arrows"`. */
   summary?: (page: string, count: string) => string;
+  /** The per-page control's rendered text, e.g. `'۷ / صفحه'`. */
+  perPage?: (size: string) => string;
+  /** Accessible name for the per-page control. */
+  perPageLabel?: string;
 }
 
 export interface PaginationItemProps extends Omit<
@@ -88,6 +92,17 @@ export interface PaginationProps extends Omit<
   showEdges?: boolean;
   /** Greys out the whole control — a table reloading, for instance. */
   disabled?: boolean;
+
+  /**
+   * Figma's `🧪 Advanced`. Adds the "Page 2 of 16" summary before the trail and
+   * the rows-per-page control after it.
+   */
+  advanced?: boolean;
+  /** Rows per page. Only rendered when `advanced`. */
+  pageSize?: number;
+  /** Choices offered by the per-page control. */
+  pageSizeOptions?: number[];
+  onPageSizeChange?: (pageSize: number) => void;
 
   /**
    * BCP-47 tag driving the digits (`'fa'` → `۱۲`). Defaults to the ambient

@@ -18,7 +18,7 @@ const SIZES = [
 const TONES = ['soft', 'yellow', 'blue', 'green', 'purple', 'red'] as const;
 
 const meta: Meta<typeof Avatar> = {
-  title: 'Components/Avatar',
+  title: 'Base Components/Avatar/Avatar',
   component: Avatar,
   parameters: {
     docs: {

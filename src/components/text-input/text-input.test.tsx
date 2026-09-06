@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TextInput } from '.';
 
@@ -101,7 +101,9 @@ describe('TextInput', () => {
     });
 
     it('lets an explicit prop beat the preset', () => {
-      render(<TextInput type="email" label="Email" latin={false} htmlType="text" />);
+      render(
+        <TextInput type="email" label="Email" latin={false} htmlType="text" />,
+      );
       const input = screen.getByLabelText('Email');
       expect(input).toHaveAttribute('type', 'text');
       expect(input).not.toHaveAttribute('dir');
@@ -137,5 +139,83 @@ describe('TextInput', () => {
       expect(screen.queryByText('⌘K')).not.toBeNull();
       expect(container.querySelector('[aria-hidden]')).not.toBeNull();
     });
+  });
+
+  // Figma puts the country code before a phone number and the currency after
+  // an amount. The side comes from the type, not from the caller.
+  it('places the in-field select on the side the type calls for', () => {
+    const { container: phone } = render(
+      <TextInput
+        type="phone"
+        label="Phone"
+        select={<button type="button">+98</button>}
+      />,
+    );
+    const phoneField = phone.querySelector('input')!.parentElement!;
+    const phoneKids = Array.from(phoneField.children);
+    expect(
+      phoneKids.indexOf(phoneField.querySelector('button')!.parentElement!),
+    ).toBeLessThan(phoneKids.indexOf(phoneField.querySelector('input')!));
+
+    cleanup();
+
+    const { container: amount } = render(
+      <TextInput
+        type="amount"
+        label="Amount"
+        select={<button type="button">EUR</button>}
+      />,
+    );
+    const amountField = amount.querySelector('input')!.parentElement!;
+    const amountKids = Array.from(amountField.children);
+    expect(
+      amountKids.indexOf(amountField.querySelector('button')!.parentElement!),
+    ).toBeGreaterThan(amountKids.indexOf(amountField.querySelector('input')!));
+  });
+
+  it('lets selectPosition override the type', () => {
+    const { container } = render(
+      <TextInput
+        type="phone"
+        label="Phone"
+        selectPosition="end"
+        select={<button type="button">+98</button>}
+      />,
+    );
+    const field = container.querySelector('input')!.parentElement!;
+    const kids = Array.from(field.children);
+    expect(
+      kids.indexOf(field.querySelector('button')!.parentElement!),
+    ).toBeGreaterThan(kids.indexOf(field.querySelector('input')!));
+  });
+
+  it('renders the currency mark before the value', () => {
+    render(<TextInput type="amount" label="Amount" prefix="€" />);
+    expect(screen.getByText('€')).toBeInTheDocument();
+  });
+
+  // The asterisk and "(Optional)" are decoration; the accessible name is the
+  // label text alone.
+  it('keeps the sublabel out of the accessible name', () => {
+    render(
+      <TextInput
+        label="Phone Number"
+        required
+        sublabel="(Optional)"
+        information
+        informationLabel="More information"
+      />,
+    );
+    // The asterisk, the "(Optional)" sublabel and the information glyph are
+    // all outside the computed name — the field is "Phone Number", not
+    // "Phone Number star optional More information".
+    expect(screen.getByRole('textbox')).toHaveAccessibleName('Phone Number');
+    expect(screen.getByText('(Optional)')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+    expect(
+      screen.getByRole('img', { name: 'More information' }),
+    ).toBeInTheDocument();
   });
 });

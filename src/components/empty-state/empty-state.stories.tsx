@@ -6,7 +6,7 @@ import { Button } from '@components/button';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof EmptyState> = {
-  title: 'Components/Empty State',
+  title: 'Base Components/Empty States',
   component: EmptyState,
   parameters: {
     docs: {

@@ -16,7 +16,9 @@ function Bar(props: React.ComponentProps<typeof ToggleGroup>) {
 describe('Toggle', () => {
   it('is a radiogroup of radios, not pressed buttons', () => {
     render(<Bar defaultValue="list" />);
-    expect(screen.getByRole('radiogroup', { name: 'View' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('radiogroup', { name: 'View' }),
+    ).toBeInTheDocument();
     expect(screen.getAllByRole('radio')).toHaveLength(3);
     expect(screen.getByRole('radio', { name: 'List' })).toBeChecked();
   });
@@ -113,5 +115,27 @@ describe('Toggle', () => {
       /must be rendered inside/,
     );
     quiet.mockRestore();
+  });
+
+  // Figma's Switch Toggle has a visible Label above it.
+  it('renders the visible label and names the group from it', () => {
+    render(
+      <ToggleGroup label="View mode" defaultValue="a">
+        <Toggle value="a">A</Toggle>
+        <Toggle value="b">B</Toggle>
+      </ToggleGroup>,
+    );
+    expect(screen.getByText('View mode')).toBeInTheDocument();
+    expect(screen.getByRole('radiogroup')).toHaveAccessibleName('View mode');
+  });
+
+  it('falls back to ariaLabel with no visible label', () => {
+    render(
+      <ToggleGroup ariaLabel="View mode" defaultValue="a">
+        <Toggle value="a">A</Toggle>
+      </ToggleGroup>,
+    );
+    expect(screen.queryByText('View mode')).not.toBeInTheDocument();
+    expect(screen.getByRole('radiogroup')).toHaveAccessibleName('View mode');
   });
 });

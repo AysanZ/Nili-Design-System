@@ -18,7 +18,7 @@ import { Avatar } from '@components/avatar';
 import { Badge } from '@components/badge';
 
 const meta: Meta<typeof Label> = {
-  title: 'Components/Key Components',
+  title: 'Base Components/Key Components',
   component: Label,
   parameters: {
     docs: {

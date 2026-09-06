@@ -1,5 +1,7 @@
 import { createContext, forwardRef, useContext, useMemo } from 'react';
 import { cn } from '../../lib/cn';
+import { useId } from '../../hooks/use-id';
+import { Label } from '../key-components/label';
 import { useControllableState } from '../../hooks/use-controllable-state';
 import { toggleVariants, toggleGroupVariants } from './toggle.styles';
 import type { ToggleProps, ToggleGroupProps } from './toggle.types';
@@ -136,7 +138,12 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       onValueChange,
       disabled,
       label,
+      sublabel,
+      information = false,
+      informationLabel,
+      ariaLabel,
       className,
+      rootClassName,
       children,
       ...rest
     },
@@ -153,16 +160,35 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       [value, disabled, setValue],
     );
 
+    const groupId = useId();
+    const labelId = label != null ? `${groupId}-label` : undefined;
+
     return (
       <ToggleGroupContext.Provider value={context}>
-        <div
-          ref={ref}
-          role="radiogroup"
-          aria-label={label}
-          className={cn(toggleGroupVariants(), className)}
-          {...rest}
-        >
-          {children}
+        <div className={cn('flex flex-col gap-1', rootClassName)}>
+          {label != null && (
+            <Label
+              id={labelId}
+              // A radiogroup is not a form control, so `htmlFor` has nothing
+              // to point at; the association runs the other way.
+              sublabel={sublabel}
+              information={information}
+              informationLabel={informationLabel}
+              disabled={Boolean(disabled)}
+            >
+              {label}
+            </Label>
+          )}
+          <div
+            ref={ref}
+            role="radiogroup"
+            aria-label={label == null ? ariaLabel : undefined}
+            aria-labelledby={labelId}
+            className={cn(toggleGroupVariants(), className)}
+            {...rest}
+          >
+            {children}
+          </div>
         </div>
       </ToggleGroupContext.Provider>
     );

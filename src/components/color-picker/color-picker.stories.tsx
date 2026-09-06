@@ -5,7 +5,7 @@ import { ColorPicker, ColorDot } from '.';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof ColorPicker> = {
-  title: 'Components/Color Picker',
+  title: 'Base Components/Color Picker',
   component: ColorPicker,
   parameters: {
     docs: {

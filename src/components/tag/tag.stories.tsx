@@ -7,7 +7,7 @@ import { Icon } from '@components/icon';
 import { Avatar } from '@components/avatar';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag',
+  title: 'Base Components/Tag',
   component: Tag,
   parameters: {
     docs: {

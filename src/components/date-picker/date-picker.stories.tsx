@@ -6,7 +6,7 @@ import { Button } from '@components/button';
 import { formatDate } from '@/lib/calendar';
 
 const meta: Meta<typeof DatePicker> = {
-  title: 'Components/Date Picker',
+  title: 'Base Components/Date Picker',
   component: DatePicker,
   parameters: {
     docs: {

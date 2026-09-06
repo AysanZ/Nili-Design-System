@@ -21,6 +21,43 @@ export type ContentDividerOrientation = NonNullable<
   ContentDividerVariantProps['orientation']
 >;
 
+/** Figma `🧩 Type` — the nine named presets on the Content Divider page. */
+export type ContentDividerType =
+  | 'line'
+  | 'line-spacing'
+  | 'text-and-line'
+  | 'text'
+  | 'solid-text'
+  | 'icon-button'
+  | 'icon-button-group'
+  | 'text-button'
+  | 'text-button-group';
+
+/**
+ * Figma's nine `Type` values, as presets over the three real axes.
+ *
+ * The four button rows differ from each other only in *what you pass as
+ * children* — a CompactButton, a ButtonGroup, a Button, a group of Buttons —
+ * so they resolve to the same geometry. They are still listed, because naming
+ * the case you are building is the point of matching Figma, and because a
+ * preset that quietly did something different from its Figma twin would be
+ * worse than no preset at all.
+ */
+export const CONTENT_DIVIDER_TYPE_PRESETS: Record<
+  ContentDividerType,
+  Partial<Pick<ContentDividerProps, 'spacing' | 'align' | 'appearance'>>
+> = {
+  line: { spacing: 'none' },
+  'line-spacing': { spacing: 'md' },
+  'text-and-line': { spacing: 'sm', align: 'start' },
+  text: { spacing: 'sm', align: 'center' },
+  'solid-text': { spacing: 'sm', align: 'center', appearance: 'solid' },
+  'icon-button': { spacing: 'sm', align: 'center' },
+  'icon-button-group': { spacing: 'sm', align: 'center' },
+  'text-button': { spacing: 'sm', align: 'center' },
+  'text-button-group': { spacing: 'sm', align: 'center' },
+};
+
 export interface ContentDividerProps extends Omit<
   ComponentPropsWithoutRef<'div'>,
   'children'
@@ -32,6 +69,12 @@ export interface ContentDividerProps extends Omit<
   orientation?: ContentDividerOrientation;
   /** `solid` is the stronger rule Figma uses for "Solid Text Divider". */
   appearance?: 'subtle' | 'solid';
+  /**
+   * Figma `🧩 Type`. A shorthand that sets `spacing`, `align` and `appearance`
+   * together; anything you pass explicitly still wins, so the preset is a floor
+   * rather than a ceiling.
+   */
+  type?: ContentDividerType;
 }
 
 /**
@@ -49,15 +92,20 @@ export const ContentDivider = forwardRef<HTMLDivElement, ContentDividerProps>(
   function ContentDivider(
     {
       children,
-      spacing = 'none',
-      align = 'center',
+      type,
+      spacing: spacingProp,
+      align: alignProp,
       orientation = 'horizontal',
-      appearance = 'subtle',
+      appearance: appearanceProp,
       className,
       ...rest
     },
     ref,
   ) {
+    const preset = type ? CONTENT_DIVIDER_TYPE_PRESETS[type] : undefined;
+    const spacing = spacingProp ?? preset?.spacing ?? 'none';
+    const align = alignProp ?? preset?.align ?? 'center';
+    const appearance = appearanceProp ?? preset?.appearance ?? 'subtle';
     const isText = typeof children === 'string' || typeof children === 'number';
 
     if (!children) {

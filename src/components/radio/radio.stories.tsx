@@ -5,7 +5,7 @@ import { Radio, RadioGroup } from '.';
 import { HintText } from '@components/key-components';
 
 const meta: Meta<typeof RadioGroup> = {
-  title: 'Components/Radio',
+  title: 'Base Components/Radio',
   component: RadioGroup,
   parameters: {
     docs: {

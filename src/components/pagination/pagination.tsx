@@ -12,6 +12,7 @@ import { formatNumber } from '../../lib/numerals';
 import { useControllableState } from '../../hooks/use-controllable-state';
 import { useDirection } from '../../providers/direction';
 import { Icon } from '../icon';
+import { Dropdown } from '../dropdown';
 import {
   paginationVariants,
   paginationItemVariants,
@@ -99,6 +100,8 @@ const DEFAULT_LABELS: Required<PaginationLabels> = {
   currentPage: (page) => `Page ${page}`,
   ellipsis: 'More pages',
   summary: (page, count) => `Page ${page} of ${count}`,
+  perPage: (size) => `${size} / page`,
+  perPageLabel: 'Rows per page',
 };
 
 /**
@@ -212,6 +215,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       align = 'center',
       showEdges = false,
       disabled = false,
+      advanced = false,
+      pageSize,
+      pageSizeOptions = [7, 10, 25, 50],
+      onPageSizeChange,
       locale: localeProp,
       labels,
       className,
@@ -253,9 +260,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       isDisabled: boolean,
     ) => (
       <li key={key}>
-        <PaginationItem fullRadius={type === 'full-radius'}
-          
-          
+        <PaginationItem
+          fullRadius={type === 'full-radius'}
+
           aria-label={label}
           disabled={disabled || isDisabled}
           onClick={() => goTo(target)}
@@ -270,60 +277,102 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const atStart = current <= 1;
     const atEnd = current >= count;
 
-    return (
-      <nav ref={ref} aria-label={text.root} className={className} {...rest}>
-        <ul className={paginationVariants({ align })}>
-          {showArrows &&
-            showEdges &&
-            arrow('first', RiArrowLeftDoubleLine, text.first, 1, atStart)}
-          {showArrows &&
-            arrow(
-              'previous',
-              RiArrowLeftSLine,
-              text.previous,
-              current - 1,
-              atStart,
-            )}
+    const list = (
+      <ul className={cn(paginationVariants({ align }), advanced && 'flex-1')}>
+        {showArrows &&
+          showEdges &&
+          arrow('first', RiArrowLeftDoubleLine, text.first, 1, atStart)}
+        {showArrows &&
+          arrow(
+            'previous',
+            RiArrowLeftSLine,
+            text.previous,
+            current - 1,
+            atStart,
+          )}
 
-          {deviceMode === 'mobile' && (
-            <li
-              className={paginationSummaryVariants()}
-              aria-live="polite"
-            >
-              {text.summary(format(current), format(count))}
+        {deviceMode === 'mobile' && (
+          <li className={paginationSummaryVariants()} aria-live="polite">
+            {text.summary(format(current), format(count))}
+          </li>
+        )}
+
+        {slots.map((slot, index) =>
+          typeof slot === 'number' ? (
+            <li key={slot}>
+              <PaginationItem
+                fullRadius={type === 'full-radius'}
+
+                active={slot === current}
+                disabled={disabled}
+                aria-label={
+                  slot === current
+                    ? text.currentPage(format(slot))
+                    : text.page(format(slot))
+                }
+                onClick={() => goTo(slot)}
+              >
+                {format(slot)}
+              </PaginationItem>
             </li>
-          )}
+          ) : (
+            <li key={`${slot}-${index}`}>
+              <PaginationEllipsis label={text.ellipsis} />
+            </li>
+          ),
+        )}
 
-          {slots.map((slot, index) =>
-            typeof slot === 'number' ? (
-              <li key={slot}>
-                <PaginationItem fullRadius={type === 'full-radius'}
-                  
-                  active={slot === current}
-                  disabled={disabled}
-                  aria-label={
-                    slot === current
-                      ? text.currentPage(format(slot))
-                      : text.page(format(slot))
-                  }
-                  onClick={() => goTo(slot)}
-                >
-                  {format(slot)}
-                </PaginationItem>
-              </li>
-            ) : (
-              <li key={`${slot}-${index}`}>
-                <PaginationEllipsis  label={text.ellipsis} />
-              </li>
-            ),
-          )}
+        {showArrows &&
+          arrow('next', RiArrowRightSLine, text.next, current + 1, atEnd)}
+        {showArrows &&
+          showEdges &&
+          arrow('last', RiArrowRightDoubleLine, text.last, count, atEnd)}
+      </ul>
+    );
 
-          {showArrows &&
-            arrow('next', RiArrowRightSLine, text.next, current + 1, atEnd)}
-          {showArrows &&
-            showEdges &&
-            arrow('last', RiArrowRightDoubleLine, text.last, count, atEnd)}
-        </ul>
+    if (!advanced) {
+      return (
+        <nav ref={ref} aria-label={text.root} className={className} {...rest}>
+          {list}
+        </nav>
+      );
+    }
+
+    // Figma's Advanced layout: summary — trail — rows-per-page, the trail
+    // centred between two equal-width flanks so it does not drift sideways as
+    // the page number grows from 1 to 16.
+    return (
+      <nav
+        ref={ref}
+        aria-label={text.root}
+        className={cn('flex w-full items-center gap-4', className)}
+        {...rest}
+      >
+        <p
+          className={cn(paginationSummaryVariants(), 'w-48 shrink-0')}
+          aria-live="polite"
+        >
+          {text.summary(format(current), format(count))}
+        </p>
+
+        {list}
+
+        <div className="flex w-48 shrink-0 justify-end">
+          {pageSize != null && (
+            <Dropdown
+              appearance="compact"
+              size="xs"
+              ariaLabel={text.perPageLabel}
+              value={String(pageSize)}
+              disabled={disabled}
+              onChange={(next) => onPageSizeChange?.(Number(next))}
+              options={pageSizeOptions.map((option) => ({
+                value: String(option),
+                label: text.perPage(format(option)),
+              }))}
+            />
+          )}
+        </div>
       </nav>
     );
   },

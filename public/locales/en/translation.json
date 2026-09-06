@@ -204,7 +204,10 @@
     "continueWith": "Continue with",
     "showMore": "Show more",
     "today": "Today",
-    "section": "Section"
+    "section": "Section",
+    "lineSpacing": "Line spacing",
+    "textAndLine": "Text & line",
+    "solidText": "Solid text"
   },
   "colorPicker": {
     "spectrum": "Saturation and brightness",
@@ -332,7 +335,9 @@
     "currentPage": "Page {{page}}",
     "ellipsis": "More pages",
     "summary": "Page {{page}} of {{total}}",
-    "results": "{{total}} results"
+    "results": "{{total}} results",
+    "perPage": "{{size}} / page",
+    "perPageLabel": "Rows per page"
   },
   "progressBar": {
     "label": "Uploading files",
@@ -379,7 +384,11 @@
     "summary": "{{value}} out of {{max}}",
     "reviews": "{{value}} ({{total}} reviews)",
     "average": "Average rating",
-    "yours": "Your rating"
+    "yours": "Your rating",
+    "barLabel": "How was your experience?",
+    "barItem": "{{score}} of {{total}}",
+    "barComment": "Tell us why!",
+    "barCommentLabel": "Your comment"
   },
   "slider": {
     "volume": "Volume",
@@ -441,7 +450,23 @@
     "password": "Password",
     "amount": "Amount",
     "currency": "IRR",
-    "iban": "IBAN"
+    "iban": "IBAN",
+    "tagLabel": "Cities",
+    "tagPlaceholder": "Add tags...",
+    "tagHint": "Press Enter to add a tag",
+    "removeTag": "Remove tag",
+    "counterLabel": "Guests",
+    "counterHint": "Between 1 and 10",
+    "decrement": "Decrease",
+    "increment": "Increase",
+    "digitLabel": "Verification code",
+    "digitHint": "We sent a code to your phone",
+    "digitGroup": "Verification code",
+    "digitCell": "Digit {{index}} of {{total}}",
+    "digitError": "That code is not right",
+    "inlineLabel": "Full name",
+    "inlinePlaceholder": "Placeholder text...",
+    "inlineEdit": "Edit"
   },
   "textArea": {
     "bio": "About you",

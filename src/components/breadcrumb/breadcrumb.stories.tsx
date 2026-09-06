@@ -5,7 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'Components/Breadcrumb',
+  title: 'Base Components/Breadcrumbs',
   component: Breadcrumb,
   parameters: {
     docs: {

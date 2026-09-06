@@ -8,6 +8,7 @@ import {
   KeyIcon,
   ChartLegend,
   ContentCard,
+  ContentLabel,
 } from '.';
 
 describe('Label', () => {
@@ -122,5 +123,42 @@ describe('ContentCard', () => {
   it('is inert without onSelect', () => {
     render(<ContentCard title="Design System" />);
     expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  it('renders the ContentLabel slots Figma defines', () => {
+    render(
+      <ContentLabel
+        title="Ada Lovelace"
+        required
+        sublabel="admin"
+        badge={<span>Pro</span>}
+        description="last seen today"
+        toggle={<span>toggle</span>}
+      />,
+    );
+    expect(screen.getByText('admin')).toBeInTheDocument();
+    expect(screen.getByText('Pro')).toBeInTheDocument();
+    expect(screen.getByText('last seen today')).toBeInTheDocument();
+    expect(screen.getByText('toggle')).toBeInTheDocument();
+  });
+
+  it('renders the Label sublabel and information glyph', () => {
+    render(
+      <Label
+        required
+        sublabel="(Optional)"
+        information
+        informationLabel="More information"
+      >
+        Email
+      </Label>,
+    );
+    expect(screen.getByText('(Optional)')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+    expect(
+      screen.getByRole('img', { name: 'More information' }),
+    ).toBeInTheDocument();
   });
 });

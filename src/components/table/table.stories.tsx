@@ -19,7 +19,7 @@ import { Icon } from '@components/icon';
 import { formatNumber } from '@lib/numerals';
 
 const meta: Meta<typeof Table> = {
-  title: 'Components/Table',
+  title: 'Base Components/Table',
   component: Table,
   parameters: {
     docs: {

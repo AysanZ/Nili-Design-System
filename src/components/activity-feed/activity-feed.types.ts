@@ -22,6 +22,8 @@ export interface ActivityFeedItemProps extends Omit<
   description?: ReactNode;
   /** Pre-formatted timestamp. Use `formatNumber` for Persian digits. */
   timestamp?: ReactNode;
+  /** Figma `🎖️ Badge` — sits beside the title, e.g. a status or a count. */
+  badge?: ReactNode;
   unread?: boolean;
   /** `type="button"`: up to two actions under the text. */
   actions?: ReactNode;

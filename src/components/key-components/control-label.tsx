@@ -1,4 +1,8 @@
-import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+} from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/cn';
 
@@ -113,7 +117,10 @@ export const ControlLabel = forwardRef<HTMLSpanElement, ControlLabelProps>(
         )}
 
         {description != null && (
-          <span id={descriptionId} className={descriptionVariants({ disabled })}>
+          <span
+            id={descriptionId}
+            className={descriptionVariants({ disabled })}
+          >
             {description}
           </span>
         )}

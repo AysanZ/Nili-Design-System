@@ -14,7 +14,7 @@ import { Icon } from '@components/icon';
 import { LinkButton } from '@components/button';
 
 const meta: Meta<typeof QuickActions> = {
-  title: 'Components/Quick Actions',
+  title: 'Base Components/Quick Actions',
   component: QuickActions,
   parameters: {
     docs: {

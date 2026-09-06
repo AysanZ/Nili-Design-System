@@ -4,7 +4,7 @@ import { VideoPlayer } from '.';
 import type { VideoPlayerLabels } from '.';
 
 const meta: Meta<typeof VideoPlayer> = {
-  title: 'Components/Video Player',
+  title: 'Base Components/Video Player',
   component: VideoPlayer,
   parameters: {
     docs: {

@@ -56,7 +56,21 @@ export interface ContentLabelProps extends Omit<
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
   title: ReactNode;
+  /**
+   * Figma `💬 Sublabel` — the muted run *beside* the title, on the same line.
+   *
+   * Not the same slot as `description`: Figma draws both at once, the sublabel
+   * inline after the title and the description on the line below. Folding them
+   * together made "Ada Lovelace · admin" over "last seen today" unreachable.
+   */
+  sublabel?: ReactNode;
   description?: ReactNode;
+  /** Figma `🎖️ Badge` — sits after the title, before any sublabel. */
+  badge?: ReactNode;
+  /** Figma `🚨 Required` — the asterisk after the title. Decorative. */
+  required?: boolean;
+  /** Figma `🔀 Toggle` — trailing control. Rendered after `endAdornment`. */
+  toggle?: ReactNode;
   size?: ContentLabelSize;
 }
 
@@ -67,7 +81,11 @@ export const ContentLabel = forwardRef<HTMLDivElement, ContentLabelProps>(
       startAdornment,
       endAdornment,
       title,
+      sublabel,
       description,
+      badge,
+      required = false,
+      toggle,
       size = 'md',
       className,
       ...rest
@@ -82,13 +100,30 @@ export const ContentLabel = forwardRef<HTMLDivElement, ContentLabelProps>(
       >
         {startAdornment && <span className="shrink-0">{startAdornment}</span>}
         <span className="flex min-w-0 flex-1 flex-col">
-          <span
-            className={cn(
-              'truncate font-medium text-strong-950',
-              size === 'lg' ? 'text-[16px] leading-6' : 'text-[14px] leading-5',
+          <span className="flex min-w-0 items-center gap-1">
+            <span
+              className={cn(
+                'truncate font-medium text-strong-950',
+                size === 'lg'
+                  ? 'text-[16px] leading-6'
+                  : 'text-[14px] leading-5',
+              )}
+            >
+              {title}
+            </span>
+            {required && (
+              // Decorative, like every other asterisk in the system: the
+              // requirement belongs to the control, not to its label.
+              <span aria-hidden className="shrink-0 text-error-base">
+                *
+              </span>
             )}
-          >
-            {title}
+            {badge && <span className="shrink-0">{badge}</span>}
+            {sublabel && (
+              <span className="truncate text-[12px] leading-4 text-sub-600">
+                {sublabel}
+              </span>
+            )}
           </span>
           {description && (
             <span className="truncate text-[12px] leading-4 text-sub-600">
@@ -97,6 +132,7 @@ export const ContentLabel = forwardRef<HTMLDivElement, ContentLabelProps>(
           )}
         </span>
         {endAdornment && <span className="shrink-0">{endAdornment}</span>}
+        {toggle && <span className="shrink-0">{toggle}</span>}
       </div>
     );
   },

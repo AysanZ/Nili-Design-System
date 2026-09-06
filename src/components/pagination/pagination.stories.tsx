@@ -5,7 +5,7 @@ import { Pagination } from '.';
 import type { PaginationLabels } from '.';
 
 const meta: Meta<typeof Pagination> = {
-  title: 'Components/Pagination',
+  title: 'Base Components/Pagination',
   component: Pagination,
   parameters: {
     docs: {
@@ -187,6 +187,38 @@ export const TableFooter = () => {
         labels={labels}
       />
     </div>
+  );
+};
+
+/**
+ * Figma `🧪 Advanced`: the "Page 2 of 16" summary before the trail and the
+ * rows-per-page control after it. The two flanks are equal width so the trail
+ * stays centred as the page number grows.
+ */
+export const Advanced = () => {
+  const { t } = useTranslation();
+  const [page, setPage] = useState(2);
+  const [pageSize, setPageSize] = useState(7);
+  return (
+    <Pagination
+      advanced
+      count={16}
+      page={page}
+      onPageChange={setPage}
+      pageSize={pageSize}
+      onPageSizeChange={setPageSize}
+      labels={{
+        root: t('pagination.label'),
+        previous: t('pagination.previous'),
+        next: t('pagination.next'),
+        ellipsis: t('pagination.ellipsis'),
+        page: (p) => t('pagination.goToPage', { page: p }),
+        currentPage: (p) => t('pagination.currentPage', { page: p }),
+        summary: (p, total) => t('pagination.summary', { page: p, total }),
+        perPage: (size) => t('pagination.perPage', { size }),
+        perPageLabel: t('pagination.perPageLabel'),
+      }}
+    />
   );
 };
 

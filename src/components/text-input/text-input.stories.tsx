@@ -4,16 +4,15 @@ import {
   RiMailLine,
   RiSearchLine,
   RiEyeOffLine,
-  RiPhoneLine,
   RiBankCardLine,
   RiCalendarLine,
 } from '@remixicon/react';
-import { TextInput } from '.';
+import { TextInput, InputSelect } from '.';
 import { Icon } from '@components/icon';
 import { CompactButton, Button } from '@components/button';
 
 const meta: Meta<typeof TextInput> = {
-  title: 'Components/Text Input',
+  title: 'Base Components/Text Input/Text Input',
   component: TextInput,
   parameters: {
     docs: {
@@ -40,8 +39,18 @@ const meta: Meta<typeof TextInput> = {
     type: {
       control: { type: 'select' },
       options: [
-        'basic', 'email', 'phone', 'card', 'website', 'amount',
-        'date', 'search', 'password', 'button', 'dropdown', 'emoji',
+        'basic',
+        'email',
+        'phone',
+        'card',
+        'website',
+        'amount',
+        'date',
+        'search',
+        'password',
+        'button',
+        'dropdown',
+        'emoji',
       ],
       table: { defaultValue: { summary: 'basic' } },
     },
@@ -200,20 +209,198 @@ export const LatinValues = () => {
  */
 export const AllTypes = () => {
   const { t } = useTranslation();
+
+  // Every field on the Figma page carries the same four label parts and the
+  // same hint, so they are pulled out rather than repeated twelve times.
+  const label = {
+    sublabel: t('textInput.optional'),
+    information: true as const,
+    informationLabel: t('textInput.info'),
+    required: true,
+    hint: t('textInput.hintFigma'),
+  };
+
   return (
-    <div className="grid w-[720px] grid-cols-2 gap-5">
-      <TextInput type="basic" label="Basic" placeholder={t('textInput.emailPlaceholder')} />
-      <TextInput type="email" label="Email" placeholder="hello@husan.ir" startIcon={<Icon icon={RiMailLine} />} />
-      <TextInput type="phone" label="Phone" placeholder="(555) 000-0000" startIcon={<Icon icon={RiPhoneLine} />} />
-      <TextInput type="card" label="Card" placeholder="0000 0000 0000 0000" cardProvider={<Icon icon={RiBankCardLine} />} />
-      <TextInput type="website" label="Website" startAffix="https://" placeholder="example.com" />
-      <TextInput type="amount" label="Amount" placeholder="0.00" endAffix={t('textInput.currency')} />
-      <TextInput type="date" label="Date" placeholder="00 / 00 / 0000" endIcon={<Icon icon={RiCalendarLine} />} />
-      <TextInput type="search" label="Search" placeholder={t('textInput.searchPlaceholder')} startIcon={<Icon icon={RiSearchLine} />} shortcut="⌘K" />
-      <TextInput type="password" label="Password" defaultValue="hunter2hunter2" strength="strong" strengthLabel="Strong password" />
-      <TextInput type="button" label="Button" placeholder={t('textInput.emailPlaceholder')} button={<Button size="sm" appearance="ghost">Send</Button>} />
-      <TextInput type="dropdown" label="Dropdown" placeholder="9123456789" select={<span className="px-3 text-[14px] text-sub-600">+98</span>} />
-      <TextInput type="emoji" label="Emoji" placeholder="Type or select an emoji..." emojiPicker={<span aria-hidden>🙂</span>} />
+    <div className="grid w-[760px] grid-cols-2 gap-5">
+      {/* 📂 Basic */}
+      <TextInput
+        {...label}
+        type="basic"
+        label={t('textInput.basicLabel')}
+        placeholder={t('textInput.basicPlaceholder')}
+      />
+
+      {/* 💌 Email */}
+      <TextInput
+        {...label}
+        type="email"
+        label={t('textInput.emailLabel')}
+        placeholder="hello@husan.ir"
+        startIcon={<Icon icon={RiMailLine} />}
+      />
+
+      {/* 📞 Phone — the country code sits *before* the number, inside the field. */}
+      <TextInput
+        {...label}
+        type="phone"
+        label={t('textInput.phoneLabel')}
+        placeholder={t('textInput.phonePlaceholder')}
+        select={
+          <InputSelect
+            icon={<span>🇺🇸</span>}
+            aria-label={t('textInput.phoneCodeLabel')}
+          >
+            {t('textInput.phoneCode')}
+          </InputSelect>
+        }
+      />
+
+      {/* 💳 Card */}
+      <TextInput
+        {...label}
+        type="card"
+        label={t('textInput.cardLabel')}
+        placeholder={t('textInput.cardPlaceholder')}
+        cardProvider={<Icon icon={RiBankCardLine} />}
+      />
+
+      {/* 🌐 Website — `https://` is a bordered block beside the value. */}
+      <TextInput
+        {...label}
+        type="website"
+        label={t('textInput.websiteLabel')}
+        startAffix="https://"
+        placeholder={t('textInput.websitePlaceholder')}
+      />
+
+      {/* 💰 Amount — currency mark inside, currency picker attached after. */}
+      <TextInput
+        {...label}
+        type="amount"
+        label={t('textInput.amountLabel')}
+        prefix={t('textInput.amountSymbol')}
+        placeholder={t('textInput.amountPlaceholder')}
+        select={
+          <InputSelect
+            icon={<span>🇪🇺</span>}
+            aria-label={t('textInput.amountCurrencyLabel')}
+          >
+            {t('textInput.amountCurrency')}
+          </InputSelect>
+        }
+      />
+
+      {/* 📅 Date */}
+      <TextInput
+        {...label}
+        type="date"
+        label={t('textInput.dateLabel')}
+        placeholder={t('textInput.datePlaceholder')}
+        endIcon={<Icon icon={RiCalendarLine} />}
+      />
+
+      {/* 🔍 Search */}
+      <TextInput
+        {...label}
+        type="search"
+        label={t('textInput.searchLabel')}
+        placeholder={t('textInput.searchFigmaPlaceholder')}
+        startIcon={<Icon icon={RiSearchLine} />}
+        shortcut="⌘1"
+      />
+
+      {/* 🔒 Password */}
+      <TextInput
+        {...label}
+        type="password"
+        label={t('textInput.passwordLabel')}
+        defaultValue="hunter2hunter2"
+        endIcon={
+          <CompactButton
+            appearance="ghost"
+            size="md"
+            aria-label={t('textInput.passwordLabel')}
+          >
+            <Icon icon={RiEyeOffLine} />
+          </CompactButton>
+        }
+      />
+
+      {/* 🔘 Button — Figma's "Share Link". */}
+      <TextInput
+        {...label}
+        type="button"
+        label={t('textInput.shareLabel')}
+        defaultValue={t('textInput.websitePlaceholder')}
+        button={
+          <Button size="2xs" appearance="ghost">
+            {t('textInput.copy')}
+          </Button>
+        }
+      />
+
+      {/* 🔽 Dropdown — Figma's "Invite Members"; the picker sits after the value. */}
+      <TextInput
+        {...label}
+        type="dropdown"
+        label={t('textInput.inviteLabel')}
+        placeholder={t('textInput.basicPlaceholder')}
+        select={
+          <InputSelect aria-label={t('textInput.inviteRoleLabel')}>
+            {t('textInput.inviteRole')}
+          </InputSelect>
+        }
+      />
+
+      {/* 🙂 Emoji */}
+      <TextInput
+        {...label}
+        type="emoji"
+        label={t('textInput.emojiLabel')}
+        placeholder={t('textInput.emojiPlaceholder')}
+        emojiPicker={<span aria-hidden>🙂</span>}
+      />
+    </div>
+  );
+};
+
+/**
+ * Figma's `Label [1.0]` has four optional parts, and the Text Input page draws
+ * all of them on every field: the required asterisk, the muted `(Optional)`
+ * sublabel, the information glyph, and a trailing Link Button.
+ *
+ * The asterisk and the sublabel are both `aria-hidden`. Requiredness is carried
+ * by the input's own `required` attribute; announcing "Email Address star
+ * optional" says the same thing three times, twice contradictorily.
+ */
+export const LabelParts = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex w-80 flex-col gap-5">
+      <TextInput
+        label={t('textInput.basicLabel')}
+        placeholder={t('textInput.basicPlaceholder')}
+      />
+      <TextInput
+        label={t('textInput.basicLabel')}
+        required
+        placeholder={t('textInput.basicPlaceholder')}
+      />
+      <TextInput
+        label={t('textInput.basicLabel')}
+        required
+        sublabel={t('textInput.optional')}
+        placeholder={t('textInput.basicPlaceholder')}
+      />
+      <TextInput
+        label={t('textInput.basicLabel')}
+        required
+        sublabel={t('textInput.optional')}
+        information
+        informationLabel={t('textInput.info')}
+        placeholder={t('textInput.basicPlaceholder')}
+        hint={t('textInput.hintFigma')}
+      />
     </div>
   );
 };
@@ -236,10 +423,17 @@ export const AllStates = () => {
   const { t } = useTranslation();
   return (
     <div className="flex w-80 flex-col gap-5">
-      <TextInput label="Placeholder" placeholder={t('textInput.emailPlaceholder')} />
+      <TextInput
+        label="Placeholder"
+        placeholder={t('textInput.emailPlaceholder')}
+      />
       <TextInput label="Filled" defaultValue="hello@husan.ir" type="email" />
       <TextInput label="Disabled" defaultValue="hello@husan.ir" disabled />
-      <TextInput label="Error" defaultValue="hello@" error="Enter a valid email address" />
+      <TextInput
+        label="Error"
+        defaultValue="hello@"
+        error="Enter a valid email address"
+      />
     </div>
   );
 };

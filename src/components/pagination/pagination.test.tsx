@@ -117,4 +117,27 @@ describe('Pagination', () => {
     const { container } = render(<Pagination count={0} />);
     expect(container.firstChild).toBeNull();
   });
+
+  // Figma `🧪 Advanced`: the summary before the trail and the rows-per-page
+  // control after it.
+  it('renders the summary and the per-page control when advanced', () => {
+    render(
+      <Pagination
+        advanced
+        count={16}
+        page={2}
+        pageSize={7}
+        pageSizeOptions={[7, 10]}
+      />,
+    );
+    expect(screen.getByText('Page 2 of 16')).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox', { name: 'Rows per page' }),
+    ).toBeInTheDocument();
+  });
+
+  it('omits both when advanced is off', () => {
+    render(<Pagination count={16} page={2} pageSize={7} />);
+    expect(screen.queryByText('Page 2 of 16')).not.toBeInTheDocument();
+  });
 });

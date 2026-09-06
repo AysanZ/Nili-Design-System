@@ -12,7 +12,7 @@ import { Icon } from '@components/icon';
 import { Badge } from '@components/badge';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Components/Tabs',
+  title: 'Base Components/Tab Menu',
   component: Tabs,
   parameters: {
     docs: {

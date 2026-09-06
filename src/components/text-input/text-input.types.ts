@@ -32,7 +32,7 @@ export type TextInputType =
 
 export interface TextInputProps extends Omit<
   ComponentPropsWithoutRef<'input'>,
-  'size' | 'type'
+  'size' | 'type' | 'prefix'
 > {
   size?: TextInputSize;
   /**
@@ -48,6 +48,14 @@ export interface TextInputProps extends Omit<
   htmlType?: ComponentPropsWithoutRef<'input'>['type'];
   /** Rendered above the field and tied to it. */
   label?: ReactNode;
+  /** Figma Label's `💬 Sublabel` — the muted "(Optional)" beside the label. */
+  sublabel?: ReactNode;
+  /** Figma Label's `ℹ️ Information` glyph. `true` uses the default icon. */
+  information?: boolean | ReactNode;
+  /** Accessible name for that glyph. */
+  informationLabel?: string;
+  /** Figma Label's `🌟 Button` — trailing slot on the label row. */
+  labelAction?: ReactNode;
   /** The line under the field. Becomes the error message when `error` is set. */
   hint?: ReactNode;
   /**
@@ -89,6 +97,13 @@ export interface TextInputProps extends Omit<
   button?: ReactNode;
   /** Figma's `Suffix` — muted text pinned inside the trailing edge. */
   suffix?: ReactNode;
+  /** Muted text before the value — Figma's `€` on an Amount field. */
+  prefix?: ReactNode;
+  /**
+   * Overrides which edge `select` sits on. Defaults to the type's own side:
+   * `start` for Phone, `end` for Amount and Dropdown.
+   */
+  selectPosition?: 'start' | 'end';
 
   /**
    * Pins the field to left-to-right regardless of the ambient direction.

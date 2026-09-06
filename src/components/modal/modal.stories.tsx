@@ -6,7 +6,7 @@ import { Button } from '@components/button';
 import { Checkbox } from '@components/checkbox';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Base Components/Modal',
   component: Modal,
   parameters: {
     docs: {

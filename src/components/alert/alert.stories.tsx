@@ -5,7 +5,7 @@ import { Alert } from '.';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Components/Alert',
+  title: 'Base Components/Alert, Notification & Toast',
   component: Alert,
   parameters: {
     docs: {

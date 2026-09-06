@@ -10,7 +10,7 @@ import { Icon } from '@components/icon';
 import { Button, CompactButton } from '@components/button';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Tooltip',
+  title: 'Base Components/Tooltip',
   component: Tooltip,
   parameters: {
     docs: {

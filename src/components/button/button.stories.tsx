@@ -5,7 +5,7 @@ import { Button } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Base Components/Button/Button',
   component: Button,
   parameters: {
     docs: {

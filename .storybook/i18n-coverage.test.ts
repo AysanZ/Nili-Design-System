@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import en from '../public/locales/en/translation.json';
-import fa from '../public/locales/fa/translation.json';
+import en from '../src/locales/en/translation.json';
+import fa from '../src/locales/fa/translation.json';
 
 function flatten(obj: Record<string, unknown>, prefix = ''): string[] {
   return Object.entries(obj).flatMap(([key, value]) =>

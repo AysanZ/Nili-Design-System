@@ -50,8 +50,17 @@ export interface QuickActionItemProps extends Omit<
   icon?: ReactNode;
   /** Set `false` to drop the tinted chip and render the glyph bare. */
   iconWrapper?: boolean;
+  /**
+   * Figma `💬 Sublabel` — muted text on the *label's* line.
+   *
+   * Figma's item draws a sublabel and a description at once, so they are two
+   * slots here as well; folding them together loses the second line.
+   */
+  sublabel?: ReactNode;
   /** Second line under the label. */
   description?: ReactNode;
+  /** Figma `🎖️ Badge` — beside the label. */
+  badge?: ReactNode;
   /** Keyboard hint at the trailing edge, e.g. `'⌘N'`. */
   shortcut?: ReactNode;
   /** Anything at the trailing edge — a Badge, a count, a chevron. */

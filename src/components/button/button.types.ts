@@ -9,6 +9,14 @@ export interface ButtonProps extends Omit<
   ComponentPropsWithoutRef<'button'>,
   'color'
 > {
+  /**
+   * Figma `🧩 Type` — Primary · Neutral · Error · Success.
+   *
+   * `basic` is **not** on Figma's Button. It exists there only on Fancy Button,
+   * so reach for `<FancyButton color="basic">` when you want that treatment.
+   * The value is kept here because removing it would break callers, but treat
+   * it as outside the design system rather than as a fifth type.
+   */
   color?: ButtonColor;
   appearance?: ButtonAppearance;
   size?: ButtonSize;

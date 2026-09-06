@@ -7,7 +7,7 @@ import { Icon } from '@components/icon';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof Banner> = {
-  title: 'Components/Banner',
+  title: 'Base Components/Banner',
   component: Banner,
   parameters: {
     layout: 'fullscreen',

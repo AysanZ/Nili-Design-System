@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Checkbox } from '.';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Base Components/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {

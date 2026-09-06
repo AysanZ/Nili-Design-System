@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { TextArea } from '.';
 
 const meta: Meta<typeof TextArea> = {
-  title: 'Components/Text Area',
+  title: 'Base Components/Text Area',
   component: TextArea,
   parameters: {
     docs: {

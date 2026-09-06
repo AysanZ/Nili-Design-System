@@ -6,7 +6,7 @@ import { FilterBar, FilterChip, FilterList, FilterListItem } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof FilterBar> = {
-  title: 'Components/Filter',
+  title: 'Base Components/Filter',
   component: FilterBar,
   parameters: {
     docs: {

@@ -6,12 +6,22 @@ import { Badge } from '@components/badge';
 import { LinkButton } from '@components/button';
 
 const meta: Meta<typeof Switch> = {
-  title: 'Components/Switch',
+  title: 'Base Components/Toggle',
   component: Switch,
   parameters: {
     docs: {
       description: {
-        component: `The **Switch**, from the Figma "❖ Switch" page: two sizes, with or without a label, a description and a flip.
+        component: `The on/off control, from the Figma **"❖ Toggle"** page (\`Toggle [1.0]\` + \`Toggle Label [1.0]\`): two sizes, with or without a label, a description and a flip.
+
+> **Naming.** Figma calls this *Toggle*; the code export is \`<Switch>\` and always has been, so the export name is unchanged. Figma's *Switch Toggle* — the segmented control — is a different component, filed under **Base Components → Switch Toggle**.
+
+| Figma property | Prop |
+| --- | --- |
+| 🟢 Active | \`checked\` / \`defaultChecked\` |
+| 📌 State (Default · Hover · Pressed · Disabled) | CSS state + native \`disabled\` |
+| 🔄 Flip | \`labelPosition\` (\`start\` · \`end\`) |
+| ✏️ Edit Label / Sublabel / Description | \`label\` · \`sublabel\` · \`description\` |
+| 💬 Sublabel · 🎖️ Badge · 🔗 Link Button · 📝 Description | \`sublabel\` · \`badge\` · \`linkButton\` · \`description\` (omit to hide) |
 
 **Key Features:**
 - A real \`<input type="checkbox">\` carrying \`role="switch"\`

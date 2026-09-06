@@ -8,7 +8,7 @@ import { Checkbox } from '@components/checkbox';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Components/Drawer',
+  title: 'Base Components/Drawer',
   component: Drawer,
   parameters: {
     docs: {

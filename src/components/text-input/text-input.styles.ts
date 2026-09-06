@@ -129,19 +129,31 @@ export const TEXT_INPUT_TYPE_PRESETS: Record<
     inputMode?: 'text' | 'email' | 'tel' | 'url' | 'numeric' | 'decimal' | 'search';
     autoComplete?: string;
     latin?: boolean;
+    /**
+     * Which edge the in-field `select` sits on for this type. Figma puts the
+     * country code *before* a phone number and the currency *after* an amount,
+     * so the side is a property of the type, not a free choice.
+     */
+    selectSide?: 'start' | 'end';
   }
 > = {
   basic: {},
   email: { htmlType: 'email', inputMode: 'email', autoComplete: 'email', latin: true },
-  phone: { htmlType: 'tel', inputMode: 'tel', autoComplete: 'tel', latin: true },
+  phone: {
+    htmlType: 'tel',
+    inputMode: 'tel',
+    autoComplete: 'tel',
+    latin: true,
+    selectSide: 'start',
+  },
   card: { inputMode: 'numeric', autoComplete: 'cc-number', latin: true },
   website: { htmlType: 'url', inputMode: 'url', autoComplete: 'url', latin: true },
-  amount: { inputMode: 'decimal', latin: true },
+  amount: { inputMode: 'decimal', latin: true, selectSide: 'end' },
   date: { inputMode: 'numeric', latin: true },
   search: { htmlType: 'search', inputMode: 'search' },
   password: { htmlType: 'password', autoComplete: 'current-password' },
   button: {},
-  dropdown: {},
+  dropdown: { selectSide: 'end' },
   emoji: {},
 };
 
@@ -153,6 +165,18 @@ export const textInputShortcutVariants = cva([
 
 /** Muted text pinned inside the trailing edge. Figma's `Suffix`. */
 export const textInputSuffixVariants = cva(
+  'shrink-0 select-none text-sub-600',
+);
+
+/**
+ * Muted text pinned inside the *leading* edge — the `€` before an Amount.
+ *
+ * Not the same thing as `startAffix`: Figma draws the currency mark inside the
+ * same padded frame as the value, with no rule and no fill, while `https://`
+ * on a Website field is a bordered block beside it. Two different drawings, so
+ * two different slots.
+ */
+export const textInputPrefixVariants = cva(
   'shrink-0 select-none text-sub-600',
 );
 

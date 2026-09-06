@@ -103,4 +103,55 @@ describe('Dropdown', () => {
       'true',
     );
   });
+
+  // Figma draws a Label above every Dropdown. Until v1.1 `label` was only an
+  // aria-label and rendered nothing at all.
+  it('renders the visible label and names the trigger from it', () => {
+    render(
+      <Dropdown label="Country" options={[{ value: 'ir', label: 'Iran' }]} />,
+    );
+    expect(screen.getByText('Country')).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveAccessibleName('Country');
+  });
+
+  it('falls back to ariaLabel when there is no visible label', () => {
+    render(
+      <Dropdown
+        ariaLabel="Rows per page"
+        options={[{ value: '7', label: '7' }]}
+      />,
+    );
+    expect(screen.queryByText('Rows per page')).not.toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveAccessibleName('Rows per page');
+  });
+
+  it('marks itself invalid from the error message', () => {
+    render(<Dropdown label="Country" error="Pick one" options={[]} />);
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-invalid',
+      'true',
+    );
+    expect(screen.getByText('Pick one')).toBeInTheDocument();
+  });
+
+  it('renders an option sublabel, badge and shortcut', async () => {
+    render(
+      <Dropdown
+        label="Actions"
+        options={[
+          {
+            value: 'a',
+            label: 'Archive',
+            sublabel: 'admin',
+            badge: <span>New</span>,
+            shortcut: '⌘A',
+          },
+        ]}
+      />,
+    );
+    await userEvent.click(screen.getByRole('combobox'));
+    expect(screen.getByText('admin')).toBeInTheDocument();
+    expect(screen.getByText('New')).toBeInTheDocument();
+    expect(screen.getByText('⌘A')).toBeInTheDocument();
+  });
 });

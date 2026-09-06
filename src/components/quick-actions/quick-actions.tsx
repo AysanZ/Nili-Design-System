@@ -122,7 +122,9 @@ export const QuickActionItem = forwardRef<HTMLElement, QuickActionItemProps>(
       tone = 'neutral',
       icon,
       iconWrapper = true,
+      sublabel,
       description,
+      badge,
       shortcut,
       endAdornment,
       active = false,
@@ -155,9 +157,19 @@ export const QuickActionItem = forwardRef<HTMLElement, QuickActionItemProps>(
           ))}
 
         <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-          {children != null && (
-            <span className={quickActionLabelVariants({ size })}>
-              {children}
+          {(children != null || badge != null || sublabel != null) && (
+            <span className="flex min-w-0 items-center gap-1.5">
+              {children != null && (
+                <span className={quickActionLabelVariants({ size })}>
+                  {children}
+                </span>
+              )}
+              {badge != null && <span className="shrink-0">{badge}</span>}
+              {sublabel != null && (
+                <span className={quickActionDescriptionVariants()}>
+                  {sublabel}
+                </span>
+              )}
             </span>
           )}
           {description != null && (

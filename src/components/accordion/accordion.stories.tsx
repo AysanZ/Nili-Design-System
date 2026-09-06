@@ -7,7 +7,7 @@ import { Icon } from '@components/icon';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof Accordion> = {
-  title: 'Components/Accordion',
+  title: 'Base Components/Accordion',
   component: Accordion,
   parameters: {
     docs: {

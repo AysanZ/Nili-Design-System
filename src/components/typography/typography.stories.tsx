@@ -9,7 +9,7 @@ const VARIANTS = Object.keys(defaultElementForVariant) as Array<
 >;
 
 const meta: Meta<typeof Typography> = {
-  title: 'Components/Typography',
+  title: 'Core Elements/Typography',
   component: Typography,
   parameters: {
     docs: {

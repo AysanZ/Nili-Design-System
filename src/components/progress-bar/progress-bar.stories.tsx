@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ProgressBar, ProgressCircle } from '.';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Components/Progress Bar',
+  title: 'Base Components/Progress Bar',
   component: ProgressBar,
   parameters: {
     docs: {

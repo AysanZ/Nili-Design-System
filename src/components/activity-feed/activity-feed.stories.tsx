@@ -7,7 +7,7 @@ import { Badge } from '@components/badge';
 import { Button, LinkButton } from '@components/button';
 
 const meta: Meta<typeof ActivityFeed> = {
-  title: 'Components/Activity Feed',
+  title: 'Base Components/Activity Feed',
   component: ActivityFeed,
   parameters: {
     docs: {

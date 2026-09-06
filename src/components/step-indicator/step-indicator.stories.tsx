@@ -6,7 +6,7 @@ import type { StepIndicatorLabels } from '.';
 import { Button } from '@components/button';
 
 const meta: Meta<typeof StepIndicator> = {
-  title: 'Components/Step Indicator',
+  title: 'Base Components/Step Indicator',
   component: StepIndicator,
   parameters: {
     docs: {

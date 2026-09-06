@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import enTranslation from '../public/locales/en/translation.json';
-import faTranslation from '../public/locales/fa/translation.json';
+import enTranslation from '../src/locales/en/translation.json';
+import faTranslation from '../src/locales/fa/translation.json';
 
 /**
  * i18next now lives in .storybook, not in src.

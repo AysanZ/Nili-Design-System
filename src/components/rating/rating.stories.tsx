@@ -7,7 +7,7 @@ import type { RatingLabels } from '.';
 import { Icon } from '@components/icon';
 
 const meta: Meta<typeof Rating> = {
-  title: 'Components/Rating',
+  title: 'Base Components/Rating/Rating',
   component: Rating,
   parameters: {
     docs: {
