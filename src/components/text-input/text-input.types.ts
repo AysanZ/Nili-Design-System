@@ -87,7 +87,7 @@ export interface TextInputProps extends Omit<
    * field. Pass a level, or `false` to hide it.
    */
   strength?: PasswordStrengthLevel | false;
-  /** Text read out beside the strength meter, e.g. `'رمز قوی'`. */
+  /** Text read out beside the strength meter, e.g. `'Strong password'`. */
   strengthLabel?: string;
   /** `type="emoji"` — the picker trigger on the leading edge. */
   emojiPicker?: ReactNode;

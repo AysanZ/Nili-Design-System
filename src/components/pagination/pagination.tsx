@@ -189,7 +189,7 @@ export const PaginationEllipsis = forwardRef<
  *
  * ## Numerals
  *
- * Digits are formatted through `Intl`, so a Persian pagination renders ۱۲ while
+ * Digits are formatted through `Intl`, so a Persian pagination renders Persian
  * the DOM still holds a real number — find-in-page, copy-paste and screen
  * readers all agree with the screen. The accessible name of each button is
  * built from the same localized string.

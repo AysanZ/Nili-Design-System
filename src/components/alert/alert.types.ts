@@ -37,7 +37,7 @@ export interface AlertProps extends Omit<
   /** Shows a close button. Requires `dismissLabel` for the accessible name. */
   dismissible?: boolean;
   onDismiss?: () => void;
-  /** Accessible name for the close button, e.g. `'بستن'`. */
+  /** Accessible name for the close button, e.g. `'Close'`. */
   dismissLabel?: string;
 
   /**

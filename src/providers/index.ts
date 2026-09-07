@@ -1,3 +1,3 @@
-export * from './wal-provider';
+export * from './nili-provider';
 export * from './theme';
 export * from './direction';

@@ -39,7 +39,7 @@ import { RiAddLine } from '@remixicon/react';
 Runtime string lookup still exists — it is genuinely needed for icon pickers and CMS content — but it lives behind a separate entry point so the cost is opt-in:
 
 \`\`\`tsx
-import { DynamicIcon } from '@husan/wal-ui/icons';
+import { DynamicIcon } from '@husan/nili-ui/icons';
 <DynamicIcon name="add-line" />
 \`\`\`
 
@@ -151,7 +151,7 @@ export const InlineWithText = () => {
 // ====================== RTL Mirroring ======================
 
 /**
- * Switch the Locale toolbar to فارسی. The top row keeps pointing right — wrong,
+ * Switch the Locale toolbar to Persian. The top row still points right — wrong,
  * because "forward" in Persian is leftward. The bottom row flips.
  */
 export const Mirroring = () => {

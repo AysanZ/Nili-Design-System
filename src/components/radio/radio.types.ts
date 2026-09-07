@@ -45,7 +45,7 @@ export interface RadioGroupProps extends Omit<
   orientation?: RadioOrientation;
   /** Disables every radio in the group. */
   disabled?: boolean;
-  /** Accessible name for the group, e.g. `'روش پرداخت'`. */
+  /** Accessible name for the group, e.g. `'Payment method'`. */
   label?: string;
   /** Visible heading. Also names the group. */
   title?: ReactNode;

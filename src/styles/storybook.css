@@ -6,8 +6,8 @@
    to reveal. */
 .storybook-light,
 .storybook-dark {
-  background-color: var(--wal-white-0);
-  color: var(--wal-strong-950);
+  background-color: var(--nili-white-0);
+  color: var(--nili-strong-950);
   min-height: 100%;
   padding: 1rem;
 }

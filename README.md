@@ -1,25 +1,25 @@
-# Wal Design System
+# Nili Design System
 
 A bilingual (Persian / English), **RTL-first** React component library.
 
 Persian and English are not a base language plus a translation layer here. Direction, script, numerals and type metrics are first-class inputs to every component, and both languages are exercised in Storybook on every story.
 
 ```bash
-npm install @husan/wal-ui @remixicon/react
+npm install @husan/nili-ui @remixicon/react
 ```
 
 ```tsx
-import { WalProvider, Button, Badge } from '@husan/wal-ui';
-import '@husan/wal-ui/styles.css';
+import { NiliProvider, Button, Badge } from '@husan/nili-ui';
+import '@husan/nili-ui/styles.css';
 
 export function App() {
   return (
-    <WalProvider locale="fa" defaultTheme="system">
+    <NiliProvider locale="fa" defaultTheme="system">
       <Button color="primary">ذخیره تغییرات</Button>
       <Badge appearance="light" color="green" dot>
         فعال
       </Badge>
-    </WalProvider>
+    </NiliProvider>
   );
 }
 ```
@@ -31,7 +31,7 @@ export function App() {
 ```
 src/
 ├── components/   one folder per component: .tsx .styles .types .stories .test
-├── providers/    WalProvider — theme + direction, the only two globals
+├── providers/    NiliProvider — theme + direction, the only two globals
 ├── hooks/        useControllableState, useId
 ├── lib/          cn, Slot, polymorphic types, Persian numerals
 ├── icons/        opt-in runtime icon registry (separate entry point)
@@ -42,11 +42,11 @@ Three published entry points, and nothing else is supported:
 
 | Import                     | Contents                                             |
 | -------------------------- | ---------------------------------------------------- |
-| `@husan/wal-ui`            | components, providers, hooks, utilities              |
-| `@husan/wal-ui/icons`      | runtime string→icon lookup — pulls the full icon set |
-| `@husan/wal-ui/styles.css` | compiled stylesheet                                  |
+| `@husan/nili-ui`            | components, providers, hooks, utilities              |
+| `@husan/nili-ui/icons`      | runtime string→icon lookup — pulls the full icon set |
+| `@husan/nili-ui/styles.css` | compiled stylesheet                                  |
 
-Deep imports (`@husan/wal-ui/dist/components/badge/badge`) will break without a major version.
+Deep imports (`@husan/nili-ui/dist/components/badge/badge`) will break without a major version.
 
 ---
 
@@ -55,9 +55,9 @@ Deep imports (`@husan/wal-ui/dist/components/badge/badge`) will break without a 
 **Components never write `dark:`.** A component names one semantic token; the value swaps underneath it.
 
 ```
-primitives     --wal-blue-500: #335CFF      raw palette, theme-independent
+primitives     --nili-blue-500: #335CFF      raw palette, theme-independent
       ↓
-semantic       --wal-information-base       :root and [data-theme="dark"]
+semantic       --nili-information-base       :root and [data-theme="dark"]
       ↓
 @theme inline  --color-information-base     Tailwind utility generation
       ↓
@@ -74,7 +74,7 @@ Two details that are easy to get wrong:
 Setting the theme in React means dark-mode users see a white flash on every load. Inline the init script in `<head>`:
 
 ```tsx
-import { themeInitScript } from '@husan/wal-ui';
+import { themeInitScript } from '@husan/nili-ui';
 
 <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />;
 ```
@@ -84,9 +84,9 @@ import { themeInitScript } from '@husan/wal-ui';
 `attributeTarget="self"` scopes the theme to a wrapper instead of `<html>`, so light and dark previews of the same component can sit side by side on one page. The docs site and the theme-builder preview pane both need this.
 
 ```tsx
-<WalProvider theme="dark" attributeTarget="self">
+<NiliProvider theme="dark" attributeTarget="self">
   <Button>Dark preview</Button>
-</WalProvider>
+</NiliProvider>
 ```
 
 ### Building a custom theme
@@ -95,8 +95,8 @@ Every themeable value is a CSS variable, so a theme is a stylesheet — no rebui
 
 ```css
 [data-theme='acme'] {
-  --wal-primary-base: #e11d48;
-  --wal-information-base: #e11d48;
+  --nili-primary-base: #e11d48;
+  --nili-information-base: #e11d48;
 }
 ```
 
@@ -134,7 +134,7 @@ import {
   formatNumber,
   toPersianDigits,
   parseLocalizedNumber,
-} from '@husan/wal-ui';
+} from '@husan/nili-ui';
 
 formatNumber(1234567.89, { locale: 'fa-IR' }); // '۱٬۲۳۴٬۵۶۷٫۸۹'  — note ٬ not ,
 formatNumber(1234567.89, { locale: 'en-US' }); // '1,234,567.89'
@@ -159,7 +159,7 @@ Both are **variable** fonts: one file per script covers weights 100–900, repla
 
 `unicode-range` subsetting means an English-only page never downloads the 46 KB Arabic subset, and a Persian page never downloads Inter.
 
-If you already load these fonts yourself, import `@husan/wal-ui/styles/base.css` instead — identical, minus the `@font-face` rules.
+If you already load these fonts yourself, import `@husan/nili-ui/styles/base.css` instead — identical, minus the `@font-face` rules.
 
 ---
 

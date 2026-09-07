@@ -89,7 +89,7 @@ export type RatingBarType = NonNullable<RatingBarVariantProps['type']>;
 export const RATING_BAR_EMOJIS = ['😔', '😕', '😐', '🙂', '😄'] as const;
 
 export interface RatingBarLabels {
-  /** Names the whole scale, e.g. `'رضایت شما'`. */
+  /** Names the whole scale, e.g. `'Your satisfaction'`. */
   root?: string;
   /** Names one option: `(score, total) => string`. */
   item?: (score: string, total: string) => string;
@@ -106,7 +106,7 @@ export interface RatingBarProps {
   disabled?: boolean;
   /** Overrides the emoji set. Must be at least `count` long. */
   emojis?: readonly ReactNode[];
-  /** Digits follow the locale, so `4` reads as `۴` in Persian. */
+  /** Digits follow the locale, so `4` renders in Persian digits under `fa`. */
   locale?: string;
   labels?: RatingBarLabels;
   name?: string;

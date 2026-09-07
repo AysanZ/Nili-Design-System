@@ -28,7 +28,7 @@ import type { TextAreaProps } from './text-area.types';
  * Length is measured with `Array.from(value).length`, not `value.length`.
  * `String.length` counts UTF-16 code units, so an emoji costs two and a
  * Persian word with a zero-width non-joiner costs one more than its letters —
- * a user typing "می‌خواهم" would watch the counter jump ahead of their
+ * a user typing a word with a ZWNJ would watch the counter jump ahead of their
  * fingers. `Array.from` iterates code points, which is much closer to what a
  * reader would call a character.
  *

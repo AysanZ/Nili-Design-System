@@ -6,7 +6,7 @@ const trail = (props = {}) => (
   <Breadcrumb label="Breadcrumb" {...props}>
     <BreadcrumbItem href="/">Home</BreadcrumbItem>
     <BreadcrumbItem href="/projects">Projects</BreadcrumbItem>
-    <BreadcrumbItem href="/projects/wal">Wal</BreadcrumbItem>
+    <BreadcrumbItem href="/projects/nili">Nili</BreadcrumbItem>
     <BreadcrumbItem current>Components</BreadcrumbItem>
   </Breadcrumb>
 );

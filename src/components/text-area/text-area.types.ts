@@ -34,11 +34,11 @@ export interface TextAreaProps extends Omit<
   /** Soft limit for the counter. Defaults to `maxLength` when that is set. */
   countLimit?: number;
 
-  /** Formats the counter, e.g. `` (used, limit) => `${used} از ${limit}` ``. */
+  /** Formats the counter, e.g. `` (used, limit) => `${used} of ${limit}` ``. */
   formatCount?: (used: string, limit: string) => string;
   /**
-   * BCP-47 tag driving the counter digits (`'fa'` → ۱۲۰). Defaults to the
-   * ambient locale from `WalProvider`.
+   * BCP-47 tag driving the counter digits (`'fa'` → Persian). Defaults to the
+   * ambient locale from `NiliProvider`.
    */
   locale?: string;
 

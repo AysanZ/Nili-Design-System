@@ -116,7 +116,7 @@ describe('DigitInput', () => {
     expect(onValueChange).toHaveBeenLastCalledWith('1234');
   });
 
-  // A Persian keyboard emits ۱۲۳۴, and parseInt on those is NaN.
+  // A Persian keyboard emits Persian digits, and parseInt on those is NaN.
   it('normalizes Persian digits to Latin', async () => {
     const onValueChange = vi.fn();
     render(

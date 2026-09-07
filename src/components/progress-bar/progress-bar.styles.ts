@@ -15,7 +15,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *   track height. The Size axis lives on the circular form only.
  * - **`color` had six values; Figma has five.** `feature` and `neutral` were
  *   invented. The remaining four keep their semantic names rather than Figma's
- *   literal Blue/Red/Green/Orange: a theme can repoint `--wal-primary-base` at
+ *   literal Blue/Red/Green/Orange: a theme can repoint `--nili-primary-base` at
  *   any hue, so a prop called `blue` would become a lie the moment anyone
  *   builds one.
  * - **`Direction (LTR | RTL)` is not a prop.** Figma has to draw both; here the
@@ -42,7 +42,7 @@ export const progressFillVariants = cva(
        * keyframe or a direction read in JavaScript.
        */
       indeterminate: {
-        true: 'absolute top-0 w-2/5 animate-[wal-progress-indeterminate_1.4s_ease-in-out_infinite] motion-reduce:animate-none motion-reduce:w-full',
+        true: 'absolute top-0 w-2/5 animate-[nili-progress-indeterminate_1.4s_ease-in-out_infinite] motion-reduce:animate-none motion-reduce:w-full',
         false: '',
       },
     },

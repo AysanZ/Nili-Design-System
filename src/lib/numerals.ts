@@ -5,9 +5,9 @@
  *
  * The old font was `YekanBakhFaNum` — a cut where the Persian digit glyphs
  * are mapped onto the ASCII digit codepoints, so typing `123` *displays*
- * `۱۲۳`. It looks like it works, and it is the wrong layer to solve this at:
+ * Persian-looking digits. It looks like it works. It is the wrong layer:
  *
- * - The DOM still contains `123`, so `Ctrl+F` for `۱۲۳` finds nothing and
+ * - The DOM still holds `123`, so `Ctrl+F` for the Persian form fails and
  *   copy-paste gives Latin digits.
  * - Screen readers read the codepoints, not the glyphs.
  * - It only ever renders one numeral system, so a Persian UI showing a
@@ -22,12 +22,12 @@
 const PERSIAN_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
 const ARABIC_INDIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
-/** `'1402'` → `'۱۴۰۲'`. Leaves every non-digit character untouched. */
+/** ASCII digits → Persian ones. Leaves every non-digit character untouched. */
 export function toPersianDigits(input: string | number): string {
   return String(input).replace(/\d/g, (d) => PERSIAN_DIGITS[Number(d)]);
 }
 
-/** `'۱۴۰۲'` → `'1402'`. Accepts Persian and Arabic-Indic digits. */
+/** Persian digits → ASCII. Accepts Persian and Arabic-Indic digits. */
 export function toLatinDigits(input: string): string {
   return input.replace(/[۰-۹٠-٩]/g, (char) => {
     const persian = PERSIAN_DIGITS.indexOf(char);
@@ -42,11 +42,11 @@ export interface FormatNumberOptions extends Intl.NumberFormatOptions {
 
 /**
  * Locale-correct number formatting. Prefer this over `toPersianDigits` for
- * anything numeric: it also gets the thousands separator right (`٬` in Persian,
+ * anything numeric: it also gets the thousands separator right (Persian uses its
  * not `,`) and handles currency and percentages.
  *
  * ```ts
- * formatNumber(1234567.89, { locale: 'fa-IR' })  // '۱٬۲۳۴٬۵۶۷٫۸۹'
+ * formatNumber(1234567.89, { locale: 'fa-IR' })  // Persian digits
  * formatNumber(1234567.89, { locale: 'en-US' })  // '1,234,567.89'
  * ```
  */
@@ -58,7 +58,7 @@ export function formatNumber(
 }
 
 /**
- * Strips Persian/Arabic digits and separators so a user typing `۱۲۳٬۴۵۶` into
+ * Strips Persian/Arabic digits and separators so a localized number typed into
  * a numeric input produces `123456`. Every numeric field in the system should
  * run its value through this before parsing.
  */

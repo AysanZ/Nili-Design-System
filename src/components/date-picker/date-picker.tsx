@@ -256,7 +256,7 @@ function useCalendarState(
  *
  * ## The calendar question
  *
- * شمسی and جلالی are the same calendar — Solar Hijri. `calendar` therefore has
+ * Shamsi and Jalali are the same calendar — Solar Hijri. `calendar` has
  * two values, `'jalali'` and `'gregorian'`, and defaults to Jalali under a
  * Persian locale. `allowCalendarSwitch` puts a toggle in the header for users
  * who need to cross-reference, and switching keeps the visible month anchored

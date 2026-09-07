@@ -33,7 +33,7 @@ export interface ButtonProps extends Omit<
 
   /** Shows a spinner and blocks interaction without collapsing the layout. */
   loading?: boolean;
-  /** Announced while `loading`, e.g. `'در حال ارسال'`. */
+  /** Announced while `loading`, e.g. `'Sending'`. */
   loadingLabel?: string;
 
   /**

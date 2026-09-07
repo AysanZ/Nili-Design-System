@@ -45,8 +45,8 @@ export interface SliderProps extends Omit<
    */
   formatValue?: (value: number) => string;
   /**
-   * BCP-47 tag driving the digits (`'fa'` → `۴۲`). Defaults to the ambient
-   * locale from `WalProvider`.
+   * BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient
+   * locale from `NiliProvider`.
    */
   locale?: string;
   /**

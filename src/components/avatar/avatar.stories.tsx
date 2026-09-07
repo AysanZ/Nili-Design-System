@@ -163,7 +163,7 @@ export const Tones = () => (
 // ====================== Status Markers ======================
 
 /**
- * Flip the Locale toolbar to فارسی: the markers stay glued to the avatar and
+ * Flip the Locale toolbar to Persian: the markers stay glued to the avatar and
  * move to the opposite corner. That is the bug this rewrite fixed.
  */
 export const TopStatuses = () => (

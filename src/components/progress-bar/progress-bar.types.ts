@@ -32,11 +32,11 @@ interface ProgressCommonProps {
   linkButton?: ReactNode;
   /** Shows the percentage. */
   showValue?: boolean;
-  /** Overrides the rendered readout — `'۳ از ۱۰ فایل'`, a size, an ETA. */
+  /** Overrides the rendered readout — `'3 of 10 files'`, a size, an ETA. */
   valueLabel?: ReactNode;
   /**
-   * BCP-47 tag driving the digits (`'fa'` → `۶۳٪`). Defaults to the ambient
-   * locale from `WalProvider`.
+   * BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient
+   * locale from `NiliProvider`.
    */
   locale?: string;
   /**

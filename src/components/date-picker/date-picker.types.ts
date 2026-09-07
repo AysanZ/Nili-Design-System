@@ -15,7 +15,7 @@ export interface DatePreset {
 
 interface CalendarBaseProps {
   /**
-   * `'jalali'` (Solar Hijri — شمسی, also called جلالی) or `'gregorian'`.
+   * `'jalali'` (Solar Hijri — Shamsi, also called Jalali) or `'gregorian'`.
    * Defaults to Jalali under a Persian locale and Gregorian otherwise.
    */
   calendar?: CalendarSystem;

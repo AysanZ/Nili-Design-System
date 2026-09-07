@@ -30,16 +30,16 @@ export interface PaginationLabels {
   last?: string;
   /**
    * Accessible name for a page button. Receives the *localized* digits, so a
-   * Persian screen reader hears "رفتن به صفحه ۳" and not "…page 3".
+   * Persian screen reader hears the Persian phrasing and not "…page 3".
    */
   page?: (page: string) => string;
   /** Name for the current page button. */
   currentPage?: (page: string) => string;
   /** Skipped-pages marker. */
   ellipsis?: string;
-  /** Compact readout, e.g. `'Page ۳ of ۱۰'`. Used when `type="arrows"`. */
+  /** Compact readout, e.g. `'Page 3 of 10'`. Used when `type="arrows"`. */
   summary?: (page: string, count: string) => string;
-  /** The per-page control's rendered text, e.g. `'۷ / صفحه'`. */
+  /** The per-page control's rendered text, e.g. `'7 / page'`. */
   perPage?: (size: string) => string;
   /** Accessible name for the per-page control. */
   perPageLabel?: string;
@@ -105,8 +105,8 @@ export interface PaginationProps extends Omit<
   onPageSizeChange?: (pageSize: number) => void;
 
   /**
-   * BCP-47 tag driving the digits (`'fa'` → `۱۲`). Defaults to the ambient
-   * locale from `WalProvider`.
+   * BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient
+   * locale from `NiliProvider`.
    */
   locale?: string;
   labels?: PaginationLabels;

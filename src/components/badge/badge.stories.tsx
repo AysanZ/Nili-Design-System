@@ -226,7 +226,7 @@ export const AllCombinations = () => (
 
 // ====================== Localized ======================
 
-/** Switch the Locale toolbar to فارسی: content, font and direction all follow. */
+/** Switch the Locale toolbar to Persian: content, font and direction follow. */
 export const Localized = () => {
   const { t } = useTranslation();
   return (

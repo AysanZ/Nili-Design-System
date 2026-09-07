@@ -167,7 +167,7 @@ export const Adornments = () => {
 // ====================== RTL ======================
 
 /**
- * The point of `latin`. In فارسی the top field reverses and becomes
+ * The point of `latin`. In Persian the top field reverses and becomes
  * unreadable; the bottom one stays as written.
  */
 export const LatinValues = () => {
@@ -176,11 +176,11 @@ export const LatinValues = () => {
     <div className="flex w-80 flex-col gap-4">
       <TextInput
         label={`${t('textInput.website')} — latin={false}`}
-        defaultValue="https://wal.design/docs?v=1"
+        defaultValue="https://nili.design/docs?v=1"
       />
       <TextInput
         label={`${t('textInput.website')} — latin`}
-        defaultValue="https://wal.design/docs?v=1"
+        defaultValue="https://nili.design/docs?v=1"
         latin
       />
       <TextInput
@@ -202,7 +202,7 @@ export const LatinValues = () => {
  * value is Latin regardless of the surrounding script — the details that are
  * tedious to remember on every field and therefore usually wrong.
  *
- * Switch the Locale toolbar to فارسی: the email, phone, card, website, amount
+ * Switch the Locale toolbar to Persian: the email, phone, card, website, amount
  * and date fields stay left-to-right, because those values are Latin even in a
  * Persian UI. Rendered RTL their slashes and dots migrate to the wrong end and
  * the value becomes unreadable while staying correct in the DOM.

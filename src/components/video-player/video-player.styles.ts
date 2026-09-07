@@ -25,8 +25,8 @@ export const videoPlayerVariants = cva(
     variants: {
       /** Figma's Size. Drives the control bar and the overlay affordance. */
       size: {
-        md: '[--wal-video-control:2.25rem] [--wal-video-overlay:4rem]',
-        sm: '[--wal-video-control:2rem] [--wal-video-overlay:3rem]',
+        md: '[--nili-video-control:2.25rem] [--nili-video-overlay:4rem]',
+        sm: '[--nili-video-control:2rem] [--nili-video-overlay:3rem]',
       },
       ratio: {
         '16/9': 'aspect-video',
@@ -68,7 +68,7 @@ export const videoControlsVariants = cva(
 
 export const videoButtonVariants = cva([
   'grid shrink-0 place-items-center rounded-lg text-static-white',
-  'size-[var(--wal-video-control)] [&_svg]:size-5',
+  'size-[var(--nili-video-control)] [&_svg]:size-5',
   'cursor-pointer transition-colors duration-150',
   'hover:bg-white-alpha-16',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-static-white',
@@ -78,7 +78,7 @@ export const videoButtonVariants = cva([
 /** The big play affordance over the poster. */
 export const videoOverlayButtonVariants = cva([
   'absolute inset-0 m-auto grid place-items-center rounded-full',
-  'size-[var(--wal-video-overlay)]',
+  'size-[var(--nili-video-overlay)]',
   'bg-black-alpha-24 text-static-white backdrop-blur-sm',
   'cursor-pointer transition-transform duration-150 hover:scale-105',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-static-white',

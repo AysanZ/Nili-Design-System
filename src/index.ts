@@ -1,13 +1,13 @@
 /**
- * Wal Design System — public API.
+ * Nili Design System — public API.
  *
- * Deep imports (`wal-ui/dist/components/badge/badge`) are NOT supported and
+ * Deep imports (`nili-ui/dist/components/badge/badge`) are NOT supported and
  * will break without a major version. Import from here, or from the two
  * documented subpaths:
  *
- *   wal-ui           components, providers, hooks, cn
- *   wal-ui/icons     runtime string→icon lookup (pulls the full icon set)
- *   wal-ui/styles.css   the stylesheet
+ *   nili-ui           components, providers, hooks, cn
+ *   nili-ui/icons     runtime string→icon lookup (pulls the full icon set)
+ *   nili-ui/styles.css   the stylesheet
  */
 
 /* ── components ── */

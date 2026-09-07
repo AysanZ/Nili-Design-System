@@ -84,7 +84,7 @@ export const textInputAdornmentVariants = cva(
 );
 
 /**
- * Attached text block — `https://`, `.com`, `تومان`. Bordered on its inner
+ * Attached text block — `https://`, `.com`, a currency. Bordered on its inner
  * edge with a logical property, so the divider lands between the affix and the
  * field in both directions rather than always on the right.
  */

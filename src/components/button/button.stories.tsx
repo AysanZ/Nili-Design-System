@@ -110,7 +110,7 @@ WithStartIcon.args = {
 
 /**
  * `mirrored` flips directional glyphs in RTL. Switch the Locale toolbar to
- * فارسی — the arrow points the other way, because "forward" is a direction,
+ * Persian — the arrow points the other way, because "forward" is a direction,
  * not a shape.
  */
 export const WithEndIcon = Template.bind({});

@@ -54,7 +54,7 @@ export interface DigitInputProps {
   disabled?: boolean;
   /** `one-time-code` by default, which is what lets iOS and Android autofill. */
   autoComplete?: string;
-  /** Accessible name for the group, e.g. `'کد تأیید'`. */
+  /** Accessible name for the group, e.g. `'Verification code'`. */
   groupLabel?: string;
   /** Names each cell for a screen reader: `(index, total) => string`. */
   cellLabel?: (index: string, total: string) => string;
@@ -72,7 +72,7 @@ export interface DigitInputProps {
  * - **Paste.** People receive the code and paste all six digits at once.
  *   Pasting into cell 1 fills the whole row here, rather than dropping five
  *   characters on the floor.
- * - **Persian digits.** A Persian keyboard emits `۱۲۳۴`, and `parseInt` on
+ * - **Persian digits.** A Persian keyboard emits them, and `parseInt` on
  *   those is `NaN`. Every keystroke is normalised through `toLatinDigits`, so
  *   the value the server sees is Latin no matter which keyboard produced it.
  * - **Direction.** The row is forced to `dir="ltr"` even inside a Persian page.

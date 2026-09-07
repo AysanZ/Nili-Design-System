@@ -1,8 +1,8 @@
 /**
  * Dual-calendar core: Jalali (Solar Hijri) and Gregorian.
  *
- * A note on names: **شمسی and جلالی are the same calendar** — Solar Hijri.
- * "شمسی" (solar) describes what it tracks, "جلالی" credits Jalaluddin Malik
+ * A note on names: **Shamsi and Jalali are the same calendar** — Solar Hijri.
+ * "Shamsi" (solar) describes what it tracks, "Jalali" credits Jalaluddin Malik
  * Shah, under whom it was reformed in 1079. There is no third system to
  * support, so this file has exactly two: `'jalali'` and `'gregorian'`.
  *
@@ -276,7 +276,7 @@ export function formatDate(
   }
 }
 
-/** Year label. Kept separate so the header can show "مهر ۱۴۰۳" in one line. */
+/** Year label. Kept separate so the header can show month and year in one line. */
 export function formatYear(year: number, locale: string): string {
   try {
     return new Intl.NumberFormat(locale, { useGrouping: false }).format(year);

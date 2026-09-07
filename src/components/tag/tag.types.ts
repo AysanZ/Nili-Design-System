@@ -33,6 +33,6 @@ export interface TagProps extends Omit<
 }
 
 export interface TagGroupProps extends ComponentPropsWithoutRef<'div'> {
-  /** Accessible name for the set, e.g. `'برچسب‌ها'`. */
+  /** Accessible name for the set, e.g. `'Tags'`. */
   label?: string;
 }

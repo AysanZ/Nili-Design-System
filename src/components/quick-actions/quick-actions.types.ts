@@ -28,7 +28,7 @@ export interface QuickActionsProps extends Omit<
    * Tailwind class through `className` instead if you need it responsive.
    */
   columns?: number;
-  /** Accessible name for the group, e.g. `'اقدام‌های سریع'`. */
+  /** Accessible name for the group, e.g. `'Quick actions'`. */
   label?: string;
   /** Optional heading rendered above the group; also names it. */
   title?: ReactNode;

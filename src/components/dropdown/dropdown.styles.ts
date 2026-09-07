@@ -58,7 +58,7 @@ export const dropdownTriggerVariants = cva(
 );
 
 export const dropdownMenuVariants = cva([
-  'z-50 flex max-h-[320px] min-w-[--wal-dropdown-width] flex-col overflow-hidden',
+  'z-50 flex max-h-[320px] min-w-[--nili-dropdown-width] flex-col overflow-hidden',
   'rounded-xl border border-soft-200 bg-white-0 p-1',
   'shadow-md',
 ]);

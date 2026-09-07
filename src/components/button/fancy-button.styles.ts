@@ -30,15 +30,15 @@ export const fancyButtonVariants = cva(
     variants: {
       color: {
         primary:
-          'bg-primary-base text-static-white shadow-[0_0_0_1px_var(--wal-primary-base),var(--wal-shadow-button-primary)] focus-visible:outline-primary-base',
+          'bg-primary-base text-static-white shadow-[0_0_0_1px_var(--nili-primary-base),var(--nili-shadow-button-primary)] focus-visible:outline-primary-base',
         neutral:
-          'bg-surface-800 text-static-white shadow-[0_0_0_1px_var(--wal-surface-800),var(--wal-shadow-button-primary)] focus-visible:outline-surface-800',
+          'bg-surface-800 text-static-white shadow-[0_0_0_1px_var(--nili-surface-800),var(--nili-shadow-button-primary)] focus-visible:outline-surface-800',
         error:
-          'bg-error-base text-static-white shadow-[0_0_0_1px_var(--wal-error-base),var(--wal-shadow-button-primary)] focus-visible:outline-error-base',
+          'bg-error-base text-static-white shadow-[0_0_0_1px_var(--nili-error-base),var(--nili-shadow-button-primary)] focus-visible:outline-error-base',
         success:
-          'bg-success-base text-static-white shadow-[0_0_0_1px_var(--wal-success-base),var(--wal-shadow-button-primary)] focus-visible:outline-success-base',
+          'bg-success-base text-static-white shadow-[0_0_0_1px_var(--nili-success-base),var(--nili-shadow-button-primary)] focus-visible:outline-success-base',
         basic:
-          'bg-white-0 text-sub-600 border-soft-200 shadow-[0_0_0_1px_var(--wal-soft-200),var(--wal-shadow-button-basic)] focus-visible:outline-primary-base',
+          'bg-white-0 text-sub-600 border-soft-200 shadow-[0_0_0_1px_var(--nili-soft-200),var(--nili-shadow-button-basic)] focus-visible:outline-primary-base',
       },
       size: {
         md: 'h-10 rounded-lg px-2.5 text-[14px] leading-5 [&_svg]:size-5',

@@ -1,8 +1,8 @@
 /* ────────────────────────────────────────────────────────────────
-   Wal Design System — stylesheet entry point
+   Nili Design System — stylesheet entry point
 
    Consumers import exactly this one file:
-       import '@husan/wal-ui/styles.css';
+       import '@husan/nili-ui/styles.css';
 
    Order matters: Tailwind first, then tokens, then the @theme bridge.
    ──────────────────────────────────────────────────────────────── */
@@ -27,7 +27,7 @@
 
 @layer base {
   html {
-    font-family: var(--wal-font-sans);
+    font-family: var(--nili-font-sans);
     /* Persian text is dense; optical sizing and kerning matter more than in
        Latin, and both are off by default in some engines. */
     font-optical-sizing: auto;
@@ -39,13 +39,13 @@
      inside an English page renders correctly without extra classes. */
   [lang='fa'],
   [lang^='fa-'] {
-    font-family: var(--wal-font-persian);
-    line-height: calc(1em * var(--wal-leading-multiplier));
+    font-family: var(--nili-font-persian);
+    line-height: calc(1em * var(--nili-leading-multiplier));
   }
 
   [lang='en'],
   [lang^='en-'] {
-    font-family: var(--wal-font-latin);
+    font-family: var(--nili-font-latin);
   }
 }
 
@@ -53,7 +53,7 @@
    Tailwind can emit the `animation` shorthand but not the keyframes it names.
    `inset-inline-start` is logical, so the stripe travels right-to-left under
    `dir="rtl"` with no second keyframe and no direction read in JavaScript. */
-@keyframes wal-progress-indeterminate {
+@keyframes nili-progress-indeterminate {
   from {
     inset-inline-start: -40%;
   }

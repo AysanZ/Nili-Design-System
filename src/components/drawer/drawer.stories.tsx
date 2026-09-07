@@ -71,7 +71,7 @@ const Demo = ({ side = 'end' as DrawerSide, ...args }) => {
 
 export const Default = () => <Demo />;
 
-/** `start` and `end` are logical — switch to فارسی and they swap sides. */
+/** `start` and `end` are logical — switch to Persian and they swap sides. */
 export const Sides = () => {
   const { t } = useTranslation();
   const [side, setSide] = useState<DrawerSide | null>(null);

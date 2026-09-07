@@ -60,7 +60,7 @@ export function ThemeProvider({
   defaultTheme = 'system',
   theme: controlledTheme,
   onThemeChange,
-  storageKey = 'wal-theme',
+  storageKey = 'nili-theme',
   attributeTarget = 'document',
 }: ThemeProviderProps) {
   const isControlled = controlledTheme !== undefined;
@@ -127,7 +127,7 @@ export function ThemeProvider({
 export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used inside <WalProvider>.');
+    throw new Error('useTheme must be used inside <NiliProvider>.');
   }
   return context;
 }
@@ -138,7 +138,7 @@ export function useTheme(): ThemeContextValue {
  *
  *   <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
  */
-export function themeInitScript(storageKey = 'wal-theme'): string {
+export function themeInitScript(storageKey = 'nili-theme'): string {
   return `(function(){try{var s=localStorage.getItem(${JSON.stringify(
     storageKey,
   )});var t=(s==='light'||s==='dark')?s:(window.matchMedia('${MEDIA}').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`;

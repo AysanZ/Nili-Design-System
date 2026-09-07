@@ -37,7 +37,7 @@ export interface TagInputProps {
   placeholder?: string;
   /** Refuses to add beyond this many. */
   maxTags?: number;
-  /** Accessible name for each tag's dismiss button, e.g. `'حذف'`. */
+  /** Accessible name for each tag's dismiss button, e.g. `'Remove'`. */
   dismissLabel?: string;
   disabled?: boolean;
   id?: string;

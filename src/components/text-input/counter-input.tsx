@@ -28,7 +28,7 @@ export interface CounterInputProps {
   max?: number;
   step?: number;
   disabled?: boolean;
-  /** Digits follow the locale, so `16` reads as `۱۶` in Persian. */
+  /** Digits follow the locale, so `16` renders in Persian digits under `fa`. */
   locale?: string;
   /** Overrides the rendered value — units, currency, `2 hrs`. */
   formatValue?: (value: number) => string;

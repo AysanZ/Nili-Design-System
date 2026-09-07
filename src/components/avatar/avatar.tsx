@@ -21,7 +21,7 @@ import type {
   AvatarBottomStatus,
 } from './avatar.types';
 
-/** "علی رضایی" → "عر", "Ada Lovelace" → "AL". Works for RTL scripts too. */
+/** "Ada Lovelace" → "AL". Works for RTL scripts too. */
 export function initialsFromName(name: string, max = 2): string {
   return name
     .trim()

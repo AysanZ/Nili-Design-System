@@ -15,7 +15,7 @@ export type StepperDotSize = NonNullable<StepperDotVariantProps['size']>;
 export interface StepIndicatorLabels {
   /** Accessible name for the landmark. */
   root?: string;
-  /** How a step is announced, e.g. `` (n, total) => `مرحلهٔ ${n} از ${total}` ``. */
+  /** How a step is announced, e.g. `` (n, t) => `Step ${n} of ${t}` ``. */
   step?: (index: string, total: string) => string;
   /** Appended for a finished step, so "done" is not carried by a tick alone. */
   completed?: string;
@@ -32,8 +32,8 @@ export interface StepIndicatorProps extends Omit<
   value?: number;
   orientation?: StepOrientation;
   /**
-   * BCP-47 tag driving the step numbers (`'fa'` → ۲). Defaults to the ambient
-   * locale from `WalProvider`.
+   * BCP-47 tag for the step numbers (`'fa'` → Persian). Defaults to the ambient
+   * locale from `NiliProvider`.
    */
   locale?: string;
   labels?: StepIndicatorLabels;
@@ -69,7 +69,7 @@ export interface StepperDotProps extends Omit<
   /** Index of the active dot, 0-based. Figma's "1st / 2nd / 3rd Active". */
   value?: number;
   size?: StepperDotSize;
-  /** Accessible name, e.g. `'مرحلهٔ فرم'`. */
+  /** Accessible name, e.g. `'Form steps'`. */
   label?: string;
   /** How the position is announced. */
   formatProgress?: (index: string, total: string) => string;

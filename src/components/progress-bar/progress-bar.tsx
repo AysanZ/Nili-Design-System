@@ -18,7 +18,7 @@ import type {
 const clamp = (value: number, max: number) =>
   Math.min(Math.max(value, 0), max) || 0;
 
-/** `0.63` → `'63%'` / `'۶۳٪'`. The percent sign is localized too. */
+/** `0.63` → `'63%'`, Persian digits under `fa`. The sign localizes too. */
 function formatPercent(ratio: number, locale: string): string {
   return formatNumber(ratio, {
     locale,

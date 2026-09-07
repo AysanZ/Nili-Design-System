@@ -17,7 +17,7 @@ export interface VideoPlayerLabels {
   volume?: string;
   fullscreen?: string;
   exitFullscreen?: string;
-  /** Announced position, e.g. `` (current, total) => `${current} از ${total}` ``. */
+  /** Announced position, e.g. `` (cur, total) => `${cur} of ${total}` ``. */
   progress?: (current: string, total: string) => string;
 }
 
@@ -59,8 +59,8 @@ export interface VideoPlayerProps extends Omit<
   onTimeChange?: (currentTime: number) => void;
 
   /**
-   * BCP-47 tag driving the timestamps (`'fa'` → ۰۱:۲۳). Defaults to the
-   * ambient locale from `WalProvider`.
+   * BCP-47 tag driving the timestamps (`'fa'` → Persian). Defaults to the
+   * ambient locale from `NiliProvider`.
    */
   locale?: string;
   labels?: VideoPlayerLabels;

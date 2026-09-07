@@ -95,7 +95,7 @@ export const AllStates = () => {
   );
 };
 
-/** Figma's "Flip". Switch to فارسی — `start` moves to the right on its own. */
+/** Figma's "Flip". Switch to Persian — `start` moves right on its own. */
 export const LabelPosition = () => {
   const { t } = useTranslation();
   return (

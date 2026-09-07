@@ -34,7 +34,7 @@ const DEFAULT_LABELS: Required<RatingLabels> = {
  * ## Two components in one, on purpose
  *
  * `readOnly` is not a styling flag. A review average is **content**: one
- * `role="img"` with a name like "۴٫۵ از ۵", which a screen reader reads once.
+ * `role="img"` named "4.5 out of 5", which a screen reader reads once.
  * An input is a **question**: a `radiogroup` of real radios, which brings form
  * participation, roving focus and arrow-key movement from the browser instead
  * of from three hundred lines of key handling. Announcing five separate

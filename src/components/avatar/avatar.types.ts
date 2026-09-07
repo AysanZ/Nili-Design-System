@@ -45,7 +45,7 @@ export interface AvatarProps extends Omit<
   bottomStatus?: AvatarBottomStatus;
   /** Rendered when `bottomStatus` is `'company'`. */
   companyIcon?: ReactNode;
-  /** Accessible name for the status marker, e.g. `'آنلاین'`. */
+  /** Accessible name for the status marker, e.g. `'Online'`. */
   statusLabel?: string;
 }
 
@@ -66,6 +66,6 @@ export interface AvatarGroupProps extends Omit<
   max?: number;
   /** Overrides the computed overflow count. */
   overflowCount?: number;
-  /** Accessible label for the whole stack, e.g. `'اعضای تیم'`. */
+  /** Accessible label for the whole stack, e.g. `'Team members'`. */
   label?: string;
 }

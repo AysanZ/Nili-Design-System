@@ -14,7 +14,7 @@ export interface UseControllableStateParams<T> {
  * The old Accordion took `isOpen` and fed it to `useState` as the initial
  * value — which silently ignored every later change from the parent. That is
  * the single most common bug in hand-written component libraries; this hook
- * exists so no component in Wal can repeat it.
+ * exists so no component in Nili can repeat it.
  */
 export function useControllableState<T>({
   value,

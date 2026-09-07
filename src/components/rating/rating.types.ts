@@ -17,10 +17,10 @@ export type RatingAlignment = NonNullable<
 export interface RatingLabels {
   /** Accessible name for the whole control. */
   root?: string;
-  /** Name of one option, e.g. `` (score) => `${score} ستاره` ``. */
+  /** Name of one option, e.g. `` (score) => `${score} stars` ``. */
   item?: (score: string) => string;
   /**
-   * How a read-only rating is announced, e.g. `'۴٫۵ از ۵'`. Read-only ratings
+   * How a read-only rating is announced, e.g. `'4.5 out of 5'`. Read-only
    * are a single `role="img"`, so this is the one string a screen reader gets.
    */
   summary?: (value: string, max: string) => string;
@@ -56,14 +56,14 @@ export interface RatingProps extends Omit<
 
   /** Shows the numeric score beside the items. */
   showValue?: boolean;
-  /** Replaces the readout — `'۴٫۵ (۱۲۸ نظر)'`, a count, anything. */
+  /** Replaces the readout — `'4.5 (128 reviews)'`, a count, anything. */
   valueLabel?: ReactNode;
 
   /** `name` for the underlying radios, when the form is submitted natively. */
   name?: string;
   /**
-   * BCP-47 tag driving the digits (`'fa'` → `۴٫۵`). Defaults to the ambient
-   * locale from `WalProvider`.
+   * BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient
+   * locale from `NiliProvider`.
    */
   locale?: string;
   labels?: RatingLabels;

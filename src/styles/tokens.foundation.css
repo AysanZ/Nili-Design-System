@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────
-   Wal Design System — Foundation tokens
+   Nili Design System — Foundation tokens
    Type families, radii and typographic behaviour. Variables, not
    hard-coded values, so the theme-builder dashboard can override them.
    ──────────────────────────────────────────────────────────────── */
@@ -10,29 +10,29 @@
      Arabic script, so on an English page it is simply never downloaded —
      but if a Persian name appears in otherwise-English copy, it renders in
      Vazirmatn instead of falling back to a random system Arabic font. */
-  --wal-font-latin: 'Inter', 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
-  --wal-font-persian: 'Vazirmatn', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --wal-font-sans: var(--wal-font-latin);
-  --wal-font-mono: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+  --nili-font-latin: 'Inter', 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
+  --nili-font-persian: 'Vazirmatn', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --nili-font-sans: var(--nili-font-latin);
+  --nili-font-mono: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
 
   /* ── radii ── */
-  --wal-radius-xs: 0.25rem;
-  --wal-radius-sm: 0.375rem;
-  --wal-radius-md: 0.5rem;
-  --wal-radius-lg: 0.625rem;
-  --wal-radius-xl: 0.75rem;
-  --wal-radius-2xl: 1rem;
+  --nili-radius-xs: 0.25rem;
+  --nili-radius-sm: 0.375rem;
+  --nili-radius-md: 0.5rem;
+  --nili-radius-lg: 0.625rem;
+  --nili-radius-xl: 0.75rem;
+  --nili-radius-2xl: 1rem;
 
   /* ── per-script line-height correction ──
      Persian ascenders and descenders reach further than Latin ones, so a
      line-height tuned for Inter crowds Vazirmatn. This multiplier is applied
      to the type scale under [lang='fa'] rather than being baked into each
      variant, which would have meant maintaining two parallel scales. */
-  --wal-leading-multiplier: 1;
+  --nili-leading-multiplier: 1;
 }
 
 [lang='fa'],
 [lang^='fa-'] {
-  --wal-font-sans: var(--wal-font-persian);
-  --wal-leading-multiplier: 1.15;
+  --nili-font-sans: var(--nili-font-persian);
+  --nili-leading-multiplier: 1.15;
 }

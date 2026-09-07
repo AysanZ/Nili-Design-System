@@ -102,7 +102,7 @@ export const Headings = () => (
   <div className="flex flex-col gap-3">
     {(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const).map((variant) => (
       <Typography key={variant} variant={variant}>
-        {variant.toUpperCase()} — Wal Design System
+        {variant.toUpperCase()} — Nili Design System
       </Typography>
     ))}
   </div>
@@ -162,7 +162,7 @@ export const PolymorphicElements = () => (
 export const Bilingual = () => (
   <div className="flex max-w-xl flex-col gap-4">
     <Typography variant="h4" lang="en">
-      Wal Design System
+      Nili Design System
     </Typography>
     <Typography variant="h4" lang="fa">
       سیستم طراحی وال
@@ -172,7 +172,7 @@ export const Bilingual = () => (
       scripts on a single line.
     </Typography>
     <Typography variant="paragraph-medium" lang="fa">
-      یک کتابخانه کامپوننت دوزبانه که از ابتدا برای راست‌به‌چپ ساخته شده — Wal
+      یک کتابخانه کامپوننت دوزبانه که از ابتدا برای راست‌به‌چپ ساخته شده — Nili
       Design System — با متن ترکیبی در یک خط.
     </Typography>
   </div>
@@ -232,7 +232,7 @@ export const Weights = () => (
           style={{ fontWeight: weight }}
           lang="en"
         >
-          Wal Design System
+          Nili Design System
         </Typography>
         <Typography
           variant="paragraph-large"

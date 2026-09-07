@@ -8,7 +8,7 @@ const march2024 = new Date(2024, 2, 20); // Nowruz 1403
 describe('DatePicker', () => {
   it('defaults to Jalali under a Persian locale', () => {
     render(<DatePicker locale="fa" defaultValue={march2024} />);
-    // 1 Farvardin 1403 — the grid must contain a "۱" and the Persian year.
+    // 1 Farvardin 1403 — the grid must show a Persian "1" and the year.
     expect(screen.getByText(/۱۴۰۳/)).toBeInTheDocument();
   });
 

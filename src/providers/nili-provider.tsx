@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { ThemeProvider, type ThemeProviderProps } from './theme';
 import { DirectionProvider, type DirectionProviderProps } from './direction';
 
-export interface WalProviderProps
+export interface NiliProviderProps
   extends
     Omit<ThemeProviderProps, 'children' | 'attributeTarget'>,
     Omit<DirectionProviderProps, 'children' | 'attributeTarget'> {
@@ -24,7 +24,7 @@ export interface WalProviderProps
  * props, so the library ships without an i18n runtime and consumers stay
  * free to use i18next, react-intl, Next.js routing, or nothing at all.
  */
-export function WalProvider({
+export function NiliProvider({
   children,
   attributeTarget = 'document',
   defaultTheme,
@@ -33,7 +33,7 @@ export function WalProvider({
   storageKey,
   locale,
   dir,
-}: WalProviderProps) {
+}: NiliProviderProps) {
   return (
     <ThemeProvider
       attributeTarget={attributeTarget}

@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────
-   Wal Design System — Semantic tokens
+   Nili Design System — Semantic tokens
    THIS is the only place light/dark differ. Components never write
    `dark:` — they use one semantic name and the value swaps here.
    Add a new theme by adding another [data-theme="…"] block.
@@ -10,91 +10,91 @@
   color-scheme: light;
 
   /* static */
-  --wal-static-white: #FFFFFF;
-  --wal-static-black: #0E121B;
+  --nili-static-white: #FFFFFF;
+  --nili-static-black: #0E121B;
 
   /* strong */
-  --wal-strong-950: #0E121B;
+  --nili-strong-950: #0E121B;
 
   /* surface */
-  --wal-surface-800: #222530;
+  --nili-surface-800: #222530;
 
   /* sub */
-  --wal-sub-300: #CACFD8;
-  --wal-sub-600: #525866;
+  --nili-sub-300: #CACFD8;
+  --nili-sub-600: #525866;
 
   /* soft */
-  --wal-soft-200: #E1E4EA;
-  --wal-soft-400: #99A0AE;
+  --nili-soft-200: #E1E4EA;
+  --nili-soft-400: #99A0AE;
 
   /* weak */
-  --wal-weak-50: #F5F7FA;
+  --nili-weak-50: #F5F7FA;
 
   /* white */
-  --wal-white-0: #FFFFFF;
+  --nili-white-0: #FFFFFF;
 
   /* disabled */
-  --wal-disabled-300: #F5F7FA;
+  --nili-disabled-300: #F5F7FA;
 
   /* faded */
-  --wal-faded-dark: #222530;
-  --wal-faded-base: #717784;
-  --wal-faded-light: #E1E4EA;
-  --wal-faded-lighter: #F2F5F8;
+  --nili-faded-dark: #222530;
+  --nili-faded-base: #717784;
+  --nili-faded-light: #E1E4EA;
+  --nili-faded-lighter: #F2F5F8;
 
   /* information */
-  --wal-information-dark: #122368;
-  --wal-information-base: #335CFF;
-  --wal-information-light: #C0D5FF;
-  --wal-information-lighter: #EBF1FF;
+  --nili-information-dark: #122368;
+  --nili-information-base: #335CFF;
+  --nili-information-light: #C0D5FF;
+  --nili-information-lighter: #EBF1FF;
 
   /* warning */
-  --wal-warning-dark: #682F12;
-  --wal-warning-base: #FF8447;
-  --wal-warning-light: #FFD5C0;
-  --wal-warning-lighter: #FFF1EB;
+  --nili-warning-dark: #682F12;
+  --nili-warning-base: #FF8447;
+  --nili-warning-light: #FFD5C0;
+  --nili-warning-lighter: #FFF1EB;
 
   /* error */
-  --wal-error-dark: #681219;
-  --wal-error-base: #FB3748;
-  --wal-error-light: #FFC0C5;
-  --wal-error-lighter: #FFEBEC;
+  --nili-error-dark: #681219;
+  --nili-error-base: #FB3748;
+  --nili-error-light: #FFC0C5;
+  --nili-error-lighter: #FFEBEC;
 
   /* success */
-  --wal-success-dark: #0B4627;
-  --wal-success-base: #1FC16B;
-  --wal-success-light: #C2F5DA;
-  --wal-success-lighter: #E0FAEC;
+  --nili-success-dark: #0B4627;
+  --nili-success-base: #1FC16B;
+  --nili-success-light: #C2F5DA;
+  --nili-success-lighter: #E0FAEC;
 
   /* away */
-  --wal-away-dark: #624C18;
-  --wal-away-base: #F6B51E;
-  --wal-away-light: #FFECC0;
-  --wal-away-lighter: #FFFAEB;
+  --nili-away-dark: #624C18;
+  --nili-away-base: #F6B51E;
+  --nili-away-light: #FFECC0;
+  --nili-away-lighter: #FFFAEB;
 
   /* feature */
-  --wal-feature-dark: #351A75;
-  --wal-feature-base: #7D52F4;
-  --wal-feature-light: #CAC0FF;
-  --wal-feature-lighter: #EFEBFF;
+  --nili-feature-dark: #351A75;
+  --nili-feature-base: #7D52F4;
+  --nili-feature-light: #CAC0FF;
+  --nili-feature-lighter: #EFEBFF;
 
   /* verified */
-  --wal-verified-dark: #124B68;
-  --wal-verified-base: #47C2FF;
-  --wal-verified-light: #C0EAFF;
-  --wal-verified-lighter: #EBF8FF;
+  --nili-verified-dark: #124B68;
+  --nili-verified-base: #47C2FF;
+  --nili-verified-light: #C0EAFF;
+  --nili-verified-lighter: #EBF8FF;
 
   /* highlighted */
-  --wal-highlighted-dark: #68123D;
-  --wal-highlighted-base: #FB4BA3;
-  --wal-highlighted-light: #FFC0DF;
-  --wal-highlighted-lighter: #FFEBF4;
+  --nili-highlighted-dark: #68123D;
+  --nili-highlighted-base: #FB4BA3;
+  --nili-highlighted-light: #FFC0DF;
+  --nili-highlighted-lighter: #FFEBF4;
 
   /* stable */
-  --wal-stable-dark: #0B463E;
-  --wal-stable-base: #22D3BB;
-  --wal-stable-light: #C2F5EE;
-  --wal-stable-lighter: #E4FBF8;
+  --nili-stable-dark: #0B463E;
+  --nili-stable-base: #22D3BB;
+  --nili-stable-light: #C2F5EE;
+  --nili-stable-lighter: #E4FBF8;
 
 
   /* ── shadows ──
@@ -102,13 +102,13 @@
      hex in fourteen component files, which meant a shadow could not follow the
      theme. Dark surfaces need a different shadow from light ones — a black
      drop shadow on a near-black panel is invisible — so these swap below. */
-  --wal-shadow-xs: 0 1px 2px 0 #0A0D1408;
-  --wal-shadow-sm: 0 2px 4px 0 #0A0D1408;
-  --wal-shadow-md: 0 16px 32px -12px #0E121B1A;
-  --wal-shadow-lg: 0 16px 40px -8px #0E121B1F;
-  --wal-shadow-button-primary: 0 1px 2px 0 #0E121B7A;
-  --wal-shadow-button-basic: 0 1px 2px 0 #0E121B14;
-  --wal-shadow-toggle: 0 6px 10px 0 #0E121B0F;
+  --nili-shadow-xs: 0 1px 2px 0 #0A0D1408;
+  --nili-shadow-sm: 0 2px 4px 0 #0A0D1408;
+  --nili-shadow-md: 0 16px 32px -12px #0E121B1A;
+  --nili-shadow-lg: 0 16px 40px -8px #0E121B1F;
+  --nili-shadow-button-primary: 0 1px 2px 0 #0E121B7A;
+  --nili-shadow-button-basic: 0 1px 2px 0 #0E121B14;
+  --nili-shadow-toggle: 0 6px 10px 0 #0E121B0F;
 
 }
 
@@ -116,101 +116,101 @@
   color-scheme: dark;
 
   /* static */
-  --wal-static-white: #FFFFFF;
-  --wal-static-black: #0E121B;
+  --nili-static-white: #FFFFFF;
+  --nili-static-black: #0E121B;
 
   /* strong */
-  --wal-strong-950: #FFFFFF;
+  --nili-strong-950: #FFFFFF;
 
   /* surface */
-  --wal-surface-800: #E1E4EA;
+  --nili-surface-800: #E1E4EA;
 
   /* sub */
-  --wal-sub-300: #525866;
-  --wal-sub-600: #99A0AE;
+  --nili-sub-300: #525866;
+  --nili-sub-600: #99A0AE;
 
   /* soft */
-  --wal-soft-200: #2B303B;
-  --wal-soft-400: #717784;
+  --nili-soft-200: #2B303B;
+  --nili-soft-400: #717784;
 
   /* weak */
-  --wal-weak-50: #181B25;
+  --nili-weak-50: #181B25;
 
   /* white */
-  --wal-white-0: #0E121B;
+  --nili-white-0: #0E121B;
 
   /* disabled */
-  --wal-disabled-300: #525866;
+  --nili-disabled-300: #525866;
 
   /* faded */
-  --wal-faded-dark: #CACFD8;
-  --wal-faded-base: #717784;
-  --wal-faded-light: #99A0AE3D;
-  --wal-faded-lighter: #99A0AE29;
+  --nili-faded-dark: #CACFD8;
+  --nili-faded-base: #717784;
+  --nili-faded-light: #99A0AE3D;
+  --nili-faded-lighter: #99A0AE29;
 
   /* information */
-  --wal-information-dark: #6895FF;
-  --wal-information-base: #335CFF;
-  --wal-information-light: #476CFF3D;
-  --wal-information-lighter: #476CFF29;
+  --nili-information-dark: #6895FF;
+  --nili-information-base: #335CFF;
+  --nili-information-light: #476CFF3D;
+  --nili-information-lighter: #476CFF29;
 
   /* warning */
-  --wal-warning-dark: #FF9A68;
-  --wal-warning-base: #E97135;
-  --wal-warning-light: #FF91473D;
-  --wal-warning-lighter: #FF914729;
+  --nili-warning-dark: #FF9A68;
+  --nili-warning-base: #E97135;
+  --nili-warning-light: #FF91473D;
+  --nili-warning-lighter: #FF914729;
 
   /* error */
-  --wal-error-dark: #FF6875;
-  --wal-error-base: #E93544;
-  --wal-error-light: #FB37483D;
-  --wal-error-lighter: #FB374829;
+  --nili-error-dark: #FF6875;
+  --nili-error-base: #E93544;
+  --nili-error-light: #FB37483D;
+  --nili-error-lighter: #FB374829;
 
   /* success */
-  --wal-success-dark: #3EE089;
-  --wal-success-base: #1DAF61;
-  --wal-success-light: #1FC16B3D;
-  --wal-success-lighter: #1FC16B29;
+  --nili-success-dark: #3EE089;
+  --nili-success-base: #1DAF61;
+  --nili-success-light: #1FC16B3D;
+  --nili-success-lighter: #1FC16B29;
 
   /* away */
-  --wal-away-dark: #FFD268;
-  --wal-away-base: #E6A819;
-  --wal-away-light: #FBC64B3D;
-  --wal-away-lighter: #FBC64B29;
+  --nili-away-dark: #FFD268;
+  --nili-away-base: #E6A819;
+  --nili-away-light: #FBC64B3D;
+  --nili-away-lighter: #FBC64B29;
 
   /* feature */
-  --wal-feature-dark: #8C71F6;
-  --wal-feature-base: #7D52F4;
-  --wal-feature-light: #784DEF3D;
-  --wal-feature-lighter: #784DEF29;
+  --nili-feature-dark: #8C71F6;
+  --nili-feature-base: #7D52F4;
+  --nili-feature-light: #784DEF3D;
+  --nili-feature-lighter: #784DEF29;
 
   /* verified */
-  --wal-verified-dark: #68CDFF;
-  --wal-verified-base: #35ADE9;
-  --wal-verified-light: #47C2FF3D;
-  --wal-verified-lighter: #47C2FF29;
+  --nili-verified-dark: #68CDFF;
+  --nili-verified-base: #35ADE9;
+  --nili-verified-light: #47C2FF3D;
+  --nili-verified-lighter: #47C2FF29;
 
   /* highlighted */
-  --wal-highlighted-dark: #FF68B3;
-  --wal-highlighted-base: #E9358F;
-  --wal-highlighted-light: #FB4BA33D;
-  --wal-highlighted-lighter: #FB4BA329;
+  --nili-highlighted-dark: #FF68B3;
+  --nili-highlighted-base: #E9358F;
+  --nili-highlighted-light: #FB4BA33D;
+  --nili-highlighted-lighter: #FB4BA329;
 
   /* stable */
-  --wal-stable-dark: #C2F5EE;
-  --wal-stable-base: #1DAF9C;
-  --wal-stable-light: #22D3BB3D;
-  --wal-stable-lighter: #22D3BB29;
+  --nili-stable-dark: #C2F5EE;
+  --nili-stable-base: #1DAF9C;
+  --nili-stable-light: #22D3BB3D;
+  --nili-stable-lighter: #22D3BB29;
 
 
   /* Lifted, not darkened: on a dark surface a black shadow disappears, so the
      alpha is raised and the ambient blur widened instead of tinted. */
-  --wal-shadow-xs: 0 1px 2px 0 #00000052;
-  --wal-shadow-sm: 0 2px 4px 0 #00000052;
-  --wal-shadow-md: 0 16px 32px -12px #00000085;
-  --wal-shadow-lg: 0 16px 40px -8px #0000008F;
-  --wal-shadow-button-primary: 0 1px 2px 0 #00000099;
-  --wal-shadow-button-basic: 0 1px 2px 0 #00000052;
-  --wal-shadow-toggle: 0 6px 10px 0 #0000006B;
+  --nili-shadow-xs: 0 1px 2px 0 #00000052;
+  --nili-shadow-sm: 0 2px 4px 0 #00000052;
+  --nili-shadow-md: 0 16px 32px -12px #00000085;
+  --nili-shadow-lg: 0 16px 40px -8px #0000008F;
+  --nili-shadow-button-primary: 0 1px 2px 0 #00000099;
+  --nili-shadow-button-basic: 0 1px 2px 0 #00000052;
+  --nili-shadow-toggle: 0 6px 10px 0 #0000006B;
 
 }

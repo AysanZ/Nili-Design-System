@@ -64,7 +64,7 @@ export interface TableHeadProps extends Omit<
   /** Current direction, or `null` when this column is not the sort key. */
   sortDirection?: SortDirection | null;
   onSort?: (direction: SortDirection) => void;
-  /** Accessible name for the sort button, e.g. `` (col) => `مرتب‌سازی بر اساس ${col}` ``. */
+  /** Accessible name for the sort button, e.g. `` (c) => `Sort by ${c}` ``. */
   sortLabel?: string;
 }
 

@@ -15,18 +15,18 @@
 
 @layer base {
   html {
-    font-family: var(--wal-font-sans);
+    font-family: var(--nili-font-sans);
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
   }
   [lang='fa'],
   [lang^='fa-'] {
-    font-family: var(--wal-font-persian);
-    line-height: calc(1em * var(--wal-leading-multiplier));
+    font-family: var(--nili-font-persian);
+    line-height: calc(1em * var(--nili-leading-multiplier));
   }
   [lang='en'],
   [lang^='en-'] {
-    font-family: var(--wal-font-latin);
+    font-family: var(--nili-font-latin);
   }
 }
 
@@ -34,7 +34,7 @@
    Tailwind can emit the `animation` shorthand but not the keyframes it names.
    `inset-inline-start` is logical, so the stripe travels right-to-left under
    `dir="rtl"` with no second keyframe and no direction read in JavaScript. */
-@keyframes wal-progress-indeterminate {
+@keyframes nili-progress-indeterminate {
   from {
     inset-inline-start: -40%;
   }

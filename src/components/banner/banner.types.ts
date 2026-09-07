@@ -30,7 +30,7 @@ export interface BannerProps extends Omit<
 
   dismissible?: boolean;
   onDismiss?: () => void;
-  /** Accessible name for the close button, e.g. `'بستن'`. Required by `dismissible`. */
+  /** Accessible name for the close button. Required by `dismissible`. */
   dismissLabel?: string;
 
   /**

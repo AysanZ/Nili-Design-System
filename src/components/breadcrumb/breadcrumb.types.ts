@@ -30,6 +30,6 @@ export interface BreadcrumbProps extends Omit<
    */
   maxItems?: number;
   itemsAfterCollapse?: number;
-  /** Accessible name for the landmark, e.g. `'مسیر صفحه'`. */
+  /** Accessible name for the landmark, e.g. `'Breadcrumb'`. */
   label?: string;
 }

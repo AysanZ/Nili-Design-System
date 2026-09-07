@@ -30,7 +30,7 @@ export const colorSliderVariants = cva(
         hue: 'bg-[linear-gradient(to_right,#f00_0%,#ff0_17%,#0f0_33%,#0ff_50%,#00f_67%,#f0f_83%,#f00_100%)] rtl:bg-[linear-gradient(to_left,#f00_0%,#ff0_17%,#0f0_33%,#0ff_50%,#00f_67%,#f0f_83%,#f00_100%)]',
         // The checkerboard shows through the alpha gradient.
         opacity:
-          'bg-[repeating-conic-gradient(var(--wal-soft-200)_0_25%,transparent_0_50%)] bg-[length:8px_8px]',
+          'bg-[repeating-conic-gradient(var(--nili-soft-200)_0_25%,transparent_0_50%)] bg-[length:8px_8px]',
       },
     },
     defaultVariants: { type: 'hue' },

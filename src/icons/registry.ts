@@ -6,9 +6,9 @@ import type { IconName } from './names';
  * ⚠️  This module intentionally namespace-imports all of `@remixicon/react`.
  *
  * That is unavoidable for runtime string→component lookup, and it is exactly
- * why it lives behind the `wal-ui/icons` entry point instead of the main one:
+ * why it lives behind the `nili-ui/icons` entry point instead of the main one:
  * importing it pulls the full ~2,830-icon set into your bundle. The core
- * `wal-ui` entry stays clean.
+ * `nili-ui` entry stays clean.
  *
  * Import this only when the icon is not known at build time — an icon picker,
  * CMS-driven content, or the theme-builder dashboard.

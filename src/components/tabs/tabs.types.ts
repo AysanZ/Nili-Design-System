@@ -32,7 +32,7 @@ export interface TabsProps extends Omit<
 }
 
 export interface TabsListProps extends ComponentPropsWithoutRef<'div'> {
-  /** Accessible name for the tab set, e.g. `'تنظیمات حساب'`. */
+  /** Accessible name for the tab set, e.g. `'Account settings'`. */
   label?: string;
   /** Tabs share the width instead of hugging their labels. */
   stretch?: boolean;
