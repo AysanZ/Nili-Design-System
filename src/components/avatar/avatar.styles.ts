@@ -25,7 +25,9 @@ export const avatarSurfaceVariants = cva(
         soft: 'bg-soft-200 text-static-black',
         yellow: 'bg-yellow-200 text-yellow-950',
         blue: 'bg-blue-200 text-blue-950',
-        green: 'bg-sky-200 text-sky-950',
+        // Was sky-200 under the name `green`; Figma's green tone is green-200.
+        green: 'bg-green-200 text-green-950',
+        pink: 'bg-pink-200 text-pink-950',
         purple: 'bg-purple-200 text-purple-950',
         red: 'bg-red-200 text-red-950',
       },
@@ -69,9 +71,45 @@ export const avatarTextVariant: Record<
   '3xs': 'label-xsmall',
 };
 
-/** Below `lg` there is not enough room to render a status marker legibly. */
+/**
+ * Figma draws both statuses on all nine sizes, down to 20px, so every size
+ * supports them. Kept as a function for existing imports.
+ */
 export const avatarSupportsStatus = (size: AvatarSize): boolean =>
-  (['lg', 'xl', '2xl', '3xl'] as AvatarSize[]).includes(size);
+  Boolean(avatarPixelSize[size]);
+
+/**
+ * Status geometry per size, read from the Figma component set. Markers are
+ * drawn at their 80px size and scaled; `x` is the marker centre's distance
+ * from the avatar's end edge, `top` / `bottom` from the top / bottom edge.
+ */
+export const avatarStatusGeometry: Record<
+  AvatarSize,
+  { scale: number; x: number; top: number; bottom: number }
+> = {
+  '3xl': { scale: 1, x: 8, top: 16, bottom: 16 },
+  '2xl': { scale: 1, x: 8, top: 16, bottom: 12.8 },
+  xl: { scale: 0.875, x: 6, top: 14, bottom: 14 },
+  lg: { scale: 0.75, x: 6, top: 12, bottom: 12 },
+  md: { scale: 0.625, x: 4, top: 10, bottom: 10 },
+  sm: { scale: 0.5625, x: 3, top: 9, bottom: 9 },
+  xs: { scale: 0.5, x: 2, top: 8, bottom: 8 },
+  '2xs': { scale: 0.375, x: 2, top: 6, bottom: 6 },
+  '3xs': { scale: 0.3125, x: 1, top: 5, bottom: 5 },
+};
+
+/** Avatar Group overlap per size (Figma: 80–56 → 16, 48–40 → 12, 32 → 6, 24–20 → 4). */
+export const avatarGroupOverlap: Record<AvatarSize, string> = {
+  '3xl': '-ms-4',
+  '2xl': '-ms-4',
+  xl: '-ms-4',
+  lg: '-ms-4',
+  md: '-ms-3',
+  sm: '-ms-3',
+  xs: '-ms-1.5',
+  '2xs': '-ms-1',
+  '3xs': '-ms-1',
+};
 
 /**
  * Deprecated size names kept so existing call sites keep compiling.

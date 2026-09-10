@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { RiHomeSmile2Line, RiFolderLine, RiStackLine } from '@remixicon/react';
 import { Breadcrumb, BreadcrumbItem } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { BreadcrumbItemsMatrix, BreadcrumbsMatrix } from './breadcrumb.docs';
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'Base Components/Breadcrumbs',
+  title: 'Base Components/Breadcrumbs/Breadcrumbs',
   component: Breadcrumb,
   parameters: {
     docs: {
@@ -158,5 +160,24 @@ export const Collapsed = () => {
     </Breadcrumb>
   );
 };
+
+// ====================== Figma component sets ======================
+
+/** Figma Breadcrumb Items: Icon · Text · Icon + Text × Default · Hover · Active. */
+export const BreadcrumbItems = () => (
+  <FigmaFrame>
+    <BreadcrumbItemsMatrix />
+  </FigmaFrame>
+);
+BreadcrumbItems.parameters = { docs: { source: { code: null } } };
+
+/** Figma Breadcrumbs: Quantity 05–02 × Divider Arrow · Slash · Dot. */
+export const BreadcrumbTrails = () => (
+  <FigmaFrame>
+    <BreadcrumbsMatrix />
+  </FigmaFrame>
+);
+BreadcrumbTrails.storyName = 'Breadcrumbs';
+BreadcrumbTrails.parameters = { docs: { source: { code: null } } };
 
 export default meta;

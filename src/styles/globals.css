@@ -2,7 +2,7 @@
    Nili Design System — stylesheet entry point
 
    Consumers import exactly this one file:
-       import '@husan/nili-ui/styles.css';
+       import '@nili/ui/styles.css';
 
    Order matters: Tailwind first, then tokens, then the @theme bridge.
    ──────────────────────────────────────────────────────────────── */
@@ -14,6 +14,7 @@
 @import './tokens.foundation.css';
 @import './tokens.semantic.css';
 @import './theme.css';
+@import './variants.css';
 
 /* Tell Tailwind v4 where to look for class names. Needed because this
    stylesheet is also consumed from Storybook and from the docs site, which

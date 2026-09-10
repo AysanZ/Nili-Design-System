@@ -2,10 +2,12 @@ import {
   forwardRef,
   useCallback,
   useMemo,
+  useState,
   useRef,
   type PointerEvent as ReactPointerEvent,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
+import { RiArrowDownSLine, RiSipLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { useId } from '../../hooks/use-id';
 import { useControllableState } from '../../hooks/use-controllable-state';
@@ -20,6 +22,7 @@ import {
 } from '../../lib/color';
 import {
   colorPickerVariants,
+  colorDotSwatchVariants,
   colorSpectrumVariants,
   colorSliderVariants,
   colorThumbVariants,
@@ -36,7 +39,7 @@ import type {
 const clamp = (n: number, min = 0, max = 100) =>
   Math.min(max, Math.max(min, n));
 
-/** A single palette swatch. */
+/** A single palette swatch — Figma Color Dots. */
 export const ColorDot = forwardRef<HTMLButtonElement, ColorDotProps>(
   function ColorDot(
     { color, value, selected = false, className, style, type, ...rest },
@@ -52,9 +55,15 @@ export const ColorDot = forwardRef<HTMLButtonElement, ColorDotProps>(
           colorDotVariants({ color: value ? undefined : color }),
           className,
         )}
-        style={value ? { ...style, backgroundColor: value } : style}
+        style={
+          value
+            ? ({ ...style, '--nili-dot': value } as React.CSSProperties)
+            : style
+        }
         {...rest}
-      />
+      >
+        <span aria-hidden className={colorDotSwatchVariants()} />
+      </button>
     );
   },
 );
@@ -166,6 +175,7 @@ export const ColorSlider = forwardRef<HTMLDivElement, ColorSliderProps>(
       value,
       onChange,
       baseColor = '#000',
+      thumbColor: thumbColorProp,
       label,
       className,
       style,
@@ -176,6 +186,8 @@ export const ColorSlider = forwardRef<HTMLDivElement, ColorSliderProps>(
     const trackRef = useRef<HTMLDivElement>(null);
     const { dir } = useDirection();
     const max = type === 'hue' ? 360 : 100;
+    const thumbColor =
+      thumbColorProp ?? (type === 'hue' ? `hsl(${value} 100% 50%)` : baseColor);
 
     const apply = useCallback(
       (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -239,12 +251,27 @@ export const ColorSlider = forwardRef<HTMLDivElement, ColorSliderProps>(
         )}
         <span
           className={colorThumbVariants()}
-          style={{ insetInlineStart: `calc(${percent}% - 0.5rem)` }}
+          style={{
+            insetInlineStart: `calc(${percent}% - 7px)`,
+            backgroundColor: thumbColor,
+          }}
         />
       </div>
     );
   },
 );
+
+/** Figma "Recommended Colors": gray, blue, orange, red, green, yellow, purple, sky. */
+const DEFAULT_SWATCHES = [
+  '#717784',
+  '#335CFF',
+  '#FF9147',
+  '#FB3748',
+  '#1FC16B',
+  '#F6B51E',
+  '#7D52F4',
+  '#47C2FF',
+];
 
 /**
  * Composite picker: spectrum, hue, optional opacity, a hex field and swatches.
@@ -258,7 +285,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
       value,
       defaultValue = '#335CFF',
       onChange,
-      withOpacity = false,
+      withOpacity = true,
       swatches,
       footer,
       labels,
@@ -289,79 +316,156 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
       setHex(rgbToHex(hsvToRgb(merged), withOpacity ? alpha : 1));
     };
 
+    const opaque = rgbToHex({ r: parsed.r, g: parsed.g, b: parsed.b });
+    const alphaPercent = Math.round(parsed.a * 100);
+    const [format, setFormat] = useState<'hex' | 'rgb'>('hex');
+    const palette = swatches ?? DEFAULT_SWATCHES;
+    const canPickFromScreen =
+      typeof window !== 'undefined' && 'EyeDropper' in window;
+
+    const pickFromScreen = async () => {
+      try {
+        const EyeDropperCtor = (
+          window as unknown as {
+            EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> };
+          }
+        ).EyeDropper;
+        const result = await new EyeDropperCtor().open();
+        setHex(result.sRGBHex);
+      } catch {
+        // The user dismissed the picker.
+      }
+    };
+
+    const fieldValue =
+      format === 'hex'
+        ? opaque.replace('#', '').toUpperCase()
+        : `${parsed.r}, ${parsed.g}, ${parsed.b}`;
+
     return (
       <div ref={ref} className={cn(colorPickerVariants(), className)} {...rest}>
-        <ColorSpectrum
-          hue={hsv.h}
-          saturation={hsv.s}
-          brightness={hsv.v}
-          label={labels?.spectrum}
-          onChange={({ saturation, brightness }) =>
-            commit({ s: saturation, v: brightness })
-          }
-        />
-
-        <div className="flex items-center gap-3">
-          <span
-            aria-hidden
-            className="size-8 shrink-0 rounded-full border border-soft-200"
-            style={{ backgroundColor: hex }}
+        <div className="flex flex-col gap-[13px] p-[15px]">
+          <ColorSpectrum
+            hue={hsv.h}
+            saturation={hsv.s}
+            brightness={hsv.v}
+            label={labels?.spectrum}
+            onChange={({ saturation, brightness }) =>
+              commit({ s: saturation, v: brightness })
+            }
           />
-          <div className="flex flex-1 flex-col gap-2">
+
+          <div className="flex flex-col gap-3.5">
             <ColorSlider
               type="hue"
               value={hsv.h}
+              thumbColor={opaque}
               label={labels?.hue}
               onChange={(h) => commit({ h })}
             />
             {withOpacity && (
               <ColorSlider
                 type="opacity"
-                value={Math.round(parsed.a * 100)}
-                baseColor={rgbToHex({ r: parsed.r, g: parsed.g, b: parsed.b })}
+                value={alphaPercent}
+                baseColor={opaque}
+                thumbColor={opaque}
                 label={labels?.opacity}
                 onChange={(a) => commit({ a: a / 100 })}
               />
             )}
           </div>
-        </div>
 
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor={hexId}
-            className="text-[12px] font-medium leading-4 text-sub-600"
-          >
-            {labels?.hex ?? 'Hex'}
-          </label>
-          <input
-            id={hexId}
-            value={hex.toUpperCase()}
-            spellCheck={false}
-            // Hex codes are Latin even in Persian UI, so the field is pinned LTR.
-            dir="ltr"
-            onChange={(event) => {
-              const next = event.target.value;
-              setHex(next.startsWith('#') ? next : `#${next}`);
-            }}
-            className="h-9 rounded-lg border border-soft-200 bg-white-0 px-2.5 font-mono text-[14px] text-strong-950 outline-none focus-visible:border-primary-base"
-          />
-        </div>
-
-        {swatches && swatches.length > 0 && (
-          <div
-            role="group"
-            aria-label={labels?.swatches}
-            className="flex flex-wrap gap-2"
-          >
-            {swatches.map((swatch) => (
-              <ColorDot
-                key={swatch}
-                value={swatch}
-                aria-label={swatch}
-                selected={swatch.toLowerCase() === hex.toLowerCase()}
-                onClick={() => setHex(swatch)}
+          <div className="flex flex-col gap-1">
+            {/* Figma "Hex ▾": the value format. */}
+            <label className="relative flex w-fit items-center gap-0.5 text-[14px] leading-5 font-medium text-strong-950">
+              <select
+                aria-label={labels?.format ?? 'Format'}
+                value={format}
+                onChange={(event) =>
+                  setFormat(event.target.value as 'hex' | 'rgb')
+                }
+                className="cursor-pointer appearance-none bg-transparent pe-5 outline-hidden focus-visible:underline"
+              >
+                <option value="hex">{labels?.hex ?? 'Hex'}</option>
+                <option value="rgb">RGB</option>
+              </select>
+              <RiArrowDownSLine
+                size={20}
+                aria-hidden
+                className="pointer-events-none absolute end-0 text-soft-400"
               />
-            ))}
+            </label>
+
+            <div
+              dir="ltr"
+              className="flex h-8 items-stretch overflow-hidden rounded-lg border border-soft-200 bg-white-0 text-[14px] leading-5 focus-within:shadow-focus-neutral"
+            >
+              <button
+                type="button"
+                onClick={pickFromScreen}
+                disabled={!canPickFromScreen}
+                aria-label={
+                  labels?.eyedropper ?? 'Pick a colour from the screen'
+                }
+                className="flex w-8 shrink-0 cursor-pointer items-center justify-center border-e border-soft-200 text-sub-600 outline-hidden hovered:bg-weak-50 disabled:cursor-default"
+              >
+                <RiSipLine size={20} />
+              </button>
+              <input
+                id={hexId}
+                value={fieldValue}
+                spellCheck={false}
+                // Hex codes are Latin even in a Persian UI.
+                dir="ltr"
+                aria-label={format === 'hex' ? (labels?.hex ?? 'Hex') : 'RGB'}
+                onChange={(event) => {
+                  const next = event.target.value.trim();
+                  if (format === 'hex') {
+                    setHex(next.startsWith('#') ? next : `#${next}`);
+                    return;
+                  }
+                  const parts = next.split(/[\s,]+/).map(Number);
+                  if (
+                    parts.length === 3 &&
+                    parts.every((n) => n >= 0 && n <= 255)
+                  ) {
+                    setHex(
+                      rgbToHex(
+                        { r: parts[0], g: parts[1], b: parts[2] },
+                        parsed.a,
+                      ),
+                    );
+                  }
+                }}
+                className="min-w-0 flex-1 bg-transparent px-2.5 text-strong-950 outline-hidden"
+              />
+              <span className="flex w-14 shrink-0 items-center justify-center border-s border-soft-200 text-sub-600">
+                {alphaPercent}%
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {palette.length > 0 && (
+          <div className="flex flex-col gap-2 border-t border-soft-200 px-[15px] pt-4 pb-[15px]">
+            <span className="text-[12px] leading-4 text-sub-600">
+              {labels?.swatches ?? 'Recommended Colors'}
+            </span>
+            <div
+              role="group"
+              aria-label={labels?.swatches ?? 'Recommended Colors'}
+              className="flex flex-wrap gap-1"
+            >
+              {palette.map((swatch) => (
+                <ColorDot
+                  key={swatch}
+                  value={swatch}
+                  aria-label={swatch}
+                  selected={swatch.toLowerCase() === opaque.toLowerCase()}
+                  onClick={() => setHex(swatch)}
+                />
+              ))}
+            </div>
           </div>
         )}
 

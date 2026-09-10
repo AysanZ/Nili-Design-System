@@ -3,9 +3,16 @@ import { Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { ColorPicker, ColorDot } from '.';
 import { Button } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  ColorDotsSet,
+  ColorPickerSet,
+  ColorSlidersSet,
+  ColorSpectrumSet,
+} from './color-picker.docs';
 
 const meta: Meta<typeof ColorPicker> = {
-  title: 'Base Components/Color Picker',
+  title: 'Base Components/Color Picker/Color Picker',
   component: ColorPicker,
   parameters: {
     docs: {
@@ -129,5 +136,37 @@ export const Dots = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const ColorSliders = () => (
+  <FigmaFrame>
+    <ColorSlidersSet />
+  </FigmaFrame>
+);
+ColorSliders.parameters = { docs: { source: { code: null } } };
+
+export const ColorDots = () => (
+  <FigmaFrame>
+    <ColorDotsSet />
+  </FigmaFrame>
+);
+ColorDots.parameters = { docs: { source: { code: null } } };
+
+export const ColorSpectrumSetStory = () => (
+  <FigmaFrame>
+    <ColorSpectrumSet />
+  </FigmaFrame>
+);
+ColorSpectrumSetStory.storyName = 'Color Spectrum';
+ColorSpectrumSetStory.parameters = { docs: { source: { code: null } } };
+
+export const ColorPickerSetStory = () => (
+  <FigmaFrame>
+    <ColorPickerSet />
+  </FigmaFrame>
+);
+ColorPickerSetStory.storyName = 'Color Picker set';
+ColorPickerSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

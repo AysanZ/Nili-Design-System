@@ -1,5 +1,27 @@
 import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { extendTailwindMerge } from 'tailwind-merge';
+
+/**
+ * tailwind-merge only knows Tailwind's stock shadow scale (`xs`…`2xl`).
+ * Anything else after `shadow-` it files under *shadow colour*, so
+ * `shadow-button-xs` and a consumer's `shadow-lg` were seen as two different
+ * groups and both survived — the override silently lost half the time.
+ * Registering the Nili shadow names puts them in the right group.
+ */
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      shadow: [
+        'button-xs',
+        'button-primary',
+        'button-basic',
+        'toggle',
+        'alert',
+        (value: string) => /^(focus|fancy)-/.test(value),
+      ],
+    },
+  },
+});
 
 /**
  * Merge Tailwind class names with correct precedence.

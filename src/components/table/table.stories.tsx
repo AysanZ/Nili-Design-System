@@ -17,9 +17,15 @@ import { Checkbox } from '@components/checkbox';
 import { CompactButton } from '@components/button';
 import { Icon } from '@components/icon';
 import { formatNumber } from '@lib/numerals';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  SortingIconsSet,
+  TableHeaderCellSet,
+  TableRowCellSet,
+} from './table.docs';
 
 const meta: Meta<typeof Table> = {
-  title: 'Base Components/Table',
+  title: 'Base Components/Table/Table',
   component: Table,
   parameters: {
     docs: {
@@ -265,5 +271,31 @@ export const RichCells = () => {
 /** The header stays put while the body scrolls. */
 export const StickyHeader = Template.bind({});
 StickyHeader.args = { stickyHeader: true };
+
+// ====================== Figma component sets ======================
+
+export const TableRowCellSetStory = () => (
+  <FigmaFrame>
+    <TableRowCellSet />
+  </FigmaFrame>
+);
+TableRowCellSetStory.storyName = 'Table Row Cell';
+TableRowCellSetStory.parameters = { docs: { source: { code: null } } };
+
+export const SortingIconsSetStory = () => (
+  <FigmaFrame>
+    <SortingIconsSet />
+  </FigmaFrame>
+);
+SortingIconsSetStory.storyName = 'Sorting Icons';
+SortingIconsSetStory.parameters = { docs: { source: { code: null } } };
+
+export const TableHeaderCellSetStory = () => (
+  <FigmaFrame>
+    <TableHeaderCellSet />
+  </FigmaFrame>
+);
+TableHeaderCellSetStory.storyName = 'Table Header Cell';
+TableHeaderCellSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

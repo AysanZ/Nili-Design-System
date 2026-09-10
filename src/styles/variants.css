@@ -1,0 +1,49 @@
+/* ────────────────────────────────────────────────────────────────
+   Nili Design System — interaction variants
+
+   `hovered:` and `focused:` replace Tailwind's `hover:` and
+   `focus-visible:` inside components. They match exactly the same
+   browser states, plus two things the built-ins cannot do:
+
+   1. They never apply to a disabled control. `:disabled` and
+      `aria-disabled="true"` are excluded in the selector itself, so a
+      disabled `<a>` rendered through `asChild` cannot pick up hover or
+      focus styling from the keyboard.
+
+   2. They also match `data-nili-state="hover" | "focus"`. That
+      attribute is a docs / visual-regression hook, NOT a public prop:
+      it is what lets Storybook draw Figma's State row (Default ·
+      Hover · Focus · Disabled) side by side as static pictures. A real
+      `state` prop was rejected on purpose — it produces buttons that
+      look focused without being focused. Nothing in the library sets
+      this attribute; only docs do.
+
+   Declared in this order on purpose: Tailwind emits custom variants in
+   registration order, so `focused` lands after `hovered` and wins when
+   a focused control is also hovered — matching Figma, where Focus is
+   drawn over whatever the pointer is doing.
+   ──────────────────────────────────────────────────────────────── */
+
+@custom-variant hovered {
+  &:not(:disabled, [aria-disabled='true']) {
+    &[data-nili-state='hover'] {
+      @slot;
+    }
+    @media (hover: hover) {
+      &:hover {
+        @slot;
+      }
+    }
+  }
+}
+
+@custom-variant focused {
+  &:not(:disabled, [aria-disabled='true']) {
+    &[data-nili-state='focus'] {
+      @slot;
+    }
+    &:focus-visible {
+      @slot;
+    }
+  }
+}

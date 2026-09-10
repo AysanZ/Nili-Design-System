@@ -1,7 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
-import type {
-  PaginationVariantProps,
-} from './pagination.styles';
+import type { PaginationVariantProps } from './pagination.styles';
 
 export type PaginationAlign = NonNullable<PaginationVariantProps['align']>;
 

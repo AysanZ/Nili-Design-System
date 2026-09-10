@@ -30,7 +30,7 @@
   --nili-blue-400: #6895FF;
   --nili-blue-500: #335CFF;
   --nili-blue-600: #3559E9;
-  --nili-blue-700: #3559E9;
+  --nili-blue-700: #2547D0;
   --nili-blue-800: #1F3BAD;
   --nili-blue-900: #182F8B;
   --nili-blue-950: #122368;
@@ -179,7 +179,10 @@
   /* primary */
   --nili-primary-alpha-10: #476CFF1A;
   --nili-primary-alpha-16: #476CFF29;
+  --nili-primary-alpha-24: #476CFF3D;
   --nili-primary-base: #335CFF;
-  --nili-primary-darker: #335CFF;
+  /* Button / Link Button hover fill (Figma: blue-700). Was #335CFF — the
+     same as primary-base — so hover produced no visible change at all. */
+  --nili-primary-darker: #2547D0;
   --nili-primary-dark: #1F3BAD;
 }

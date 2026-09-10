@@ -12,9 +12,15 @@ import {
 import { QuickActions, QuickActionItem } from '.';
 import { Icon } from '@components/icon';
 import { LinkButton } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  QuickActionsFooterSet,
+  QuickActionsItemsSet,
+  QuickActionsSearchSet,
+} from './quick-actions.docs';
 
 const meta: Meta<typeof QuickActions> = {
-  title: 'Base Components/Quick Actions',
+  title: 'Base Components/Quick Actions/Quick Actions',
   component: QuickActions,
   parameters: {
     docs: {
@@ -230,5 +236,29 @@ export const TrailingEdge = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const QuickActionsSearchInput = () => (
+  <FigmaFrame>
+    <QuickActionsSearchSet />
+  </FigmaFrame>
+);
+QuickActionsSearchInput.parameters = { docs: { source: { code: null } } };
+
+export const QuickActionsItemsSetStory = () => (
+  <FigmaFrame>
+    <QuickActionsItemsSet />
+  </FigmaFrame>
+);
+QuickActionsItemsSetStory.storyName = 'Quick Actions Items';
+QuickActionsItemsSetStory.parameters = { docs: { source: { code: null } } };
+
+export const QuickActionsFooter = () => (
+  <FigmaFrame>
+    <QuickActionsFooterSet />
+  </FigmaFrame>
+);
+QuickActionsFooter.parameters = { docs: { source: { code: null } } };
 
 export default meta;

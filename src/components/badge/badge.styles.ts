@@ -13,7 +13,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
 export const badgeVariants = cva(
   [
     'inline-flex items-center justify-center shrink-0',
-    'gap-0.5 rounded-full px-2 py-0.5',
+    // Inline padding is set per slot in badge.tsx: Figma uses 8px beside
+    // text, 4px beside an icon, and 4px (medium) / 2px (small) beside a dot.
+    'gap-0.5 rounded-full py-0.5',
     'align-middle whitespace-nowrap',
   ],
   {
@@ -38,7 +40,8 @@ export const badgeVariants = cva(
       },
       size: {
         medium: 'text-[12px] font-medium leading-4',
-        small: 'text-[11px] font-medium leading-3 tracking-[0.02em]',
+        // Figma Small uses the uppercase Subheading/2X-Small style ("BADGE").
+        small: 'text-[11px] font-medium leading-3 tracking-[0.02em] uppercase',
       },
       disabled: {
         true: 'bg-transparent text-sub-300 border border-soft-200',
@@ -326,5 +329,10 @@ export const badgeDotVariants = cva('rounded-full bg-current', {
   },
   defaultVariants: { size: 'medium' },
 });
+
+/** The dot sits centred in a 12px slot on both sizes (Figma). */
+export const badgeDotSlotVariants = cva(
+  'inline-flex size-3 shrink-0 items-center justify-center',
+);
 
 export type BadgeVariantProps = VariantProps<typeof badgeVariants>;

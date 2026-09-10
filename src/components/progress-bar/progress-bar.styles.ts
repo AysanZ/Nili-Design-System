@@ -23,7 +23,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * - `Percentage` is `value`, not a variant, for the same reason.
  */
 export const progressTrackVariants = cva(
-  'relative h-2 w-full overflow-hidden rounded-full bg-soft-200',
+  // Figma: a 6px track, radius 3, soft-200.
+  'relative h-1.5 w-full overflow-hidden rounded-full bg-soft-200',
 );
 
 export const progressFillVariants = cva(
@@ -71,12 +72,13 @@ export const progressCircleVariants = cva(
     variants: {
       /** Figma's circular Size, in pixels. */
       size: {
-        80: 'size-20 text-[18px] leading-6',
-        72: 'size-[72px] text-[16px] leading-6',
-        64: 'size-16 text-[16px] leading-6',
-        56: 'size-14 text-[14px] leading-5',
-        48: 'size-12 text-[12px] leading-4',
-        40: 'size-10 text-[11px] leading-4',
+        // Figma: 14px medium on 80–64, 12px on 56–48; 40 carries no number.
+        80: 'size-20 text-[14px] leading-5 font-medium',
+        72: 'size-[72px] text-[14px] leading-5 font-medium',
+        64: 'size-16 text-[14px] leading-5 font-medium',
+        56: 'size-14 text-[12px] leading-4 font-medium',
+        48: 'size-12 text-[12px] leading-4 font-medium',
+        40: 'size-10 text-[0px]',
       },
     },
     defaultVariants: { size: 64 },

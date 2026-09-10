@@ -57,13 +57,19 @@ export const drawerPanelVariants = cva(
   },
 );
 
+/**
+ * Figma Drawer Header (400 wide): 20px sides, 68px tall with a title
+ * (Label/Large 18/24), 92px with a description (Paragraph/Small, 4px below),
+ * a 20px icon or a 48px key-icon 16px before the text, and a × at the end.
+ * `size` is kept for existing callers; both draw the Figma header.
+ */
 export const drawerHeaderVariants = cva(
-  'flex shrink-0 items-start gap-3 border-b border-soft-200',
+  'flex shrink-0 items-start gap-4 border-b border-soft-200 bg-white-0 px-5 pt-[22px] pb-[21px]',
   {
     variants: {
       size: {
-        sm: 'px-4 py-3',
-        lg: 'px-5 py-4',
+        sm: '',
+        lg: '',
       },
     },
     defaultVariants: { size: 'sm' },
@@ -81,7 +87,9 @@ export const drawerBodyVariants = cva('flex-1 overflow-y-auto', {
 });
 
 export const drawerFooterVariants = cva(
-  'flex shrink-0 items-center gap-3 border-t border-soft-200 px-4 py-3',
+  // Figma Drawer Footer: 20px sides, 16px top/bottom, actions at the end
+  // and an optional start slot (checkbox, switch, step dots, link).
+  'flex shrink-0 items-center gap-3 border-t border-soft-200 bg-white-0 px-5 py-4',
   {
     variants: {
       /** Figma "Stretch": actions fill the width instead of hugging the end. */

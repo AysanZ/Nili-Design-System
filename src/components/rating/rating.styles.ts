@@ -19,7 +19,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * fill comes from `value`, so 3.7 renders as three and a bit — a quantised
  * variant would be a component that cannot show the average it is given.
  */
-export const ratingVariants = cva('inline-flex items-center gap-1 [&_svg]:size-5');
+export const ratingVariants = cva(
+  'inline-flex items-center gap-1 [&_svg]:size-5',
+);
 
 /**
  * The filled glyph sits on top of the empty one and is clipped with a logical
@@ -89,7 +91,6 @@ export const ratingGlyphVariants = cva([
   'peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary-base',
 ]);
 
-
 /**
  * Figma's `Rating & Review` → `Alignment`. The score on its own, stacked above
  * its description, or beside it.
@@ -107,4 +108,6 @@ export const ratingReviewVariants = cva('flex', {
 
 export type RatingItemVariantProps = VariantProps<typeof ratingItemVariants>;
 export type RatingFillVariantProps = VariantProps<typeof ratingFillVariants>;
-export type RatingReviewVariantProps = VariantProps<typeof ratingReviewVariants>;
+export type RatingReviewVariantProps = VariantProps<
+  typeof ratingReviewVariants
+>;

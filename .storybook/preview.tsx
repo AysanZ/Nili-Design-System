@@ -24,6 +24,31 @@ const preview: Preview = {
      * story instead of tinting the canvas.
      */
     backgrounds: { disable: true },
+    /**
+     * Figma order inside the Buttons page: the Overview frame first, then its
+     * component sets in the order the frame draws them.
+     *
+     * The `'*'` matters. Naming `'Buttons'` directly would hoist it to the top
+     * of Base Components; with the wildcard, siblings compare as unlisted and
+     * keep their normal order, and only the children below get re-ordered.
+     */
+    options: {
+      storySort: {
+        order: [
+          'Base Components',
+          [
+            '*',
+            [
+              'Overview',
+              'Buttons',
+              'Link Buttons',
+              'Fancy Buttons',
+              'Compact Button',
+            ],
+          ],
+        ],
+      },
+    },
   },
   /**
    * `initialGlobals`, not `globals`.

@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { Checkbox } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { CheckboxLabelMatrix, CheckboxMatrix } from './checkbox.docs';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Base Components/Checkbox',
+  title: 'Base Components/Checkbox/Checkbox',
   component: Checkbox,
   parameters: {
     docs: {
@@ -153,5 +155,23 @@ export const IndeterminateGroup = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const CheckboxSet = () => (
+  <FigmaFrame>
+    <CheckboxMatrix />
+  </FigmaFrame>
+);
+CheckboxSet.storyName = 'Checkbox set';
+CheckboxSet.parameters = { docs: { source: { code: null } } };
+
+export const CheckboxLabelSet = () => (
+  <FigmaFrame>
+    <CheckboxLabelMatrix />
+  </FigmaFrame>
+);
+CheckboxLabelSet.storyName = 'Checkbox Label';
+CheckboxLabelSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

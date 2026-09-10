@@ -59,6 +59,10 @@
   --color-stable-base: var(--nili-stable-base);
   --color-stable-light: var(--nili-stable-light);
   --color-stable-lighter: var(--nili-stable-lighter);
+  --color-error-darker: var(--nili-error-darker);
+  --color-success-darker: var(--nili-success-darker);
+  --color-error-alpha-10: var(--nili-error-alpha-10);
+  --color-success-alpha-10: var(--nili-success-alpha-10);
 
   /* ── primitive palette ── */
   --color-neutral-0: var(--nili-neutral-0);
@@ -210,6 +214,7 @@
   --color-black-alpha-24: var(--nili-black-alpha-24);
   --color-primary-alpha-10: var(--nili-primary-alpha-10);
   --color-primary-alpha-16: var(--nili-primary-alpha-16);
+  --color-primary-alpha-24: var(--nili-primary-alpha-24);
   --color-primary-base: var(--nili-primary-base);
   --color-primary-darker: var(--nili-primary-darker);
   --color-primary-dark: var(--nili-primary-dark);
@@ -228,6 +233,31 @@
   --shadow-button-primary: var(--nili-shadow-button-primary);
   --shadow-button-basic: var(--nili-shadow-button-basic);
   --shadow-toggle: var(--nili-shadow-toggle);
+  --shadow-button-xs: var(--nili-shadow-button-xs);
+  --shadow-alert: var(--nili-shadow-alert);
+
+  /* Focus rings. Composed here rather than in tokens.semantic.css because
+     `@theme inline` resolves the var()s on the element that uses the
+     utility — so the 2px gap takes the colour of the theme that element
+     actually sits in, not the one declared on :root. */
+  --shadow-focus-primary: 0 0 0 2px var(--nili-white-0), 0 0 0 4px var(--nili-focus-primary);
+  --shadow-focus-neutral: 0 0 0 2px var(--nili-white-0), 0 0 0 4px var(--nili-focus-neutral);
+  --shadow-focus-error: 0 0 0 2px var(--nili-white-0), 0 0 0 4px var(--nili-focus-error);
+  --shadow-focus-success: 0 0 0 2px var(--nili-white-0), 0 0 0 4px var(--nili-focus-success);
+
+  /* Fancy Button: 1px edge in the fill colour + drop, and the same with a
+     4px ring underneath for focus. Layer order is Figma's reversed — CSS
+     paints the first shadow on top. */
+  --shadow-fancy-neutral: 0 0 0 1px var(--nili-strong-950), var(--nili-shadow-button-primary);
+  --shadow-fancy-primary: 0 0 0 1px var(--nili-primary-base), var(--nili-shadow-button-primary);
+  --shadow-fancy-error: 0 0 0 1px var(--nili-error-base), var(--nili-shadow-button-primary);
+  --shadow-fancy-success: 0 0 0 1px var(--nili-success-base), var(--nili-shadow-button-primary);
+  --shadow-fancy-basic: 0 0 0 1px var(--nili-soft-200), var(--nili-shadow-button-basic);
+  --shadow-fancy-neutral-focus: 0 0 0 1px var(--nili-strong-950), var(--nili-shadow-button-primary), 0 0 0 4px var(--nili-focus-fancy-neutral);
+  --shadow-fancy-primary-focus: 0 0 0 1px var(--nili-primary-base), var(--nili-shadow-button-primary), 0 0 0 4px var(--nili-focus-primary);
+  --shadow-fancy-error-focus: 0 0 0 1px var(--nili-error-base), var(--nili-shadow-button-primary), 0 0 0 4px var(--nili-focus-error);
+  --shadow-fancy-success-focus: 0 0 0 1px var(--nili-success-base), var(--nili-shadow-button-primary), 0 0 0 4px var(--nili-focus-success);
+  --shadow-fancy-basic-focus: 0 0 0 1px var(--nili-soft-200), var(--nili-shadow-button-basic), 0 0 0 4px var(--nili-focus-fancy-basic);
 
   /* ── radii ── */
   --radius-xs: var(--nili-radius-xs);

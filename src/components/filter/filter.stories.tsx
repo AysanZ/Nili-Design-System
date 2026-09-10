@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { RiCalendarLine, RiUserLine, RiPriceTag3Line } from '@remixicon/react';
 import { FilterBar, FilterChip, FilterList, FilterListItem } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { HorizontalFilterSet, VerticalFilterItemsSet } from './filter.docs';
 
 const meta: Meta<typeof FilterBar> = {
   title: 'Base Components/Filter',
@@ -61,7 +63,6 @@ export const HorizontalFilters = () => {
   );
 };
 
-
 /** Figma's Vertical Filter Items — a sidebar column. */
 export const VerticalFilters = () => {
   const { t } = useTranslation();
@@ -90,5 +91,21 @@ export const VerticalFilters = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const HorizontalFilter = () => (
+  <FigmaFrame>
+    <HorizontalFilterSet />
+  </FigmaFrame>
+);
+HorizontalFilter.parameters = { docs: { source: { code: null } } };
+
+export const VerticalFilterItems = () => (
+  <FigmaFrame>
+    <VerticalFilterItemsSet />
+  </FigmaFrame>
+);
+VerticalFilterItems.parameters = { docs: { source: { code: null } } };
 
 export default meta;

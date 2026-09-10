@@ -5,9 +5,11 @@ import { RiHeart3Fill, RiHeart3Line } from '@remixicon/react';
 import { Rating } from '.';
 import type { RatingLabels } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { RatingCellSet, RatingItemsSet, RatingReviewSet } from './rating.docs';
 
 const meta: Meta<typeof Rating> = {
-  title: 'Base Components/Rating/Rating',
+  title: 'Base Components/Ratings/Rating',
   component: Rating,
   parameters: {
     docs: {
@@ -167,14 +169,36 @@ export const InContext = () => {
         <span className="text-[12px] leading-4 text-sub-600">
           {t('rating.yours')}
         </span>
-        <Rating
-          value={value}
-          onValueChange={setValue}
-          labels={labels}
-        />
+        <Rating value={value} onValueChange={setValue} labels={labels} />
       </div>
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const RatingItemsSetStory = () => (
+  <FigmaFrame>
+    <RatingItemsSet />
+  </FigmaFrame>
+);
+RatingItemsSetStory.storyName = 'Rating Items';
+RatingItemsSetStory.parameters = { docs: { source: { code: null } } };
+
+export const RatingReviewSetStory = () => (
+  <FigmaFrame>
+    <RatingReviewSet />
+  </FigmaFrame>
+);
+RatingReviewSetStory.storyName = 'Rating & Review';
+RatingReviewSetStory.parameters = { docs: { source: { code: null } } };
+
+export const RatingCellSetStory = () => (
+  <FigmaFrame>
+    <RatingCellSet />
+  </FigmaFrame>
+);
+RatingCellSetStory.storyName = 'Rating Cell';
+RatingCellSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

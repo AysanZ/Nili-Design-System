@@ -51,18 +51,25 @@ export const filterChipVariants = cva(
 
 export const filterListVariants = cva('flex w-full flex-col gap-0.5');
 
+/**
+ * Figma Vertical Filter Items: 32px, radius 8, 20px icon, 14px text.
+ * Default: icon soft-400, text sub-600 · Hover: weak-50, icon sub-600 ·
+ * Active: weak-50, primary icon, strong-950 text and a chevron at the end.
+ */
 export const filterListItemVariants = cva(
   [
-    'flex w-full items-center gap-2 rounded-lg px-2 py-2 text-start',
-    'text-[14px] leading-5 transition-colors duration-150',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-base',
+    'flex h-8 w-full items-center gap-2 rounded-md px-2 text-start outline-hidden',
+    'text-[14px] leading-5 transition-colors duration-200',
+    '[&_[data-slot=start-icon]_svg]:size-5',
+    'focused:shadow-focus-neutral',
     'disabled:pointer-events-none disabled:text-sub-300',
   ],
   {
     variants: {
       active: {
-        true: 'bg-weak-50 font-medium text-strong-950',
-        false: 'text-sub-600 hover:bg-weak-50 hover:text-strong-950',
+        true: 'bg-weak-50 text-strong-950 [&_[data-slot=start-icon]]:text-primary-base',
+        false:
+          'text-sub-600 [&_[data-slot=start-icon]]:text-soft-400 hovered:bg-weak-50 hovered:[&_[data-slot=start-icon]]:text-sub-600',
       },
     },
     defaultVariants: { active: false },

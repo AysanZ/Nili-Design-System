@@ -1,10 +1,18 @@
-import { useState } from 'react';
-import { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { ActivityFeed } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  FeedFooter,
+  FeedItem,
+  FilterButton,
+  FooterSet,
+  MarkAllRead,
+  TabList,
+  HeaderSet,
+  ItemsSet,
+  TabsSet,
+} from './activity-feed.docs';
 import { useTranslation } from 'react-i18next';
-import { ActivityFeed, ActivityFeedItem, ActivityFeedTab } from '.';
-import { Avatar } from '@components/avatar';
-import { Badge } from '@components/badge';
-import { Button, LinkButton } from '@components/button';
 
 const meta: Meta<typeof ActivityFeed> = {
   title: 'Base Components/Activity Feed',
@@ -12,165 +20,101 @@ const meta: Meta<typeof ActivityFeed> = {
   parameters: {
     docs: {
       description: {
-        component: `The **Activity Feed** component, from the Figma "Activity Feed" page.
+        component: `Figma → **Activity Feed [1.0]** — four component sets that compose into one card.
 
-**Key Features:**
-- **Header** with a title and a trailing action
-- **Tab menu** — Figma models Quantity 02–04; here the count is however many tabs you pass
-- **4 item types**: Basic, Button, File, Message
-- **\`unread\`** marker on the leading edge
-- **\`onSelect\`** turns a row into a real \`<button>\`
+| Figma component | Code |
+| --- | --- |
+| Activity Feed Header | \`title\` + \`headerAction\` (or \`<ActivityFeedHeader>\`) |
+| Activity Feed Tab Menu (Quantity 02–04) | \`tabs\` + \`tabsAction\` with \`<ActivityFeedTab count>\` and \`<ActivityFeedTabSeparator>\` |
+| Activity Feed Items (Type × State) | \`<ActivityFeedItem type="basic" \\| "button" \\| "file" \\| "message">\` |
+| Activity Feed Footer | \`footer\` with \`<ActivityFeedFooter hint action>\` and \`<ActivityFeedKey>\` |
 
-**Why the four types are one component.** Figma's Type axis describes content shape, not four separate components: \`basic\` is text, \`button\` adds actions, \`file\` adds an attachment card, \`message\` adds a quoted body. Splitting them would duplicate the avatar, timestamp and unread handling four times over.
+**Measurements from the Figma export**
 
-**Semantics.** A labelled \`<section>\` wrapping a \`<ul>\`, so a screen reader announces "list, 4 items" instead of an undifferentiated wall of text. A clickable \`<li>\` is not keyboard reachable, so \`onSelect\` renders a \`<button>\` inside the item rather than putting a handler on the row.
+- **Header:** 56px, 20px side padding, a 16/24 medium title, and a primary Link Button.
+- **Tab Menu:** 48px. Tabs are 20px apart and use Label/Small. The selected tab has a 2px primary underline exactly as wide as its label, and the count is a 16px red circle.
+- **Items:** rounded 12 with 12px padding. They turn from white to weak-50 on hover, which also reveals the "more" button.
+  - A 40px avatar sits 16px from a title and a 12px meta line (time · logo subject).
+  - The body starts 16px below the avatar and lines up with the title.
+- **Footer:** 48px, with a 12px hint using key caps and a small gray Link Button.
 
-**RTL.** The unread marker uses \`before:start-0\` and the quoted message uses \`border-s-2\`, so both sit on the leading edge in Persian without a second rule.`,
+**Quantity** is how many tabs you pass, not a prop. **State** (hover) is CSS.
+
+\`onSelect\` makes the title a real button stretched over the card, so actions and the menu stay separate, valid buttons.`,
       },
     },
   },
 };
 
-// ====================== All item types ======================
-
-export const Default = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="w-full max-w-xl">
-      <ActivityFeed
-        title={t('activityFeed.title')}
-        label={t('activityFeed.label')}
-        headerAction={
-          <LinkButton size="sm" color="primary" href="#">
-            {t('activityFeed.viewAll')}
-          </LinkButton>
-        }
-      >
-        <ActivityFeedItem
-          type="message"
-          unread
-          avatar={<Avatar size="sm" name="Ada Lovelace" tone="blue" />}
-          title={t('activityFeed.commented')}
-          timestamp={t('activityFeed.minutes')}
-          message={t('activityFeed.commentBody')}
-        />
-        <ActivityFeedItem
-          type="file"
-          avatar={<Avatar size="sm" name="Grace Hopper" tone="purple" />}
-          title={t('activityFeed.uploaded')}
-          timestamp={t('activityFeed.hours')}
-          file={{
-            name: t('activityFeed.fileName'),
-            size: t('activityFeed.fileSize'),
-          }}
-        />
-        <ActivityFeedItem
-          type="button"
-          avatar={<Avatar size="sm" name="Alan Turing" tone="green" />}
-          title={t('activityFeed.invited')}
-          description={t('activityFeed.invitedDescription')}
-          timestamp={t('activityFeed.yesterday')}
-          actions={
-            <>
-              <Button size="2xs" color="primary">
-                {t('activityFeed.accept')}
-              </Button>
-              <Button size="2xs" color="neutral" appearance="stroke">
-                {t('activityFeed.decline')}
-              </Button>
-            </>
-          }
-        />
-        <ActivityFeedItem
-          type="basic"
-          avatar={<Avatar size="sm" name="Katherine Johnson" tone="yellow" />}
-          title={t('activityFeed.shipped')}
-          description={t('activityFeed.shippedDescription')}
-          timestamp={t('activityFeed.yesterday')}
-        />
-      </ActivityFeed>
-    </div>
-  );
-};
-
-// ====================== Tabs ======================
-
-export const WithTabs = () => {
-  const { t } = useTranslation();
-  const [tab, setTab] = useState('all');
-  return (
-    <div className="w-full max-w-xl">
-      <ActivityFeed
-        title={t('activityFeed.title')}
-        label={t('activityFeed.label')}
-        tabs={
-          <>
-            <ActivityFeedTab
-              selected={tab === 'all'}
-              onClick={() => setTab('all')}
-              badge={
-                <Badge size="small" appearance="lighter" color="gray">
-                  4
-                </Badge>
-              }
-            >
-              {t('activityFeed.all')}
-            </ActivityFeedTab>
-            <ActivityFeedTab
-              selected={tab === 'mentions'}
-              onClick={() => setTab('mentions')}
-            >
-              {t('activityFeed.mentions')}
-            </ActivityFeedTab>
-            <ActivityFeedTab
-              selected={tab === 'files'}
-              onClick={() => setTab('files')}
-            >
-              {t('activityFeed.files')}
-            </ActivityFeedTab>
-          </>
-        }
-      >
-        <ActivityFeedItem
-          unread
-          avatar={<Avatar size="sm" name="Ada Lovelace" tone="blue" />}
-          title={t('activityFeed.commented')}
-          timestamp={t('activityFeed.minutes')}
-        />
-        <ActivityFeedItem
-          avatar={<Avatar size="sm" name="Grace Hopper" tone="purple" />}
-          title={t('activityFeed.uploaded')}
-          timestamp={t('activityFeed.hours')}
-        />
-      </ActivityFeed>
-    </div>
-  );
-};
-
-// ====================== Selectable rows ======================
-
-/** `onSelect` makes each row a real button, so the list is keyboard navigable. */
-export const SelectableRows = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="w-full max-w-xl">
-      <ActivityFeed label={t('activityFeed.label')}>
-        <ActivityFeedItem
-          unread
-          onSelect={() => {}}
-          avatar={<Avatar size="sm" name="Ada Lovelace" tone="blue" />}
-          title={t('activityFeed.commented')}
-          timestamp={t('activityFeed.minutes')}
-        />
-        <ActivityFeedItem
-          onSelect={() => {}}
-          avatar={<Avatar size="sm" name="Grace Hopper" tone="purple" />}
-          title={t('activityFeed.uploaded')}
-          timestamp={t('activityFeed.hours')}
-        />
-      </ActivityFeed>
-    </div>
-  );
-};
-
 export default meta;
+type Story = StoryObj<typeof ActivityFeed>;
+
+/** The four sets composed into one card, as they are used in a product. */
+export const Composed: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    return (
+      <div className="w-[540px] max-w-full">
+        <ActivityFeed
+          label={t('activityFeedDocs.headerTitle')}
+          title={t('activityFeedDocs.headerTitle')}
+          headerAction={<MarkAllRead />}
+          tabs={<TabList quantity={4} />}
+          tabsAction={<FilterButton />}
+          footer={<FeedFooter />}
+        >
+          <FeedItem type="basic" name="Sophia Williams" />
+          <FeedItem type="button" name="Arthur Taylor" tone="purple" />
+          <FeedItem type="file" name="Emma Wright" tone="green" />
+          <FeedItem type="message" name="Matthew Johnson" tone="yellow" />
+        </ActivityFeed>
+      </div>
+    );
+  },
+};
+
+const setParameters = {
+  controls: { disable: true },
+  docs: { source: { code: null } },
+} as const;
+
+export const Header: Story = {
+  name: 'Activity Feed Header',
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <HeaderSet />
+    </FigmaFrame>
+  ),
+};
+
+export const TabMenu: Story = {
+  name: 'Activity Feed Tab Menu',
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <TabsSet />
+    </FigmaFrame>
+  ),
+};
+
+export const Items: Story = {
+  name: 'Activity Feed Items',
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <ItemsSet />
+    </FigmaFrame>
+  ),
+};
+
+export const Footer: Story = {
+  name: 'Activity Feed Footer',
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <FooterSet />
+    </FigmaFrame>
+  ),
+};

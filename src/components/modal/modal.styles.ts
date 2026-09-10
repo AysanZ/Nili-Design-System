@@ -33,7 +33,8 @@ export const modalPanelVariants = cva(
     variants: {
       size: {
         sm: 'max-w-[400px]',
-        md: 'max-w-[520px]',
+        // Figma modals are 440 wide.
+        md: 'max-w-[440px]',
         lg: 'max-w-[720px]',
         xl: 'max-w-[960px]',
       },
@@ -43,13 +44,15 @@ export const modalPanelVariants = cva(
 );
 
 export const modalHeaderVariants = cva(
-  'flex shrink-0 items-start gap-3 border-b border-soft-200',
+  'flex shrink-0 items-start gap-3.5 border-b border-soft-200',
   {
     variants: {
       /** Figma Medium (80) / Small (56) is header height, i.e. density. */
       size: {
-        sm: 'px-4 py-3',
-        md: 'px-5 py-5',
+        // Figma Modal Header: 20px sides, 16px top/bottom, 14px gap to a
+        // 40px status icon. Both sizes draw the Figma header.
+        sm: 'px-5 pt-4 pb-[15px]',
+        md: 'px-5 pt-4 pb-[15px]',
       },
       alignment: {
         horizontal: 'flex-row items-start text-start',
@@ -71,7 +74,8 @@ export const modalBodyVariants = cva('flex-1 overflow-y-auto', {
 });
 
 export const modalFooterVariants = cva(
-  'flex shrink-0 items-center gap-3 border-t border-soft-200 px-4 py-3',
+  // Figma Modal Footer: 20px sides, 16px top/bottom.
+  'flex shrink-0 items-center gap-3 border-t border-soft-200 px-5 py-4',
   {
     variants: {
       stretch: {

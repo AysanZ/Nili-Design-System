@@ -4,9 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { StepIndicator, Step, StepperDot } from '.';
 import type { StepIndicatorLabels } from '.';
 import { Button } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  StepHorizontalSet,
+  StepItemsSet,
+  StepVerticalItemsSet,
+} from './step-indicator.docs';
 
 const meta: Meta<typeof StepIndicator> = {
-  title: 'Base Components/Step Indicator',
+  title: 'Base Components/Step Indicator/Step Indicator',
   component: StepIndicator,
   parameters: {
     docs: {
@@ -136,9 +142,24 @@ export const StepperDots = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
-      <StepperDot count={3} value={0} size="sm" label={t('stepIndicator.label')} />
-      <StepperDot count={3} value={1} size="sm" label={t('stepIndicator.label')} />
-      <StepperDot count={3} value={2} size="xs" label={t('stepIndicator.label')} />
+      <StepperDot
+        count={3}
+        value={0}
+        size="sm"
+        label={t('stepIndicator.label')}
+      />
+      <StepperDot
+        count={3}
+        value={1}
+        size="sm"
+        label={t('stepIndicator.label')}
+      />
+      <StepperDot
+        count={3}
+        value={2}
+        size="xs"
+        label={t('stepIndicator.label')}
+      />
     </div>
   );
 };
@@ -204,5 +225,31 @@ export const Wizard = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const StepHorizontalItemsSet = () => (
+  <FigmaFrame>
+    <StepItemsSet />
+  </FigmaFrame>
+);
+StepHorizontalItemsSet.storyName = 'Step Indicator Horizontal Items';
+StepHorizontalItemsSet.parameters = { docs: { source: { code: null } } };
+
+export const StepHorizontalSetStory = () => (
+  <FigmaFrame>
+    <StepHorizontalSet />
+  </FigmaFrame>
+);
+StepHorizontalSetStory.storyName = 'Step Indicator Horizontal';
+StepHorizontalSetStory.parameters = { docs: { source: { code: null } } };
+
+export const StepVerticalItemsSetStory = () => (
+  <FigmaFrame>
+    <StepVerticalItemsSet />
+  </FigmaFrame>
+);
+StepVerticalItemsSetStory.storyName = 'Step Indicator Vertical Items';
+StepVerticalItemsSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

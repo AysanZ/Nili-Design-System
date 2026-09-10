@@ -15,6 +15,7 @@ import { Icon } from '../icon';
 import { Dropdown } from '../dropdown';
 import {
   paginationVariants,
+  paginationGroupVariants,
   paginationItemVariants,
   paginationEllipsisVariants,
   paginationSummaryVariants,
@@ -262,6 +263,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <li key={key}>
         <PaginationItem
           fullRadius={type === 'full-radius'}
+          // Basic / Full Radius draw the arrows as bare icons; Group boxes them.
+          className={
+            type === 'group' ? undefined : 'border-transparent bg-transparent'
+          }
 
           aria-label={label}
           disabled={disabled || isDisabled}
@@ -278,7 +283,16 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const atEnd = current >= count;
 
     const list = (
-      <ul className={cn(paginationVariants({ align }), advanced && 'flex-1')}>
+      <ul
+        className={cn(
+          paginationVariants({ align }),
+          // Group is one bordered track, so it must hug its cells instead
+          // of stretching across the row.
+          type === 'group'
+            ? [paginationGroupVariants(), 'mx-auto w-auto']
+            : advanced && 'flex-1',
+        )}
+      >
         {showArrows &&
           showEdges &&
           arrow('first', RiArrowLeftDoubleLine, text.first, 1, atStart)}

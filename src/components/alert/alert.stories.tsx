@@ -1,271 +1,178 @@
-import { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { useState, type ComponentProps } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '.';
 import { Button } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { AlertMatrix } from './alert.docs';
 
-const meta: Meta<typeof Alert> = {
-  title: 'Base Components/Alert, Notification & Toast',
+type PlaygroundArgs = Omit<ComponentProps<typeof Alert>, 'title'> & {
+  withDescription: boolean;
+  links: 0 | 1 | 2;
+};
+
+const meta: Meta<PlaygroundArgs> = {
+  title: 'Base Components/Alert, Notification & Toast/Alert',
   component: Alert,
   parameters: {
     docs: {
       description: {
-        component: `The **Alert** component surfaces an inline status message: a result, a warning, a piece of context the user needs before continuing.
+        component: `Figma → **Alert, Notification & Toast [Overview]** — *Playing vital roles in conveying information, updates, and feedback with efficiency.*
 
-**Key Features:**
-- **5 Statuses**: Error, Warning, Success, Info, Feature
-- **4 Appearances**: Filled, Light, Lighter, Stroke
-- **3 Sizes**: X-Small, Small, Large
-- **Actions**: up to two inline links or buttons
-- **Dismissible**: optional close button with a required accessible name
-
-**Accessibility — the important change**
-
-The previous version rendered a plain \`<div>\`, which meant an alert appearing after a failed form submit was completely silent for screen-reader users. That is the single most consequential thing an alert has to get right.
-
-This version sets \`role="alert"\` / \`role="status"\` with a matching \`aria-live\`, derived from \`status\`:
-
-| status | default urgency | behaviour |
+| Figma axis | Prop | Values |
 | --- | --- | --- |
-| error, warning | \`assertive\` | interrupts immediately |
-| success, info, feature | \`polite\` | waits for a pause |
+| Status | \`status\` | Error · Warning · Success · Information · Feature → \`error\` · \`warning\` · \`success\` · \`info\` · \`feature\` |
+| Style | \`appearance\` | Filled · Light · Lighter · Stroke |
+| Size | \`size\` | X-Small · Small · Large → \`x-small\` · \`small\` · \`large\` |
+| Link Button(s) | \`actions\` | up to two; the first is underlined |
+| Dismiss icon | \`dismissible\` + \`dismissLabel\` | — |
 
-Override with \`urgency\`. Use **\`urgency="off"\`** for alerts that are already on screen at first paint — otherwise every page load shouts at the user.
+From the Figma export:
+- **Radius:** 8 on every size.
+- **X-Small:** 8px padding, a 16px icon and 12px text. The link and × sit inline.
+- **Small:** 10/8px padding, a 20px icon and 14px text. The link and × sit inline.
+- **Large:** 14px padding (16 at the bottom), a 20px icon and a Label/Small title. The description shows at 72%, and the links sit 10px below it.
+- **Stroke:** a white fill, a soft-200 border and a two-layer drop shadow.
+- **Feature:** the **grey** status (faded-*).
 
-**Other changes**
-- \`style\` → **\`appearance\`** (it shadowed React's \`style\` prop).
-- \`linkButton\` / \`doubleLink\` / \`dismissIcon\` were declared but never rendered anything. Replaced by a working \`actions\` array and \`dismissible\`.
-- The 5-deep nested ternary that built the class list is now a \`cva\` matrix. It was hiding a real bug: the info + light cell resolved to the \`information-dark\` token instead of \`information-light-dark\`.`,
+**Accessibility:** \`role="alert"\` / \`role="status"\` with a matching \`aria-live\`, taken from \`status\`. Override it with \`urgency\`, and use \`urgency="off"\` for alerts that are already on screen at first paint.`,
       },
     },
   },
-
   argTypes: {
     status: {
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
       options: ['error', 'warning', 'success', 'info', 'feature'],
-      description: 'Semantic status. Also picks the default icon and urgency.',
       table: { defaultValue: { summary: 'info' } },
     },
     appearance: {
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
       options: ['filled', 'light', 'lighter', 'stroke'],
-      description: 'Visual treatment.',
       table: { defaultValue: { summary: 'filled' } },
     },
     size: {
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
       options: ['x-small', 'small', 'large'],
       table: { defaultValue: { summary: 'small' } },
     },
+    withDescription: {
+      control: 'boolean',
+      description: 'Docs preview — Figma shows a description on Large only.',
+      table: { category: 'Docs preview' },
+    },
+    links: {
+      control: { type: 'inline-radio' },
+      options: [0, 1, 2],
+      description: 'Docs preview — number of `actions`.',
+      table: { category: 'Docs preview' },
+    },
+    dismissible: { control: 'boolean' },
     urgency: {
-      control: { type: 'select' },
+      control: { type: 'inline-radio' },
       options: ['assertive', 'polite', 'off'],
-      description:
-        'How assistive tech announces the alert. Defaults from `status`. Use `off` for alerts present on page load.',
     },
-    title: { control: 'text', description: 'Alert heading. Required.' },
-    description: { control: 'text', description: 'Optional supporting copy.' },
-    icon: {
-      control: 'boolean',
-      description: 'Show the default status glyph. Pass a node to override it.',
-      table: { defaultValue: { summary: 'true' } },
-    },
-    dismissible: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
-    dismissLabel: {
-      control: 'text',
-      description: 'Accessible name for the close button.',
-    },
-    actions: { control: false, table: { type: { summary: 'AlertAction[]' } } },
+    icon: { control: false },
+    actions: { control: false },
+    description: { control: false },
+    onDismiss: { action: 'dismiss' },
   },
 };
 
-/** Text comes from i18next, so the Locale toolbar changes words, not just direction. */
-const Template: StoryFn<typeof Alert> = ({ title, description, ...args }) => {
-  const { t } = useTranslation();
-  return (
-    <Alert
-      {...args}
-      title={typeof title === 'string' ? t(title) : title}
-      description={
-        typeof description === 'string' ? t(description) : description
-      }
-    />
-  );
-};
-
-// ====================== Basic Stories ======================
-
-export const Default = Template.bind({});
-Default.args = {
-  status: 'info',
-  appearance: 'filled',
-  size: 'small',
-  title: 'alert.defaultTitle',
-};
-
-export const WithDescription = Template.bind({});
-WithDescription.args = {
-  status: 'success',
-  appearance: 'light',
-  size: 'large',
-  title: 'alert.successTitle',
-  description: 'alert.successDescription',
-};
-
-// ====================== Status Variations ======================
-
-const STATUSES = ['error', 'warning', 'success', 'info', 'feature'] as const;
-
-export const AllStatuses = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex w-full max-w-xl flex-col gap-3">
-      {STATUSES.map((status) => (
-        <Alert
-          key={status}
-          status={status}
-          appearance="light"
-          size="large"
-          urgency="off"
-          title={`${t('common.status')}: ${status}`}
-          description={t('alert.defaultDescription')}
-        />
-      ))}
-    </div>
-  );
-};
-
-export const AllAppearances = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex w-full max-w-xl flex-col gap-3">
-      {(['filled', 'light', 'lighter', 'stroke'] as const).map((appearance) => (
-        <Alert
-          key={appearance}
-          status="info"
-          appearance={appearance}
-          size="large"
-          urgency="off"
-          title={`${t('common.appearance')}: ${appearance}`}
-          description={t('alert.defaultDescription')}
-        />
-      ))}
-    </div>
-  );
-};
-
-// ====================== Sizes ======================
-
-export const Sizes = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex w-full max-w-xl flex-col gap-3">
-      {(['x-small', 'small', 'large'] as const).map((size) => (
-        <Alert
-          key={size}
-          status="warning"
-          appearance="light"
-          size={size}
-          urgency="off"
-          title={`${t('common.size')}: ${size}`}
-        />
-      ))}
-    </div>
-  );
-};
-
-// ====================== Actions & Dismiss ======================
-
-export const WithActions = () => {
-  const { t } = useTranslation();
-  return (
-    <Alert
-      status="error"
-      appearance="light"
-      size="large"
-      title={t('alert.errorTitle')}
-      description={t('alert.errorDescription')}
-      actions={[
-        { label: t('alert.retry') },
-        { label: t('alert.learnMore'), href: '#' },
-      ]}
-    />
-  );
-};
-
-/** Dismissing is real state — the alert actually unmounts. */
-export const Dismissible = () => {
-  const { t } = useTranslation();
-  const [visible, setVisible] = useState(true);
-  return (
-    <div className="flex w-full max-w-xl flex-col items-start gap-3">
-      {visible ? (
-        <Alert
-          status="feature"
-          appearance="light"
-          size="large"
-          dismissible
-          dismissLabel={t('alert.dismiss')}
-          onDismiss={() => setVisible(false)}
-          title={t('alert.infoTitle')}
-          description={t('alert.infoDescription')}
-        />
-      ) : (
-        <Button
-          size="sm"
-          appearance="stroke"
-          color="neutral"
-          onClick={() => setVisible(true)}
-        >
-          {t('alert.bringBack')}
-        </Button>
-      )}
-    </div>
-  );
-};
-
-// ====================== Localized ======================
-
-export const Localized = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex w-full max-w-xl flex-col gap-3">
-      <Alert
-        status="success"
-        appearance="light"
-        size="large"
-        urgency="off"
-        title={t('alert.successTitle')}
-        description={t('alert.successDescription')}
-      />
-      <Alert
-        status="error"
-        appearance="light"
-        size="large"
-        urgency="off"
-        title={t('alert.errorTitle')}
-        description={t('alert.errorDescription')}
-        actions={[
-          { label: t('alert.retry') },
-          { label: t('alert.learnMore'), href: '#' },
-        ]}
-      />
-      <Alert
-        status="feature"
-        appearance="lighter"
-        size="large"
-        urgency="off"
-        dismissible
-        dismissLabel={t('alert.dismiss')}
-        title={t('alert.infoTitle')}
-        description={t('alert.infoDescription')}
-      />
-    </div>
-  );
-};
-
 export default meta;
+type Story = StoryObj<PlaygroundArgs>;
+
+export const Playground: Story = {
+  args: {
+    status: 'error',
+    appearance: 'filled',
+    size: 'large',
+    withDescription: true,
+    links: 2,
+    dismissible: true,
+    urgency: 'off',
+  },
+  render: function Render({ withDescription, links, ...args }) {
+    const { t } = useTranslation();
+    const actions = [
+      { label: t('alertDocs.upgrade'), href: '#' },
+      { label: t('alertDocs.learnMore'), href: '#' },
+    ].slice(0, links);
+    return (
+      <div className="w-[390px] max-w-full">
+        <Alert
+          {...args}
+          title={t('alertDocs.title')}
+          description={withDescription ? t('alertDocs.description') : undefined}
+          actions={actions}
+          dismissLabel={t('alertDocs.close')}
+        />
+      </div>
+    );
+  },
+};
+
+const setParameters = {
+  controls: { disable: true },
+  docs: { source: { code: null } },
+} as const;
+
+export const XSmall: Story = {
+  name: 'X-Small',
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <AlertMatrix size="x-small" />
+    </FigmaFrame>
+  ),
+};
+
+export const Small: Story = {
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <AlertMatrix size="small" />
+    </FigmaFrame>
+  ),
+};
+
+export const Large: Story = {
+  parameters: setParameters,
+  render: () => (
+    <FigmaFrame>
+      <AlertMatrix size="large" />
+    </FigmaFrame>
+  ),
+};
+
+/** Code-only: dismissing removes the alert; `onDismiss` owns the state. */
+export const Dismissible: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    const [open, setOpen] = useState(true);
+    return (
+      <div className="flex w-[390px] max-w-full flex-col items-start gap-3">
+        {open ? (
+          <Alert
+            status="success"
+            appearance="lighter"
+            size="small"
+            title={t('alertDocs.title')}
+            dismissible
+            dismissLabel={t('alertDocs.close')}
+            onDismiss={() => setOpen(false)}
+          />
+        ) : (
+          <Button
+            size="xs"
+            appearance="stroke"
+            color="neutral"
+            onClick={() => setOpen(true)}
+          >
+            {t('alert.retry')}
+          </Button>
+        )}
+      </div>
+    );
+  },
+};

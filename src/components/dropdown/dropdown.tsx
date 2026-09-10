@@ -248,13 +248,12 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
               <span className="truncate">{current?.label ?? placeholder}</span>
               {badge}
             </span>
-            <Icon
-              icon={RiArrowDownSLine}
-              className={cn(
-                'shrink-0 transition-transform',
-                open && 'rotate-180',
-              )}
-            />
+            <span data-slot="chevron" className="flex shrink-0">
+              <Icon
+                icon={RiArrowDownSLine}
+                className={cn('transition-transform', open && 'rotate-180')}
+              />
+            </span>
           </button>
 
           {open && (

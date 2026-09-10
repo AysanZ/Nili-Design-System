@@ -105,8 +105,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(function Rating(
   const solid = type === 'heart' ? RiHeart3Fill : RiStarFill;
   const outline = type === 'heart' ? RiHeart3Line : RiStarLine;
   const filledGlyph = icon ?? <Icon icon={solid} />;
-  const emptyGlyph =
-    emptyIcon ?? icon ?? <Icon icon={empty === 'filled' ? solid : outline} />;
+  const emptyGlyph = emptyIcon ?? icon ?? (
+    <Icon icon={empty === 'filled' ? solid : outline} />
+  );
 
   const item = (index: number): ReactNode => {
     // 0 → empty, 1 → full, anything between → a clipped fill.

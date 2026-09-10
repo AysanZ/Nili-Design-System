@@ -23,8 +23,9 @@ describe('Breadcrumb', () => {
   // Linking to the page you are already on is a dead end.
   it('renders the current crumb as text with aria-current', () => {
     render(trail());
-    const current = screen.getByText('Components');
-    expect(current.tagName).toBe('SPAN');
+    // The label sits in its own span (Figma underlines only the label).
+    const current = screen.getByText('Components').closest('[aria-current]');
+    expect(current?.tagName).toBe('SPAN');
     expect(current).toHaveAttribute('aria-current', 'page');
     expect(screen.queryByRole('link', { name: 'Components' })).toBeNull();
   });

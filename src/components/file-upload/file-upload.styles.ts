@@ -71,30 +71,32 @@ export const fileProgressBarVariants = cva(
 );
 
 /** Figma "File Format Icons": ten colours, two sizes. */
-export const fileFormatIconVariants = cva(
-  'grid shrink-0 place-items-center rounded-lg font-medium uppercase',
-  {
-    variants: {
-      color: {
-        red: 'bg-error-lighter text-error-base',
-        orange: 'bg-warning-lighter text-warning-base',
-        yellow: 'bg-away-lighter text-away-base',
-        green: 'bg-success-lighter text-success-base',
-        teal: 'bg-stable-lighter text-stable-base',
-        sky: 'bg-verified-lighter text-verified-base',
-        blue: 'bg-information-lighter text-information-base',
-        purple: 'bg-feature-lighter text-feature-base',
-        pink: 'bg-highlighted-lighter text-highlighted-base',
-        gray: 'bg-faded-lighter text-faded-base',
-      },
-      size: {
-        md: 'size-10 text-[10px]',
-        xs: 'size-8 text-[9px]',
-      },
+/**
+ * Figma File Format Icons: a white page (1.5px sub-300 outline, a cut
+ * corner) with a coloured 28×16 label chip carrying the extension in white.
+ * 40px and 32px. The colour sits on the chip, so it is the `-base` token.
+ */
+export const fileFormatIconVariants = cva('relative inline-block shrink-0', {
+  variants: {
+    color: {
+      red: 'text-error-base',
+      orange: 'text-warning-base',
+      yellow: 'text-away-base',
+      green: 'text-success-base',
+      teal: 'text-stable-base',
+      sky: 'text-verified-base',
+      blue: 'text-information-base',
+      purple: 'text-feature-base',
+      pink: 'text-highlighted-base',
+      gray: 'text-faded-base',
     },
-    defaultVariants: { color: 'gray', size: 'md' },
+    size: {
+      md: 'size-10',
+      xs: 'size-8',
+    },
   },
-);
+  defaultVariants: { color: 'gray', size: 'md' },
+});
 
 export const imageUploadVariants = cva(
   [

@@ -47,6 +47,12 @@ export interface TooltipBaseProps extends Omit<
   /** Turns the tooltip off without unmounting the trigger. */
   disabled?: boolean;
 
+  /** Figma's large tooltip carries a close (×) button. */
+  dismissible?: boolean;
+  onDismiss?: () => void;
+  /** Accessible name for the close button. */
+  dismissLabel?: string;
+
   /** Class for the bubble. Use `className` for the wrapper. */
   contentClassName?: string;
 }

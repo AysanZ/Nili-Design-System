@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { RiBuilding2Fill } from '@remixicon/react';
 import { Avatar } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { AvatarSizeMatrix, PersonaGrid, StatusSets } from './avatar.docs';
 
 const SIZES = [
   '3xl',
@@ -287,5 +289,29 @@ export const Localized = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+/** Figma Avatar Images: the 32 personas, as photos and as cut-outs. */
+export const AvatarImages = () => <PersonaGrid />;
+AvatarImages.parameters = { docs: { source: { code: null } } };
+
+/** Figma Top & Bottom Statuses, at their 80px size. */
+export const TopAndBottomStatuses = () => (
+  <FigmaFrame>
+    <StatusSets />
+  </FigmaFrame>
+);
+TopAndBottomStatuses.storyName = 'Top & Bottom Statuses';
+TopAndBottomStatuses.parameters = { docs: { source: { code: null } } };
+
+/** Figma Avatar: nine sizes × four styles, with both statuses. */
+export const ComponentSet = () => (
+  <FigmaFrame>
+    <AvatarSizeMatrix />
+  </FigmaFrame>
+);
+ComponentSet.storyName = 'Component set';
+ComponentSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

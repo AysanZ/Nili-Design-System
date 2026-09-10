@@ -29,7 +29,6 @@ const toArray = (value: SliderValue): number[] =>
 
 /** Half the thumb, in px — used as a logical offset so it centres in RTL too. */
 
-
 function snap(value: number, min: number, max: number, step: number): number {
   if (step <= 0) return clamp(value, min, max);
   const snapped = Math.round((value - min) / step) * step + min;

@@ -8,6 +8,7 @@ import {
   contentDividerVariants,
   contentDividerRuleVariants,
   contentDividerContentVariants,
+  contentDividerSolidVariants,
   type ContentDividerVariantProps,
 } from './content-divider.styles';
 
@@ -49,8 +50,10 @@ export const CONTENT_DIVIDER_TYPE_PRESETS: Record<
 > = {
   line: { spacing: 'none' },
   'line-spacing': { spacing: 'md' },
-  'text-and-line': { spacing: 'sm', align: 'start' },
-  text: { spacing: 'sm', align: 'center' },
+  // Figma: "Text & Line" is the label centred between two rules; "Text"
+  // is the label alone at the start.
+  'text-and-line': { spacing: 'sm', align: 'center' },
+  text: { spacing: 'sm', align: 'start' },
   'solid-text': { spacing: 'sm', align: 'center', appearance: 'solid' },
   'icon-button': { spacing: 'sm', align: 'center' },
   'icon-button-group': { spacing: 'sm', align: 'center' },
@@ -107,6 +110,40 @@ export const ContentDivider = forwardRef<HTMLDivElement, ContentDividerProps>(
     const align = alignProp ?? preset?.align ?? 'center';
     const appearance = appearanceProp ?? preset?.appearance ?? 'subtle';
     const isText = typeof children === 'string' || typeof children === 'number';
+
+    if (isText && type === 'text') {
+      return (
+        <div
+          ref={ref}
+          role="separator"
+          aria-orientation={orientation}
+          className={cn(
+            contentDividerVariants({ spacing, orientation, align: 'start' }),
+            'px-2',
+            className,
+          )}
+          {...rest}
+        >
+          <span className={contentDividerContentVariants({ variant: 'text' })}>
+            {children}
+          </span>
+        </div>
+      );
+    }
+
+    if (isText && appearance === 'solid') {
+      return (
+        <div
+          ref={ref}
+          role="separator"
+          aria-orientation={orientation}
+          className={cn(contentDividerSolidVariants(), className)}
+          {...rest}
+        >
+          {children}
+        </div>
+      );
+    }
 
     if (!children) {
       return (

@@ -4,9 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { Modal, StatusModal, type ModalStatus } from '.';
 import { Button } from '@components/button';
 import { Checkbox } from '@components/checkbox';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  ModalFooterSet,
+  ModalHeaderSet,
+  ModalOverlaySet,
+  StatusModalSet,
+} from './modal.docs';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Base Components/Modal',
+  title: 'Base Components/Modal/Modal',
   component: Modal,
   parameters: {
     docs: {
@@ -185,5 +192,36 @@ export const Sizes = () => {
     </>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const ModalHeader = () => (
+  <FigmaFrame>
+    <ModalHeaderSet />
+  </FigmaFrame>
+);
+ModalHeader.parameters = { docs: { source: { code: null } } };
+
+export const ModalFooter = () => (
+  <FigmaFrame>
+    <ModalFooterSet />
+  </FigmaFrame>
+);
+ModalFooter.parameters = { docs: { source: { code: null } } };
+
+export const StatusModalsSet = () => (
+  <FigmaFrame>
+    <StatusModalSet />
+  </FigmaFrame>
+);
+StatusModalsSet.storyName = 'Status Modals set';
+StatusModalsSet.parameters = { docs: { source: { code: null } } };
+
+export const ModalOverlay = () => (
+  <FigmaFrame>
+    <ModalOverlaySet />
+  </FigmaFrame>
+);
+ModalOverlay.parameters = { docs: { source: { code: null } } };
 
 export default meta;

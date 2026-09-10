@@ -276,7 +276,10 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     ref,
   ) {
     const { size } = useContext(TableContext);
-    const classes = cn(tableCellVariants({ size, align, priority, numeric }), className);
+    const classes = cn(
+      tableCellVariants({ size, align, priority, numeric }),
+      className,
+    );
 
     if (header) {
       return (

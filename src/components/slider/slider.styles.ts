@@ -50,8 +50,6 @@ export const sliderRangeVariants = cva(
   'absolute inset-y-0 rounded-full bg-primary-base',
 );
 
-
-
 export const sliderThumbVariants = cva(
   [
     'absolute top-1/2 size-5 -translate-y-1/2',
@@ -85,4 +83,3 @@ export const sliderTooltipVariants = cva([
 export const sliderHeaderVariants = cva(
   'flex items-center justify-between gap-2 text-[14px] leading-5',
 );
-

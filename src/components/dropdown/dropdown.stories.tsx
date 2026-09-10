@@ -6,9 +6,15 @@ import { Dropdown } from '.';
 import { Avatar } from '@components/avatar';
 import { Button } from '@components/button';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  DropdownItemSet,
+  DropdownMiscSet,
+  DropdownTriggerSet,
+} from './dropdown.docs';
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'Base Components/Dropdown',
+  title: 'Base Components/Dropdown/Dropdown',
   component: Dropdown,
   parameters: {
     docs: {
@@ -265,5 +271,31 @@ export const Compact = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const DropdownSet = () => (
+  <FigmaFrame>
+    <DropdownTriggerSet />
+  </FigmaFrame>
+);
+DropdownSet.storyName = 'Dropdown set';
+DropdownSet.parameters = { docs: { source: { code: null } } };
+
+export const DropdownItemSetStory = () => (
+  <FigmaFrame>
+    <DropdownItemSet />
+  </FigmaFrame>
+);
+DropdownItemSetStory.storyName = 'Dropdown Item';
+DropdownItemSetStory.parameters = { docs: { source: { code: null } } };
+
+export const DropdownMiscItem = () => (
+  <FigmaFrame>
+    <DropdownMiscSet />
+  </FigmaFrame>
+);
+DropdownMiscItem.storyName = 'Dropdown Misc. Item';
+DropdownMiscItem.parameters = { docs: { source: { code: null } } };
 
 export default meta;

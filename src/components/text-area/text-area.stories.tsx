@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { TextArea } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { CharacterCounterSet, TextAreaSet } from './text-area.docs';
 
 const meta: Meta<typeof TextArea> = {
-  title: 'Base Components/Text Area',
+  title: 'Base Components/Text Area/Text Area',
   component: TextArea,
   parameters: {
     docs: {
@@ -140,5 +142,23 @@ export const AutoResize = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const CharacterCounterSetStory = () => (
+  <FigmaFrame>
+    <CharacterCounterSet />
+  </FigmaFrame>
+);
+CharacterCounterSetStory.storyName = 'Character Counter';
+CharacterCounterSetStory.parameters = { docs: { source: { code: null } } };
+
+export const TextAreaSetStory = () => (
+  <FigmaFrame>
+    <TextAreaSet />
+  </FigmaFrame>
+);
+TextAreaSetStory.storyName = 'Text Area set';
+TextAreaSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

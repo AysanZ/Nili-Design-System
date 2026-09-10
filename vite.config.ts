@@ -13,6 +13,8 @@ export default defineConfig({
       exclude: [
         'src/**/*.stories.tsx',
         'src/**/*.test.tsx',
+        // Docs-only helpers shared between stories (e.g. button.docs.tsx).
+        'src/**/*.docs.tsx',
         'src/test',
         'src/i18n',
       ],

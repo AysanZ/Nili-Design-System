@@ -2,7 +2,11 @@ import { forwardRef } from 'react';
 import { cn } from '../../../lib/cn';
 import { Typography } from '../../typography';
 import { Avatar } from '../avatar';
-import { avatarVariants, avatarTextVariant } from '../avatar.styles';
+import {
+  avatarGroupOverlap,
+  avatarVariants,
+  avatarTextVariant,
+} from '../avatar.styles';
 import type { AvatarGroupProps } from '../avatar.types';
 
 /**
@@ -48,7 +52,12 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
             onImageError={item.onImageError}
             // First avatar keeps its natural position; the rest slide back
             // over their predecessor. `ms` is logical, so RTL flips for free.
-            className={cn('border-2 border-white-0', index > 0 && '-ms-2')}
+            // Figma: a 2px white ring outside the avatar, and a per-size
+            // overlap (16 / 12 / 6 / 4px). `ms` is logical, so RTL flips.
+            className={cn(
+              'ring-2 ring-white-0',
+              index > 0 && avatarGroupOverlap[size],
+            )}
           />
         ))}
 
@@ -56,8 +65,9 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
           <div
             className={cn(
               avatarVariants({ size }),
-              '-ms-2 flex items-center justify-center rounded-full',
-              'border-2 border-white-0 bg-weak-50',
+              avatarGroupOverlap[size],
+              'flex items-center justify-center rounded-full',
+              'bg-weak-50 ring-2 ring-white-0',
             )}
           >
             <Typography

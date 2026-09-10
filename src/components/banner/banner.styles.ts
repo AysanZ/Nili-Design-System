@@ -1,7 +1,13 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
- * Figma → "❖ Banner" page (node 29:24).
+ * Figma → "Banner [Overview]".
+ *
+ * Checked against the export: 44px tall, 12px padding, 20px icon, 12px gaps,
+ * title (medium) · description with 8px either side of the dot, 20px ×
+ * 12px from the end. Feature is the grey status (faded-*), as on Alert.
+ *
+ * (Original note, still true:)
  *
  *   Status = Error | Warning | Success | Information | Feature
  *   Style  = Filled | Light | Lighter | Stroke
@@ -34,7 +40,8 @@ export const bannerVariants = cva(
         filled: 'text-static-white',
         light: 'text-strong-950',
         lighter: 'text-strong-950',
-        stroke: 'border-b border-soft-200 bg-white-0 text-strong-950',
+        // Figma's bottom stroke sits inside the 44px frame.
+        stroke: 'border-b border-soft-200 bg-white-0 pb-[11px] text-strong-950',
       },
     },
     compoundVariants: [
@@ -58,9 +65,9 @@ export const bannerVariants = cva(
         class: 'bg-information-lighter',
       },
 
-      { status: 'feature', appearance: 'filled', class: 'bg-feature-base' },
-      { status: 'feature', appearance: 'light', class: 'bg-feature-light' },
-      { status: 'feature', appearance: 'lighter', class: 'bg-feature-lighter' },
+      { status: 'feature', appearance: 'filled', class: 'bg-faded-base' },
+      { status: 'feature', appearance: 'light', class: 'bg-faded-light' },
+      { status: 'feature', appearance: 'lighter', class: 'bg-faded-lighter' },
     ],
     defaultVariants: {
       status: 'info',
@@ -109,7 +116,7 @@ export const bannerIconVariants = cva('shrink-0 [&>svg]:size-5', {
     {
       status: 'feature',
       appearance: ['light', 'lighter', 'stroke'],
-      class: 'text-feature-base',
+      class: 'text-faded-base',
     },
   ],
   defaultVariants: { status: 'info', appearance: 'filled' },
@@ -118,8 +125,8 @@ export const bannerIconVariants = cva('shrink-0 [&>svg]:size-5', {
 export const bannerActionVariants = cva(
   [
     'shrink-0 rounded-xs text-[14px] font-medium leading-5',
-    'underline underline-offset-2 [text-underline-position:from-font]',
-    'cursor-pointer transition-opacity hover:opacity-80',
+    'underline decoration-from-font [text-underline-position:from-font]',
+    'cursor-pointer outline-hidden transition-opacity hovered:opacity-72',
     'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
   ],
   {
@@ -140,8 +147,9 @@ export const bannerDismissVariants = cva(
     // `end-3` rather than `right-3`: in Persian the close button belongs on
     // the left, and a logical inset flips itself.
     'absolute end-3 top-3 grid size-5 place-items-center',
-    'rounded-xs opacity-70 transition-opacity hover:opacity-100',
-    'focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+    // Full colour, as in Figma (it used to sit at 70%).
+    'rounded-xs outline-hidden transition-opacity hovered:opacity-72',
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
   ],
   {
     variants: {

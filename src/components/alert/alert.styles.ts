@@ -1,14 +1,30 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
- * The previous version expressed this matrix as a five-deep nested ternary
- * inside `clsx` — ~60 lines where one wrong branch sat undetected: the
- * info + light cell resolved to the `information-dark` token instead of
- * `information-light-dark`. `cva` makes the
- * same matrix declarative, and semantic tokens remove the `dark:` half of it.
+ * Figma → "Alert, Notification & Toast [Overview]".
+ *
+ *   Status = Error · Warning · Success · Information · Feature → `status`
+ *   Style  = Filled · Light · Lighter · Stroke                   → `appearance`
+ *   Size   = X-Small · Small · Large                             → `size`
+ *
+ * Read from the Figma export (all radii 8):
+ *   size     padding      icon  title                  link / close
+ *   x-small  8            16    Paragraph/X-Small 12    12px link, 16px ×, inline
+ *   small    10 · 8       20    Paragraph/Small 14      14px link, 20px ×, inline
+ *   large    14 · 14/16   20    Label/Small 14          description + links below
+ *
+ * Colours:
+ *   Filled   status-base fill, everything white.
+ *   Light    status-light fill; Lighter status-lighter fill; Stroke white
+ *            with a soft-200 border and a two-layer drop (`shadow-alert`).
+ *            Text strong-950, description at 72%, icon in status-base.
+ *   Feature is the grey status (faded-*), not purple — that is what Figma
+ *   draws. Warning uses the Nili orange ramp (see tokens.semantic.css).
+ *
+ * Stroke gets 1px less padding: its border is inside Figma's frame.
  */
 export const alertVariants = cva(
-  'flex w-full items-start justify-between shrink-0',
+  'flex w-full shrink-0 items-start rounded-md',
   {
     variants: {
       status: {
@@ -23,15 +39,19 @@ export const alertVariants = cva(
         light: 'text-strong-950',
         lighter: 'text-strong-950',
         stroke:
-          'bg-white-0 text-strong-950 border border-soft-200 shadow-md',
+          'border border-soft-200 bg-white-0 text-strong-950 shadow-alert',
       },
       size: {
-        'x-small': 'gap-2 rounded-lg p-2',
-        small: 'gap-2 rounded-lg px-2.5 py-2',
-        large: 'gap-3 rounded-xl p-3.5 pb-4',
+        'x-small': 'gap-2 p-2',
+        small: 'gap-2 px-2.5 py-2',
+        large: 'gap-3 p-3.5 pb-4',
       },
     },
     compoundVariants: [
+      { appearance: 'stroke', size: 'x-small', class: 'p-[7px]' },
+      { appearance: 'stroke', size: 'small', class: 'px-[9px] py-[7px]' },
+      { appearance: 'stroke', size: 'large', class: 'p-[13px] pb-[15px]' },
+
       { status: 'error', appearance: 'filled', class: 'bg-error-base' },
       { status: 'error', appearance: 'light', class: 'bg-error-light' },
       { status: 'error', appearance: 'lighter', class: 'bg-error-lighter' },
@@ -52,9 +72,9 @@ export const alertVariants = cva(
         class: 'bg-information-lighter',
       },
 
-      { status: 'feature', appearance: 'filled', class: 'bg-feature-base' },
-      { status: 'feature', appearance: 'light', class: 'bg-feature-light' },
-      { status: 'feature', appearance: 'lighter', class: 'bg-feature-lighter' },
+      { status: 'feature', appearance: 'filled', class: 'bg-faded-base' },
+      { status: 'feature', appearance: 'light', class: 'bg-faded-light' },
+      { status: 'feature', appearance: 'lighter', class: 'bg-faded-lighter' },
     ],
     defaultVariants: {
       status: 'info',
@@ -64,7 +84,7 @@ export const alertVariants = cva(
   },
 );
 
-export const alertIconVariants = cva('shrink-0 [&>svg]:size-4', {
+export const alertIconVariants = cva('flex shrink-0', {
   variants: {
     status: {
       error: '',
@@ -78,6 +98,11 @@ export const alertIconVariants = cva('shrink-0 [&>svg]:size-4', {
       light: '',
       lighter: '',
       stroke: '',
+    },
+    size: {
+      'x-small': '[&_svg]:size-4',
+      small: '[&_svg]:size-5',
+      large: '[&_svg]:size-5',
     },
   },
   compoundVariants: [
@@ -104,30 +129,32 @@ export const alertIconVariants = cva('shrink-0 [&>svg]:size-4', {
     {
       status: 'feature',
       appearance: ['light', 'lighter', 'stroke'],
-      class: 'text-feature-base',
+      class: 'text-faded-base',
     },
   ],
-  defaultVariants: { status: 'info', appearance: 'filled' },
+  defaultVariants: { status: 'info', appearance: 'filled', size: 'small' },
 });
 
-export const alertActionVariants = cva(
+/** The × — same colour as the text, 16px on x-small, 20px otherwise. */
+export const alertCloseVariants = cva(
   [
-    'inline-flex items-center rounded-sm underline underline-offset-2',
-    'text-[14px] font-medium leading-5',
-    'cursor-pointer transition-opacity hover:opacity-80',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+    'flex shrink-0 cursor-pointer rounded-xs text-inherit outline-hidden',
+    'transition-opacity duration-200 hovered:opacity-72',
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current',
   ],
   {
     variants: {
-      appearance: {
-        filled: 'text-static-white focus-visible:outline-static-white',
-        light: 'text-strong-950 focus-visible:outline-primary-base',
-        lighter: 'text-strong-950 focus-visible:outline-primary-base',
-        stroke: 'text-strong-950 focus-visible:outline-primary-base',
+      size: {
+        'x-small': '[&_svg]:size-4',
+        small: '[&_svg]:size-5',
+        large: '[&_svg]:size-5',
       },
     },
-    defaultVariants: { appearance: 'filled' },
+    defaultVariants: { size: 'small' },
   },
 );
+
+/** Kept for existing imports; actions are now Link Buttons (`color="inherit"`). */
+export const alertActionVariants = cva('');
 
 export type AlertVariantProps = VariantProps<typeof alertVariants>;

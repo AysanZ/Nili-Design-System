@@ -89,7 +89,35 @@ export const FileFormatIcon = forwardRef<HTMLSpanElement, FileFormatIconProps>(
         )}
         {...rest}
       >
-        {extension}
+        <svg viewBox="0 0 40 40" className="size-full" fill="none">
+          <path
+            d="M10 .75h10.515c1.392 0 2.727.553 3.712 1.538l9.485 9.485a5.25 5.25 0 0 1 1.538 3.712V34A5.25 5.25 0 0 1 30 39.25H10A5.25 5.25 0 0 1 4.75 34V6A5.25 5.25 0 0 1 10 .75Z"
+            className="fill-white-0 stroke-sub-300"
+            strokeWidth="1.5"
+          />
+          <rect
+            x="0"
+            y="18"
+            width="28"
+            height="16"
+            rx="4"
+            fill="currentColor"
+          />
+          <text
+            x="14"
+            y="29.2"
+            textAnchor="middle"
+            fill="white"
+            fontSize="9"
+            fontWeight="600"
+            style={{
+              textTransform: 'uppercase',
+              fontFamily: 'var(--nili-font-latin)',
+            }}
+          >
+            {extension}
+          </text>
+        </svg>
       </span>
     );
   },

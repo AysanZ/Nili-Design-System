@@ -40,9 +40,11 @@ export const quickActionItemVariants = cva(
   {
     variants: {
       appearance: {
-        card: 'rounded-xl border border-soft-200 bg-white-0 shadow-xs hover:bg-weak-50',
-        tile: 'rounded-xl bg-weak-50 hover:bg-soft-200/60',
-        ghost: 'rounded-lg bg-transparent hover:bg-weak-50',
+        card: 'rounded-xl border border-soft-200 bg-white-0 shadow-xs hovered:bg-weak-50',
+        tile: 'rounded-xl bg-weak-50 hovered:bg-soft-200/60',
+        ghost: 'rounded-lg bg-transparent hovered:bg-weak-50',
+        /** Figma Quick Actions Items: a flat row, radius 10, no border. */
+        list: 'rounded-[10px] bg-transparent hovered:bg-weak-50',
       },
       layout: {
         horizontal: 'flex-row gap-3',
@@ -68,6 +70,7 @@ export const quickActionItemVariants = cva(
       },
       { active: true, appearance: 'tile', class: 'bg-information-lighter' },
       { active: true, appearance: 'ghost', class: 'bg-weak-50' },
+      { active: true, appearance: 'list', class: 'bg-weak-50' },
     ],
     defaultVariants: {
       appearance: 'card',

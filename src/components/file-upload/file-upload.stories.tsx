@@ -3,9 +3,11 @@ import { Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { FileUploadArea, FileUploadCard, FileFormatIcon, ImageUpload } from '.';
 import { Button } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { FileFormatIconSet } from './file-upload.docs';
 
 const meta: Meta<typeof FileUploadArea> = {
-  title: 'Base Components/File Upload',
+  title: 'Base Components/File Upload/File Upload',
   component: FileUploadArea,
   parameters: {
     docs: {
@@ -140,5 +142,15 @@ export const ImageUploads = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const FileFormatIconsSet = () => (
+  <FigmaFrame>
+    <FileFormatIconSet />
+  </FigmaFrame>
+);
+FileFormatIconsSet.storyName = 'File Format Icons set';
+FileFormatIconsSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

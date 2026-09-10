@@ -3,9 +3,11 @@ import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { Slider } from '.';
 import type { SliderValue } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { RangeSliderSet, SliderSet } from './slider.docs';
 
 const meta: Meta<typeof Slider> = {
-  title: 'Base Components/Slider',
+  title: 'Base Components/Slider/Slider',
   component: Slider,
   parameters: {
     docs: {
@@ -137,5 +139,23 @@ export const CommitOnRelease = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const SliderSetStory = () => (
+  <FigmaFrame>
+    <SliderSet />
+  </FigmaFrame>
+);
+SliderSetStory.storyName = 'Slider set';
+SliderSetStory.parameters = { docs: { source: { code: null } } };
+
+export const RangeSliderSetStory = () => (
+  <FigmaFrame>
+    <RangeSliderSet />
+  </FigmaFrame>
+);
+RangeSliderSetStory.storyName = 'Range Slider set';
+RangeSliderSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

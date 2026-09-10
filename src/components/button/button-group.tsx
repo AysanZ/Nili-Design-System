@@ -9,6 +9,7 @@ import { cn } from '../../lib/cn';
 import {
   buttonGroupVariants,
   buttonGroupItemVariants,
+  buttonGroupItemPadding,
   type ButtonGroupVariantProps,
 } from './button-group.styles';
 
@@ -107,6 +108,8 @@ export const ButtonGroupItem = forwardRef<
   ref,
 ) {
   const group = useContext(ButtonGroupContext);
+  const resolvedSize = size ?? group.size;
+  const padding = buttonGroupItemPadding[resolvedSize];
 
   return (
     <button
@@ -118,11 +121,15 @@ export const ButtonGroupItem = forwardRef<
       data-selected={selected || undefined}
       className={cn(
         buttonGroupItemVariants({
-          size: size ?? group.size,
+          size: resolvedSize,
           orientation: group.orientation,
           selected,
           iconOnly,
         }),
+        !iconOnly && [
+          startIcon ? padding.iconStart : padding.textStart,
+          endIcon ? padding.iconEnd : padding.textEnd,
+        ],
         className,
       )}
       {...rest}

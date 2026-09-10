@@ -3,9 +3,11 @@ import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '.';
 import type { PaginationLabels } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { PaginationCellSet, PaginationGroupSet } from './pagination.docs';
 
 const meta: Meta<typeof Pagination> = {
-  title: 'Base Components/Pagination',
+  title: 'Base Components/Pagination/Pagination',
   component: Pagination,
   parameters: {
     docs: {
@@ -221,5 +223,22 @@ export const Advanced = () => {
     />
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const PaginationCell = () => (
+  <FigmaFrame>
+    <PaginationCellSet />
+  </FigmaFrame>
+);
+PaginationCell.parameters = { docs: { source: { code: null } } };
+
+export const PaginationGroupSetStory = () => (
+  <FigmaFrame>
+    <PaginationGroupSet />
+  </FigmaFrame>
+);
+PaginationGroupSetStory.storyName = 'Pagination Group';
+PaginationGroupSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

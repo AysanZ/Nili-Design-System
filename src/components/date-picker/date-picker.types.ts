@@ -41,6 +41,8 @@ export interface DatePickerProps
   extends
     CalendarBaseProps,
     Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
+  /** Figma footer — typically `<DatePickerFooter>` with Cancel / Apply. */
+  footer?: ReactNode;
   value?: Date | null;
   defaultValue?: Date | null;
   onChange?: (date: Date | null) => void;

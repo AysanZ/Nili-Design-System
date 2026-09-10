@@ -16,6 +16,7 @@ import {
   accordionTriggerVariants,
   accordionIndicatorVariants,
   accordionContentVariants,
+  accordionPanelVariants,
 } from './accordion.styles';
 import type { AccordionProps, AccordionGroupProps } from './accordion.types';
 
@@ -156,12 +157,16 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     };
 
     const body = children ?? content;
+    // Slots beside the title on the start side (the adornment and/or a
+    // start-positioned indicator) — the description is indented past them.
+    const startSlots = ((startAdornment ? 1 : 0) +
+      (indicatorPosition === 'start' ? 1 : 0)) as 0 | 1 | 2;
 
     return (
       <div
         ref={ref}
         data-state={isOpen ? 'open' : 'closed'}
-        className={cn(accordionVariants({ open: isOpen }), className)}
+        className={cn(accordionVariants({ open: isOpen, disabled }), className)}
         {...rest}
       >
         <button
@@ -171,10 +176,10 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           aria-controls={panelId}
           disabled={disabled}
           onClick={handleToggle}
-          className={accordionTriggerVariants()}
+          className={accordionTriggerVariants({ open: isOpen })}
         >
           {startAdornment && (
-            <span className="flex size-5 shrink-0 items-center justify-center">
+            <span className="flex size-5 shrink-0 items-center justify-center text-sub-600">
               {startAdornment}
             </span>
           )}
@@ -188,6 +193,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           </Typography>
 
           <span
+            data-slot="accordion-indicator"
             className={accordionIndicatorVariants({
               position: indicatorPosition,
             })}
@@ -225,7 +231,10 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
               // No explicit role="region": a <section> with an accessible
               // name already exposes one, and stating it again is redundant.
               aria-labelledby={triggerId}
-              className="px-3.5 pb-3.5"
+              className={accordionPanelVariants({
+                start: startSlots,
+                end: indicatorPosition === 'end' ? 1 : 0,
+              })}
             >
               {typeof body === 'string' ? (
                 <Typography

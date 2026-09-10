@@ -9,23 +9,31 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * `labelPosition`, expressed with logical properties so it follows the reading
  * direction instead of hardcoding a side.
  */
+/**
+ * Figma export: a 16px box in a 20px frame (2px margin), radius 4, a 1.5px
+ * edge. Default soft-200 → Hover sub-300 → Focus primary-base; checked /
+ * indeterminate fill primary-base → Hover primary-darker → Focus
+ * primary-dark. Disabled is a flat soft-200 square in every state.
+ */
 export const checkboxControlVariants = cva(
   [
-    'peer relative grid size-5 shrink-0 place-items-center',
-    'rounded-sm border transition-colors duration-150',
+    'peer relative m-0.5 grid size-4 shrink-0 place-items-center',
+    'rounded-[4px] border-[1.5px] outline-hidden transition-colors duration-200',
     'cursor-pointer appearance-none',
     'border-soft-200 bg-white-0',
-    'hover:border-sub-300',
+    'hovered:border-sub-300 focused:border-primary-base',
     'checked:border-primary-base checked:bg-primary-base',
     'indeterminate:border-primary-base indeterminate:bg-primary-base',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-base',
-    'disabled:cursor-not-allowed disabled:border-soft-200 disabled:bg-weak-50',
-    'disabled:checked:border-soft-200 disabled:checked:bg-sub-300',
+    'checked:hovered:border-primary-darker checked:hovered:bg-primary-darker',
+    'indeterminate:hovered:border-primary-darker indeterminate:hovered:bg-primary-darker',
+    'checked:focused:border-primary-dark checked:focused:bg-primary-dark',
+    'indeterminate:focused:border-primary-dark indeterminate:focused:bg-primary-dark',
+    'disabled:cursor-not-allowed disabled:border-soft-200 disabled:bg-soft-200',
   ],
   {
     variants: {
       invalid: {
-        true: 'border-error-base hover:border-error-base focus-visible:outline-error-base',
+        true: 'border-error-base hovered:border-error-base focused:border-error-base',
         false: '',
       },
     },
@@ -46,6 +54,7 @@ export const checkboxIndicatorVariants = cva([
 ]);
 
 export const checkboxRootVariants = cva('inline-flex gap-2', {
+  // Figma: 8px from the 20px frame to the label
   variants: {
     labelPosition: {
       // `flex-row-reverse` on top of logical properties: the control moves to

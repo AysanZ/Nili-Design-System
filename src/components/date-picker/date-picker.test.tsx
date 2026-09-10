@@ -70,7 +70,8 @@ describe('DatePicker', () => {
         markedDates={[march2024]}
       />,
     );
-    expect(container.innerHTML).toContain('before:bg-feature-base');
+    // Figma: a 3px primary dot under the number.
+    expect(container.innerHTML).toContain('after:bg-primary-base');
   });
 });
 

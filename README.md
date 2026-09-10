@@ -5,12 +5,12 @@ A bilingual (Persian / English), **RTL-first** React component library.
 Persian and English are not a base language plus a translation layer here. Direction, script, numerals and type metrics are first-class inputs to every component, and both languages are exercised in Storybook on every story.
 
 ```bash
-npm install @husan/nili-ui @remixicon/react
+npm install @nili/ui @remixicon/react
 ```
 
 ```tsx
-import { NiliProvider, Button, Badge } from '@husan/nili-ui';
-import '@husan/nili-ui/styles.css';
+import { NiliProvider, Button, Badge } from '@nili/ui';
+import '@nili/ui/styles.css';
 
 export function App() {
   return (
@@ -42,11 +42,11 @@ Three published entry points, and nothing else is supported:
 
 | Import                     | Contents                                             |
 | -------------------------- | ---------------------------------------------------- |
-| `@husan/nili-ui`            | components, providers, hooks, utilities              |
-| `@husan/nili-ui/icons`      | runtime string→icon lookup — pulls the full icon set |
-| `@husan/nili-ui/styles.css` | compiled stylesheet                                  |
+| `@nili/ui`            | components, providers, hooks, utilities              |
+| `@nili/ui/icons`      | runtime string→icon lookup — pulls the full icon set |
+| `@nili/ui/styles.css` | compiled stylesheet                                  |
 
-Deep imports (`@husan/nili-ui/dist/components/badge/badge`) will break without a major version.
+Deep imports (`@nili/ui/dist/components/badge/badge`) will break without a major version.
 
 ---
 
@@ -74,7 +74,7 @@ Two details that are easy to get wrong:
 Setting the theme in React means dark-mode users see a white flash on every load. Inline the init script in `<head>`:
 
 ```tsx
-import { themeInitScript } from '@husan/nili-ui';
+import { themeInitScript } from '@nili/ui';
 
 <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />;
 ```
@@ -134,7 +134,7 @@ import {
   formatNumber,
   toPersianDigits,
   parseLocalizedNumber,
-} from '@husan/nili-ui';
+} from '@nili/ui';
 
 formatNumber(1234567.89, { locale: 'fa-IR' }); // '۱٬۲۳۴٬۵۶۷٫۸۹'  — note ٬ not ,
 formatNumber(1234567.89, { locale: 'en-US' }); // '1,234,567.89'
@@ -159,7 +159,7 @@ Both are **variable** fonts: one file per script covers weights 100–900, repla
 
 `unicode-range` subsetting means an English-only page never downloads the 46 KB Arabic subset, and a Persian page never downloads Inter.
 
-If you already load these fonts yourself, import `@husan/nili-ui/styles/base.css` instead — identical, minus the `@font-face` rules.
+If you already load these fonts yourself, import `@nili/ui/styles/base.css` instead — identical, minus the `@font-face` rules.
 
 ---
 

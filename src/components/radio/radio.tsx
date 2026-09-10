@@ -117,16 +117,16 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
     >
       {control}
       <ControlLabel
-          htmlFor={inputId}
-          label={label}
-          sublabel={sublabel}
-          description={description}
-          descriptionId={descriptionId}
-          badge={badge}
-          linkButton={linkButton}
-          disabled={isDisabled}
-        />
-      </div>
+        htmlFor={inputId}
+        label={label}
+        sublabel={sublabel}
+        description={description}
+        descriptionId={descriptionId}
+        badge={badge}
+        linkButton={linkButton}
+        disabled={isDisabled}
+      />
+    </div>
   );
 });
 
@@ -244,23 +244,31 @@ export const RadioCard = forwardRef<HTMLInputElement, RadioCardProps>(
     const descriptionId = description ? `${inputId}-description` : undefined;
 
     return (
-      <label htmlFor={inputId} className={cn(radioCardVariants(), rootClassName)}>
-        <input
-          ref={ref}
-          type="radio"
-          id={inputId}
-          disabled={disabled}
-          aria-describedby={descriptionId}
-          className={cn(
-            radioControlVariants(),
-            hideControl && 'sr-only',
-            className,
+      <label
+        htmlFor={inputId}
+        className={cn(radioCardVariants(), rootClassName)}
+      >
+        {/* The indicator centres itself with `inset-0 m-auto`, so it needs a
+            20px positioned wrapper the same size as the input — without one
+            it centres on the whole card instead of the circle. */}
+        <span className="relative inline-grid shrink-0">
+          <input
+            ref={ref}
+            type="radio"
+            id={inputId}
+            disabled={disabled}
+            aria-describedby={descriptionId}
+            className={cn(
+              radioControlVariants(),
+              hideControl && 'sr-only',
+              className,
+            )}
+            {...rest}
+          />
+          {!hideControl && (
+            <span aria-hidden className={radioIndicatorVariants()} />
           )}
-          {...rest}
-        />
-        {!hideControl && (
-          <span aria-hidden className={radioIndicatorVariants()} />
-        )}
+        </span>
 
         {startAdornment != null && (
           <span className="shrink-0 [&_svg]:size-5">{startAdornment}</span>

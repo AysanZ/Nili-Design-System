@@ -36,6 +36,8 @@ export interface ColorSliderProps extends Omit<
   onChange: (value: number) => void;
   /** For the opacity track, the colour the gradient fades to. */
   baseColor?: string;
+  /** Fill of the thumb. Figma paints it with the picked colour. */
+  thumbColor?: string;
   label?: string;
 }
 
@@ -54,6 +56,8 @@ export interface ColorPickerProps extends Omit<
   /** Rendered under the hex field — a confirm button, for instance. */
   footer?: ReactNode;
   labels?: {
+    format?: string;
+    eyedropper?: string;
     spectrum?: string;
     hue?: string;
     opacity?: string;

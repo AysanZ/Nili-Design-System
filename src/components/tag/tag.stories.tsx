@@ -5,9 +5,11 @@ import { RiPriceTag3Line } from '@remixicon/react';
 import { Tag, TagGroup } from '.';
 import { Icon } from '@components/icon';
 import { Avatar } from '@components/avatar';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { TagSet } from './tag.docs';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Base Components/Tag',
+  title: 'Base Components/Tag/Tag',
   component: Tag,
   parameters: {
     docs: {
@@ -170,5 +172,15 @@ export const SelectableSet = () => {
     </TagGroup>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const TagSetStory = () => (
+  <FigmaFrame>
+    <TagSet />
+  </FigmaFrame>
+);
+TagSetStory.storyName = 'Tag set';
+TagSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

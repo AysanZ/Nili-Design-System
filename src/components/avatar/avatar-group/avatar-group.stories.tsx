@@ -2,6 +2,8 @@ import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { AvatarGroup, CompactAvatarGroup } from '.';
 import type { AvatarGroupItem } from '../avatar.types';
+import { FigmaFrame } from '../../../docs/figma.docs';
+import { AvatarGroupMatrix, CompactGroupMatrix } from '../avatar.docs';
 
 const PEOPLE: AvatarGroupItem[] = [
   { id: '1', name: 'Ada Lovelace', tone: 'blue' },
@@ -159,5 +161,25 @@ export const Compact = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+/** Figma Avatar Group: four avatars + counter at all nine sizes. */
+export const ComponentSet = () => (
+  <FigmaFrame>
+    <AvatarGroupMatrix />
+  </FigmaFrame>
+);
+ComponentSet.storyName = 'Component set';
+ComponentSet.parameters = { docs: { source: { code: null } } };
+
+/** Figma Compact Avatar Group: 40 · 32 · 24 in both appearances. */
+export const CompactComponentSet = () => (
+  <FigmaFrame>
+    <CompactGroupMatrix />
+  </FigmaFrame>
+);
+CompactComponentSet.storyName = 'Compact Avatar Group';
+CompactComponentSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

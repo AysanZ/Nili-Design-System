@@ -1,3 +1,4 @@
+import { RiArrowRightSLine } from '@remixicon/react';
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
@@ -174,12 +175,24 @@ export const FilterListItem = forwardRef<
       className={cn(filterListItemVariants({ active }), className)}
       {...rest}
     >
-      {startIcon}
+      {startIcon && (
+        <span data-slot="start-icon" className="flex shrink-0">
+          {startIcon}
+        </span>
+      )}
       <span className="flex-1 truncate">{children}</span>
       {count != null && (
         <span className="shrink-0 text-[12px] leading-4 text-soft-400">
           {count}
         </span>
+      )}
+      {/* Figma: the active item ends with a chevron. */}
+      {active && (
+        <RiArrowRightSLine
+          size={20}
+          aria-hidden
+          className="shrink-0 text-soft-400 rtl:-scale-x-100"
+        />
       )}
     </button>
   );

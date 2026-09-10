@@ -10,9 +10,16 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '.';
 import { Icon } from '@components/icon';
 import { Badge } from '@components/badge';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  TabMenuHorizontalItemsSet,
+  TabMenuHorizontalSet,
+  TabMenuVerticalItemsSet,
+  TabMenuVerticalSet,
+} from './tabs.docs';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Base Components/Tab Menu',
+  title: 'Base Components/Tab Menu/Tab Menu',
   component: Tabs,
   parameters: {
     docs: {
@@ -184,5 +191,41 @@ export const DisabledTab = () => {
 /** For panels that fetch: arrow to a tab, then confirm with Enter. */
 export const ManualActivation = Template.bind({});
 ManualActivation.args = { activationMode: 'manual' };
+
+// ====================== Figma component sets ======================
+
+export const TabMenuHorizontalItemsSetStory = () => (
+  <FigmaFrame>
+    <TabMenuHorizontalItemsSet />
+  </FigmaFrame>
+);
+TabMenuHorizontalItemsSetStory.storyName = 'Tab Menu Horizontal Items';
+TabMenuHorizontalItemsSetStory.parameters = {
+  docs: { source: { code: null } },
+};
+
+export const TabMenuHorizontalSetStory = () => (
+  <FigmaFrame>
+    <TabMenuHorizontalSet />
+  </FigmaFrame>
+);
+TabMenuHorizontalSetStory.storyName = 'Tab Menu Horizontal';
+TabMenuHorizontalSetStory.parameters = { docs: { source: { code: null } } };
+
+export const TabMenuVerticalItemsSetStory = () => (
+  <FigmaFrame>
+    <TabMenuVerticalItemsSet />
+  </FigmaFrame>
+);
+TabMenuVerticalItemsSetStory.storyName = 'Tab Menu Vertical Items';
+TabMenuVerticalItemsSetStory.parameters = { docs: { source: { code: null } } };
+
+export const TabMenuVerticalSetStory = () => (
+  <FigmaFrame>
+    <TabMenuVerticalSet />
+  </FigmaFrame>
+);
+TabMenuVerticalSetStory.storyName = 'Tab Menu Vertical';
+TabMenuVerticalSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

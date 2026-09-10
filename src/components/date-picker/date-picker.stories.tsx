@@ -4,9 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { DatePicker, DateRangePicker, type DateRange } from '.';
 import { Button } from '@components/button';
 import { formatDate } from '@/lib/calendar';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  DateSelectorSet,
+  DayCellsSet,
+  PeriodRangeSet,
+  PickersSet,
+} from './date-picker.docs';
 
 const meta: Meta<typeof DatePicker> = {
-  title: 'Base Components/Date Picker',
+  title: 'Base Components/Date Picker/Date Picker',
   component: DatePicker,
   parameters: {
     docs: {
@@ -235,5 +242,34 @@ export const RangeWithPresets = () => {
     />
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const DayLabelAndCells = () => (
+  <FigmaFrame>
+    <DayCellsSet />
+  </FigmaFrame>
+);
+DayLabelAndCells.storyName = 'Day Label & Cells';
+DayLabelAndCells.parameters = { docs: { source: { code: null } } };
+
+export const PeriodRangeAndSelector = () => (
+  <FigmaFrame>
+    <div className="flex flex-col gap-8">
+      <PeriodRangeSet />
+      <DateSelectorSet />
+    </div>
+  </FigmaFrame>
+);
+PeriodRangeAndSelector.storyName = 'Period Range & Date Selector';
+PeriodRangeAndSelector.parameters = { docs: { source: { code: null } } };
+
+export const DateAndRangePickers = () => (
+  <FigmaFrame>
+    <PickersSet />
+  </FigmaFrame>
+);
+DateAndRangePickers.storyName = 'Date & Range Pickers';
+DateAndRangePickers.parameters = { docs: { source: { code: null } } };
 
 export default meta;

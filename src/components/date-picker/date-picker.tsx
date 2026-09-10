@@ -4,7 +4,6 @@ import { cn } from '../../lib/cn';
 import { Icon } from '../icon';
 import { CompactButton } from '../button';
 import { useControllableState } from '../../hooks/use-controllable-state';
-import { useDirection } from '../../providers/direction';
 import {
   type CalendarSystem,
   toParts,
@@ -25,6 +24,7 @@ import {
   dayCellVariants,
   periodRangeVariants,
   periodRangeItemVariants,
+  datePickerFooterVariants,
   calendarToggleVariants,
 } from './date-picker.styles';
 import type {
@@ -75,7 +75,7 @@ function CalendarGrid({
 
   return (
     <div role="grid" className="flex flex-col">
-      <div role="row" className="grid grid-cols-7">
+      <div role="row" className="grid grid-cols-7 gap-x-2">
         {weekdays.map((name, index) => (
           <span key={index} role="columnheader" className={dayLabelVariants()}>
             {name}
@@ -83,7 +83,7 @@ function CalendarGrid({
         ))}
       </div>
 
-      <div className="grid grid-cols-7">
+      <div className="grid grid-cols-7 gap-2 [&>[data-in-range]:nth-child(7n+1)]:rounded-s-lg [&>[data-in-range]:nth-child(7n+1)]:before:hidden [&>[data-in-range]:nth-child(7n)]:rounded-e-lg">
         {cells.map((cell) => {
           const disabled = isDisabled(cell.date);
           const selected = isSelected(cell.date);
@@ -94,6 +94,9 @@ function CalendarGrid({
               role="gridcell"
               disabled={disabled}
               aria-selected={selected}
+              data-in-range={
+                !selected && isInRange?.(cell.date) ? true : undefined
+              }
               // The label is the full localized date, so a screen reader
               // announces "12 Mehr 1403" and not a bare number.
               aria-label={cell.date.toDateString()}
@@ -137,20 +140,18 @@ function CalendarHeader({
   onCalendarChange,
   labels,
 }: HeaderProps) {
-  const { dir } = useDirection();
-  // In RTL the "previous" control sits on the right, so the two arrow glyphs
-  // swap. `mirrored` alone is not enough: the buttons themselves reorder.
-  const previousIcon = dir === 'rtl' ? RiArrowRightSLine : RiArrowLeftSLine;
-  const nextIcon = dir === 'rtl' ? RiArrowLeftSLine : RiArrowRightSLine;
-
   return (
     <div className={dateSelectorVariants()}>
       <CompactButton
-        appearance="ghost"
+        appearance="white"
         aria-label={labels.previousMonth ?? 'Previous month'}
         onClick={() => onStep(-1)}
       >
-        <Icon icon={previousIcon} />
+        {/* No `mirrored`: only the button's position should flip under
+            RTL (via the browser's native bidi reorder), not the glyph
+            itself — the chevron already needs to point physically right
+            when this button lands on the right side. */}
+        <Icon icon={RiArrowLeftSLine} />
       </CompactButton>
 
       <div className="flex items-center gap-2">
@@ -188,11 +189,11 @@ function CalendarHeader({
       </div>
 
       <CompactButton
-        appearance="ghost"
+        appearance="white"
         aria-label={labels.nextMonth ?? 'Next month'}
         onClick={() => onStep(1)}
       >
-        <Icon icon={nextIcon} />
+        <Icon icon={RiArrowRightSLine} />
       </CompactButton>
     </div>
   );
@@ -274,6 +275,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       minDate,
       maxDate,
       markedDates,
+      footer,
       isDateDisabled,
       labels = {},
       className,
@@ -312,6 +314,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           isMarked={state.isMarked}
           onSelect={(date) => setSelected(startOfDay(date))}
         />
+        {footer}
       </div>
     );
   },
@@ -440,3 +443,17 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     );
   },
 );
+
+/**
+ * Figma date-picker footer: a full-bleed bar with a top divider and 16px
+ * padding. Put Cancel / Apply buttons (and, for ranges, the "Range: …"
+ * summary) inside and pass it as `footer`.
+ */
+export function DatePickerFooter({
+  className,
+  ...rest
+}: React.ComponentPropsWithoutRef<'div'>) {
+  return (
+    <div className={cn(datePickerFooterVariants(), className)} {...rest} />
+  );
+}

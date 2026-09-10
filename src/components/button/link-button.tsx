@@ -1,6 +1,9 @@
 import {
+  cloneElement,
   forwardRef,
+  isValidElement,
   type ComponentPropsWithoutRef,
+  type ReactElement,
   type ReactNode,
 } from 'react';
 import { cn } from '../../lib/cn';
@@ -66,7 +69,11 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
       </>
     );
 
-    if (asChild) {
+    // asChild used to pass `children` straight through, which silently
+    // dropped startIcon / endIcon on router links. The icons are now injected
+    // into the child element, the same way Button does it.
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{ children?: ReactNode }>;
       return (
         <Slot
           ref={ref as never}
@@ -74,7 +81,15 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
           className={classes}
           {...rest}
         >
-          {children}
+          {cloneElement(
+            child,
+            undefined,
+            <>
+              {startIcon}
+              {child.props.children}
+              {endIcon}
+            </>,
+          )}
         </Slot>
       );
     }

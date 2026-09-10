@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { RatingBar, RatingBarArea } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { RatingBarItemsSet, RatingBarSet } from './rating.docs';
 
 const meta: Meta<typeof RatingBar> = {
-  title: 'Base Components/Rating/Rating Bar',
+  title: 'Base Components/Ratings/Rating Bar',
   component: RatingBar,
   parameters: {
     docs: {
@@ -114,5 +116,23 @@ export const Area = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const RatingBarItemsSetStory = () => (
+  <FigmaFrame>
+    <RatingBarItemsSet />
+  </FigmaFrame>
+);
+RatingBarItemsSetStory.storyName = 'Rating Bar Items';
+RatingBarItemsSetStory.parameters = { docs: { source: { code: null } } };
+
+export const RatingBarSetStory = () => (
+  <FigmaFrame>
+    <RatingBarSet />
+  </FigmaFrame>
+);
+RatingBarSetStory.storyName = 'Rating Bar set';
+RatingBarSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

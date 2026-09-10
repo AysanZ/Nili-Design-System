@@ -125,8 +125,10 @@ export type TextInputVariantProps = VariantProps<typeof textInputFieldVariants>;
 export const TEXT_INPUT_TYPE_PRESETS: Record<
   string,
   {
-    htmlType?: 'text' | 'email' | 'tel' | 'url' | 'password' | 'search' | 'date';
-    inputMode?: 'text' | 'email' | 'tel' | 'url' | 'numeric' | 'decimal' | 'search';
+    htmlType?:
+      'text' | 'email' | 'tel' | 'url' | 'password' | 'search' | 'date';
+    inputMode?:
+      'text' | 'email' | 'tel' | 'url' | 'numeric' | 'decimal' | 'search';
     autoComplete?: string;
     latin?: boolean;
     /**
@@ -138,7 +140,12 @@ export const TEXT_INPUT_TYPE_PRESETS: Record<
   }
 > = {
   basic: {},
-  email: { htmlType: 'email', inputMode: 'email', autoComplete: 'email', latin: true },
+  email: {
+    htmlType: 'email',
+    inputMode: 'email',
+    autoComplete: 'email',
+    latin: true,
+  },
   phone: {
     htmlType: 'tel',
     inputMode: 'tel',
@@ -147,7 +154,12 @@ export const TEXT_INPUT_TYPE_PRESETS: Record<
     selectSide: 'start',
   },
   card: { inputMode: 'numeric', autoComplete: 'cc-number', latin: true },
-  website: { htmlType: 'url', inputMode: 'url', autoComplete: 'url', latin: true },
+  website: {
+    htmlType: 'url',
+    inputMode: 'url',
+    autoComplete: 'url',
+    latin: true,
+  },
   amount: { inputMode: 'decimal', latin: true, selectSide: 'end' },
   date: { inputMode: 'numeric', latin: true },
   search: { htmlType: 'search', inputMode: 'search' },
@@ -164,9 +176,7 @@ export const textInputShortcutVariants = cva([
 ]);
 
 /** Muted text pinned inside the trailing edge. Figma's `Suffix`. */
-export const textInputSuffixVariants = cva(
-  'shrink-0 select-none text-sub-600',
-);
+export const textInputSuffixVariants = cva('shrink-0 select-none text-sub-600');
 
 /**
  * Muted text pinned inside the *leading* edge — the `€` before an Amount.
@@ -176,9 +186,7 @@ export const textInputSuffixVariants = cva(
  * on a Website field is a bordered block beside it. Two different drawings, so
  * two different slots.
  */
-export const textInputPrefixVariants = cva(
-  'shrink-0 select-none text-sub-600',
-);
+export const textInputPrefixVariants = cva('shrink-0 select-none text-sub-600');
 
 /**
  * An attached control — Figma's `Button` and `Dropdown` types. It sits inside

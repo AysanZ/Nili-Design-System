@@ -8,6 +8,7 @@
 @import './tokens.foundation.css';
 @import './tokens.semantic.css';
 @import './theme.css';
+@import './variants.css';
 
 @source '../';
 

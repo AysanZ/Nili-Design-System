@@ -107,6 +107,8 @@ describe('StepIndicator', () => {
 
   it('renders a stepper dot row with its position announced', () => {
     render(<StepperDot count={3} value={1} />);
-    expect(screen.getByRole('img', { name: 'Step 2 of 3' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Step 2 of 3' }),
+    ).toBeInTheDocument();
   });
 });

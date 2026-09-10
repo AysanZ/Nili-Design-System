@@ -59,7 +59,8 @@ export const contentDividerRuleVariants = cva('shrink-0', {
 export const contentDividerContentVariants = cva('shrink-0', {
   variants: {
     variant: {
-      text: 'px-1 text-[12px] font-medium uppercase leading-4 tracking-wider text-soft-400',
+      // Figma: Subheading/2X-Small — 11px, uppercase, soft-400.
+      text: 'px-1 text-[11px] font-medium uppercase leading-3 tracking-[0.02em] text-soft-400',
       /** Anything interactive keeps its own typography. */
       element: '',
     },
@@ -70,3 +71,8 @@ export const contentDividerContentVariants = cva('shrink-0', {
 export type ContentDividerVariantProps = VariantProps<
   typeof contentDividerVariants
 >;
+
+/** Figma "Solid Text Divider": a weak-50 bar with the label at the start. */
+export const contentDividerSolidVariants = cva(
+  'flex w-full items-center bg-weak-50 px-5 py-2 text-[11px] font-medium uppercase leading-3 tracking-[0.02em] text-soft-400',
+);

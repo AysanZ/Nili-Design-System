@@ -1,4 +1,4 @@
-import { forwardRef, isValidElement } from 'react';
+import { Fragment, forwardRef, isValidElement } from 'react';
 import {
   RiErrorWarningFill,
   RiAlertFill,
@@ -10,10 +10,11 @@ import {
 import { cn } from '../../lib/cn';
 import { Icon, type IconComponent } from '../icon';
 import { Typography } from '../typography';
+import { LinkButton } from '../button/link-button';
 import {
   alertVariants,
   alertIconVariants,
-  alertActionVariants,
+  alertCloseVariants,
 } from './alert.styles';
 import type { AlertProps, AlertStatus } from './alert.types';
 
@@ -75,23 +76,51 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
         ? 'label-small'
         : 'paragraph-small';
 
+  const iconSize = size === 'x-small' ? 16 : 20;
+  const inlineActions = size !== 'large';
+
   const renderIcon = () => {
     if (icon === false) return null;
-    if (isValidElement(icon)) {
-      return (
-        <span className={alertIconVariants({ status, appearance })} aria-hidden>
-          {icon}
-        </span>
-      );
-    }
     return (
-      <Icon
-        icon={STATUS_ICON[status]}
-        size={16}
-        className={alertIconVariants({ status, appearance })}
-      />
+      <span
+        className={alertIconVariants({ status, appearance, size })}
+        aria-hidden
+      >
+        {isValidElement(icon) ? (
+          icon
+        ) : (
+          <Icon icon={STATUS_ICON[status]} size={iconSize} />
+        )}
+      </span>
     );
   };
+
+  // Figma: the first link is underlined, the next one is not, and a 48%
+  // dot sits between them. Link Buttons with `color="inherit"`, so they
+  // follow the alert's text colour (white on Filled, strong-950 otherwise).
+  const renderActions = () =>
+    actions && actions.length > 0 ? (
+      <div className="flex shrink-0 items-center gap-2">
+        {actions.slice(0, 2).map((action, index) => (
+          <Fragment key={action.label}>
+            {index > 0 && (
+              <span aria-hidden className="text-[14px] leading-5 opacity-48">
+                ·
+              </span>
+            )}
+            <LinkButton
+              color="inherit"
+              size={size === 'x-small' ? 'sm' : 'md'}
+              underline={index === 0}
+              href={action.href}
+              onClick={action.onClick}
+            >
+              {action.label}
+            </LinkButton>
+          </Fragment>
+        ))}
+      </div>
+    ) : null;
 
   return (
     <div
@@ -102,72 +131,46 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       className={cn(alertVariants({ status, appearance, size }), className)}
       {...rest}
     >
-      <div className="flex flex-1 items-start gap-2">
-        {renderIcon()}
+      {renderIcon()}
 
-        <div className="flex min-w-0 flex-1 flex-col items-start gap-2.5">
-          <div className="flex flex-col items-start gap-1">
-            <Typography
-              as="span"
-              variant={titleVariant}
-              className="break-words text-inherit"
-            >
-              {title}
-            </Typography>
+      <div className="flex min-w-0 flex-1 flex-col items-start gap-1">
+        <Typography
+          as="span"
+          variant={titleVariant}
+          className="break-words text-inherit"
+        >
+          {title}
+        </Typography>
 
-            {description && (
-              <Typography
-                variant="paragraph-small"
-                className="break-words text-inherit"
-              >
-                {description}
-              </Typography>
+        {description && (
+          <Typography
+            variant="paragraph-small"
+            className={cn(
+              'break-words text-inherit',
+              appearance !== 'filled' && 'opacity-72',
             )}
-          </div>
+          >
+            {description}
+          </Typography>
+        )}
 
-          {children}
+        {children}
 
-          {actions && actions.length > 0 && (
-            <div className="flex items-center gap-4">
-              {actions.slice(0, 2).map((action) =>
-                action.href ? (
-                  <a
-                    key={action.label}
-                    href={action.href}
-                    className={alertActionVariants({ appearance })}
-                  >
-                    {action.label}
-                  </a>
-                ) : (
-                  <button
-                    key={action.label}
-                    type="button"
-                    onClick={action.onClick}
-                    className={alertActionVariants({ appearance })}
-                  >
-                    {action.label}
-                  </button>
-                ),
-              )}
-            </div>
-          )}
-        </div>
+        {!inlineActions && actions && actions.length > 0 && (
+          <div className="mt-1.5">{renderActions()}</div>
+        )}
       </div>
+
+      {inlineActions && renderActions()}
 
       {dismissible && (
         <button
           type="button"
           onClick={onDismiss}
           aria-label={dismissLabel}
-          className={cn(
-            'shrink-0 rounded-sm p-0.5 opacity-70 transition-opacity',
-            'hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
-            appearance === 'filled'
-              ? 'focus-visible:outline-static-white'
-              : 'focus-visible:outline-primary-base',
-          )}
+          className={alertCloseVariants({ size })}
         >
-          <Icon icon={RiCloseLine} size={16} />
+          <Icon icon={RiCloseLine} size={iconSize} />
         </button>
       )}
     </div>

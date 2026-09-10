@@ -1,8 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
-import { RiCheckLine, RiSubtractLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { useId } from '../../hooks/use-id';
-import { Icon } from '../icon';
 import { ControlLabel } from '../key-components/control-label';
 import {
   checkboxRootVariants,
@@ -70,7 +68,18 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {...rest}
         />
         <span className={checkboxIndicatorVariants()} aria-hidden>
-          <Icon icon={indeterminate ? RiSubtractLine : RiCheckLine} size={14} />
+          {/* Figma's own glyphs: an 8×5 tick and an 8px dash, 1.5px strokes. */}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            {indeterminate ? (
+              <path d="M4 8h8" stroke="currentColor" strokeWidth="1.5" />
+            ) : (
+              <path
+                d="M4 8.25 6.5 10.5 12 5.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            )}
+          </svg>
         </span>
       </span>
     );

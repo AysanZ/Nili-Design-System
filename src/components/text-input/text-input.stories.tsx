@@ -235,7 +235,7 @@ export const AllTypes = () => {
         {...label}
         type="email"
         label={t('textInput.emailLabel')}
-        placeholder="hello@husan.ir"
+        placeholder="hello@nili.design"
         startIcon={<Icon icon={RiMailLine} />}
       />
 
@@ -427,8 +427,8 @@ export const AllStates = () => {
         label="Placeholder"
         placeholder={t('textInput.emailPlaceholder')}
       />
-      <TextInput label="Filled" defaultValue="hello@husan.ir" type="email" />
-      <TextInput label="Disabled" defaultValue="hello@husan.ir" disabled />
+      <TextInput label="Filled" defaultValue="hello@nili.design" type="email" />
+      <TextInput label="Disabled" defaultValue="hello@nili.design" disabled />
       <TextInput
         label="Error"
         defaultValue="hello@"

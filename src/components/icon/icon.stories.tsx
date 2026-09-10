@@ -39,7 +39,7 @@ import { RiAddLine } from '@remixicon/react';
 Runtime string lookup still exists — it is genuinely needed for icon pickers and CMS content — but it lives behind a separate entry point so the cost is opt-in:
 
 \`\`\`tsx
-import { DynamicIcon } from '@husan/nili-ui/icons';
+import { DynamicIcon } from '@nili/ui/icons';
 <DynamicIcon name="add-line" />
 \`\`\`
 

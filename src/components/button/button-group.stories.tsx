@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { RiBold, RiItalic, RiUnderline } from '@remixicon/react';
 import { ButtonGroup, ButtonGroupItem } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { ButtonGroupItemsMatrix, ButtonGroupMatrix } from './button-group.docs';
 
 const meta: Meta<typeof ButtonGroup> = {
-  title: 'Base Components/Button Group',
+  title: 'Base Components/Button Group/Button Group',
   component: ButtonGroup,
   parameters: {
     docs: {
@@ -97,5 +99,22 @@ export const Vertical = () => {
     </ButtonGroup>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const ButtonGroupItems = () => (
+  <FigmaFrame>
+    <ButtonGroupItemsMatrix />
+  </FigmaFrame>
+);
+ButtonGroupItems.parameters = { docs: { source: { code: null } } };
+
+export const ButtonGroups = () => (
+  <FigmaFrame>
+    <ButtonGroupMatrix />
+  </FigmaFrame>
+);
+ButtonGroups.storyName = 'Button Group sets';
+ButtonGroups.parameters = { docs: { source: { code: null } } };
 
 export default meta;

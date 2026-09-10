@@ -36,6 +36,33 @@ describe('LinkButton', () => {
     expect(link).toHaveAttribute('aria-disabled', 'true');
   });
 
+  // asChild used to forward only `children`, silently dropping the icons.
+  it('keeps startIcon and endIcon with asChild', () => {
+    render(
+      <LinkButton
+        asChild
+        startIcon={<svg data-testid="start" />}
+        endIcon={<svg data-testid="end" />}
+      >
+        <a href="/docs">Read</a>
+      </LinkButton>,
+    );
+    const link = screen.getByRole('link', { name: 'Read' });
+    expect(link).toContainElement(screen.getByTestId('start'));
+    expect(link).toContainElement(screen.getByTestId('end'));
+  });
+
+  it('drops the underline when disabled, even with underline on', () => {
+    render(
+      <LinkButton href="/docs" underline disabled>
+        Read
+      </LinkButton>,
+    );
+    expect(screen.getByText('Read').className).toContain(
+      'aria-disabled:no-underline',
+    );
+  });
+
   it('inherits the container colour with color="inherit"', () => {
     render(
       <LinkButton color="inherit" href="#">
@@ -79,6 +106,39 @@ describe('FancyButton', () => {
     expect(button).toHaveAttribute('type', 'button');
     await user.click(button);
     expect(onClick).not.toHaveBeenCalled();
+  });
+});
+
+describe('FancyButton asChild', () => {
+  // Slot needs a single element child; icons + label as siblings used to make
+  // it render nothing.
+  it('renders the child element with label and icons', () => {
+    render(
+      <FancyButton asChild startIcon={<svg data-testid="start" />}>
+        <a href="/go">Go</a>
+      </FancyButton>,
+    );
+    const link = screen.getByRole('link', { name: 'Go' });
+    expect(link).toHaveAttribute('href', '/go');
+    expect(link).toContainElement(screen.getByTestId('start'));
+  });
+});
+
+describe('Figma sizes', () => {
+  it('has no 2X-Small Fancy Button', async () => {
+    const { FANCY_BUTTON_SIZES } = await import('./fancy-button.styles');
+    expect(FANCY_BUTTON_SIZES).toEqual(['md', 'sm', 'xs']);
+  });
+
+  it('uses an 18px glyph on the 20px Compact Button', () => {
+    render(
+      <CompactButton size="md" aria-label="Close">
+        <svg />
+      </CompactButton>,
+    );
+    expect(screen.getByRole('button').className).toContain(
+      '[&_svg]:size-[18px]',
+    );
   });
 });
 

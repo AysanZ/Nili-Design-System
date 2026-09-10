@@ -1,7 +1,12 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ActivityFeed, ActivityFeedItem, ActivityFeedTab } from '.';
+import {
+  ActivityFeed,
+  ActivityFeedItem,
+  ActivityFeedTab,
+  ActivityFeedTabSeparator,
+} from '.';
 
 describe('ActivityFeed', () => {
   it('is a labelled region wrapping a list', () => {
@@ -44,7 +49,7 @@ describe('ActivityFeed', () => {
       </ActivityFeed>,
     );
     expect(screen.getByText('a.pdf')).toBeInTheDocument();
-    expect(screen.getByText('1 MB')).toBeInTheDocument();
+    expect(screen.getByText('(1 MB)')).toBeInTheDocument();
   });
 
   it('renders the quoted body for type="message"', () => {
@@ -55,8 +60,9 @@ describe('ActivityFeed', () => {
     );
     const quote = container.querySelector('blockquote');
     expect(quote).toHaveTextContent('Nice work');
-    // border-s, not border-l: the rule must sit on the leading edge in RTL.
-    expect(quote?.className).toContain('border-s-2');
+    // Figma draws Message as boxed text, not a side-ruled quote.
+    expect(quote?.className).toContain('rounded-md');
+    expect(quote?.className).toContain('border-soft-200');
   });
 
   it('marks unread items with a logical inset', () => {
@@ -91,5 +97,39 @@ describe('ActivityFeed', () => {
       'aria-selected',
       'false',
     );
+  });
+
+  // Actions inside a selectable row must not be nested in its button.
+  it('keeps actions outside the stretched select button', () => {
+    const { container } = render(
+      <ActivityFeed label="Feed">
+        <ActivityFeedItem
+          type="button"
+          title="Request"
+          onSelect={() => undefined}
+          actions={<button type="button">Approve</button>}
+        />
+      </ActivityFeed>,
+    );
+    expect(container.querySelector('button button')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Request' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Approve' })).toBeInTheDocument();
+  });
+
+  it('renders the tab count and a separator', () => {
+    render(
+      <ActivityFeed
+        label="Feed"
+        tabs={
+          <>
+            <ActivityFeedTab selected>All</ActivityFeedTab>
+            <ActivityFeedTab count={2}>Inbox</ActivityFeedTab>
+            <ActivityFeedTabSeparator />
+          </>
+        }
+      />,
+    );
+    expect(screen.getByRole('tab', { name: /Inbox/ })).toHaveTextContent('2');
+    expect(screen.getByRole('separator')).toBeInTheDocument();
   });
 });

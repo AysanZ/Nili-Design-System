@@ -5,8 +5,9 @@ export type ActivityFeedItemType = 'basic' | 'button' | 'file' | 'message';
 
 export interface ActivityFeedFile {
   name: string;
-  /** Pre-formatted, e.g. `'1.2 MB'` — formatting is a locale decision. */
+  /** Pre-formatted, e.g. `'4mb'` — formatting is a locale decision. */
   size?: string;
+  /** Replaces the default paperclip. */
   icon?: ReactNode;
   href?: string;
 }
@@ -15,40 +16,64 @@ export interface ActivityFeedItemProps extends Omit<
   ComponentPropsWithoutRef<'li'>,
   'title' | 'children'
 > {
+  /** Figma Type: Basic · Button · File · Message. */
   type?: ActivityFeedItemType;
-  /** Usually an `<Avatar>`. */
+  /** Usually a 40px `<Avatar size="sm">`. */
   avatar?: ReactNode;
   title: ReactNode;
-  description?: ReactNode;
-  /** Pre-formatted timestamp. Use `formatNumber` for Persian digits. */
+  /** Pre-formatted time, e.g. "8 min ago". First part of the meta line. */
   timestamp?: ReactNode;
-  /** Figma `🎖️ Badge` — sits beside the title, e.g. a status or a count. */
+  /** Figma "Insert subject here." — second part of the meta line. */
+  subject?: ReactNode;
+  /** 16px glyph before `subject` (an app or workspace logo). */
+  subjectIcon?: ReactNode;
+  /** Sits beside the title, e.g. a status or a count. */
   badge?: ReactNode;
-  unread?: boolean;
-  /** `type="button"`: up to two actions under the text. */
+  /** Body text — Figma Type Basic. */
+  description?: ReactNode;
+  /** Figma Type Button: the actions row, usually two `size="xs"` Buttons. */
   actions?: ReactNode;
-  /** `type="file"`: the attachment card. */
+  /** Figma Type File: the attachment chip. */
   file?: ActivityFeedFile;
-  /** `type="message"`: quoted message body. */
+  /** Figma Type Message: the boxed message text. */
   message?: ReactNode;
-  children?: ReactNode;
+  /**
+   * The "more" control Figma reveals on hover — pass a ghost icon Button
+   * or a Dropdown trigger. Shown on hover and keyboard focus, and always on
+   * touch screens.
+   */
+  menu?: ReactNode;
+  unread?: boolean;
+  /**
+   * Makes the whole card selectable. The title becomes a real button that
+   * stretches over the card, so actions and the menu inside stay separate,
+   * valid, focusable buttons.
+   */
   onSelect?: () => void;
+  children?: ReactNode;
 }
 
 export interface ActivityFeedProps extends Omit<
   ComponentPropsWithoutRef<'section'>,
   'title'
 > {
+  /** Figma Header title, e.g. "Notifications". */
   title?: ReactNode;
-  /** Rendered at the trailing edge of the header — a link or menu button. */
+  /** End of the header, e.g. `<LinkButton color="primary">Mark all as read</LinkButton>`. */
   headerAction?: ReactNode;
-  /** `<ActivityFeedTab>` children. Omit for a feed with no tabs. */
+  /** `<ActivityFeedTab>` children (and `<ActivityFeedTabSeparator>`). */
   tabs?: ReactNode;
+  /** End of the tab row, e.g. a filter `<CompactButton appearance="ghost">`. */
+  tabsAction?: ReactNode;
+  /** Figma Footer content — see `<ActivityFeedFooter>`. */
+  footer?: ReactNode;
   label?: string;
 }
 
 export interface ActivityFeedTabProps extends ComponentPropsWithoutRef<'button'> {
   selected?: boolean;
-  /** Count chip after the label — pass a `<Badge>` or plain text. */
+  /** Figma's red count after the label. */
+  count?: ReactNode;
+  /** Any other node after the label — e.g. a `<Badge>`. */
   badge?: ReactNode;
 }

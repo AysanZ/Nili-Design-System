@@ -236,8 +236,10 @@ export const Step = forwardRef<HTMLLIElement, StepProps>(function Step(
 
   // `...rest` used to be spread only on the button branch, so every extra
   // prop — id, data-*, title — was silently dropped on a non-interactive step.
-  const { onSelect: _ignored, ...liRest } = { onSelect: undefined, ...rest } as
-    Record<string, unknown>;
+  const { onSelect: _ignored, ...liRest } = {
+    onSelect: undefined,
+    ...rest,
+  } as Record<string, unknown>;
 
   return (
     <li

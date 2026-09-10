@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { forwardRef, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { RiCloseLine } from '@remixicon/react';
@@ -111,41 +112,16 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
         {...rest}
       >
         {(title || showClose) && (
-          <header className={drawerHeaderVariants({ size: headerSize })}>
-            {icon && <span className="shrink-0 pt-0.5">{icon}</span>}
-            <div className="flex min-w-0 flex-1 flex-col gap-1">
-              {title && (
-                <h2
-                  id={titleId}
-                  className={cn(
-                    'font-medium text-strong-950',
-                    headerSize === 'lg'
-                      ? 'text-[18px] leading-6'
-                      : 'text-[16px] leading-6',
-                  )}
-                >
-                  {title}
-                </h2>
-              )}
-              {description && (
-                <p
-                  id={descriptionId}
-                  className="text-[14px] leading-5 text-sub-600"
-                >
-                  {description}
-                </p>
-              )}
-            </div>
-            {showClose && (
-              <CompactButton
-                appearance="ghost"
-                aria-label={closeLabel}
-                onClick={() => onOpenChange(false)}
-              >
-                <Icon icon={RiCloseLine} />
-              </CompactButton>
-            )}
-          </header>
+          <DrawerHeader
+            title={title}
+            description={description}
+            icon={icon}
+            size={headerSize}
+            titleId={titleId}
+            descriptionId={descriptionId}
+            onClose={showClose ? () => onOpenChange(false) : undefined}
+            closeLabel={closeLabel}
+          />
         )}
 
         <div className={drawerBodyVariants({ size: headerSize })}>
@@ -153,12 +129,97 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
         </div>
 
         {footer && (
-          <footer className={drawerFooterVariants({ stretch: stretchFooter })}>
-            {footer}
-          </footer>
+          <DrawerFooter stretch={stretchFooter}>{footer}</DrawerFooter>
         )}
       </div>
     </>,
     container ?? document.body,
   );
 });
+
+export interface DrawerHeaderProps {
+  title?: ReactNode;
+  description?: ReactNode;
+  /** A 20px icon, or a 48px key icon. */
+  icon?: ReactNode;
+  size?: 'sm' | 'lg';
+  titleId?: string;
+  descriptionId?: string;
+  /** Shows the × when set. */
+  onClose?: () => void;
+  closeLabel?: string;
+  className?: string;
+}
+
+/** Figma Drawer Header. Used by `Drawer`, and usable on its own. */
+export function DrawerHeader({
+  title,
+  description,
+  icon,
+  size = 'sm',
+  titleId,
+  descriptionId,
+  onClose,
+  closeLabel = 'Close',
+  className,
+}: DrawerHeaderProps) {
+  return (
+    <header className={cn(drawerHeaderVariants({ size }), className)}>
+      {icon && <span className="flex shrink-0 self-center">{icon}</span>}
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        {title && (
+          <h2
+            id={titleId}
+            className="text-[18px] leading-6 font-medium tracking-[-0.015em] text-strong-950"
+          >
+            {title}
+          </h2>
+        )}
+        {description && (
+          <p id={descriptionId} className="text-[14px] leading-5 text-sub-600">
+            {description}
+          </p>
+        )}
+      </div>
+      {onClose && (
+        <CompactButton
+          appearance="ghost"
+          aria-label={closeLabel}
+          onClick={onClose}
+        >
+          <Icon icon={RiCloseLine} />
+        </CompactButton>
+      )}
+    </header>
+  );
+}
+
+/** Figma Drawer Footer: `start` content, then the actions at the end. */
+export function DrawerFooter({
+  start,
+  stretch = false,
+  className,
+  children,
+}: {
+  start?: ReactNode;
+  stretch?: boolean;
+  className?: string;
+  children?: ReactNode;
+}) {
+  return (
+    <footer
+      className={cn(
+        drawerFooterVariants({ stretch: stretch && !start }),
+        start && 'justify-between',
+        className,
+      )}
+    >
+      {start && <div className="flex min-w-0 items-center gap-2">{start}</div>}
+      {start ? (
+        <div className="flex shrink-0 items-center gap-3">{children}</div>
+      ) : (
+        children
+      )}
+    </footer>
+  );
+}

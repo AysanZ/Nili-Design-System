@@ -27,7 +27,9 @@ export const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>(
     const content = (
       <>
         {icon}
-        {children}
+        {children != null && children !== false && (
+          <span data-slot="label">{children}</span>
+        )}
       </>
     );
 

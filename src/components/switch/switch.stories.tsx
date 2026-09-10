@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Switch } from '.';
 import { Badge } from '@components/badge';
 import { LinkButton } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { SwitchToggleItemsSet } from './switch.docs';
 
 const meta: Meta<typeof Switch> = {
-  title: 'Base Components/Toggle',
+  title: 'Base Components/Switch Toggle/Switch',
   component: Switch,
   parameters: {
     docs: {
@@ -114,9 +116,11 @@ export const LabelAnatomy = () => {
           </Badge>
         }
         description={t('switch.autoSave')}
-        linkButton={<LinkButton href="#" color="primary" size="sm" underline>
+        linkButton={
+          <LinkButton href="#" color="primary" size="sm" underline>
             Learn more
-          </LinkButton>}
+          </LinkButton>
+        }
       />
     </div>
   );
@@ -166,5 +170,15 @@ export const SettingsList = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const SwitchToggleItemsSetStory = () => (
+  <FigmaFrame>
+    <SwitchToggleItemsSet />
+  </FigmaFrame>
+);
+SwitchToggleItemsSetStory.storyName = 'Switch Toggle Items';
+SwitchToggleItemsSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

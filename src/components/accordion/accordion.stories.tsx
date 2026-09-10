@@ -1,258 +1,245 @@
-import { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { useState, type ComponentProps } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
-import { RiQuestionLine, RiArrowDownSLine } from '@remixicon/react';
+import { RiArrowDownSLine, RiQuestionLine } from '@remixicon/react';
 import { Accordion, AccordionGroup } from '.';
 import { Icon } from '@components/icon';
 import { Button } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { AccordionMatrix } from './accordion.docs';
 
-const meta: Meta<typeof Accordion> = {
-  title: 'Base Components/Accordion',
+type PlaygroundArgs = Omit<
+  ComponentProps<typeof Accordion>,
+  'title' | 'content'
+> & {
+  state: 'default' | 'hover';
+  icon: boolean;
+};
+
+const meta: Meta<PlaygroundArgs> = {
+  title: 'Base Components/Accordion/Accordion',
   component: Accordion,
   parameters: {
     docs: {
       description: {
-        component: `The **Accordion** component organises content in a space-efficient way, letting users expand or collapse sections as needed. Common in FAQs, product descriptions and content-heavy pages.
+        component: `Figma → **Accordion [Overview]** → **Accordion** — *Allows you to display content in a collapsible manner, making it easy for users to access information while conserving screen space.*
 
-**Key Features:**
-- **Controlled or uncontrolled**: \`open\` + \`onOpenChange\`, or \`defaultOpen\`
-- **Grouping**: wrap in \`<AccordionGroup type="single">\` for exclusive open state
-- **Indicator**: default ＋/－ crossfade, \`indicatorPosition\`, or a fully custom node
-- **CSS-only height animation**, with \`prefers-reduced-motion\` respected
+| Figma axis | Prop | Values |
+| --- | --- | --- |
+| 📌 State | — / \`open\` | Default · Hover · Active → CSS hover, and \`open\` / \`defaultOpen\` for Active |
+| ⬅️ Icon | \`startAdornment\` | Off · On (any 20px icon) |
+| 🔄 Flip Icon | \`indicatorPosition\` | Off · On → \`end\` · \`start\` (logical, so it mirrors in RTL) |
+| ✏️ Title / Description | \`title\` / \`children\` (or \`content\`) | — |
 
-**Accessibility — the important change**
+From the Figma export:
+- **Closed:** 48px tall, with 14px padding, 20px icons, 10px gaps and a radius of 10.
+- **Default:** white with a soft-200 border and a hairline shadow.
+- **Hover:** the whole card turns weak-50 and the border disappears. The ＋ turns from soft-400 to sub-600.
+- **Active:** the description starts 10px under the title and lines up with the title's first letter. It has 20px bottom padding.
 
-The previous version put \`onClick\` on a \`<section>\`. That element is not focusable, does not respond to Enter or Space, and exposes no state — so the accordion was completely unusable by keyboard and invisible to screen readers. It also nested the panel inside \`<header>\`, putting a landmark in the middle of the content.
-
-Now:
-- The trigger is a real \`<button>\` — focusable, Enter/Space work, it appears in the tab order.
-- \`aria-expanded\` reflects open state; \`aria-controls\` points at the panel.
-- The panel is a \`<section role="region">\` labelled by the trigger, so it shows up in screen-reader landmark navigation with the right name.
-
-**The controlled-state bug**
-
-\`isOpen\` used to be passed straight into \`useState\` as an *initial* value, so a parent could set the starting state and then never change it again — the prop looked controlled but silently was not. \`open\` / \`defaultOpen\` now go through \`useControllableState\`, which handles both modes on one code path.
-
-**Renamed props:** \`isOpen\` → \`open\` / \`defaultOpen\` · \`onToggle\` → \`onOpenChange\` · \`flipIcon\` → \`indicatorPosition\` · \`hasIcon\` + \`icon\` → \`startAdornment\` · \`customExpandIcon\`/\`customCollapseIcon\` → \`indicator\`.`,
+Also in code: \`AccordionGroup\` (\`type="single" | "multiple"\`), controlled or uncontrolled state, and a CSS-only height animation that respects \`prefers-reduced-motion\`. The trigger is a real \`<button>\` with \`aria-expanded\` / \`aria-controls\`. The panel is a \`<section>\` labelled by it.`,
       },
     },
   },
-
   argTypes: {
-    title: { control: 'text', description: 'Trigger label. Required.' },
-    content: {
-      control: 'text',
-      description: 'Panel content. `children` works too and takes precedence.',
+    state: {
+      control: { type: 'inline-radio' },
+      options: ['default', 'hover'],
+      description:
+        'Docs only — previews Figma Hover. Not a component prop. For Active use `open`.',
+      table: { category: 'Docs preview' },
+    },
+    icon: {
+      control: 'boolean',
+      description: 'Figma ⬅️ Icon → `startAdornment`.',
+      table: { category: 'Docs preview' },
+    },
+    indicatorPosition: {
+      control: { type: 'inline-radio' },
+      options: ['end', 'start'],
+      description:
+        'Figma 🔄 Flip Icon. Logical: `end` is right in LTR, left in RTL.',
+      table: { defaultValue: { summary: 'end' } },
     },
     open: {
       control: 'boolean',
-      description: 'Controlled open state. Pair with `onOpenChange`.',
+      description:
+        'Controlled open state (Figma Active). Pair with `onOpenChange`.',
     },
-    defaultOpen: {
-      control: 'boolean',
-      description: 'Uncontrolled initial state.',
-      table: { defaultValue: { summary: 'false' } },
-    },
-    onOpenChange: {
-      action: 'openChange',
-      description: 'Fires with the next open state.',
-    },
+    defaultOpen: { control: false },
+    onOpenChange: { action: 'openChange' },
     disabled: {
       control: 'boolean',
+      description: 'Not in Figma.',
       table: { defaultValue: { summary: 'false' } },
-    },
-    indicatorPosition: {
-      control: { type: 'radio' },
-      options: ['start', 'end'],
-      description:
-        'Which side the ＋/－ sits on. Follows reading direction, so `end` is right in LTR and left in RTL.',
-      table: { defaultValue: { summary: 'end' } },
     },
     indicator: { control: false, table: { type: { summary: 'ReactNode' } } },
     startAdornment: {
       control: false,
       table: { type: { summary: 'ReactNode' } },
     },
-    className: { control: 'text' },
   },
 };
 
-/** Text comes from i18next, so the Locale toolbar changes words, not just direction. */
-const Template: StoryFn<typeof Accordion> = ({ title, content, ...args }) => {
-  const { t } = useTranslation();
-  return (
-    <div className="w-full max-w-xl">
-      <Accordion
-        {...args}
-        title={typeof title === 'string' ? t(title) : title}
-        content={typeof content === 'string' ? t(content) : content}
-      />
-    </div>
-  );
+export default meta;
+type Story = StoryObj<PlaygroundArgs>;
+
+export const Playground: Story = {
+  args: {
+    state: 'default',
+    icon: true,
+    indicatorPosition: 'end',
+    open: false,
+    disabled: false,
+  },
+  render: function Render({ state, icon, ...args }) {
+    const { t } = useTranslation();
+    return (
+      <div className="w-[440px] max-w-full">
+        <Accordion
+          {...args}
+          title={t('accordion.title')}
+          content={t('accordion.content')}
+          startAdornment={
+            icon ? <Icon icon={RiQuestionLine} size={20} /> : undefined
+          }
+          {...(state === 'hover' ? { 'data-nili-state': 'hover' } : {})}
+        />
+      </div>
+    );
+  },
 };
 
-// ====================== Basic Stories ======================
-
-export const Default = Template.bind({});
-Default.args = {
-  title: 'accordion.title',
-  content: 'accordion.content',
-};
-
-export const OpenByDefault = Template.bind({});
-OpenByDefault.args = {
-  title: 'accordion.customTitle',
-  content: 'accordion.customContent',
-  defaultOpen: true,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  title: 'accordion.disabledTitle',
-  content: 'accordion.disabledContent',
-  disabled: true,
-};
-
-// ====================== Indicator Variations ======================
-
-export const IndicatorAtStart = Template.bind({});
-IndicatorAtStart.args = {
-  title: 'accordion.title',
-  content: 'accordion.content',
-  indicatorPosition: 'start',
-};
-
-export const CustomIndicator = Template.bind({});
-CustomIndicator.args = {
-  title: 'accordion.customTitle',
-  content: 'accordion.customContent',
-  indicator: <Icon icon={RiArrowDownSLine} size={20} />,
-};
-
-export const WithStartAdornment = Template.bind({});
-WithStartAdornment.args = {
-  title: 'accordion.title',
-  content: 'accordion.content',
-  startAdornment: (
-    <Icon icon={RiQuestionLine} size={20} className="text-sub-600" />
+/** The Figma component set: Default · Hover · Active, for both icon layouts. */
+export const ComponentSet: Story = {
+  name: 'Component set',
+  parameters: { controls: { disable: true }, docs: { source: { code: null } } },
+  render: () => (
+    <FigmaFrame>
+      <AccordionMatrix />
+    </FigmaFrame>
   ),
 };
 
-// ====================== Controlled ======================
+// ====================== Code-only behaviour ======================
 
-/**
- * Fully controlled from the outside — the case that was silently broken
- * before. The external button and the trigger stay in sync because `open`
- * is honoured on every render, not just the first.
- */
-export const Controlled = () => {
-  const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="flex w-full max-w-xl flex-col items-start gap-3">
-      <Button
-        size="sm"
-        appearance="stroke"
-        color="neutral"
-        onClick={() => setOpen((v) => !v)}
+/** `type="single"` closes the others when one opens. */
+export const SingleOpenGroup: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    return (
+      <AccordionGroup
+        type="single"
+        className="w-[440px] max-w-full"
+        defaultValue={['a']}
       >
-        {open ? t('accordion.closeExternally') : t('accordion.openExternally')}
-      </Button>
-      <Accordion
-        open={open}
-        onOpenChange={setOpen}
-        title={t('accordion.controlledTitle')}
-        content={t('accordion.controlledContent')}
-      />
-    </div>
-  );
+        <Accordion
+          id="a"
+          title={t('accordion.first')}
+          content={t('accordion.firstContent')}
+        />
+        <Accordion
+          id="b"
+          title={t('accordion.second')}
+          content={t('accordion.secondContent')}
+        />
+        <Accordion
+          id="c"
+          title={t('accordion.third')}
+          content={t('accordion.thirdContent')}
+        />
+      </AccordionGroup>
+    );
+  },
 };
 
-// ====================== Grouped ======================
-
-/** `type="single"` closes the others; `type="multiple"` leaves them alone. */
-export const SingleOpenGroup = () => {
-  const { t } = useTranslation();
-  return (
-    <AccordionGroup
-      type="single"
-      className="w-full max-w-xl"
-      defaultValue={['a']}
-    >
-      <Accordion
-        id="a"
-        title={t('accordion.first')}
-        content={t('accordion.firstContent')}
-      />
-      <Accordion
-        id="b"
-        title={t('accordion.second')}
-        content={t('accordion.secondContent')}
-      />
-      <Accordion
-        id="c"
-        title={t('accordion.third')}
-        content={t('accordion.thirdContent')}
-      />
-    </AccordionGroup>
-  );
+/** `type="multiple"` leaves the others alone. */
+export const MultipleOpenGroup: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    return (
+      <AccordionGroup type="multiple" className="w-[440px] max-w-full">
+        <Accordion
+          id="m1"
+          title={t('accordion.first')}
+          content={t('accordion.firstContent')}
+        />
+        <Accordion
+          id="m2"
+          title={t('accordion.second')}
+          content={t('accordion.secondContent')}
+        />
+        <Accordion
+          id="m3"
+          title={t('accordion.third')}
+          content={t('accordion.thirdContent')}
+        />
+      </AccordionGroup>
+    );
+  },
 };
 
-export const MultipleOpenGroup = () => {
-  const { t } = useTranslation();
-  return (
-    <AccordionGroup type="multiple" className="w-full max-w-xl">
-      <Accordion
-        id="m1"
-        title={t('accordion.first')}
-        content={t('accordion.firstContent')}
-      />
-      <Accordion
-        id="m2"
-        title={t('accordion.second')}
-        content={t('accordion.secondContent')}
-      />
-      <Accordion
-        id="m3"
-        title={t('accordion.third')}
-        content={t('accordion.thirdContent')}
-      />
-    </AccordionGroup>
-  );
+/** Fully controlled from outside: `open` is honoured on every render. */
+export const Controlled: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    const [open, setOpen] = useState(false);
+    return (
+      <div className="flex w-[440px] max-w-full flex-col items-start gap-3">
+        <Button
+          size="sm"
+          appearance="stroke"
+          color="neutral"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open
+            ? t('accordion.closeExternally')
+            : t('accordion.openExternally')}
+        </Button>
+        <Accordion
+          open={open}
+          onOpenChange={setOpen}
+          title={t('accordion.controlledTitle')}
+          content={t('accordion.controlledContent')}
+        />
+      </div>
+    );
+  },
 };
 
-// ====================== Localized ======================
-
-export const Localized = () => {
-  const { t } = useTranslation();
-  return (
-    <AccordionGroup type="single" className="w-full max-w-xl">
-      <Accordion
-        id="faq-shipping"
-        title={t('accordion.shipping')}
-        content={t('accordion.shippingAnswer')}
-        startAdornment={
-          <Icon icon={RiQuestionLine} size={20} className="text-sub-600" />
-        }
-      />
-      <Accordion
-        id="faq-returns"
-        title={t('accordion.returns')}
-        content={t('accordion.returnsAnswer')}
-        startAdornment={
-          <Icon icon={RiQuestionLine} size={20} className="text-sub-600" />
-        }
-      />
-      <Accordion
-        id="faq-support"
-        title={t('accordion.support')}
-        content={t('accordion.supportAnswer')}
-        startAdornment={
-          <Icon icon={RiQuestionLine} size={20} className="text-sub-600" />
-        }
-      />
-    </AccordionGroup>
-  );
+/** Not in Figma: a custom indicator replaces the ＋ / －. */
+export const CustomIndicator: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    return (
+      <div className="w-[440px] max-w-full">
+        <Accordion
+          title={t('accordion.customTitle')}
+          content={t('accordion.customContent')}
+          indicator={<Icon icon={RiArrowDownSLine} size={20} />}
+        />
+      </div>
+    );
+  },
 };
 
-export default meta;
+/** Not in Figma: disabled. */
+export const Disabled: Story = {
+  parameters: { controls: { disable: true } },
+  render: function Render() {
+    const { t } = useTranslation();
+    return (
+      <div className="w-[440px] max-w-full">
+        <Accordion
+          disabled
+          title={t('accordion.disabledTitle')}
+          content={t('accordion.disabledContent')}
+        />
+      </div>
+    );
+  },
+};

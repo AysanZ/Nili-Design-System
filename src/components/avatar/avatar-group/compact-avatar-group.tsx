@@ -16,13 +16,15 @@ import type { AvatarGroupItem } from '../avatar.types';
 const compactAvatarGroupVariants = cva('inline-flex items-center', {
   variants: {
     appearance: {
-      default: '',
+      // Figma: both sit in a white pill; stroke adds the soft-200 border.
+      default: 'rounded-full bg-white-0 p-0.5 shadow-button-xs',
       stroke: 'rounded-full border border-soft-200 bg-white-0 p-0.5',
     },
     size: {
-      sm: '[&>*:not(:first-child)]:-ms-2.5',
-      xs: '[&>*:not(:first-child)]:-ms-2',
-      '2xs': '[&>*:not(:first-child)]:-ms-1.5',
+      // Figma overlap: 4px at 40, 2px at 32 and 24.
+      sm: '[&>*:not(:first-child)]:-ms-1',
+      xs: '[&>*:not(:first-child)]:-ms-0.5',
+      '2xs': '[&>*:not(:first-child)]:-ms-0.5',
     },
   },
   defaultVariants: { appearance: 'default', size: 'sm' },
@@ -88,7 +90,7 @@ export const CompactAvatarGroup = forwardRef<
           src={item.src}
           initials={item.initials}
           tone={item.tone}
-          className="border-2 border-white-0"
+          className="ring-2 ring-white-0"
         />
       ))}
       {overflow > 0 && (
@@ -97,7 +99,7 @@ export const CompactAvatarGroup = forwardRef<
           name=""
           initials={`+${overflow}`}
           tone="soft"
-          className="border-2 border-white-0"
+          className="ring-2 ring-white-0"
         />
       )}
     </div>

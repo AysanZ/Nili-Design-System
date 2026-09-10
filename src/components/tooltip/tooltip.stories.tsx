@@ -8,9 +8,11 @@ import {
 import { Tooltip } from '.';
 import { Icon } from '@components/icon';
 import { Button, CompactButton } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { TooltipPlacementSet, TooltipSizeSet } from './tooltip.docs';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Base Components/Tooltip',
+  title: 'Base Components/Tooltip/Tooltip',
   component: Tooltip,
   parameters: {
     docs: {
@@ -82,7 +84,10 @@ Small.args = { size: '2xs' };
 
 /** Figma's `Large` — the two-line form, with a description under the text. */
 export const WithDescription = Template.bind({});
-WithDescription.args = { size: 'lg', description: 'Applies to this board only' };
+WithDescription.args = {
+  size: 'lg',
+  description: 'Applies to this board only',
+};
 
 /**
  * Figma's `Dark Mode`. Not the theme: a tooltip is inverted against its
@@ -181,5 +186,23 @@ export const FieldHint = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const TooltipPlacementSetStory = () => (
+  <FigmaFrame>
+    <TooltipPlacementSet />
+  </FigmaFrame>
+);
+TooltipPlacementSetStory.storyName = 'Tooltip placement';
+TooltipPlacementSetStory.parameters = { docs: { source: { code: null } } };
+
+export const TooltipSizeSetStory = () => (
+  <FigmaFrame>
+    <TooltipSizeSet />
+  </FigmaFrame>
+);
+TooltipSizeSetStory.storyName = 'Tooltip sizes';
+TooltipSizeSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

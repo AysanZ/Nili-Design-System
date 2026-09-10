@@ -1,9 +1,16 @@
 import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { ProgressBar, ProgressCircle } from '.';
+import { FigmaFrame } from '../../docs/figma.docs';
+import {
+  ProgressBarSet,
+  ProgressCircleSet,
+  ProgressLabelSet,
+  ProgressLineSet,
+} from './progress-bar.docs';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Base Components/Progress Bar',
+  title: 'Base Components/Progress Bar/Progress Bar',
   component: ProgressBar,
   parameters: {
     docs: {
@@ -118,12 +125,41 @@ export const Circle = () => {
 
 export const CircleColors = () => (
   <div className="flex items-center gap-4">
-    {(
-      ['primary', 'success', 'warning', 'error'] as const
-    ).map((color) => (
+    {(['primary', 'success', 'warning', 'error'] as const).map((color) => (
       <ProgressCircle key={color} value={65} color={color} aria-label={color} />
     ))}
   </div>
 );
+
+// ====================== Figma component sets ======================
+
+export const ProgressBarLine = () => (
+  <FigmaFrame>
+    <ProgressLineSet />
+  </FigmaFrame>
+);
+ProgressBarLine.parameters = { docs: { source: { code: null } } };
+
+export const ProgressBarSetStory = () => (
+  <FigmaFrame>
+    <ProgressBarSet />
+  </FigmaFrame>
+);
+ProgressBarSetStory.storyName = 'Progress Bar set';
+ProgressBarSetStory.parameters = { docs: { source: { code: null } } };
+
+export const ProgressBarLabel = () => (
+  <FigmaFrame>
+    <ProgressLabelSet />
+  </FigmaFrame>
+);
+ProgressBarLabel.parameters = { docs: { source: { code: null } } };
+
+export const CircularProgressBar = () => (
+  <FigmaFrame>
+    <ProgressCircleSet />
+  </FigmaFrame>
+);
+CircularProgressBar.parameters = { docs: { source: { code: null } } };
 
 export default meta;

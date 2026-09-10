@@ -114,7 +114,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
             {/* Decorative separator: it is punctuation, not content, so it
                 stays out of the accessible name. */}
             <span aria-hidden className="text-[14px] leading-5">
-              ∙
+              ·
             </span>
             <span className="truncate text-[14px] font-normal leading-5">
               {description}

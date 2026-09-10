@@ -16,9 +16,11 @@ import {
 import { Icon } from '@components/icon';
 import { Avatar } from '@components/avatar';
 import { Badge } from '@components/badge';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { PaymentIconSet } from './key-components.docs';
 
 const meta: Meta<typeof Label> = {
-  title: 'Base Components/Key Components',
+  title: 'Base Components/Key Components/Key Components',
   component: Label,
   parameters: {
     docs: {
@@ -217,5 +219,14 @@ export const ContentLabelsAndCards = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const PaymentIcons = () => (
+  <FigmaFrame>
+    <PaymentIconSet />
+  </FigmaFrame>
+);
+PaymentIcons.parameters = { docs: { source: { code: null } } };
 
 export default meta;

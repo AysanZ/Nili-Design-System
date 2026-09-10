@@ -11,9 +11,11 @@ import {
 } from '@remixicon/react';
 import { Toggle, ToggleGroup } from '.';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { ToggleGroupSet } from '../switch/switch.docs';
 
 const meta: Meta<typeof ToggleGroup> = {
-  title: 'Base Components/Switch Toggle',
+  title: 'Base Components/Switch Toggle/Toggle',
   component: ToggleGroup,
   parameters: {
     docs: {
@@ -142,5 +144,15 @@ export const Disabled = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const SwitchToggleSet = () => (
+  <FigmaFrame>
+    <ToggleGroupSet />
+  </FigmaFrame>
+);
+SwitchToggleSet.storyName = 'Switch Toggle set';
+SwitchToggleSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

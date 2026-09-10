@@ -88,16 +88,19 @@ export const stepConnectorVariants = cva('shrink-0 rounded-full', {
   defaultVariants: { orientation: 'horizontal', complete: false },
 });
 
-export const stepLabelVariants = cva('truncate text-[14px] font-medium leading-5', {
-  variants: {
-    status: {
-      completed: 'text-strong-950',
-      active: 'text-strong-950',
-      default: 'text-sub-600',
+export const stepLabelVariants = cva(
+  'truncate text-[14px] font-medium leading-5',
+  {
+    variants: {
+      status: {
+        completed: 'text-strong-950',
+        active: 'text-strong-950',
+        default: 'text-sub-600',
+      },
     },
+    defaultVariants: { status: 'default' },
   },
-  defaultVariants: { status: 'default' },
-});
+);
 
 /**
  * Figma → `Stepper Dot [1.0]`: State (1st | 2nd | 3rd Active) × Size (Small |

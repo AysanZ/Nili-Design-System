@@ -52,8 +52,10 @@ describe('Button', () => {
 
   it('lets className win over internal utilities via tailwind-merge', () => {
     render(<Button className="bg-red-500">Save</Button>);
-    const className = screen.getByRole('button').className;
-    expect(className).toContain('bg-red-500');
-    expect(className).not.toContain('bg-primary-base');
+    // Compare whole tokens: `focused:bg-primary-base` is a different utility
+    // (the focus fill) and must survive; only the resting fill is replaced.
+    const classes = screen.getByRole('button').className.split(' ');
+    expect(classes).toContain('bg-red-500');
+    expect(classes).not.toContain('bg-primary-base');
   });
 });

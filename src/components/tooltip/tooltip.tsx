@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useRef } from 'react';
+import { RiCloseLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { Slot } from '../../lib/slot';
+import { Icon } from '../icon';
 import { useId } from '../../hooks/use-id';
 import { useControllableState } from '../../hooks/use-controllable-state';
 import { tooltipVariants, tooltipArrowVariants } from './tooltip.styles';
@@ -63,6 +65,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onOpenChange,
       delay = 200,
       disabled = false,
+      dismissible = false,
+      onDismiss,
+      dismissLabel = 'Close',
       className,
       contentClassName,
       ...rest
@@ -157,6 +162,19 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   <span className="font-normal opacity-70">{description}</span>
                 )}
               </span>
+              {dismissible && (
+                <button
+                  type="button"
+                  aria-label={dismissLabel}
+                  onClick={() => {
+                    hide();
+                    onDismiss?.();
+                  }}
+                  className="-m-1 flex shrink-0 cursor-pointer rounded-xs p-1 opacity-70 outline-hidden transition-opacity hovered:opacity-100 focused:opacity-100"
+                >
+                  <Icon icon={RiCloseLine} size={16} />
+                </button>
+              )}
             </span>
             {arrow && (
               <span

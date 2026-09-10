@@ -6,9 +6,11 @@ import { Drawer, type DrawerSide } from '.';
 import { Button } from '@components/button';
 import { Checkbox } from '@components/checkbox';
 import { Icon } from '@components/icon';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { DrawerFooterSet, DrawerHeaderSet } from './drawer.docs';
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Base Components/Drawer',
+  title: 'Base Components/Drawer/Drawer',
   component: Drawer,
   parameters: {
     docs: {
@@ -144,5 +146,23 @@ export const StretchedFooterWithCheckbox = () => {
     </>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const DrawerHeaderSetStory = () => (
+  <FigmaFrame>
+    <DrawerHeaderSet />
+  </FigmaFrame>
+);
+DrawerHeaderSetStory.storyName = 'Drawer Header';
+DrawerHeaderSetStory.parameters = { docs: { source: { code: null } } };
+
+export const DrawerFooterSetStory = () => (
+  <FigmaFrame>
+    <DrawerFooterSet />
+  </FigmaFrame>
+);
+DrawerFooterSetStory.storyName = 'Drawer Footer';
+DrawerFooterSetStory.parameters = { docs: { source: { code: null } } };
 
 export default meta;

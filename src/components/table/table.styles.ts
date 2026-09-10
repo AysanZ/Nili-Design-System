@@ -149,7 +149,12 @@ export const tableCellVariants = cva('', {
       false: '',
     },
   },
-  defaultVariants: { size: 'xl', align: 'start', priority: 'regular', numeric: false },
+  defaultVariants: {
+    size: 'xl',
+    align: 'start',
+    priority: 'regular',
+    numeric: false,
+  },
 });
 
 export const tableCaptionVariants = cva(

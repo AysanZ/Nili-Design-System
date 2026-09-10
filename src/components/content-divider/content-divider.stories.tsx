@@ -9,9 +9,11 @@ import {
   ButtonGroup,
   ButtonGroupItem,
 } from '@components/button';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { ContentDividerMatrix } from './content-divider.docs';
 
 const meta: Meta<typeof ContentDivider> = {
-  title: 'Base Components/Content Divider',
+  title: 'Base Components/Content Divider/Content Divider',
   component: ContentDivider,
   parameters: {
     docs: {
@@ -157,5 +159,15 @@ export const FigmaTypes = () => {
     </div>
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const ComponentSet = () => (
+  <FigmaFrame>
+    <ContentDividerMatrix />
+  </FigmaFrame>
+);
+ComponentSet.storyName = 'Component set';
+ComponentSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

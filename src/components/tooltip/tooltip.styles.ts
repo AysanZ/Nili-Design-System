@@ -84,28 +84,30 @@ export const tooltipVariants = cva(
       },
       { side: 'bottom', align: 'end', class: 'end-0' },
     ],
-    defaultVariants: { size: 'xs', side: 'top', align: 'center', darkMode: true },
+    defaultVariants: {
+      size: 'xs',
+      side: 'top',
+      align: 'center',
+      darkMode: true,
+    },
   },
 );
 
 /** A rotated square peeking out from under the bubble. */
-export const tooltipArrowVariants = cva(
-  'absolute size-2 rotate-45',
-  {
-    variants: {
-      darkMode: {
-        true: 'bg-strong-950',
-        false: 'bg-white-0 border-b border-e border-soft-200',
-      },
-      side: {
-        top: 'bottom-[-3px] start-1/2 -ms-1',
-        bottom: 'top-[-3px] start-1/2 -ms-1',
-        start: 'end-[-3px] top-1/2 -mt-1',
-        end: 'start-[-3px] top-1/2 -mt-1',
-      },
+export const tooltipArrowVariants = cva('absolute size-2 rotate-45', {
+  variants: {
+    darkMode: {
+      true: 'bg-strong-950',
+      false: 'bg-white-0 border-b border-e border-soft-200',
     },
-    defaultVariants: { side: 'top', darkMode: true },
+    side: {
+      top: 'bottom-[-3px] start-1/2 -ms-1',
+      bottom: 'top-[-3px] start-1/2 -ms-1',
+      start: 'end-[-3px] top-1/2 -mt-1',
+      end: 'start-[-3px] top-1/2 -mt-1',
+    },
   },
-);
+  defaultVariants: { side: 'top', darkMode: true },
+});
 
 export type TooltipVariantProps = VariantProps<typeof tooltipVariants>;

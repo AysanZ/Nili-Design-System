@@ -49,8 +49,7 @@ interface ProgressCommonProps {
 export interface ProgressBarProps
   extends
     ProgressCommonProps,
-    Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'> {
-}
+    Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'> {}
 
 export interface ProgressCircleProps
   extends

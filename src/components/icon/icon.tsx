@@ -16,7 +16,7 @@ import type { IconProps, IconRenderProps } from './icon.types';
  * `Icon` now takes the component itself, which keeps named imports statically
  * analysable. If you genuinely need string lookup at runtime — an icon picker,
  * a CMS-driven field, the theme-builder dashboard — import `DynamicIcon` from
- * `@husan/nili-ui/icons`. It lives behind a separate entry point so the cost is
+ * `@nili/ui/icons`. It lives behind a separate entry point so the cost is
  * opt-in rather than paid by everyone.
  *
  * ```tsx

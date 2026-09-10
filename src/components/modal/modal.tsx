@@ -115,7 +115,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
   const leading =
     icon ??
     (status ? (
-      <KeyIcon color={STATUS_COLOR[status]} size="lg">
+      <KeyIcon color={STATUS_COLOR[status]} size="md">
         <Icon icon={STATUS_ICON[status]} />
       </KeyIcon>
     ) : null);
@@ -153,7 +153,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
               {title && (
                 <h2
                   id={titleId}
-                  className="text-[16px] font-medium leading-6 text-strong-950"
+                  className="text-[14px] font-medium leading-5 tracking-[-0.006em] text-strong-950"
                 >
                   {title}
                 </h2>
@@ -161,7 +161,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
               {description && (
                 <p
                   id={descriptionId}
-                  className="text-[14px] leading-5 text-sub-600"
+                  className="text-[12px] leading-4 text-sub-600"
                 >
                   {description}
                 </p>

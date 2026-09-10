@@ -15,37 +15,47 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * adornment needs a library release. `startAdornment` covers all six.
  */
 
+/**
+ * Figma Dropdown trigger (40 / 36 / 32, radius 10 / 8 / 8):
+ *   Default   white, soft-200 border, xs shadow; placeholder sub-600, icons soft-400
+ *   Filled    value strong-950, icons sub-600
+ *   Hover     weak-50, no border, no shadow
+ *   Focus/Open white, strong-950 border and the neutral focus ring
+ *   Disabled  weak-50, sub-300 · Error  error-base border
+ * Padding 12 to the leading icon (8px gap), 10 to the chevron.
+ */
 export const dropdownTriggerVariants = cva(
   [
     'inline-flex w-full items-center justify-between gap-2',
-    'rounded-lg border bg-white-0 text-start',
-    'cursor-pointer transition-colors duration-150',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-base',
-    'disabled:pointer-events-none disabled:bg-weak-50 disabled:text-sub-300',
+    'border bg-white-0 text-start outline-hidden',
+    'cursor-pointer transition-[background-color,border-color,box-shadow,color] duration-200',
+    '[&_[data-slot=chevron]]:text-soft-400',
+    'hovered:border-transparent hovered:bg-weak-50 hovered:shadow-none hovered:[&_[data-slot=chevron]]:text-sub-600',
+    'focused:border-strong-950 focused:bg-white-0 focused:shadow-focus-neutral',
+    'aria-expanded:border-strong-950 aria-expanded:bg-white-0 aria-expanded:shadow-focus-neutral aria-expanded:[&_[data-slot=chevron]]:text-sub-600',
+    'disabled:pointer-events-none disabled:border-transparent disabled:bg-weak-50 disabled:text-sub-300 disabled:shadow-none disabled:[&_[data-slot=chevron]]:text-sub-300',
   ],
   {
     variants: {
       size: {
-        md: 'h-10 px-3 text-[14px] leading-5 [&_svg]:size-5',
-        sm: 'h-9 px-2.5 text-[14px] leading-5 [&_svg]:size-5',
-        xs: 'h-8 px-2 text-[12px] leading-4 [&_svg]:size-4',
+        md: 'h-10 rounded-[10px] ps-[11px] pe-[9px] text-[14px] leading-5 [&_svg]:size-5',
+        sm: 'h-9 rounded-md ps-[9px] pe-[7px] text-[14px] leading-5 [&_svg]:size-5',
+        xs: 'h-8 rounded-md ps-[7px] pe-[5px] text-[14px] leading-5 [&_svg]:size-5',
       },
-      /** Figma "Filled" — a value is chosen, so the text goes full strength. */
       filled: {
-        true: 'border-soft-200 text-strong-950',
-        false: 'border-soft-200 text-soft-400',
+        true: 'text-strong-950 [&_[data-slot=chevron]]:text-sub-600',
+        false: 'text-sub-600',
       },
       invalid: {
-        true: 'border-error-base focus-visible:outline-error-base',
-        false: 'hover:border-sub-300',
+        true: 'border-error-base focused:border-error-base',
+        false: 'border-soft-200',
       },
-      /** Figma "Compact Dropdowns": no border, for toolbars and input adornments. */
       appearance: {
-        default: 'shadow-xs',
+        default: 'shadow-button-xs',
         compact:
-          'border-transparent bg-transparent shadow-none hover:bg-weak-50',
+          'border-transparent bg-transparent shadow-none hovered:bg-weak-50',
         inline:
-          'h-auto w-auto border-transparent bg-transparent p-0 shadow-none',
+          'h-auto w-auto border-transparent bg-transparent p-0 shadow-none hovered:bg-transparent',
       },
     },
     defaultVariants: {
@@ -63,28 +73,31 @@ export const dropdownMenuVariants = cva([
   'shadow-md',
 ]);
 
+/**
+ * Figma Dropdown Item: 36px (single line) or with a description, radius 8,
+ * 8px padding, 20px leading visual (icon, flag, avatar, brand) and 8px gap.
+ * Label strong-950, icon sub-600 · Hover weak-50 · Disabled sub-300.
+ */
 export const dropdownItemVariants = cva(
   [
-    'flex w-full items-center gap-2 rounded-lg text-start',
-    'cursor-pointer transition-colors duration-150',
-    'focus-visible:outline-none',
-    'aria-disabled:pointer-events-none aria-disabled:text-sub-300',
+    'flex w-full items-center gap-2 rounded-md text-start outline-hidden',
+    'cursor-pointer text-strong-950 transition-colors duration-200',
+    '[&_svg]:text-sub-600',
+    'hovered:bg-weak-50',
+    'aria-disabled:pointer-events-none aria-disabled:text-sub-300 aria-disabled:[&_svg]:text-sub-300 aria-disabled:[&_img]:opacity-40',
   ],
   {
     variants: {
       size: {
-        /** Figma Small (36): a single line. */
-        sm: 'min-h-9 px-2 py-1.5 text-[14px] leading-5 [&_svg]:size-5',
-        /** Figma Large (56): label plus description. */
-        lg: 'min-h-14 px-2 py-2 text-[14px] leading-5 [&_svg]:size-6',
+        sm: 'min-h-9 px-2 py-2 text-[14px] leading-5 [&_svg]:size-5',
+        lg: 'min-h-14 px-2 py-2 text-[14px] leading-5 [&_svg]:size-5',
       },
       selected: {
-        true: 'bg-weak-50 text-strong-950',
-        false: 'text-sub-600',
+        true: 'bg-weak-50',
+        false: '',
       },
-      /** Keyboard cursor, kept separate from `selected`: they co-occur. */
       active: {
-        true: 'bg-weak-50 text-strong-950',
+        true: 'bg-weak-50',
         false: '',
       },
     },

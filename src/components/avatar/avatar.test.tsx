@@ -37,16 +37,17 @@ describe('Avatar', () => {
     expect(screen.getByRole('img', { name: 'Online' })).toBeInTheDocument();
   });
 
-  it('suppresses status markers below the lg threshold', () => {
+  // Figma draws both statuses on all nine sizes, down to 20px.
+  it('keeps status markers on small sizes, scaled down', () => {
     const { container } = render(
       <Avatar
         name="Ada"
-        size="sm"
+        size="3xs"
         bottomStatus="online"
         statusLabel="Online"
       />,
     );
-    expect(container.querySelector('[aria-label="Online"]')).toBeNull();
+    expect(container.querySelector('[aria-label="Online"]')).not.toBeNull();
   });
 });
 
@@ -66,7 +67,8 @@ describe('AvatarGroup', () => {
   // The old version read document.dir during render and set inline transforms.
   it('uses a logical margin instead of an inline transform', () => {
     const { container } = render(<AvatarGroup items={people} label="Team" />);
-    const avatars = container.querySelectorAll('[class*="-ms-2"]');
+    // md (default) overlaps by 12px in Figma: -ms-3.
+    const avatars = container.querySelectorAll('[class*="-ms-3"]');
     expect(avatars.length).toBe(people.length - 1);
     expect(container.querySelector('[style*="translateX"]')).toBeNull();
   });

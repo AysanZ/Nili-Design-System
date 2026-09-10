@@ -49,10 +49,12 @@
   --nili-information-lighter: #EBF1FF;
 
   /* warning */
-  --nili-warning-dark: #682F12;
-  --nili-warning-base: #FF8447;
-  --nili-warning-light: #FFD5C0;
-  --nili-warning-lighter: #FFF1EB;
+  /* Figma Alert uses the Nili orange ramp (orange-950/500/200/50). The
+     previous values were a different palette's orange. */
+  --nili-warning-dark: #683412;
+  --nili-warning-base: #FF9147;
+  --nili-warning-light: #FFD9C0;
+  --nili-warning-lighter: #FFF3EB;
 
   /* error */
   --nili-error-dark: #681219;
@@ -97,6 +99,27 @@
   --nili-stable-lighter: #E4FBF8;
 
 
+  /* ── action states ──
+     Hover and focus colours for Button, Link Button, Fancy Button and
+     Compact Button, read straight from the Figma "Buttons [Overview]"
+     page. `*-darker` follows the existing `primary-darker` naming: it is
+     the hover fill one step past `*-base` — and, consistently with Figma,
+     lighter than `*-dark`, which is the text-on-tint colour used by Badge
+     and Alert. */
+  --nili-error-darker: #D02533;
+  --nili-success-darker: #178C4E;
+  --nili-error-alpha-10: #FB37481A;
+  --nili-success-alpha-10: #1FC16B1A;
+
+  /* Outer colour of the focus ring (2px page-colour gap + 2px colour). */
+  --nili-focus-primary: #476CFF3D;
+  --nili-focus-neutral: #E1E4EA;
+  --nili-focus-error: #FFC0C5;
+  --nili-focus-success: #C2F5DA;
+  /* Fancy Button's 4px ring sits straight on its 1px edge — no gap. */
+  --nili-focus-fancy-neutral: #0E121B3D;
+  --nili-focus-fancy-basic: #E1E4EA3D;
+
   /* ── shadows ──
      Figma ships these as effect styles; they were previously inlined as raw
      hex in fourteen component files, which meant a shadow could not follow the
@@ -107,7 +130,10 @@
   --nili-shadow-md: 0 16px 32px -12px #0E121B1A;
   --nili-shadow-lg: 0 16px 40px -8px #0E121B1F;
   --nili-shadow-button-primary: 0 1px 2px 0 #0E121B7A;
-  --nili-shadow-button-basic: 0 1px 2px 0 #0E121B14;
+  --nili-shadow-button-basic: 0 1px 3px 0 #0E121B1F;
+  --nili-shadow-button-xs: 0 1px 2px 0 #0E121B0D;
+  /* Figma Alert · Stroke. */
+  --nili-shadow-alert: 0 4px 6px -1px #0E121B1A, 0 2px 4px -2px #0E121B1A;
   --nili-shadow-toggle: 0 6px 10px 0 #0E121B0F;
 
 }
@@ -155,8 +181,8 @@
   --nili-information-lighter: #476CFF29;
 
   /* warning */
-  --nili-warning-dark: #FF9A68;
-  --nili-warning-base: #E97135;
+  --nili-warning-dark: #FFA468;
+  --nili-warning-base: #E97D35;
   --nili-warning-light: #FF91473D;
   --nili-warning-lighter: #FF914729;
 
@@ -203,6 +229,19 @@
   --nili-stable-lighter: #22D3BB29;
 
 
+  /* ── action states ── */
+  --nili-error-darker: #D02533;
+  --nili-success-darker: #178C4E;
+  --nili-error-alpha-10: #FB37481A;
+  --nili-success-alpha-10: #1FC16B1A;
+
+  --nili-focus-primary: #476CFF3D;
+  --nili-focus-neutral: #2B303B;
+  --nili-focus-error: #FB37483D;
+  --nili-focus-success: #1FC16B3D;
+  --nili-focus-fancy-neutral: #FFFFFF3D;
+  --nili-focus-fancy-basic: #2B303B3D;
+
   /* Lifted, not darkened: on a dark surface a black shadow disappears, so the
      alpha is raised and the ambient blur widened instead of tinted. */
   --nili-shadow-xs: 0 1px 2px 0 #00000052;
@@ -211,6 +250,8 @@
   --nili-shadow-lg: 0 16px 40px -8px #0000008F;
   --nili-shadow-button-primary: 0 1px 2px 0 #00000099;
   --nili-shadow-button-basic: 0 1px 2px 0 #00000052;
+  --nili-shadow-button-xs: 0 1px 2px 0 #00000052;
+  --nili-shadow-alert: 0 4px 6px -1px #00000052, 0 2px 4px -2px #00000052;
   --nili-shadow-toggle: 0 6px 10px 0 #0000006B;
 
 }

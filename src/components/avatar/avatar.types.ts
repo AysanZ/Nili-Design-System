@@ -47,6 +47,11 @@ export interface AvatarProps extends Omit<
   companyIcon?: ReactNode;
   /** Accessible name for the status marker, e.g. `'Online'`. */
   statusLabel?: string;
+  /**
+   * Figma's "Icon" style: a person silhouette on the tone colour, for
+   * accounts with no photo and no name worth initialising.
+   */
+  placeholder?: boolean;
 }
 
 export interface AvatarGroupItem extends Pick<

@@ -3,9 +3,11 @@ import { StoryFn, Meta } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { Radio, RadioGroup } from '.';
 import { HintText } from '@components/key-components';
+import { FigmaFrame } from '../../docs/figma.docs';
+import { RadioCardMatrix, RadioLabelMatrix, RadioMatrix } from './radio.docs';
 
 const meta: Meta<typeof RadioGroup> = {
-  title: 'Base Components/Radio',
+  title: 'Base Components/Radio/Radio',
   component: RadioGroup,
   parameters: {
     docs: {
@@ -162,5 +164,31 @@ export const Standalone = () => {
     <Radio name="plan" value="pro" label={t('radio.pro')} defaultChecked />
   );
 };
+
+// ====================== Figma component sets ======================
+
+export const RadioSet = () => (
+  <FigmaFrame>
+    <RadioMatrix />
+  </FigmaFrame>
+);
+RadioSet.storyName = 'Radio set';
+RadioSet.parameters = { docs: { source: { code: null } } };
+
+export const RadioLabelSet = () => (
+  <FigmaFrame>
+    <RadioLabelMatrix />
+  </FigmaFrame>
+);
+RadioLabelSet.storyName = 'Radio Label';
+RadioLabelSet.parameters = { docs: { source: { code: null } } };
+
+export const RadioCardSet = () => (
+  <FigmaFrame>
+    <RadioCardMatrix />
+  </FigmaFrame>
+);
+RadioCardSet.storyName = 'Radio Card';
+RadioCardSet.parameters = { docs: { source: { code: null } } };
 
 export default meta;

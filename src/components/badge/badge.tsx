@@ -4,6 +4,7 @@ import {
   badgeVariants,
   badgeIconVariants,
   badgeDotVariants,
+  badgeDotSlotVariants,
 } from './badge.styles';
 import type { BadgeProps } from './badge.types';
 
@@ -30,17 +31,32 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   },
   ref,
 ) {
+  // Figma "Number" badge: a circle, 16px (small) / 20px (medium).
+  const isNumber =
+    typeof children === 'number' && !dot && !startIcon && !endIcon;
+  const leading = dot ? 'dot' : startIcon ? 'icon' : 'text';
+
   return (
     <span
       ref={ref}
       className={cn(
         badgeVariants({ appearance, color, size, disabled }),
+        isNumber
+          ? cn('justify-center px-0', size === 'small' ? 'size-4' : 'size-5')
+          : [
+              leading === 'text' && 'ps-2',
+              leading === 'icon' && 'ps-1',
+              leading === 'dot' && (size === 'small' ? 'ps-0.5' : 'ps-1'),
+              endIcon ? 'pe-1' : 'pe-2',
+            ],
+        // Stroke draws its 1px border inside Figma's frame.
+        appearance === 'stroke' || disabled ? 'py-px' : null,
         className,
       )}
       {...rest}
     >
       {dot ? (
-        <span className={badgeIconVariants({ size })} aria-hidden>
+        <span className={badgeDotSlotVariants()} aria-hidden>
           <span className={badgeDotVariants({ size })} />
         </span>
       ) : (

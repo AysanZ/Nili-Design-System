@@ -23,7 +23,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * "Active" is `active`, which is a fact about the data (the page you are on),
  * not a look. See the component API conventions in the README.
  */
-export const paginationVariants = cva('flex items-center', {
+export const paginationVariants = cva('flex items-center gap-2', {
   variants: {
     align: {
       start: 'justify-start',
@@ -36,22 +36,29 @@ export const paginationVariants = cva('flex items-center', {
   defaultVariants: { align: 'center' },
 });
 
+/**
+ * Figma Pagination Cell: 32px, radius 8 (or full), 14px. Default white with
+ * a soft-200 border and sub-600 text · Hover weak-50, no border · Active
+ * weak-50 with the border and strong-950 text · Disabled sub-300.
+ * Cells sit 8px apart; the arrows in Basic / Full Radius are bare icons.
+ */
 export const paginationItemVariants = cva(
   [
-    'inline-flex size-9 shrink-0 items-center justify-center',
-    'text-[14px] leading-5 font-medium tabular-nums',
-    'cursor-pointer transition-colors duration-150',
-    'text-sub-600 hover:bg-weak-50 hover:text-strong-950',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-base',
-    'disabled:pointer-events-none disabled:border-soft-200 disabled:bg-transparent disabled:text-sub-300',
+    'inline-flex size-8 shrink-0 items-center justify-center',
+    'border border-soft-200 bg-white-0 outline-hidden',
+    'text-[14px] leading-5 font-medium tabular-nums text-sub-600',
+    'cursor-pointer transition-colors duration-200',
+    'hovered:border-transparent hovered:bg-weak-50',
+    'focused:shadow-focus-neutral',
+    'disabled:pointer-events-none disabled:text-sub-300',
     'aria-disabled:pointer-events-none aria-disabled:text-sub-300',
   ],
   {
     variants: {
-      /** Figma's `Full Radius`: pill cells instead of rounded rectangles. */
+      /** Figma's `Full Radius`: circles instead of rounded squares. */
       fullRadius: {
         true: 'rounded-full',
-        false: 'rounded-lg',
+        false: 'rounded-md',
       },
       active: {
         true: '',
@@ -62,7 +69,7 @@ export const paginationItemVariants = cva(
       {
         active: true,
         class:
-          'bg-weak-50 text-strong-950 hover:bg-weak-50 hover:text-strong-950',
+          'bg-weak-50 text-strong-950 hovered:border-soft-200 hovered:bg-weak-50',
       },
     ],
     defaultVariants: { fullRadius: false, active: false },
@@ -74,11 +81,12 @@ export const paginationItemVariants = cva(
  * as separate targets.
  */
 export const paginationGroupVariants = cva(
-  'inline-flex items-center overflow-hidden rounded-lg border border-soft-200 shadow-xs [&>*]:rounded-none',
+  // Figma Group: one bordered track, radius 8, cells divided by 1px rules.
+  'gap-0 overflow-hidden rounded-md border border-soft-200 [&>li>*]:rounded-none [&>li>*]:border-0 [&>li+li>*]:border-s [&>li+li>*]:border-soft-200',
 );
 
 export const paginationEllipsisVariants = cva(
-  'inline-flex size-9 shrink-0 select-none items-center justify-center text-soft-400',
+  'inline-flex size-8 shrink-0 select-none items-center justify-center rounded-md border border-soft-200 bg-white-0 text-[14px] leading-5 text-sub-600',
 );
 
 export const paginationSummaryVariants = cva(

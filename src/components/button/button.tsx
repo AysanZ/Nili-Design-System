@@ -20,7 +20,7 @@ function Spinner() {
 }
 
 /**
- * The primary action primitive, built from the Figma "❖ Button" page.
+ * The primary action primitive — Figma "Buttons [Overview]" → Buttons.
  *
  * Notable choices:
  * - `appearance` rather than `style`, so React's own `style` prop stays usable.
@@ -70,7 +70,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           )}
         >
           {startIcon}
-          {content}
+          {/*
+            The label owns 4px of inline padding. That is what reproduces
+            Figma's two different distances — edge→icon (root padding) and
+            icon↔label (gap + 4) — and why a text-only button still gets the
+            wider side padding Figma shows with both icons switched off.
+          */}
+          {iconOnly || content == null || content === false ? (
+            content
+          ) : (
+            <span className="px-1">{content}</span>
+          )}
           {endIcon}
         </span>
       </>
