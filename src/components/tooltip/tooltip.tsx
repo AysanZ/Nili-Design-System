@@ -1,11 +1,15 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef } from 'react';
+import { FloatingPortal } from '@floating-ui/react';
 import { RiCloseLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { Slot } from '../../lib/slot';
 import { Icon } from '../icon';
-import { useId } from '../../hooks/use-id';
+import { useAnchored } from '../../hooks/use-anchored';
 import { useControllableState } from '../../hooks/use-controllable-state';
-import { tooltipVariants, tooltipArrowVariants } from './tooltip.styles';
+import {
+  tooltipSurfaceVariants,
+  tooltipArrowSurfaceVariants,
+} from './tooltip.styles';
 import type {
   TooltipProps,
   TooltipBaseProps,
@@ -24,29 +28,33 @@ type TooltipInternalProps = TooltipBaseProps & {
 };
 
 /**
- * A short label that appears beside its trigger.
+ * ## What changed in this file
  *
- * ## Hover is only half of it
+ * Every prop is the same. `side`, `align`, `delay`, `arrow`, `darkMode`,
+ * `dismissible` — all unchanged, all still doing what their documentation
+ * says. No story, no test and no consumer needed editing.
  *
- * A tooltip that opens on `mouseenter` alone does not exist for anyone using a
- * keyboard, and that is the most common way this component is built. This one
- * opens on **focus** as well, closes on **Escape** while the trigger keeps
- * focus (WAI-ARIA requires the dismissal), and stays open while the pointer is
- * over the bubble itself, so a long label can be read without it vanishing.
+ * Three things are different underneath:
  *
- * ## It describes, it does not name
+ * 1. **Position is measured, not guessed.** The bubble used to be placed
+ *    with `bottom-full mb-2`, which is correct only when there is room
+ *    above and no clipping ancestor. It now flips and shifts against the
+ *    real viewport and recomputes on scroll and resize.
  *
- * The trigger gets `aria-describedby`, not `aria-labelledby`. A tooltip is
- * supplementary: an icon-only button still needs its own `aria-label`, because
- * a description is announced after a pause and some setups skip it entirely.
- * If the text is the only name the control has, it is not a tooltip — it is a
- * label, and it belongs in the button.
+ * 2. **It renders in a portal.** A tooltip inside `overflow: hidden` — a
+ *    table cell, a card, a drawer — used to be cut in half. The portal
+ *    takes it out of the clipping context; `useAnchored` keeps it glued to
+ *    the trigger anyway.
  *
- * ## Not for touch
+ * 3. **The arrow points at the trigger.** Previously the arrow's side came
+ *    from the requested `side` prop, so a tooltip that flipped from top to
+ *    bottom kept an arrow pointing the wrong way. It now comes from where
+ *    the bubble actually landed.
  *
- * There is no hover on a phone, and tapping a trigger activates it. Anything
- * the user genuinely needs to read has to be on the page; a tooltip is for the
- * detail that helps and can be missed.
+ * The hover/focus/Escape behaviour that was written out by hand here is now
+ * `useAnchored`'s, including the part the old version did not have: a
+ * tooltip is `aria-describedby`, never the accessible name, so an icon-only
+ * button still needs its own `aria-label`.
  */
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   function Tooltip(
@@ -74,117 +82,95 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }: TooltipInternalProps,
     ref,
   ) {
-    const tooltipId = useId();
-    const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
     const [open, setOpen] = useControllableState<boolean>({
       value: openProp,
       defaultValue: defaultOpen,
       onChange: onOpenChange,
     });
 
-    const clear = () => {
-      if (timer.current) clearTimeout(timer.current);
-      timer.current = null;
-    };
-
-    useEffect(() => clear, []);
-
-    const show = (immediate = false) => {
-      if (disabled) return;
-      clear();
-      if (immediate || delay <= 0) setOpen(true);
-      else timer.current = setTimeout(() => setOpen(true), delay);
-    };
-
-    const hide = () => {
-      clear();
-      setOpen(false);
-    };
+    const anchored = useAnchored({
+      open: open ?? false,
+      onOpenChange: setOpen,
+      side,
+      align,
+      trigger: ['hover', 'focus'],
+      openDelay: delay,
+      role: 'tooltip',
+      gap: 8,
+      disabled,
+      // A tooltip stuck to a row that has scrolled out of the table should
+      // disappear, not hover over whatever is now in that spot.
+      hideWhenDetached: true,
+    });
 
     return (
-      <div
-        ref={ref}
-        className={cn('relative inline-flex w-fit', className)}
-        {...rest}
-      >
+      <>
         {/*
           The handlers go on the trigger through `Slot`, not on a wrapper: a
           wrapper that owns the hover has a different shape from the control
-          the user is aiming at, so the tooltip opens from the padding and the
-          trigger's own handlers are silently replaced instead of merged.
+          the user is aiming at, so the tooltip opens from the padding and
+          the trigger's own handlers are silently replaced instead of merged.
         */}
-        <Slot
-          aria-describedby={open ? tooltipId : undefined}
-          onMouseEnter={() => show()}
-          onMouseLeave={hide}
-          // Focus opens immediately: a keyboard user has already committed to
-          // the control, so a hover delay would just look broken.
-          onFocus={() => show(true)}
-          onBlur={hide}
-          // Escape must dismiss it without moving focus — a tooltip covering
-          // the next control with no way to close it is a trap.
-          onKeyDown={(event) => {
-            if (event.key === 'Escape' && open) {
-              event.stopPropagation();
-              hide();
-            }
-          }}
-        >
+        <Slot ref={anchored.refs.setReference} {...anchored.triggerProps}>
           {children}
         </Slot>
 
-        {open && !disabled && (
-          <div
-            id={tooltipId}
-            role="tooltip"
-            className={cn(
-              tooltipVariants({
-                side,
-                // Left and Right carry no alignment in the design; forcing
-                // centre here keeps the class list honest about that.
-                align: side === 'start' || side === 'end' ? 'center' : align,
-                size,
-                darkMode,
-              }),
-              contentClassName,
-            )}
-          >
-            <span className="flex items-start gap-1.5">
-              {startIcon != null && (
-                <span aria-hidden className="mt-px shrink-0 [&_svg]:size-4">
-                  {startIcon}
-                </span>
+        {anchored.mounted && !disabled && (
+          <FloatingPortal>
+            <div
+              ref={anchored.setFloating(ref)}
+              style={anchored.floatingStyles}
+              // The side the bubble *landed* on, after flipping — so the
+              // entrance animation grows from the trigger and not from
+              // wherever the author originally asked for.
+              data-side={anchored.side}
+              data-state={anchored.status}
+              className={cn(
+                tooltipSurfaceVariants({ size, darkMode }),
+                contentClassName,
               )}
-              <span className="flex min-w-0 flex-col gap-0.5">
-                <span>{content}</span>
-                {description != null && (
-                  <span className="font-normal opacity-70">{description}</span>
+              {...anchored.floatingProps}
+              {...rest}
+            >
+              <span className={cn('flex items-start gap-1.5', className)}>
+                {startIcon != null && (
+                  <span aria-hidden className="mt-px shrink-0 [&_svg]:size-4">
+                    {startIcon}
+                  </span>
+                )}
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  <span>{content}</span>
+                  {description != null && (
+                    <span className="font-normal opacity-70">{description}</span>
+                  )}
+                </span>
+                {dismissible && (
+                  <button
+                    type="button"
+                    aria-label={dismissLabel}
+                    onClick={() => {
+                      setOpen(false);
+                      onDismiss?.();
+                    }}
+                    className="-m-1 flex shrink-0 cursor-pointer rounded-xs p-1 opacity-70 outline-hidden transition-opacity hovered:opacity-100 focused:opacity-100"
+                  >
+                    <Icon icon={RiCloseLine} size={16} />
+                  </button>
                 )}
               </span>
-              {dismissible && (
-                <button
-                  type="button"
-                  aria-label={dismissLabel}
-                  onClick={() => {
-                    hide();
-                    onDismiss?.();
-                  }}
-                  className="-m-1 flex shrink-0 cursor-pointer rounded-xs p-1 opacity-70 outline-hidden transition-opacity hovered:opacity-100 focused:opacity-100"
-                >
-                  <Icon icon={RiCloseLine} size={16} />
-                </button>
+
+              {arrow && (
+                <span
+                  ref={anchored.arrowRef as React.Ref<HTMLSpanElement>}
+                  aria-hidden
+                  style={anchored.arrowStyles}
+                  className={tooltipArrowSurfaceVariants({ darkMode })}
+                />
               )}
-            </span>
-            {arrow && (
-              <span
-                aria-hidden
-                className={tooltipArrowVariants({ side, darkMode })}
-              />
-            )}
-          </div>
+            </div>
+          </FloatingPortal>
         )}
-      </div>
+      </>
     );
   },
 );

@@ -1,0 +1,475 @@
+{
+  "dir": "file-upload",
+  "name": "FileUpload",
+  "type": "registry:component",
+  "files": [
+    "src/components/file-upload/file-upload.styles.ts",
+    "src/components/file-upload/file-upload.tsx",
+    "src/components/file-upload/index.ts"
+  ],
+  "exports": [
+    "FileCardVariantProps",
+    "FileFormatColor",
+    "FileFormatIcon",
+    "FileFormatIconProps",
+    "FileFormatIconVariantProps",
+    "FileStatus",
+    "FileUploadArea",
+    "FileUploadAreaProps",
+    "FileUploadCard",
+    "FileUploadCardProps",
+    "ImageUpload",
+    "ImageUploadProps",
+    "ImageUploadShape",
+    "ImageUploadVariantProps",
+    "fileCardVariants",
+    "fileFormatIconVariants",
+    "fileProgressBarVariants",
+    "fileProgressVariants",
+    "fileUploadAreaVariants",
+    "formatColorFor",
+    "imageUploadRootVariants",
+    "imageUploadVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "FileCard",
+      "exported": false,
+      "variants": {
+        "status": [
+          "progress",
+          "success",
+          "error"
+        ]
+      },
+      "defaultVariants": {
+        "status": "progress"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'progress' | 'success' | 'error'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "progress",
+          "source": "cva",
+          "options": [
+            "progress",
+            "success",
+            "error"
+          ]
+        }
+      }
+    },
+    {
+      "name": "FileFormatIcon",
+      "exported": true,
+      "variants": {
+        "color": [
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "teal",
+          "sky",
+          "blue",
+          "purple",
+          "pink",
+          "gray"
+        ],
+        "size": [
+          "md",
+          "xs"
+        ]
+      },
+      "defaultVariants": {
+        "color": "gray",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
+      ],
+      "props": {
+        "fileName": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "color": {
+          "type": "FileFormatColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "teal",
+            "sky",
+            "blue",
+            "purple",
+            "pink",
+            "gray"
+          ],
+          "default": "gray",
+          "source": "cva"
+        },
+        "size": {
+          "type": "'md' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "xs"
+          ],
+          "default": "md",
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "FileProgress",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "FileProgressBar",
+      "exported": false,
+      "variants": {
+        "status": [
+          "progress",
+          "success",
+          "error"
+        ]
+      },
+      "defaultVariants": {
+        "status": "progress"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'progress' | 'success' | 'error'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "progress",
+          "source": "cva",
+          "options": [
+            "progress",
+            "success",
+            "error"
+          ]
+        }
+      }
+    },
+    {
+      "name": "FileUploadArea",
+      "exported": true,
+      "variants": {
+        "dragging": [
+          "true",
+          "false"
+        ],
+        "invalid": [
+          "true",
+          "false"
+        ],
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "dragging": false,
+        "invalid": false,
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'label'>, 'onDrop' | 'onChange' | 'title' >"
+      ],
+      "props": {
+        "onFiles": {
+          "type": "(files: File[]) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "accept": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "multiple": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the hidden file input.",
+          "control": "text"
+        },
+        "dragging": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "FileUploadCard",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "fileName": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "fileSize": {
+          "type": "string",
+          "required": false,
+          "doc": "Pre-formatted — size formatting is a locale decision.",
+          "control": "text"
+        },
+        "status": {
+          "type": "FileStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "success",
+            "progress"
+          ]
+        },
+        "progress": {
+          "type": "number",
+          "required": false,
+          "doc": "0–100. Ignored unless `status` is `'progress'`.",
+          "control": "number"
+        },
+        "errorMessage": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "onRemove": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "onRetry": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "removeLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "retryLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ImageUpload",
+      "exported": true,
+      "variants": {
+        "shape": [
+          "avatar",
+          "company",
+          "square",
+          "4:3",
+          "16:9"
+        ]
+      },
+      "defaultVariants": {
+        "shape": "square"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
+      ],
+      "props": {
+        "shape": {
+          "type": "ImageUploadShape",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "avatar",
+            "company",
+            "square",
+            "4:3",
+            "16:9"
+          ],
+          "default": "square",
+          "source": "cva"
+        },
+        "alignment": {
+          "type": "'vertical' | 'horizontal'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "vertical",
+            "horizontal"
+          ]
+        },
+        "src": {
+          "type": "string",
+          "required": false,
+          "doc": "Preview URL. Absent means the Figma \"Empty\" state.",
+          "control": "text"
+        },
+        "onFiles": {
+          "type": "(files: File[]) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "accept": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "alt": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ImageUploadRoot",
+      "exported": false,
+      "variants": {
+        "alignment": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "defaultVariants": {
+        "alignment": "vertical"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "alignment": {
+          "type": "'vertical' | 'horizontal'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "vertical",
+          "source": "cva",
+          "options": [
+            "vertical",
+            "horizontal"
+          ]
+        }
+      }
+    }
+  ]
+}

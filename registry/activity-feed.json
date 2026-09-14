@@ -1,0 +1,338 @@
+{
+  "dir": "activity-feed",
+  "name": "ActivityFeed",
+  "type": "registry:component",
+  "files": [
+    "src/components/activity-feed/activity-feed.styles.ts",
+    "src/components/activity-feed/activity-feed.tsx",
+    "src/components/activity-feed/activity-feed.types.ts",
+    "src/components/activity-feed/index.ts"
+  ],
+  "exports": [
+    "ActivityFeed",
+    "ActivityFeedFile",
+    "ActivityFeedFooter",
+    "ActivityFeedHeader",
+    "ActivityFeedItem",
+    "ActivityFeedItemProps",
+    "ActivityFeedItemType",
+    "ActivityFeedItemVariantProps",
+    "ActivityFeedKey",
+    "ActivityFeedProps",
+    "ActivityFeedTab",
+    "ActivityFeedTabProps",
+    "ActivityFeedTabSeparator",
+    "ActivityFeedTabs",
+    "activityFeedChipVariants",
+    "activityFeedCountVariants",
+    "activityFeedFooterVariants",
+    "activityFeedHeaderVariants",
+    "activityFeedItemVariants",
+    "activityFeedKeyVariants",
+    "activityFeedTabIndicatorVariants",
+    "activityFeedTabVariants",
+    "activityFeedTabsVariants",
+    "activityFeedVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "ActivityFeed",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'section'>, 'title' >"
+      ],
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Header title, e.g. \"Notifications\".",
+          "control": "slot"
+        },
+        "headerAction": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "End of the header, e.g. `<LinkButton color=\"primary\">Mark all as read</LinkButton>`.",
+          "control": "slot"
+        },
+        "tabs": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`<ActivityFeedTab>` children (and `<ActivityFeedTabSeparator>`).",
+          "control": "slot"
+        },
+        "tabsAction": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "End of the tab row, e.g. a filter `<CompactButton appearance=\"ghost\">`.",
+          "control": "slot"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Footer content — see `<ActivityFeedFooter>`.",
+          "control": "slot"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ActivityFeedChip",
+      "exported": false,
+      "variants": {
+        "kind": [
+          "file",
+          "message"
+        ]
+      },
+      "defaultVariants": {
+        "kind": "file"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "kind": {
+          "type": "'file' | 'message'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "file",
+          "source": "cva",
+          "options": [
+            "file",
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ActivityFeedCount",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ActivityFeedFooter",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ActivityFeedHeader",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ActivityFeedItem",
+      "exported": true,
+      "variants": {
+        "unread": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "unread": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'li'>, 'title' | 'children' >"
+      ],
+      "props": {
+        "type": {
+          "type": "ActivityFeedItemType",
+          "required": false,
+          "doc": "Figma Type: Basic · Button · File · Message.",
+          "control": "select",
+          "options": [
+            "basic",
+            "button",
+            "file",
+            "message"
+          ]
+        },
+        "avatar": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Usually a 40px `<Avatar size=\"sm\">`.",
+          "control": "slot"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "timestamp": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Pre-formatted time, e.g. \"8 min ago\". First part of the meta line.",
+          "control": "slot"
+        },
+        "subject": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma \"Insert subject here.\" — second part of the meta line.",
+          "control": "slot"
+        },
+        "subjectIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "16px glyph before `subject` (an app or workspace logo).",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Sits beside the title, e.g. a status or a count.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Body text — Figma Type Basic.",
+          "control": "slot"
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Type Button: the actions row, usually two `size=\"xs\"` Buttons.",
+          "control": "slot"
+        },
+        "file": {
+          "type": "ActivityFeedFile",
+          "required": false,
+          "doc": "Figma Type File: the attachment chip.",
+          "control": "none"
+        },
+        "message": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Type Message: the boxed message text.",
+          "control": "slot"
+        },
+        "menu": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The \"more\" control Figma reveals on hover — pass a ghost icon Button or a Dropdown trigger. Shown on hover and keyboard focus, and always on touch screens.",
+          "control": "slot"
+        },
+        "unread": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "onSelect": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Makes the whole card selectable. The title becomes a real button that stretches over the card, so actions and the menu inside stay separate, valid, focusable buttons.",
+          "control": "handler"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "ActivityFeedKey",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ActivityFeedTab",
+      "exported": true,
+      "variants": {
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "selected": false
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'button'>"
+      ],
+      "props": {
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "count": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's red count after the label.",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Any other node after the label — e.g. a `<Badge>`.",
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "ActivityFeedTabIndicator",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ActivityFeedTabs",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

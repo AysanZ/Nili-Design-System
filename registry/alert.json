@@ -1,0 +1,291 @@
+{
+  "dir": "alert",
+  "name": "Alert",
+  "type": "registry:component",
+  "files": [
+    "src/components/alert/alert.styles.ts",
+    "src/components/alert/alert.tsx",
+    "src/components/alert/alert.types.ts",
+    "src/components/alert/index.ts"
+  ],
+  "exports": [
+    "Alert",
+    "AlertAction",
+    "AlertAppearance",
+    "AlertProps",
+    "AlertSize",
+    "AlertStatus",
+    "AlertVariantProps",
+    "alertActionVariants",
+    "alertCloseVariants",
+    "alertIconVariants",
+    "alertVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon",
+      "typography"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Alert",
+      "exported": true,
+      "variants": {
+        "status": [
+          "error",
+          "warning",
+          "success",
+          "info",
+          "feature"
+        ],
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ],
+        "size": [
+          "x-small",
+          "small",
+          "large"
+        ]
+      },
+      "defaultVariants": {
+        "status": "info",
+        "appearance": "filled",
+        "size": "small"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'children' >"
+      ],
+      "props": {
+        "status": {
+          "type": "AlertStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info",
+            "feature"
+          ],
+          "default": "info",
+          "source": "cva"
+        },
+        "appearance": {
+          "type": "AlertAppearance",
+          "required": false,
+          "doc": "Renamed from `style`, which shadowed React's `style` (`CSSProperties`).",
+          "control": "select",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ],
+          "default": "filled",
+          "source": "cva"
+        },
+        "size": {
+          "type": "AlertSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "x-small",
+            "small",
+            "large"
+          ],
+          "default": "small",
+          "source": "cva"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "`true` shows the default glyph for `status`; pass a node to override it; `false` hides it. The default glyph is decorative — the alert's meaning is carried by `role`, not by the picture.",
+          "control": "boolean-or-slot"
+        },
+        "actions": {
+          "type": "AlertAction[]",
+          "required": false,
+          "doc": "Up to two inline actions. Replaces the unused `linkButton`/`doubleLink`.",
+          "control": "list"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows a close button. Requires `dismissLabel` for the accessible name.",
+          "control": "boolean"
+        },
+        "onDismiss": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "dismissLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the close button, e.g. `'Close'`.",
+          "control": "text"
+        },
+        "urgency": {
+          "type": "'assertive' | 'polite' | 'off'",
+          "required": false,
+          "doc": "How assistive tech announces this alert. - `'assertive'` (default for `error`) interrupts the user immediately. - `'polite'` waits for a pause — right for success and info. - `'off'` for alerts rendered statically on page load, which should not be announced at all.",
+          "control": "select",
+          "options": [
+            "assertive",
+            "polite",
+            "off"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AlertAction",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "AlertClose",
+      "exported": false,
+      "variants": {
+        "size": [
+          "x-small",
+          "small",
+          "large"
+        ]
+      },
+      "defaultVariants": {
+        "size": "small"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'x-small' | 'small' | 'large'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "small",
+          "source": "cva",
+          "options": [
+            "x-small",
+            "small",
+            "large"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AlertIcon",
+      "exported": false,
+      "variants": {
+        "status": [
+          "error",
+          "warning",
+          "success",
+          "info",
+          "feature"
+        ],
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ],
+        "size": [
+          "x-small",
+          "small",
+          "large"
+        ]
+      },
+      "defaultVariants": {
+        "status": "info",
+        "appearance": "filled",
+        "size": "small"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'error' | 'warning' | 'success' | 'info' | 'feature'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "info",
+          "source": "cva",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info",
+            "feature"
+          ]
+        },
+        "appearance": {
+          "type": "'filled' | 'light' | 'lighter' | 'stroke'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "filled",
+          "source": "cva",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ]
+        },
+        "size": {
+          "type": "'x-small' | 'small' | 'large'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "small",
+          "source": "cva",
+          "options": [
+            "x-small",
+            "small",
+            "large"
+          ]
+        }
+      }
+    }
+  ]
+}

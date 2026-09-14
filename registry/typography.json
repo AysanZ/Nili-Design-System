@@ -1,0 +1,125 @@
+{
+  "dir": "typography",
+  "name": "Typography",
+  "type": "registry:component",
+  "files": [
+    "src/components/typography/index.ts",
+    "src/components/typography/typography.styles.ts",
+    "src/components/typography/typography.tsx",
+    "src/components/typography/typography.types.ts"
+  ],
+  "exports": [
+    "Typography",
+    "TypographyOwnProps",
+    "TypographyProps",
+    "TypographyVariant",
+    "TypographyVariantProps",
+    "defaultElementForVariant",
+    "typographyVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn",
+      "lib/polymorphic"
+    ]
+  },
+  "components": [
+    {
+      "name": "Typography",
+      "exported": true,
+      "variants": {
+        "variant": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "label-xlarge",
+          "label-large",
+          "label-medium",
+          "label-small",
+          "label-xsmall",
+          "paragraph-xlarge",
+          "paragraph-large",
+          "paragraph-medium",
+          "paragraph-small",
+          "paragraph-xsmall",
+          "subheading-medium",
+          "subheading-small",
+          "subheading-xsmall",
+          "subheading-2xsmall",
+          "docs-label",
+          "docs-paragraph"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "paragraph-medium"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "variant": {
+          "type": "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label-xlarge' | 'label-large' | 'label-medium' | 'label-small' | 'label-xsmall' | 'paragraph-xlarge' | 'paragraph-large' | 'paragraph-medium' | 'paragraph-small' | 'paragraph-xsmall' | 'subheading-medium' | 'subheading-small' | 'subheading-xsmall' | 'subheading-2xsmall' | 'docs-label' | 'docs-paragraph'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "paragraph-medium",
+          "source": "cva",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "label-xlarge",
+            "label-large",
+            "label-medium",
+            "label-small",
+            "label-xsmall",
+            "paragraph-xlarge",
+            "paragraph-large",
+            "paragraph-medium",
+            "paragraph-small",
+            "paragraph-xsmall",
+            "subheading-medium",
+            "subheading-small",
+            "subheading-xsmall",
+            "subheading-2xsmall",
+            "docs-label",
+            "docs-paragraph"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TypographyOwn",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "TypographyVariantProps"
+      ],
+      "props": {
+        "as": {
+          "type": "ElementType",
+          "required": false,
+          "doc": "Override the rendered element. Defaults to a semantically sensible tag for the variant (`h1` renders `<h1>`, `paragraph-*` renders `<p>`) so document outline and screen-reader navigation stay correct by default.",
+          "control": "none"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    }
+  ]
+}

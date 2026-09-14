@@ -1,0 +1,11 @@
+{
+  "name": "nili",
+  "version": "0.1.0",
+  "description": "Copy Nili components into your own repository.",
+  "type": "module",
+  "bin": { "nili": "./bin/nili.mjs" },
+  "files": ["bin"],
+  "engines": { "node": ">=20.0.0" },
+  "keywords": ["nili", "design-system", "rtl", "react", "cli"],
+  "license": "MIT"
+}

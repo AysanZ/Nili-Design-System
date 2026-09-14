@@ -1,0 +1,235 @@
+{
+  "dir": "checkbox",
+  "name": "Checkbox",
+  "type": "registry:component",
+  "files": [
+    "src/components/checkbox/checkbox.styles.ts",
+    "src/components/checkbox/checkbox.tsx",
+    "src/components/checkbox/checkbox.types.ts",
+    "src/components/checkbox/index.ts"
+  ],
+  "exports": [
+    "Checkbox",
+    "CheckboxProps",
+    "CheckboxVariantProps",
+    "checkboxControlVariants",
+    "checkboxDescriptionVariants",
+    "checkboxIndicatorVariants",
+    "checkboxLabelVariants",
+    "checkboxRootVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Checkbox",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'type' | 'size' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Secondary line under the label. Figma's \"Description\" toggle.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text inline after the label — Figma's \"Sublabel\".",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing slot on the label row — Figma's \"Badge\".",
+          "control": "slot"
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the description — Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "labelPosition": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": "Which side the label sits on. Figma calls this \"Flip\". Logical, so `start` is left in English and right in Persian.",
+          "control": "select",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Tri-state. Not a DOM attribute — it has to be assigned to the element, which is why this component always attaches a ref internally.",
+          "control": "boolean"
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the control itself.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "CheckboxControl",
+      "exported": false,
+      "variants": {
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "CheckboxDescription",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "CheckboxIndicator",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "CheckboxLabel",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "CheckboxRoot",
+      "exported": false,
+      "variants": {
+        "labelPosition": [
+          "end",
+          "start"
+        ],
+        "align": [
+          "center",
+          "start"
+        ]
+      },
+      "defaultVariants": {
+        "labelPosition": "end",
+        "align": "center"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "labelPosition": {
+          "type": "'end' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "end",
+            "start"
+          ]
+        },
+        "align": {
+          "type": "'center' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "center",
+          "source": "cva",
+          "options": [
+            "center",
+            "start"
+          ]
+        }
+      }
+    }
+  ]
+}

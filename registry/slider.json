@@ -1,0 +1,263 @@
+{
+  "dir": "slider",
+  "name": "Slider",
+  "type": "registry:component",
+  "files": [
+    "src/components/slider/index.ts",
+    "src/components/slider/slider.styles.ts",
+    "src/components/slider/slider.tsx",
+    "src/components/slider/slider.types.ts"
+  ],
+  "exports": [
+    "Slider",
+    "SliderProps",
+    "SliderValue",
+    "sliderHeaderVariants",
+    "sliderRangeVariants",
+    "sliderRootVariants",
+    "sliderThumbVariants",
+    "sliderTooltipVariants",
+    "sliderTrackVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "Slider",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'color' >"
+      ],
+      "props": {
+        "value": {
+          "type": "SliderValue",
+          "required": false,
+          "doc": "Controlled value. A `number` renders one thumb, a `[number, number]` renders a range — the shape of the value *is* Figma's \"Type\", so a range slider cannot be handed a single number by accident.",
+          "control": "none"
+        },
+        "defaultValue": {
+          "type": "SliderValue",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "onValueChange": {
+          "type": "(value: SliderValue) => void",
+          "required": false,
+          "doc": "Fires on every step while dragging.",
+          "control": "handler"
+        },
+        "onValueCommit": {
+          "type": "(value: SliderValue) => void",
+          "required": false,
+          "doc": "Fires once, when the pointer or key is released. Use this for anything expensive — a request per pixel of drag is the usual way a slider takes a server down.",
+          "control": "handler"
+        },
+        "min": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "step": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "minStepsBetweenThumbs": {
+          "type": "number",
+          "required": false,
+          "doc": "Smallest allowed gap between the two thumbs of a range.",
+          "control": "number"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Visible label above the track. Also names the thumbs. Figma's \"Label\".",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted second line under the label. Figma's \"Sublabel\".",
+          "control": "slot"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows the current value beside the label. Figma's \"Edit Amount\".",
+          "control": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Value bubble above the thumb while dragging. Figma's \"Tooltip\".",
+          "control": "boolean"
+        },
+        "formatValue": {
+          "type": "(value: number) => string",
+          "required": false,
+          "doc": "Formats every number the user sees or hears. Defaults to localized digits.",
+          "control": "handler"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "dir": {
+          "type": "'ltr' | 'rtl'",
+          "required": false,
+          "doc": "Forces the drag direction, overriding the ambient locale. Needed for a track whose axis is not the reading axis — a video timeline runs from the video's start to its end, which is not a sentence, so it is pinned `ltr` even in a Persian UI. Without this the CSS renders one way and the pointer maths mirrors the other, and the playhead jumps backwards.",
+          "control": "select",
+          "options": [
+            "ltr",
+            "rtl"
+          ]
+        },
+        "thumbLabels": {
+          "type": "[string, string?]",
+          "required": false,
+          "doc": "Accessible names for the thumbs, when there is no visible `label`.",
+          "control": "none"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": "`name` for the hidden inputs, when the form is submitted natively.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "SliderHeader",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "SliderRange",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "SliderRoot",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SliderThumb",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SliderTooltip",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "SliderTrack",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

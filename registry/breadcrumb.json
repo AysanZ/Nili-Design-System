@@ -1,0 +1,179 @@
+{
+  "dir": "breadcrumb",
+  "name": "Breadcrumb",
+  "type": "registry:component",
+  "files": [
+    "src/components/breadcrumb/breadcrumb.styles.ts",
+    "src/components/breadcrumb/breadcrumb.tsx",
+    "src/components/breadcrumb/breadcrumb.types.ts",
+    "src/components/breadcrumb/index.ts"
+  ],
+  "exports": [
+    "Breadcrumb",
+    "BreadcrumbDivider",
+    "BreadcrumbItem",
+    "BreadcrumbItemProps",
+    "BreadcrumbProps",
+    "BreadcrumbVariantProps",
+    "breadcrumbItemVariants",
+    "breadcrumbSeparatorVariants",
+    "breadcrumbVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn",
+      "lib/slot"
+    ]
+  },
+  "components": [
+    {
+      "name": "Breadcrumb",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'nav'>, 'children' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "divider": {
+          "type": "BreadcrumbDivider",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "dot",
+            "arrow",
+            "slash"
+          ]
+        },
+        "separator": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Replaces the divider entirely.",
+          "control": "slot"
+        },
+        "maxItems": {
+          "type": "number",
+          "required": false,
+          "doc": "Collapse the middle of long trails into an ellipsis, keeping the first crumb and the last `itemsAfterCollapse`. A five-level path on a phone either wraps or scrolls; neither is good.",
+          "control": "number"
+        },
+        "itemsAfterCollapse": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the landmark, e.g. `'Breadcrumb'`.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "BreadcrumbItem",
+      "exported": true,
+      "variants": {
+        "current": [
+          "true",
+          "false"
+        ],
+        "interactive": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "current": false,
+        "interactive": true
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'a'>, 'children' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Leading icon. Omit for a text-only crumb; pass `children` for icon-only.",
+          "control": "slot"
+        },
+        "current": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Marks the current page: renders as text, not a link, plus aria-current.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Render the child element instead of an `<a>` — for router links.",
+          "control": "boolean"
+        },
+        "interactive": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "BreadcrumbSeparator",
+      "exported": false,
+      "variants": {
+        "divider": [
+          "arrow",
+          "slash",
+          "dot"
+        ]
+      },
+      "defaultVariants": {
+        "divider": "arrow"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "divider": {
+          "type": "'arrow' | 'slash' | 'dot'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "arrow",
+          "source": "cva",
+          "options": [
+            "arrow",
+            "slash",
+            "dot"
+          ]
+        }
+      }
+    }
+  ]
+}

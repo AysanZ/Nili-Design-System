@@ -1,0 +1,390 @@
+{
+  "dir": "dropdown",
+  "name": "Dropdown",
+  "type": "registry:component",
+  "files": [
+    "src/components/dropdown/dropdown.styles.ts",
+    "src/components/dropdown/dropdown.tsx",
+    "src/components/dropdown/dropdown.types.ts",
+    "src/components/dropdown/index.ts"
+  ],
+  "exports": [
+    "Dropdown",
+    "DropdownAppearance",
+    "DropdownItemSize",
+    "DropdownItemVariantProps",
+    "DropdownOption",
+    "DropdownProps",
+    "DropdownSize",
+    "DropdownVariantProps",
+    "dropdownCaptionVariants",
+    "dropdownItemVariants",
+    "dropdownMenuVariants",
+    "dropdownSearchVariants",
+    "dropdownTriggerVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon",
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-dismissable",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Dropdown",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'children' >"
+      ],
+      "props": {
+        "options": {
+          "type": "DropdownOption[]",
+          "required": true,
+          "doc": null,
+          "control": "list"
+        },
+        "value": {
+          "type": "string | null",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string | null",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "placeholder": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "size": {
+          "type": "DropdownSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "itemSize": {
+          "type": "DropdownItemSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "sm"
+          ]
+        },
+        "appearance": {
+          "type": "DropdownAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "default",
+            "compact",
+            "inline"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "searchable": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma misc. item \"Search\".",
+          "control": "boolean"
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "emptyMessage": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma misc. items \"Button\" / \"Button Group\", pinned under the list.",
+          "control": "slot"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔖 Label` — the visible label above the field, drawn with the same `Label` component the Text Input page uses.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Label's `💬 Sublabel` — the muted \"(Optional)\".",
+          "control": "slot"
+        },
+        "information": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
+          "control": "boolean-or-slot"
+        },
+        "informationLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for that glyph.",
+          "control": "text"
+        },
+        "labelAction": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Label's `🌟 Button` — trailing slot on the label row.",
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💡 Hint Text` — the line under the field.",
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Validation message. Its presence is what marks the field invalid.",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🎖️ Badge` — inside the trigger, after the value.",
+          "control": "slot"
+        },
+        "ariaLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name when no visible `label` is rendered.",
+          "control": "text"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Applied to the outer wrapper rather than to the field.",
+          "control": "text"
+        },
+        "triggerClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "menuClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "DropdownCaption",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DropdownItem",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "lg"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ],
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm",
+        "selected": false,
+        "active": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "sm",
+          "source": "cva",
+          "options": [
+            "sm",
+            "lg"
+          ]
+        },
+        "selected": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "active": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "DropdownMenu",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DropdownSearch",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DropdownTrigger",
+      "exported": false,
+      "variants": {
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ],
+        "filled": [
+          "true",
+          "false"
+        ],
+        "invalid": [
+          "true",
+          "false"
+        ],
+        "appearance": [
+          "default",
+          "compact",
+          "inline"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "filled": false,
+        "invalid": false,
+        "appearance": "default"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'md' | 'sm' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "filled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "appearance": {
+          "type": "'default' | 'compact' | 'inline'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "default",
+          "source": "cva",
+          "options": [
+            "default",
+            "compact",
+            "inline"
+          ]
+        }
+      }
+    }
+  ]
+}

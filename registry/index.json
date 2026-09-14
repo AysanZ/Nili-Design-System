@@ -1,0 +1,1657 @@
+{
+  "$schema": "https://nili.dev/schema/registry.json",
+  "name": "@nili/ui",
+  "version": "0.2.0",
+  "homepage": null,
+  "generatedFrom": "src/components/**/*.styles.ts + *.types.ts",
+  "styles": [
+    "src/styles/tokens.primitives.css",
+    "src/styles/tokens.foundation.css",
+    "src/styles/tokens.semantic.css",
+    "src/styles/theme.css",
+    "src/styles/variants.css"
+  ],
+  "shared": [
+    {
+      "name": "lib",
+      "type": "registry:lib",
+      "files": [
+        "src/lib/calendar.ts",
+        "src/lib/cn.ts",
+        "src/lib/color.ts",
+        "src/lib/floating.ts",
+        "src/lib/index.ts",
+        "src/lib/numerals.ts",
+        "src/lib/polymorphic.ts",
+        "src/lib/slot.tsx"
+      ],
+      "dependencies": {
+        "npm": [
+          "@floating-ui/react",
+          "clsx",
+          "tailwind-merge"
+        ],
+        "registry": [],
+        "shared": []
+      }
+    },
+    {
+      "name": "hooks",
+      "type": "registry:lib",
+      "files": [
+        "src/hooks/index.ts",
+        "src/hooks/use-anchored.ts",
+        "src/hooks/use-controllable-state.ts",
+        "src/hooks/use-dismissable.ts",
+        "src/hooks/use-id.ts"
+      ],
+      "dependencies": {
+        "npm": [
+          "@floating-ui/react",
+          "tabbable"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/floating",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "providers",
+      "type": "registry:lib",
+      "files": [
+        "src/providers/direction.tsx",
+        "src/providers/index.ts",
+        "src/providers/nili-provider.tsx",
+        "src/providers/theme.tsx"
+      ],
+      "dependencies": {
+        "npm": [],
+        "registry": [],
+        "shared": [
+          "providers/direction",
+          "providers/theme"
+        ]
+      }
+    }
+  ],
+  "components": [
+    {
+      "name": "Accordion",
+      "dir": "accordion",
+      "exports": [
+        "Accordion",
+        "AccordionGroup",
+        "AccordionGroupProps",
+        "AccordionProps",
+        "AccordionVariantProps",
+        "accordionContentVariants",
+        "accordionIndicatorVariants",
+        "accordionPanelVariants",
+        "accordionTriggerVariants",
+        "accordionVariants"
+      ],
+      "provides": [
+        "Accordion",
+        "AccordionContent",
+        "AccordionGroup",
+        "AccordionIndicator",
+        "AccordionPanel",
+        "AccordionTrigger"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon",
+          "typography"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "ActivityFeed",
+      "dir": "activity-feed",
+      "exports": [
+        "ActivityFeed",
+        "ActivityFeedFile",
+        "ActivityFeedFooter",
+        "ActivityFeedHeader",
+        "ActivityFeedItem",
+        "ActivityFeedItemProps",
+        "ActivityFeedItemType",
+        "ActivityFeedItemVariantProps",
+        "ActivityFeedKey",
+        "ActivityFeedProps",
+        "ActivityFeedTab",
+        "ActivityFeedTabProps",
+        "ActivityFeedTabSeparator",
+        "ActivityFeedTabs",
+        "activityFeedChipVariants",
+        "activityFeedCountVariants",
+        "activityFeedFooterVariants",
+        "activityFeedHeaderVariants",
+        "activityFeedItemVariants",
+        "activityFeedKeyVariants",
+        "activityFeedTabIndicatorVariants",
+        "activityFeedTabVariants",
+        "activityFeedTabsVariants",
+        "activityFeedVariants"
+      ],
+      "provides": [
+        "ActivityFeed",
+        "ActivityFeedChip",
+        "ActivityFeedCount",
+        "ActivityFeedFooter",
+        "ActivityFeedHeader",
+        "ActivityFeedItem",
+        "ActivityFeedKey",
+        "ActivityFeedTab",
+        "ActivityFeedTabIndicator",
+        "ActivityFeedTabs"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Alert",
+      "dir": "alert",
+      "exports": [
+        "Alert",
+        "AlertAction",
+        "AlertAppearance",
+        "AlertProps",
+        "AlertSize",
+        "AlertStatus",
+        "AlertVariantProps",
+        "alertActionVariants",
+        "alertCloseVariants",
+        "alertIconVariants",
+        "alertVariants"
+      ],
+      "provides": [
+        "Alert",
+        "AlertAction",
+        "AlertClose",
+        "AlertIcon"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon",
+          "typography"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Avatar",
+      "dir": "avatar",
+      "exports": [
+        "Avatar",
+        "AvatarBottomStatus",
+        "AvatarGroup",
+        "AvatarGroupItem",
+        "AvatarGroupProps",
+        "AvatarProps",
+        "AvatarSize",
+        "AvatarTone",
+        "AvatarTopStatus",
+        "CompactAvatarGroup",
+        "CompactAvatarGroupAppearance",
+        "CompactAvatarGroupProps",
+        "CompactAvatarGroupSize",
+        "FLAT_AVATAR_COUNTS",
+        "FlatAvatar",
+        "FlatAvatarProps",
+        "avatarGroupOverlap",
+        "avatarPixelSize",
+        "avatarStatusGeometry",
+        "avatarSupportsStatus",
+        "avatarSurfaceVariants",
+        "avatarTextVariant",
+        "avatarVariants",
+        "initialsFromName",
+        "legacyAvatarSize"
+      ],
+      "provides": [
+        "Avatar",
+        "AvatarGroup",
+        "AvatarSurface",
+        "CompactAvatarGroup",
+        "FlatAvatar"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon",
+          "typography"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Badge",
+      "dir": "badge",
+      "exports": [
+        "Badge",
+        "BadgeAppearance",
+        "BadgeColor",
+        "BadgeProps",
+        "BadgeSize",
+        "BadgeVariantProps",
+        "StatusBadge",
+        "StatusBadgeAppearance",
+        "StatusBadgeProps",
+        "StatusBadgeStatus",
+        "badgeDotSlotVariants",
+        "badgeDotVariants",
+        "badgeIconVariants",
+        "badgeVariants",
+        "statusBadgeVariants"
+      ],
+      "provides": [
+        "Badge",
+        "BadgeDot",
+        "BadgeDotSlot",
+        "BadgeIcon",
+        "StatusBadge"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Banner",
+      "dir": "banner",
+      "exports": [
+        "Banner",
+        "BannerAction",
+        "BannerAppearance",
+        "BannerProps",
+        "BannerStatus",
+        "BannerVariantProps",
+        "bannerActionVariants",
+        "bannerDismissVariants",
+        "bannerIconVariants",
+        "bannerVariants"
+      ],
+      "provides": [
+        "Banner",
+        "BannerAction",
+        "BannerDismiss",
+        "BannerIcon"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Breadcrumb",
+      "dir": "breadcrumb",
+      "exports": [
+        "Breadcrumb",
+        "BreadcrumbDivider",
+        "BreadcrumbItem",
+        "BreadcrumbItemProps",
+        "BreadcrumbProps",
+        "BreadcrumbVariantProps",
+        "breadcrumbItemVariants",
+        "breadcrumbSeparatorVariants",
+        "breadcrumbVariants"
+      ],
+      "provides": [
+        "Breadcrumb",
+        "BreadcrumbItem",
+        "BreadcrumbSeparator"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn",
+          "lib/slot"
+        ]
+      }
+    },
+    {
+      "name": "Button",
+      "dir": "button",
+      "exports": [
+        "BUTTON_APPEARANCES",
+        "BUTTON_COLORS",
+        "BUTTON_SIZES",
+        "Button",
+        "ButtonAppearance",
+        "ButtonColor",
+        "ButtonGroup",
+        "ButtonGroupItem",
+        "ButtonGroupItemProps",
+        "ButtonGroupOrientation",
+        "ButtonGroupProps",
+        "ButtonGroupSize",
+        "ButtonGroupVariantProps",
+        "ButtonProps",
+        "ButtonSize",
+        "ButtonVariantProps",
+        "COMPACT_BUTTON_APPEARANCES",
+        "CompactButton",
+        "CompactButtonAppearance",
+        "CompactButtonProps",
+        "CompactButtonSize",
+        "CompactButtonVariantProps",
+        "FANCY_BUTTON_COLORS",
+        "FANCY_BUTTON_SIZES",
+        "FancyButton",
+        "FancyButtonColor",
+        "FancyButtonProps",
+        "FancyButtonSize",
+        "FancyButtonVariantProps",
+        "LINK_BUTTON_COLORS",
+        "LinkButton",
+        "LinkButtonColor",
+        "LinkButtonProps",
+        "LinkButtonSize",
+        "LinkButtonVariantProps",
+        "buttonGroupItemPadding",
+        "buttonGroupItemVariants",
+        "buttonGroupVariants",
+        "buttonVariants",
+        "compactButtonVariants",
+        "fancyButtonVariants",
+        "linkButtonVariants"
+      ],
+      "provides": [
+        "Button",
+        "ButtonGroup",
+        "ButtonGroupItem",
+        "CompactButton",
+        "FancyButton",
+        "LinkButton"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn",
+          "lib/slot"
+        ]
+      }
+    },
+    {
+      "name": "Checkbox",
+      "dir": "checkbox",
+      "exports": [
+        "Checkbox",
+        "CheckboxProps",
+        "CheckboxVariantProps",
+        "checkboxControlVariants",
+        "checkboxDescriptionVariants",
+        "checkboxIndicatorVariants",
+        "checkboxLabelVariants",
+        "checkboxRootVariants"
+      ],
+      "provides": [
+        "Checkbox",
+        "CheckboxControl",
+        "CheckboxDescription",
+        "CheckboxIndicator",
+        "CheckboxLabel",
+        "CheckboxRoot"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "ColorPicker",
+      "dir": "color-picker",
+      "exports": [
+        "ColorDot",
+        "ColorDotColor",
+        "ColorDotProps",
+        "ColorDotVariantProps",
+        "ColorPicker",
+        "ColorPickerProps",
+        "ColorSlider",
+        "ColorSliderProps",
+        "ColorSpectrum",
+        "ColorSpectrumProps",
+        "colorDotSwatchVariants",
+        "colorDotVariants",
+        "colorPickerVariants",
+        "colorSliderVariants",
+        "colorSpectrumThumbVariants",
+        "colorSpectrumVariants",
+        "colorThumbVariants"
+      ],
+      "provides": [
+        "ColorDot",
+        "ColorDotSwatch",
+        "ColorPicker",
+        "ColorSlider",
+        "ColorSpectrum",
+        "ColorSpectrumThumb",
+        "ColorThumb"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn",
+          "lib/color",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "ContentDivider",
+      "dir": "content-divider",
+      "exports": [
+        "CONTENT_DIVIDER_TYPE_PRESETS",
+        "ContentDivider",
+        "ContentDividerAlign",
+        "ContentDividerOrientation",
+        "ContentDividerProps",
+        "ContentDividerSpacing",
+        "ContentDividerType",
+        "ContentDividerVariantProps",
+        "contentDividerContentVariants",
+        "contentDividerRuleVariants",
+        "contentDividerSolidVariants",
+        "contentDividerVariants"
+      ],
+      "provides": [
+        "ContentDivider",
+        "ContentDividerContent",
+        "ContentDividerRule",
+        "ContentDividerSolid"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "DatePicker",
+      "dir": "date-picker",
+      "exports": [
+        "CalendarSystem",
+        "DatePicker",
+        "DatePickerFooter",
+        "DatePickerProps",
+        "DatePreset",
+        "DateRange",
+        "DateRangePicker",
+        "DateRangePickerProps",
+        "DayCellVariantProps",
+        "calendarToggleVariants",
+        "datePickerFooterVariants",
+        "datePickerVariants",
+        "dateSelectorVariants",
+        "dayCellVariants",
+        "dayLabelVariants",
+        "periodRangeItemVariants",
+        "periodRangeVariants"
+      ],
+      "provides": [
+        "CalendarBase",
+        "CalendarGrid",
+        "CalendarToggle",
+        "DatePicker",
+        "DatePickerFooter",
+        "DateRangePicker",
+        "DateSelector",
+        "DayCell",
+        "DayLabel",
+        "Header",
+        "PeriodRange",
+        "PeriodRangeItem"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "lib/calendar",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Drawer",
+      "dir": "drawer",
+      "exports": [
+        "Drawer",
+        "DrawerFooter",
+        "DrawerHeader",
+        "DrawerHeaderProps",
+        "DrawerProps",
+        "DrawerSide",
+        "DrawerSize",
+        "DrawerVariantProps",
+        "drawerBodyVariants",
+        "drawerFooterVariants",
+        "drawerHeaderVariants",
+        "drawerOverlayVariants",
+        "drawerPanelVariants"
+      ],
+      "provides": [
+        "Drawer",
+        "DrawerBody",
+        "DrawerFooter",
+        "DrawerHeader",
+        "DrawerOverlay",
+        "DrawerPanel"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-dismissable",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Dropdown",
+      "dir": "dropdown",
+      "exports": [
+        "Dropdown",
+        "DropdownAppearance",
+        "DropdownItemSize",
+        "DropdownItemVariantProps",
+        "DropdownOption",
+        "DropdownProps",
+        "DropdownSize",
+        "DropdownVariantProps",
+        "dropdownCaptionVariants",
+        "dropdownItemVariants",
+        "dropdownMenuVariants",
+        "dropdownSearchVariants",
+        "dropdownTriggerVariants"
+      ],
+      "provides": [
+        "Dropdown",
+        "DropdownCaption",
+        "DropdownItem",
+        "DropdownMenu",
+        "DropdownSearch",
+        "DropdownTrigger"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon",
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-dismissable",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "EmptyState",
+      "dir": "empty-state",
+      "exports": [
+        "EmptyState",
+        "EmptyStateProps",
+        "EmptyStateSize",
+        "emptyStateVariants"
+      ],
+      "provides": [
+        "EmptyState"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "FileUpload",
+      "dir": "file-upload",
+      "exports": [
+        "FileCardVariantProps",
+        "FileFormatColor",
+        "FileFormatIcon",
+        "FileFormatIconProps",
+        "FileFormatIconVariantProps",
+        "FileStatus",
+        "FileUploadArea",
+        "FileUploadAreaProps",
+        "FileUploadCard",
+        "FileUploadCardProps",
+        "ImageUpload",
+        "ImageUploadProps",
+        "ImageUploadShape",
+        "ImageUploadVariantProps",
+        "fileCardVariants",
+        "fileFormatIconVariants",
+        "fileProgressBarVariants",
+        "fileProgressVariants",
+        "fileUploadAreaVariants",
+        "formatColorFor",
+        "imageUploadRootVariants",
+        "imageUploadVariants"
+      ],
+      "provides": [
+        "FileCard",
+        "FileFormatIcon",
+        "FileProgress",
+        "FileProgressBar",
+        "FileUploadArea",
+        "FileUploadCard",
+        "ImageUpload",
+        "ImageUploadRoot"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Filter",
+      "dir": "filter",
+      "exports": [
+        "FilterBar",
+        "FilterBarProps",
+        "FilterChip",
+        "FilterChipProps",
+        "FilterChipVariantProps",
+        "FilterList",
+        "FilterListItem",
+        "FilterListItemProps",
+        "FilterListProps",
+        "filterBarVariants",
+        "filterChipVariants",
+        "filterListItemVariants",
+        "filterListVariants"
+      ],
+      "provides": [
+        "FilterBar",
+        "FilterChip",
+        "FilterList",
+        "FilterListItem"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Icon",
+      "dir": "icon",
+      "exports": [
+        "Icon",
+        "IconComponent",
+        "IconProps",
+        "IconRenderProps"
+      ],
+      "provides": [
+        "Icon",
+        "IconRender"
+      ],
+      "dependencies": {
+        "npm": [],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "KeyComponents",
+      "dir": "key-components",
+      "exports": [
+        "ChartLegend",
+        "ChartLegendColor",
+        "ChartLegendDot",
+        "ChartLegendDotProps",
+        "ChartLegendProps",
+        "ChartLegendSize",
+        "ContentCard",
+        "ContentCardProps",
+        "ContentLabel",
+        "ContentLabelProps",
+        "ContentLabelSize",
+        "ControlLabel",
+        "ControlLabelProps",
+        "HintText",
+        "HintTextProps",
+        "KeyIcon",
+        "KeyIconAppearance",
+        "KeyIconColor",
+        "KeyIconProps",
+        "KeyIconSize",
+        "Label",
+        "LabelProps",
+        "PasswordStrength",
+        "PasswordStrengthLevel",
+        "PasswordStrengthProps",
+        "chartLegendDotVariants",
+        "chartLegendVariants",
+        "contentCardVariants",
+        "contentLabelVariants",
+        "hintTextVariants",
+        "keyIconVariants",
+        "labelRowVariants",
+        "labelVariants",
+        "passwordStrengthVariants"
+      ],
+      "provides": [
+        "ChartLegend",
+        "ChartLegendDot",
+        "ContentCard",
+        "ContentLabel",
+        "ControlLabel",
+        "HintText",
+        "KeyIcon",
+        "Label",
+        "PasswordStrength"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Modal",
+      "dir": "modal",
+      "exports": [
+        "Modal",
+        "ModalHeaderVariantProps",
+        "ModalProps",
+        "ModalSize",
+        "ModalStatus",
+        "ModalVariantProps",
+        "StatusModal",
+        "StatusModalProps",
+        "modalBodyVariants",
+        "modalFooterVariants",
+        "modalHeaderVariants",
+        "modalOverlayVariants",
+        "modalPanelVariants"
+      ],
+      "provides": [
+        "Modal",
+        "ModalBody",
+        "ModalFooter",
+        "ModalHeader",
+        "ModalOverlay",
+        "ModalPanel",
+        "StatusModal"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon",
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-dismissable",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Pagination",
+      "dir": "pagination",
+      "exports": [
+        "Pagination",
+        "PaginationAlign",
+        "PaginationDeviceMode",
+        "PaginationEllipsis",
+        "PaginationEllipsisProps",
+        "PaginationItem",
+        "PaginationItemProps",
+        "PaginationItemVariantProps",
+        "PaginationLabels",
+        "PaginationProps",
+        "PaginationSlot",
+        "PaginationType",
+        "PaginationVariantProps",
+        "getPaginationRange",
+        "paginationEllipsisVariants",
+        "paginationGroupVariants",
+        "paginationItemVariants",
+        "paginationSummaryVariants",
+        "paginationVariants"
+      ],
+      "provides": [
+        "Pagination",
+        "PaginationEllipsis",
+        "PaginationGroup",
+        "PaginationItem",
+        "PaginationSummary"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "dropdown",
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "lib/cn",
+          "lib/numerals",
+          "lib/slot",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "ProgressBar",
+      "dir": "progress-bar",
+      "exports": [
+        "ProgressBar",
+        "ProgressBarProps",
+        "ProgressCircle",
+        "ProgressCircleProps",
+        "ProgressCircleSize",
+        "ProgressCircleVariantProps",
+        "ProgressColor",
+        "ProgressFillVariantProps",
+        "ProgressLabelPosition",
+        "ProgressLabelVariantProps",
+        "progressCircleStrokeVariants",
+        "progressCircleVariants",
+        "progressFillVariants",
+        "progressLabelVariants",
+        "progressTrackVariants"
+      ],
+      "provides": [
+        "ProgressBar",
+        "ProgressCircle",
+        "ProgressCircleStroke",
+        "ProgressCommon",
+        "ProgressFill",
+        "ProgressLabel",
+        "ProgressTrack"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "QuickActions",
+      "dir": "quick-actions",
+      "exports": [
+        "QuickActionAppearance",
+        "QuickActionIconVariantProps",
+        "QuickActionItem",
+        "QuickActionItemLayout",
+        "QuickActionItemProps",
+        "QuickActionItemVariantProps",
+        "QuickActionSize",
+        "QuickActionTone",
+        "QuickActions",
+        "QuickActionsLayout",
+        "QuickActionsProps",
+        "QuickActionsVariantProps",
+        "quickActionDescriptionVariants",
+        "quickActionIconVariants",
+        "quickActionItemVariants",
+        "quickActionLabelVariants",
+        "quickActionShortcutVariants",
+        "quickActionsVariants"
+      ],
+      "provides": [
+        "QuickActionDescription",
+        "QuickActionIcon",
+        "QuickActionItem",
+        "QuickActionLabel",
+        "QuickActionShortcut",
+        "QuickActions"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn",
+          "lib/slot"
+        ]
+      }
+    },
+    {
+      "name": "Radio",
+      "dir": "radio",
+      "exports": [
+        "Radio",
+        "RadioCard",
+        "RadioCardProps",
+        "RadioGroup",
+        "RadioGroupProps",
+        "RadioGroupVariantProps",
+        "RadioOrientation",
+        "RadioProps",
+        "RadioVariantProps",
+        "radioCardVariants",
+        "radioControlVariants",
+        "radioDescriptionVariants",
+        "radioGroupVariants",
+        "radioIndicatorVariants",
+        "radioLabelVariants",
+        "radioRootVariants"
+      ],
+      "provides": [
+        "Radio",
+        "RadioCard",
+        "RadioControl",
+        "RadioDescription",
+        "RadioGroup",
+        "RadioIndicator",
+        "RadioLabel",
+        "RadioRoot"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Rating",
+      "dir": "rating",
+      "exports": [
+        "RATING_BAR_EMOJIS",
+        "Rating",
+        "RatingAlignment",
+        "RatingBar",
+        "RatingBarArea",
+        "RatingBarAreaProps",
+        "RatingBarLabels",
+        "RatingBarProps",
+        "RatingBarType",
+        "RatingBarVariantProps",
+        "RatingEmpty",
+        "RatingFillVariantProps",
+        "RatingItemVariantProps",
+        "RatingLabels",
+        "RatingProps",
+        "RatingReviewVariantProps",
+        "RatingType",
+        "ratingBarAreaVariants",
+        "ratingBarInputVariants",
+        "ratingBarItemVariants",
+        "ratingBarVariants",
+        "ratingFillVariants",
+        "ratingGlyphVariants",
+        "ratingInputVariants",
+        "ratingItemVariants",
+        "ratingReviewVariants",
+        "ratingValueVariants",
+        "ratingVariants"
+      ],
+      "provides": [
+        "Rating",
+        "RatingBar",
+        "RatingBarArea",
+        "RatingFill",
+        "RatingGlyph",
+        "RatingInput",
+        "RatingItem",
+        "RatingReview",
+        "RatingValue"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "Slider",
+      "dir": "slider",
+      "exports": [
+        "Slider",
+        "SliderProps",
+        "SliderValue",
+        "sliderHeaderVariants",
+        "sliderRangeVariants",
+        "sliderRootVariants",
+        "sliderThumbVariants",
+        "sliderTooltipVariants",
+        "sliderTrackVariants"
+      ],
+      "provides": [
+        "Slider",
+        "SliderHeader",
+        "SliderRange",
+        "SliderRoot",
+        "SliderThumb",
+        "SliderTooltip",
+        "SliderTrack"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "StepIndicator",
+      "dir": "step-indicator",
+      "exports": [
+        "Step",
+        "StepIndicator",
+        "StepIndicatorLabels",
+        "StepIndicatorProps",
+        "StepIndicatorVariantProps",
+        "StepMarkerVariantProps",
+        "StepOrientation",
+        "StepProps",
+        "StepStatus",
+        "StepperDot",
+        "StepperDotProps",
+        "StepperDotSize",
+        "StepperDotVariantProps",
+        "stepConnectorVariants",
+        "stepDescriptionVariants",
+        "stepIndicatorVariants",
+        "stepItemVariants",
+        "stepLabelVariants",
+        "stepMarkerVariants",
+        "stepperDotVariants"
+      ],
+      "provides": [
+        "Step",
+        "StepConnector",
+        "StepDescription",
+        "StepIndicator",
+        "StepItem",
+        "StepLabel",
+        "StepMarker",
+        "StepperDot"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "Switch",
+      "dir": "switch",
+      "exports": [
+        "Switch",
+        "SwitchProps",
+        "switchControlVariants",
+        "switchRootVariants",
+        "switchThumbVariants"
+      ],
+      "provides": [
+        "Switch",
+        "SwitchControl",
+        "SwitchRoot",
+        "SwitchThumb"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Table",
+      "dir": "table",
+      "exports": [
+        "SortDirection",
+        "Table",
+        "TableAlign",
+        "TableBody",
+        "TableBodyProps",
+        "TableCell",
+        "TableCellProps",
+        "TableCellVariantProps",
+        "TableFooter",
+        "TableFooterProps",
+        "TableHead",
+        "TableHeadProps",
+        "TableHeadState",
+        "TableHeader",
+        "TableHeaderProps",
+        "TablePriority",
+        "TableProps",
+        "TableRow",
+        "TableRowProps",
+        "TableSize",
+        "TableVariantProps",
+        "tableCaptionVariants",
+        "tableCellVariants",
+        "tableHeadVariants",
+        "tableHeaderVariants",
+        "tableRowVariants",
+        "tableScrollVariants",
+        "tableSortButtonVariants",
+        "tableVariants"
+      ],
+      "provides": [
+        "Table",
+        "TableCaption",
+        "TableCell",
+        "TableHead",
+        "TableHeader",
+        "TableRow",
+        "TableScroll",
+        "TableSortButton"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Tabs",
+      "dir": "tabs",
+      "exports": [
+        "Tabs",
+        "TabsActivationMode",
+        "TabsAppearance",
+        "TabsContent",
+        "TabsContentProps",
+        "TabsDivider",
+        "TabsDividerProps",
+        "TabsList",
+        "TabsListProps",
+        "TabsListVariantProps",
+        "TabsOrientation",
+        "TabsProps",
+        "TabsTrigger",
+        "TabsTriggerProps",
+        "TabsTriggerVariantProps",
+        "tabsContentVariants",
+        "tabsDividerVariants",
+        "tabsListVariants",
+        "tabsTriggerVariants"
+      ],
+      "provides": [
+        "Tabs",
+        "TabsContent",
+        "TabsDivider",
+        "TabsList",
+        "TabsTrigger"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "Tag",
+      "dir": "tag",
+      "exports": [
+        "Tag",
+        "TagAppearance",
+        "TagGroup",
+        "TagGroupProps",
+        "TagProps",
+        "TagVariantProps",
+        "tagContentVariants",
+        "tagDismissVariants",
+        "tagGroupVariants",
+        "tagVariants"
+      ],
+      "provides": [
+        "Tag",
+        "TagContent",
+        "TagDismiss",
+        "TagGroup"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "TextArea",
+      "dir": "text-area",
+      "exports": [
+        "TextArea",
+        "TextAreaControlVariantProps",
+        "TextAreaProps",
+        "TextAreaResize",
+        "TextAreaVariantProps",
+        "textAreaControlVariants",
+        "textAreaCounterVariants",
+        "textAreaFieldVariants",
+        "textAreaFooterVariants"
+      ],
+      "provides": [
+        "TextArea",
+        "TextAreaControl",
+        "TextAreaCounter",
+        "TextAreaField",
+        "TextAreaFooter"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-id",
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "TextInput",
+      "dir": "text-input",
+      "exports": [
+        "CounterInput",
+        "CounterInputProps",
+        "DigitInput",
+        "DigitInputProps",
+        "InlineInput",
+        "InlineInputProps",
+        "InputSelect",
+        "InputSelectProps",
+        "InputSelectSize",
+        "InputSelectVariantProps",
+        "TEXT_INPUT_TYPE_PRESETS",
+        "TagInput",
+        "TagInputProps",
+        "TextInput",
+        "TextInputProps",
+        "TextInputSize",
+        "TextInputType",
+        "TextInputVariantProps",
+        "inputSelectVariants",
+        "textInputAdornmentVariants",
+        "textInputAffixVariants",
+        "textInputAttachedVariants",
+        "textInputControlVariants",
+        "textInputFieldVariants",
+        "textInputPrefixVariants",
+        "textInputShortcutVariants",
+        "textInputSuffixVariants"
+      ],
+      "provides": [
+        "CounterInput",
+        "DigitInput",
+        "InlineInput",
+        "InputSelect",
+        "TagInput",
+        "TextInput",
+        "TextInputAdornment",
+        "TextInputAffix",
+        "TextInputAttached",
+        "TextInputControl",
+        "TextInputField",
+        "TextInputPrefix",
+        "TextInputShortcut",
+        "TextInputSuffix"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "button",
+          "icon",
+          "key-components",
+          "tag"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn",
+          "lib/numerals"
+        ]
+      }
+    },
+    {
+      "name": "Toggle",
+      "dir": "toggle",
+      "exports": [
+        "Toggle",
+        "ToggleGroup",
+        "ToggleGroupProps",
+        "ToggleProps",
+        "ToggleVariantProps",
+        "toggleGroupVariants",
+        "toggleVariants"
+      ],
+      "provides": [
+        "Toggle",
+        "ToggleGroup"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [
+          "key-components"
+        ],
+        "shared": [
+          "hooks/use-controllable-state",
+          "hooks/use-id",
+          "lib/cn"
+        ]
+      }
+    },
+    {
+      "name": "Tooltip",
+      "dir": "tooltip",
+      "exports": [
+        "Tooltip",
+        "TooltipAlign",
+        "TooltipBaseProps",
+        "TooltipPlacement",
+        "TooltipProps",
+        "TooltipSide",
+        "TooltipSize",
+        "TooltipSurfaceVariantProps",
+        "TooltipVariantProps",
+        "tooltipArrowSurfaceVariants",
+        "tooltipArrowVariants",
+        "tooltipSurfaceVariants",
+        "tooltipVariants"
+      ],
+      "provides": [
+        "Tooltip",
+        "TooltipArrow",
+        "TooltipArrowSurface",
+        "TooltipBase",
+        "TooltipSurface"
+      ],
+      "dependencies": {
+        "npm": [
+          "@floating-ui/react",
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "hooks/use-anchored",
+          "hooks/use-controllable-state",
+          "lib/cn",
+          "lib/slot"
+        ]
+      }
+    },
+    {
+      "name": "Typography",
+      "dir": "typography",
+      "exports": [
+        "Typography",
+        "TypographyOwnProps",
+        "TypographyProps",
+        "TypographyVariant",
+        "TypographyVariantProps",
+        "defaultElementForVariant",
+        "typographyVariants"
+      ],
+      "provides": [
+        "Typography",
+        "TypographyOwn"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn",
+          "lib/polymorphic"
+        ]
+      }
+    },
+    {
+      "name": "VideoPlayer",
+      "dir": "video-player",
+      "exports": [
+        "VideoPlayer",
+        "VideoPlayerLabels",
+        "VideoPlayerProps",
+        "VideoPlayerVariantProps",
+        "VideoRatio",
+        "VideoSize",
+        "videoButtonVariants",
+        "videoControlsVariants",
+        "videoElementVariants",
+        "videoOverlayButtonVariants",
+        "videoPlayerVariants",
+        "videoTimeVariants"
+      ],
+      "provides": [
+        "VideoButton",
+        "VideoControls",
+        "VideoElement",
+        "VideoOverlayButton",
+        "VideoPlayer",
+        "VideoTime"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon",
+          "slider"
+        ],
+        "shared": [
+          "lib/cn",
+          "lib/numerals",
+          "providers/direction"
+        ]
+      }
+    }
+  ]
+}

@@ -242,3 +242,38 @@ Foundation and the first eight components are done. Next, in order:
 6. **Theme-builder dashboard** — writes CSS variables live, exports a theme stylesheet
 
 Overlays should be built on Radix UI or Base UI rather than from scratch. Focus trapping, popover positioning and combobox keyboard behaviour are months of work each, and the value of this system is the Persian typography and RTL correctness — not a reimplementation of `aria-haspopup`.
+
+---
+
+## نسخه ۰.۲.۰ — رجیستری و لایه‌ی رفتار
+
+دو تغییر زیرساختی. هیچ پراپی عوض نشده؛ ۳۷۴ تست بدون ویرایش پاس می‌شوند.
+
+### کپی کردن کامپوننت در ریپوی خودت
+
+```bash
+npx nili init
+npx nili add alert       # button، icon و typography را هم می‌آورد
+npx nili list
+npx nili diff
+```
+
+مسیرهای ایمپورت بر اساس `components.json` بازنویسی می‌شوند:
+`../../lib/cn` → `@/lib/cn`.
+
+### رجیستری
+
+```bash
+npm run registry          # ساخت registry/ از روی کد
+npm run registry:check    # در CI — اگر عقب باشد می‌افتد
+```
+
+خروجی امروز: ۳۷ پوشه، ۲۲۰ کامپوننت، ۱۹۶ محور واریانت، ۸۶۹ پراپ.
+منبع: `cva` و `*.types.ts`. هیچ لیستی دست‌نویس نیست.
+
+### اورلی‌ها
+
+`tooltip`, `dropdown`, `modal`, `drawer`, `date-picker` روی
+`@floating-ui/react` می‌نشینند. تولتیپ مهاجرت داده شده؛ بقیه با همان الگو.
+
+جزئیات و دلیل انتخاب‌ها: `docs/ADR-0.2.0.md`.

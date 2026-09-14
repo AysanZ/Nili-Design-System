@@ -1,0 +1,354 @@
+{
+  "dir": "modal",
+  "name": "Modal",
+  "type": "registry:component",
+  "files": [
+    "src/components/modal/index.ts",
+    "src/components/modal/modal.styles.ts",
+    "src/components/modal/modal.tsx",
+    "src/components/modal/modal.types.ts"
+  ],
+  "exports": [
+    "Modal",
+    "ModalHeaderVariantProps",
+    "ModalProps",
+    "ModalSize",
+    "ModalStatus",
+    "ModalVariantProps",
+    "StatusModal",
+    "StatusModalProps",
+    "modalBodyVariants",
+    "modalFooterVariants",
+    "modalHeaderVariants",
+    "modalOverlayVariants",
+    "modalPanelVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon",
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-dismissable",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Modal",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'children' >"
+      ],
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "doc": null,
+          "control": "boolean"
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma header \"Right Icon\" — a free leading slot. Wins over `status`.",
+          "control": "slot"
+        },
+        "status": {
+          "type": "ModalStatus",
+          "required": false,
+          "doc": "Picks the default KeyIcon and its colour.",
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info"
+          ]
+        },
+        "headerSize": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": "Figma header Medium (80) / Small (56).",
+          "control": "select",
+          "options": [
+            "sm",
+            "md"
+          ]
+        },
+        "alignment": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": "Figma Status Modal alignment. `vertical` centres icon, title and text.",
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "size": {
+          "type": "ModalSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "xl",
+            "lg",
+            "md",
+            "sm"
+          ]
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "stretchFooter": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "showClose": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "closeLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "closeOnOutsideClick": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "closeOnEscape": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "container": {
+          "type": "HTMLElement | null",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "ModalBody",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "sm",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ModalFooter",
+      "exported": false,
+      "variants": {
+        "stretch": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "stretch": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "stretch": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "ModalHeader",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "md"
+        ],
+        "alignment": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm",
+        "alignment": "horizontal"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "sm",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md"
+          ]
+        },
+        "alignment": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ModalOverlay",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ModalPanel",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg' | 'xl'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        }
+      }
+    },
+    {
+      "name": "StatusModal",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ModalProps, 'alignment' | 'status' >"
+      ],
+      "props": {
+        "status": {
+          "type": "ModalStatus",
+          "required": true,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info"
+          ]
+        },
+        "alignment": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "dir": "tag",
+  "name": "Tag",
+  "type": "registry:component",
+  "files": [
+    "src/components/tag/index.ts",
+    "src/components/tag/tag.styles.ts",
+    "src/components/tag/tag.tsx",
+    "src/components/tag/tag.types.ts"
+  ],
+  "exports": [
+    "Tag",
+    "TagAppearance",
+    "TagGroup",
+    "TagGroupProps",
+    "TagProps",
+    "TagVariantProps",
+    "tagContentVariants",
+    "tagDismissVariants",
+    "tagGroupVariants",
+    "tagVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Tag",
+      "exported": true,
+      "variants": {
+        "appearance": [
+          "stroke",
+          "gray"
+        ],
+        "dismissible": [
+          "true",
+          "false"
+        ],
+        "disabled": [
+          "true",
+          "false"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "stroke",
+        "dismissible": false,
+        "disabled": false,
+        "selected": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'onSelect' >"
+      ],
+      "props": {
+        "appearance": {
+          "type": "TagAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "stroke",
+            "gray"
+          ],
+          "default": "stroke",
+          "source": "cva"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": "The tag is currently applied — adds `aria-pressed` when selectable.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Leading slot. Covers all six of Figma's `Type` values — Left Icon, Avatar, Country, Brand, Company — without making them mutually exclusive.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text after the label. Figma's \"Sublabel\".",
+          "control": "slot"
+        },
+        "onSelect": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Makes the label a button — a filter chip you can toggle.",
+          "control": "handler"
+        },
+        "onDismiss": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Shows the remove button.",
+          "control": "handler"
+        },
+        "dismissLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the remove button. Required alongside `onDismiss`: an ✕ has no accessible name, and \"button\" is all a screen reader would get.",
+          "control": "text"
+        },
+        "dismissible": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TagContent",
+      "exported": false,
+      "variants": {
+        "interactive": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "interactive": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "interactive": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TagDismiss",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TagGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the set, e.g. `'Tags'`.",
+          "control": "text"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "dir": "video-player",
+  "name": "VideoPlayer",
+  "type": "registry:component",
+  "files": [
+    "src/components/video-player/index.ts",
+    "src/components/video-player/video-player.styles.ts",
+    "src/components/video-player/video-player.tsx",
+    "src/components/video-player/video-player.types.ts"
+  ],
+  "exports": [
+    "VideoPlayer",
+    "VideoPlayerLabels",
+    "VideoPlayerProps",
+    "VideoPlayerVariantProps",
+    "VideoRatio",
+    "VideoSize",
+    "videoButtonVariants",
+    "videoControlsVariants",
+    "videoElementVariants",
+    "videoOverlayButtonVariants",
+    "videoPlayerVariants",
+    "videoTimeVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon",
+      "slider"
+    ],
+    "shared": [
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "VideoButton",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "VideoControls",
+      "exported": false,
+      "variants": {
+        "visible": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "visible": true
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "visible": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "VideoElement",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "VideoOverlayButton",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "VideoPlayer",
+      "exported": true,
+      "variants": {
+        "size": [
+          "md",
+          "sm"
+        ],
+        "ratio": [
+          "16/9",
+          "4/3",
+          "1/1",
+          "auto"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "ratio": "16/9"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'video'>, 'src' | 'poster' | 'controls' | 'children' | 'autoPlay' | 'loop' | 'muted' >"
+      ],
+      "props": {
+        "src": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "poster": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "tracks": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Caption and subtitle tracks. Pass real `<track>` elements — captions are the accessibility story of this component, not an optional extra.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "VideoSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "ratio": {
+          "type": "VideoRatio",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "16/9",
+            "4/3",
+            "1/1",
+            "auto"
+          ],
+          "default": "16/9",
+          "source": "cva"
+        },
+        "autoPlay": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "loop": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "muted": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Starts muted. Required by browsers for autoplay to be allowed at all.",
+          "control": "boolean"
+        },
+        "nativeControls": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Hand control back to the browser's own UI. Worth doing when the platform player is better than anything you would ship — picture-in-picture, AirPlay, and caption styling all come free with it.",
+          "control": "boolean"
+        },
+        "seekStep": {
+          "type": "number",
+          "required": false,
+          "doc": "Seconds jumped by the arrow keys.",
+          "control": "number"
+        },
+        "onPlayChange": {
+          "type": "(playing: boolean) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "onTimeChange": {
+          "type": "(currentTime: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the timestamps (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "VideoPlayerLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "VideoTime",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "dir": "date-picker",
+  "name": "DatePicker",
+  "type": "registry:component",
+  "files": [
+    "src/components/date-picker/date-picker.styles.ts",
+    "src/components/date-picker/date-picker.tsx",
+    "src/components/date-picker/date-picker.types.ts",
+    "src/components/date-picker/index.ts"
+  ],
+  "exports": [
+    "CalendarSystem",
+    "DatePicker",
+    "DatePickerFooter",
+    "DatePickerProps",
+    "DatePreset",
+    "DateRange",
+    "DateRangePicker",
+    "DateRangePickerProps",
+    "DayCellVariantProps",
+    "calendarToggleVariants",
+    "datePickerFooterVariants",
+    "datePickerVariants",
+    "dateSelectorVariants",
+    "dayCellVariants",
+    "dayLabelVariants",
+    "periodRangeItemVariants",
+    "periodRangeVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "lib/calendar",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "CalendarBase",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "calendar": {
+          "type": "CalendarSystem",
+          "required": false,
+          "doc": "`'jalali'` (Solar Hijri — Shamsi, also called Jalali) or `'gregorian'`. Defaults to Jalali under a Persian locale and Gregorian otherwise.",
+          "control": "select",
+          "options": [
+            "jalali",
+            "gregorian"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag for month names, weekday names and numerals.",
+          "control": "text"
+        },
+        "allowCalendarSwitch": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Let the user switch calendars from a toggle in the header.",
+          "control": "boolean"
+        },
+        "minDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "maxDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "markedDates": {
+          "type": "Date[]",
+          "required": false,
+          "doc": "Days that get a marker dot — Figma's \"Marked\" state.",
+          "control": "list"
+        },
+        "isDateDisabled": {
+          "type": "(date: Date) => boolean",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "labels": {
+          "type": "{\n    previousMonth?: string;\n    nextMonth?: string;\n    calendarSwitch?: string;\n    jalali?: string;\n    gregorian?: string;\n  }",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "CalendarGrid",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "calendar": {
+          "type": "CalendarSystem",
+          "required": true,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "jalali",
+            "gregorian"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "cursor": {
+          "type": "{ year: number; month: number }",
+          "required": true,
+          "doc": null,
+          "control": "none"
+        },
+        "isSelected": {
+          "type": "(date: Date) => boolean",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "isInRange": {
+          "type": "(date: Date) => boolean",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "rangeEdge": {
+          "type": "(date: Date) => 'start' | 'end' | 'both' | 'none'",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "isDisabled": {
+          "type": "(date: Date) => boolean",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "isMarked": {
+          "type": "(date: Date) => boolean",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "onSelect": {
+          "type": "(date: Date) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "onHover": {
+          "type": "(date: Date | null) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        }
+      }
+    },
+    {
+      "name": "CalendarToggle",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DatePicker",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "CalendarBaseProps",
+        "Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'>"
+      ],
+      "props": {
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma footer — typically `<DatePickerFooter>` with Cancel / Apply.",
+          "control": "slot"
+        },
+        "value": {
+          "type": "Date | null",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "defaultValue": {
+          "type": "Date | null",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "onChange": {
+          "type": "(date: Date | null) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        }
+      }
+    },
+    {
+      "name": "DatePickerFooter",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DateRangePicker",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "CalendarBaseProps",
+        "Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'>"
+      ],
+      "props": {
+        "value": {
+          "type": "DateRange",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "defaultValue": {
+          "type": "DateRange",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "onChange": {
+          "type": "(range: DateRange) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "presets": {
+          "type": "DatePreset[]",
+          "required": false,
+          "doc": "Shortcut column — Figma's \"Period Range\".",
+          "control": "list"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "DateSelector",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DayCell",
+      "exported": false,
+      "variants": {
+        "outside": [
+          "true",
+          "false"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ],
+        "inRange": [
+          "true",
+          "false"
+        ],
+        "rangeEdge": [
+          "start",
+          "end",
+          "both",
+          "none"
+        ],
+        "today": [
+          "true",
+          "false"
+        ],
+        "marked": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "outside": false,
+        "selected": false,
+        "inRange": false,
+        "rangeEdge": "none",
+        "today": false,
+        "marked": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "outside": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "selected": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "inRange": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "rangeEdge": {
+          "type": "'start' | 'end' | 'both' | 'none'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "none",
+          "source": "cva",
+          "options": [
+            "start",
+            "end",
+            "both",
+            "none"
+          ]
+        },
+        "today": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "marked": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "DayLabel",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "Header",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "calendar": {
+          "type": "CalendarSystem",
+          "required": true,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "jalali",
+            "gregorian"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "cursor": {
+          "type": "{ year: number; month: number }",
+          "required": true,
+          "doc": null,
+          "control": "none"
+        },
+        "onStep": {
+          "type": "(delta: number) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "allowCalendarSwitch": {
+          "type": "boolean",
+          "required": true,
+          "doc": null,
+          "control": "boolean"
+        },
+        "onCalendarChange": {
+          "type": "(system: CalendarSystem) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "labels": {
+          "type": "NonNullable<DatePickerProps['labels']>",
+          "required": true,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "PeriodRange",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "PeriodRangeItem",
+      "exported": false,
+      "variants": {
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "selected": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "selected": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

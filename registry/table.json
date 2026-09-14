@@ -1,0 +1,423 @@
+{
+  "dir": "table",
+  "name": "Table",
+  "type": "registry:component",
+  "files": [
+    "src/components/table/index.ts",
+    "src/components/table/table.styles.ts",
+    "src/components/table/table.tsx",
+    "src/components/table/table.types.ts"
+  ],
+  "exports": [
+    "SortDirection",
+    "Table",
+    "TableAlign",
+    "TableBody",
+    "TableBodyProps",
+    "TableCell",
+    "TableCellProps",
+    "TableCellVariantProps",
+    "TableFooter",
+    "TableFooterProps",
+    "TableHead",
+    "TableHeadProps",
+    "TableHeadState",
+    "TableHeader",
+    "TableHeaderProps",
+    "TablePriority",
+    "TableProps",
+    "TableRow",
+    "TableRowProps",
+    "TableSize",
+    "TableVariantProps",
+    "tableCaptionVariants",
+    "tableCellVariants",
+    "tableHeadVariants",
+    "tableHeaderVariants",
+    "tableRowVariants",
+    "tableScrollVariants",
+    "tableSortButtonVariants",
+    "tableVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Table",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'table'>"
+      ],
+      "props": {
+        "size": {
+          "type": "TableSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "xl",
+            "lg"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. A table with no name is announced as \"table\" and nothing else, which is useless on a page with three of them.",
+          "control": "text"
+        },
+        "caption": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Visible caption, rendered above the table. Also names it.",
+          "control": "slot"
+        },
+        "stickyHeader": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Keeps the header visible while the body scrolls.",
+          "control": "boolean"
+        },
+        "scrollable": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Wrap in a scrollable, keyboard-focusable region. On by default: a table that overflows horizontally is unreachable by keyboard otherwise.",
+          "control": "boolean"
+        },
+        "scrollClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Class for the scroll wrapper. Use `className` for the `<table>`.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "TableCaption",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TableCell",
+      "exported": true,
+      "variants": {
+        "size": [
+          "xl",
+          "lg"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ],
+        "priority": [
+          "leading",
+          "regular",
+          "passive",
+          "none"
+        ],
+        "numeric": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "xl",
+        "align": "start",
+        "priority": "regular",
+        "numeric": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'td'>, 'align' >"
+      ],
+      "props": {
+        "align": {
+          "type": "TableAlign",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "source": "cva"
+        },
+        "priority": {
+          "type": "TablePriority",
+          "required": false,
+          "doc": "Figma's `Priority` — how loudly the column reads. `leading` is the row's identity, `passive` is metadata the eye should skip, `none` drops the type styling so the cell can host a control.",
+          "control": "select",
+          "options": [
+            "leading",
+            "regular",
+            "passive",
+            "none"
+          ],
+          "default": "regular",
+          "source": "cva"
+        },
+        "numeric": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Tabular figures, so a column of numbers lines up.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "header": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Makes the cell a row header (`<th scope=\"row\">`). The first column of a data table usually is one, and marking it lets a screen reader say which row it is reading.",
+          "control": "boolean"
+        },
+        "size": {
+          "type": "'xl' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "xl",
+          "source": "cva",
+          "options": [
+            "xl",
+            "lg"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TableHead",
+      "exported": true,
+      "variants": {
+        "size": [
+          "xl",
+          "lg"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ],
+        "state": [
+          "default",
+          "disabled",
+          "empty"
+        ]
+      },
+      "defaultVariants": {
+        "size": "xl",
+        "align": "start",
+        "state": "default"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'th'>, 'align' >"
+      ],
+      "props": {
+        "align": {
+          "type": "TableAlign",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "source": "cva"
+        },
+        "state": {
+          "type": "TableHeadState",
+          "required": false,
+          "doc": "Figma's header `State`. `empty` marks a header with no label — the checkbox column — so it is not announced as naming its column.",
+          "control": "select",
+          "options": [
+            "default",
+            "disabled",
+            "empty"
+          ],
+          "default": "default",
+          "source": "cva"
+        },
+        "sortable": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Renders a sort button and manages `aria-sort` on the cell.",
+          "control": "boolean"
+        },
+        "sortDirection": {
+          "type": "SortDirection | null",
+          "required": false,
+          "doc": "Current direction, or `null` when this column is not the sort key.",
+          "control": "select",
+          "options": [
+            "desc",
+            "asc"
+          ]
+        },
+        "onSort": {
+          "type": "(direction: SortDirection) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "sortLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the sort button, e.g. `` (c) => `Sort by ${c}` ``.",
+          "control": "text"
+        },
+        "size": {
+          "type": "'xl' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "xl",
+          "source": "cva",
+          "options": [
+            "xl",
+            "lg"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TableHeader",
+      "exported": true,
+      "variants": {
+        "sticky": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "sticky": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "sticky": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TableRow",
+      "exported": true,
+      "variants": {
+        "interactive": [
+          "true",
+          "false"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "interactive": false,
+        "selected": false
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'tr'>"
+      ],
+      "props": {
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Highlights the row and adds `aria-selected`.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "interactive": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Hover affordance for a row that navigates. The click target must still be a real control *inside* the row — see the note in the component.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TableScroll",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TableSortButton",
+      "exported": false,
+      "variants": {
+        "align": [
+          "start",
+          "center",
+          "end"
+        ],
+        "sorted": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "align": "start",
+        "sorted": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "align": {
+          "type": "'start' | 'center' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "start",
+          "source": "cva",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ]
+        },
+        "sorted": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

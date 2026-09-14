@@ -1,0 +1,291 @@
+{
+  "dir": "tabs",
+  "name": "Tabs",
+  "type": "registry:component",
+  "files": [
+    "src/components/tabs/index.ts",
+    "src/components/tabs/tabs.styles.ts",
+    "src/components/tabs/tabs.tsx",
+    "src/components/tabs/tabs.types.ts"
+  ],
+  "exports": [
+    "Tabs",
+    "TabsActivationMode",
+    "TabsAppearance",
+    "TabsContent",
+    "TabsContentProps",
+    "TabsDivider",
+    "TabsDividerProps",
+    "TabsList",
+    "TabsListProps",
+    "TabsListVariantProps",
+    "TabsOrientation",
+    "TabsProps",
+    "TabsTrigger",
+    "TabsTriggerProps",
+    "TabsTriggerVariantProps",
+    "tabsContentVariants",
+    "tabsDividerVariants",
+    "tabsListVariants",
+    "tabsTriggerVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "Tabs",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Selected tab. Controlled.",
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onValueChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "orientation": {
+          "type": "TabsOrientation",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "appearance": {
+          "type": "TabsAppearance",
+          "required": false,
+          "doc": "Figma's `Style (Card | List)`. Vertical only — the horizontal tab menu has no style axis in the design.",
+          "control": "select",
+          "options": [
+            "card",
+            "list"
+          ]
+        },
+        "activationMode": {
+          "type": "TabsActivationMode",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "automatic",
+            "manual"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TabsContent",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "keepMounted": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Keep the panel mounted while hidden. Off by default: an unmounted panel cannot run effects or hold stale data. Turn it on to preserve scroll position, form state or a chart that is expensive to rebuild.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "TabsDivider",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TabsList",
+      "exported": true,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "appearance": [
+          "card",
+          "list"
+        ],
+        "stretch": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal",
+        "appearance": "list",
+        "stretch": false
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the tab set, e.g. `'Account settings'`.",
+          "control": "text"
+        },
+        "stretch": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Tabs share the width instead of hugging their labels.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "appearance": {
+          "type": "'card' | 'list'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "list",
+          "source": "cva",
+          "options": [
+            "card",
+            "list"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TabsTrigger",
+      "exported": true,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "appearance": [
+          "card",
+          "list"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal",
+        "appearance": "list",
+        "selected": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'value' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "doc": "Ties the tab to its panel. Must be unique within one `Tabs`.",
+          "control": "text"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's \"Left Icon\". Logical, so it leads in both directions.",
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's \"Right Icon\".",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's \"Number\" — a count or a `<Badge>`, after the label.",
+          "control": "slot"
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "appearance": {
+          "type": "'card' | 'list'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "list",
+          "source": "cva",
+          "options": [
+            "card",
+            "list"
+          ]
+        },
+        "selected": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+{
+  "dir": "button",
+  "name": "Button",
+  "type": "registry:component",
+  "files": [
+    "src/components/button/button-group.styles.ts",
+    "src/components/button/button-group.tsx",
+    "src/components/button/button.styles.ts",
+    "src/components/button/button.tsx",
+    "src/components/button/button.types.ts",
+    "src/components/button/compact-button.styles.ts",
+    "src/components/button/compact-button.tsx",
+    "src/components/button/fancy-button.styles.ts",
+    "src/components/button/fancy-button.tsx",
+    "src/components/button/index.ts",
+    "src/components/button/link-button.styles.ts",
+    "src/components/button/link-button.tsx"
+  ],
+  "exports": [
+    "BUTTON_APPEARANCES",
+    "BUTTON_COLORS",
+    "BUTTON_SIZES",
+    "Button",
+    "ButtonAppearance",
+    "ButtonColor",
+    "ButtonGroup",
+    "ButtonGroupItem",
+    "ButtonGroupItemProps",
+    "ButtonGroupOrientation",
+    "ButtonGroupProps",
+    "ButtonGroupSize",
+    "ButtonGroupVariantProps",
+    "ButtonProps",
+    "ButtonSize",
+    "ButtonVariantProps",
+    "COMPACT_BUTTON_APPEARANCES",
+    "CompactButton",
+    "CompactButtonAppearance",
+    "CompactButtonProps",
+    "CompactButtonSize",
+    "CompactButtonVariantProps",
+    "FANCY_BUTTON_COLORS",
+    "FANCY_BUTTON_SIZES",
+    "FancyButton",
+    "FancyButtonColor",
+    "FancyButtonProps",
+    "FancyButtonSize",
+    "FancyButtonVariantProps",
+    "LINK_BUTTON_COLORS",
+    "LinkButton",
+    "LinkButtonColor",
+    "LinkButtonProps",
+    "LinkButtonSize",
+    "LinkButtonVariantProps",
+    "buttonGroupItemPadding",
+    "buttonGroupItemVariants",
+    "buttonGroupVariants",
+    "buttonVariants",
+    "compactButtonVariants",
+    "fancyButtonVariants",
+    "linkButtonVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn",
+      "lib/slot"
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "exported": true,
+      "variants": {
+        "color": [
+          "primary",
+          "neutral",
+          "error",
+          "success",
+          "basic"
+        ],
+        "appearance": [
+          "filled",
+          "stroke",
+          "lighter",
+          "ghost"
+        ],
+        "size": [
+          "md",
+          "sm",
+          "xs",
+          "2xs"
+        ],
+        "iconOnly": [
+          "true",
+          "false"
+        ],
+        "fullWidth": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "color": "primary",
+        "appearance": "filled",
+        "size": "md",
+        "iconOnly": false,
+        "fullWidth": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
+      ],
+      "props": {
+        "color": {
+          "type": "ButtonColor",
+          "required": false,
+          "doc": "Figma `🧩 Type` — Primary · Neutral · Error · Success.",
+          "control": "select",
+          "options": [
+            "primary",
+            "neutral",
+            "error",
+            "success",
+            "basic"
+          ],
+          "default": "primary",
+          "source": "cva"
+        },
+        "appearance": {
+          "type": "ButtonAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "filled",
+            "stroke",
+            "lighter",
+            "ghost"
+          ],
+          "default": "filled",
+          "source": "cva"
+        },
+        "size": {
+          "type": "ButtonSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs",
+            "2xs"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "iconOnly": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Square icon-only button. Requires `aria-label` — a button whose only content is an SVG has no accessible name otherwise.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows a spinner and blocks interaction without collapsing the layout.",
+          "control": "boolean"
+        },
+        "loadingLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Announced while `loading`, e.g. `'Sending'`.",
+          "control": "text"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Render the child element instead of a `<button>`, keeping every style and handler. Use for links: `<Button asChild><a href=\"…\">…</a></Button>`.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "ButtonGroup",
+      "exported": true,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal"
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "size": {
+          "type": "ButtonGroupSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "sm",
+            "xs",
+            "2xs"
+          ]
+        },
+        "orientation": {
+          "type": "ButtonGroupOrientation",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "source": "cva"
+        },
+        "role": {
+          "type": "'toolbar' | 'radiogroup' | 'group'",
+          "required": false,
+          "doc": "`'toolbar'` (default) for a row of independent actions. Use `'radiogroup'` when the segments are mutually exclusive choices — the roles are read out differently, and only one of them promises \"pick exactly one\".",
+          "control": "select",
+          "options": [
+            "toolbar",
+            "radiogroup",
+            "group"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "ButtonGroupItem",
+      "exported": true,
+      "variants": {
+        "size": [
+          "sm",
+          "xs",
+          "2xs"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ],
+        "iconOnly": [
+          "true",
+          "false"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm",
+        "selected": false,
+        "iconOnly": false,
+        "orientation": "horizontal"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
+      ],
+      "props": {
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "iconOnly": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "size": {
+          "type": "ButtonGroupSize",
+          "required": false,
+          "doc": "Overrides the size inherited from the group. Rarely needed.",
+          "control": "select",
+          "options": [
+            "sm",
+            "xs",
+            "2xs"
+          ],
+          "default": "sm",
+          "source": "cva"
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CompactButton",
+      "exported": true,
+      "variants": {
+        "appearance": [
+          "stroke",
+          "ghost",
+          "white",
+          "error",
+          "inherit"
+        ],
+        "size": [
+          "lg",
+          "md"
+        ],
+        "fullRadius": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "stroke",
+        "size": "lg",
+        "fullRadius": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' | 'children' >"
+      ],
+      "props": {
+        "appearance": {
+          "type": "CompactButtonAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "stroke",
+            "ghost",
+            "white",
+            "error",
+            "inherit"
+          ],
+          "default": "stroke",
+          "source": "cva"
+        },
+        "size": {
+          "type": "CompactButtonSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "md"
+          ],
+          "default": "lg",
+          "source": "cva"
+        },
+        "fullRadius": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Pill instead of a rounded square.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": "The glyph. Required — this control is always icon-only.",
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible name. Required, not optional: a button whose only content is an SVG has no accessible name at all, so the type system asks for one.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "FancyButton",
+      "exported": true,
+      "variants": {
+        "color": [
+          "neutral",
+          "primary",
+          "error",
+          "success",
+          "basic"
+        ],
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ],
+        "fullWidth": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "color": "primary",
+        "size": "md",
+        "fullWidth": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
+      ],
+      "props": {
+        "color": {
+          "type": "FancyButtonColor",
+          "required": false,
+          "doc": "Figma `🧩 Type` — Neutral · Primary · Error · Success · Basic.",
+          "control": "select",
+          "options": [
+            "neutral",
+            "primary",
+            "error",
+            "success",
+            "basic"
+          ],
+          "default": "primary",
+          "source": "cva"
+        },
+        "size": {
+          "type": "FancyButtonSize",
+          "required": false,
+          "doc": "Figma `📏 Size` — Medium (40) · Small (36) · X-Small (32).",
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "LinkButton",
+      "exported": true,
+      "variants": {
+        "color": [
+          "gray",
+          "black",
+          "primary",
+          "error",
+          "success",
+          "inherit"
+        ],
+        "size": [
+          "md",
+          "sm"
+        ],
+        "underline": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "color": "gray",
+        "size": "md",
+        "underline": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'a'>, 'color' >"
+      ],
+      "props": {
+        "color": {
+          "type": "LinkButtonColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "gray",
+            "black",
+            "primary",
+            "error",
+            "success",
+            "inherit"
+          ],
+          "default": "gray",
+          "source": "cva"
+        },
+        "size": {
+          "type": "LinkButtonSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "underline": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Render the child element instead of an `<a>` — for router links.",
+          "control": "boolean"
+        }
+      }
+    }
+  ]
+}

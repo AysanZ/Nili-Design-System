@@ -1,0 +1,73 @@
+{
+  "dir": "empty-state",
+  "name": "EmptyState",
+  "type": "registry:component",
+  "files": [
+    "src/components/empty-state/empty-state.tsx",
+    "src/components/empty-state/index.ts"
+  ],
+  "exports": [
+    "EmptyState",
+    "EmptyStateProps",
+    "EmptyStateSize",
+    "emptyStateVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "EmptyState",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
+      ],
+      "props": {
+        "illustration": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "SVG exported from the Figma Empty States page, or any node.",
+          "control": "slot"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "One or two buttons.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "EmptyStateSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "md",
+            "sm"
+          ]
+        }
+      }
+    }
+  ]
+}

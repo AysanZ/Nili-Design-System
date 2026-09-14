@@ -1,0 +1,292 @@
+{
+  "dir": "color-picker",
+  "name": "ColorPicker",
+  "type": "registry:component",
+  "files": [
+    "src/components/color-picker/color-picker.styles.ts",
+    "src/components/color-picker/color-picker.tsx",
+    "src/components/color-picker/color-picker.types.ts",
+    "src/components/color-picker/index.ts"
+  ],
+  "exports": [
+    "ColorDot",
+    "ColorDotColor",
+    "ColorDotProps",
+    "ColorDotVariantProps",
+    "ColorPicker",
+    "ColorPickerProps",
+    "ColorSlider",
+    "ColorSliderProps",
+    "ColorSpectrum",
+    "ColorSpectrumProps",
+    "colorDotSwatchVariants",
+    "colorDotVariants",
+    "colorPickerVariants",
+    "colorSliderVariants",
+    "colorSpectrumThumbVariants",
+    "colorSpectrumVariants",
+    "colorThumbVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn",
+      "lib/color",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "ColorDot",
+      "exported": true,
+      "variants": {
+        "color": [
+          "gray",
+          "blue",
+          "orange",
+          "red",
+          "green",
+          "yellow",
+          "purple",
+          "sky",
+          "pink",
+          "teal"
+        ]
+      },
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
+      ],
+      "props": {
+        "color": {
+          "type": "ColorDotColor",
+          "required": false,
+          "doc": "One of the ten palette colours, or a raw CSS colour via `value`.",
+          "control": "select",
+          "options": [
+            "gray",
+            "blue",
+            "orange",
+            "red",
+            "green",
+            "yellow",
+            "purple",
+            "sky",
+            "pink",
+            "teal"
+          ],
+          "source": "cva"
+        },
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Arbitrary colour. Wins over `color`.",
+          "control": "text"
+        },
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible name — a coloured circle has none.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ColorDotSwatch",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ColorPicker",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Controlled hex, e.g. `'#335CFF'` or `'#335CFF80'`.",
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onChange": {
+          "type": "(hex: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "withOpacity": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Show the alpha track.",
+          "control": "boolean"
+        },
+        "swatches": {
+          "type": "string[]",
+          "required": false,
+          "doc": "Swatch row under the controls.",
+          "control": "list"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Rendered under the hex field — a confirm button, for instance.",
+          "control": "slot"
+        },
+        "labels": {
+          "type": "{\n    format?: string;\n    eyedropper?: string;\n    spectrum?: string;\n    hue?: string;\n    opacity?: string;\n    hex?: string;\n    swatches?: string;\n  }",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "ColorSlider",
+      "exported": true,
+      "variants": {
+        "type": [
+          "hue",
+          "opacity"
+        ]
+      },
+      "defaultVariants": {
+        "type": "hue"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
+      ],
+      "props": {
+        "type": {
+          "type": "'hue' | 'opacity'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "hue",
+            "opacity"
+          ],
+          "default": "hue",
+          "source": "cva"
+        },
+        "value": {
+          "type": "number",
+          "required": true,
+          "doc": null,
+          "control": "number"
+        },
+        "onChange": {
+          "type": "(value: number) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "baseColor": {
+          "type": "string",
+          "required": false,
+          "doc": "For the opacity track, the colour the gradient fades to.",
+          "control": "text"
+        },
+        "thumbColor": {
+          "type": "string",
+          "required": false,
+          "doc": "Fill of the thumb. Figma paints it with the picked colour.",
+          "control": "text"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ColorSpectrum",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
+      ],
+      "props": {
+        "hue": {
+          "type": "number",
+          "required": true,
+          "doc": null,
+          "control": "number"
+        },
+        "saturation": {
+          "type": "number",
+          "required": true,
+          "doc": null,
+          "control": "number"
+        },
+        "brightness": {
+          "type": "number",
+          "required": true,
+          "doc": null,
+          "control": "number"
+        },
+        "onChange": {
+          "type": "(next: { saturation: number; brightness: number }) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ColorSpectrumThumb",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "ColorThumb",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

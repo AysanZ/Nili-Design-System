@@ -1,0 +1,276 @@
+{
+  "dir": "banner",
+  "name": "Banner",
+  "type": "registry:component",
+  "files": [
+    "src/components/banner/banner.styles.ts",
+    "src/components/banner/banner.tsx",
+    "src/components/banner/banner.types.ts",
+    "src/components/banner/index.ts"
+  ],
+  "exports": [
+    "Banner",
+    "BannerAction",
+    "BannerAppearance",
+    "BannerProps",
+    "BannerStatus",
+    "BannerVariantProps",
+    "bannerActionVariants",
+    "bannerDismissVariants",
+    "bannerIconVariants",
+    "bannerVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Banner",
+      "exported": true,
+      "variants": {
+        "status": [
+          "error",
+          "warning",
+          "success",
+          "info",
+          "feature"
+        ],
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ]
+      },
+      "defaultVariants": {
+        "status": "info",
+        "appearance": "filled"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'children' >"
+      ],
+      "props": {
+        "status": {
+          "type": "BannerStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info",
+            "feature"
+          ],
+          "default": "info",
+          "source": "cva"
+        },
+        "appearance": {
+          "type": "BannerAppearance",
+          "required": false,
+          "doc": "Named `appearance`, not `style`, so React's own `style` prop stays usable.",
+          "control": "select",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ],
+          "default": "filled",
+          "source": "cva"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Shown after the title, separated by a `∙`.",
+          "control": "slot"
+        },
+        "icon": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "`true` uses the default glyph for `status`; a node overrides it; `false` hides it.",
+          "control": "boolean-or-slot"
+        },
+        "action": {
+          "type": "BannerAction",
+          "required": false,
+          "doc": "Single inline link, per the Figma spec.",
+          "control": "none"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "onDismiss": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "dismissLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the close button. Required by `dismissible`.",
+          "control": "text"
+        },
+        "sticky": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Pins the banner to the top of the viewport. A page-level banner usually wants this; one rendered inside a card does not.",
+          "control": "boolean"
+        },
+        "urgency": {
+          "type": "'assertive' | 'polite' | 'off'",
+          "required": false,
+          "doc": "How assistive tech announces the banner. Defaults to `'polite'` — unlike Alert, a banner is almost always present on first paint rather than appearing in response to an action, so interrupting is wrong. Use `'assertive'` only when the banner appears mid-session.",
+          "control": "select",
+          "options": [
+            "assertive",
+            "polite",
+            "off"
+          ]
+        }
+      }
+    },
+    {
+      "name": "BannerAction",
+      "exported": true,
+      "variants": {
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "filled"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "appearance": {
+          "type": "'filled' | 'light' | 'lighter' | 'stroke'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "filled",
+          "source": "cva",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ]
+        }
+      }
+    },
+    {
+      "name": "BannerDismiss",
+      "exported": false,
+      "variants": {
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "filled"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "appearance": {
+          "type": "'filled' | 'light' | 'lighter' | 'stroke'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "filled",
+          "source": "cva",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ]
+        }
+      }
+    },
+    {
+      "name": "BannerIcon",
+      "exported": false,
+      "variants": {
+        "status": [
+          "error",
+          "warning",
+          "success",
+          "info",
+          "feature"
+        ],
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ]
+      },
+      "defaultVariants": {
+        "status": "info",
+        "appearance": "filled"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'error' | 'warning' | 'success' | 'info' | 'feature'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "info",
+          "source": "cva",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "info",
+            "feature"
+          ]
+        },
+        "appearance": {
+          "type": "'filled' | 'light' | 'lighter' | 'stroke'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "filled",
+          "source": "cva",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ]
+        }
+      }
+    }
+  ]
+}

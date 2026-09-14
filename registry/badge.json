@@ -1,0 +1,282 @@
+{
+  "dir": "badge",
+  "name": "Badge",
+  "type": "registry:component",
+  "files": [
+    "src/components/badge/badge.styles.ts",
+    "src/components/badge/badge.tsx",
+    "src/components/badge/badge.types.ts",
+    "src/components/badge/index.ts",
+    "src/components/badge/status-badge.tsx"
+  ],
+  "exports": [
+    "Badge",
+    "BadgeAppearance",
+    "BadgeColor",
+    "BadgeProps",
+    "BadgeSize",
+    "BadgeVariantProps",
+    "StatusBadge",
+    "StatusBadgeAppearance",
+    "StatusBadgeProps",
+    "StatusBadgeStatus",
+    "badgeDotSlotVariants",
+    "badgeDotVariants",
+    "badgeIconVariants",
+    "badgeVariants",
+    "statusBadgeVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Badge",
+      "exported": true,
+      "variants": {
+        "appearance": [
+          "filled",
+          "light",
+          "lighter",
+          "stroke"
+        ],
+        "color": [
+          "gray",
+          "red",
+          "blue",
+          "orange",
+          "green",
+          "yellow",
+          "purple",
+          "sky",
+          "pink",
+          "teal"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ],
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "filled",
+        "color": "gray",
+        "size": "medium",
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'color' | 'children' >"
+      ],
+      "props": {
+        "appearance": {
+          "type": "BadgeAppearance",
+          "required": false,
+          "doc": "Visual treatment.",
+          "control": "select",
+          "options": [
+            "filled",
+            "light",
+            "lighter",
+            "stroke"
+          ],
+          "default": "filled",
+          "source": "cva"
+        },
+        "color": {
+          "type": "BadgeColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "gray",
+            "red",
+            "blue",
+            "orange",
+            "green",
+            "yellow",
+            "purple",
+            "sky",
+            "pink",
+            "teal"
+          ],
+          "default": "gray",
+          "source": "cva"
+        },
+        "size": {
+          "type": "BadgeSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "medium",
+            "small"
+          ],
+          "default": "medium",
+          "source": "cva"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "dot": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Renders a dot before the label. Mutually exclusive with `startIcon`.",
+          "control": "boolean"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Badge content. Replaces the old `label` / `number` / `number_label` trio: a boolean flag plus two parallel content props meant three ways to say the same thing and one of them was always ignored.",
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "BadgeDot",
+      "exported": false,
+      "variants": {
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "defaultVariants": {
+        "size": "medium"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'medium' | 'small'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "medium",
+          "source": "cva",
+          "options": [
+            "medium",
+            "small"
+          ]
+        }
+      }
+    },
+    {
+      "name": "BadgeDotSlot",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "BadgeIcon",
+      "exported": false,
+      "variants": {
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "defaultVariants": {
+        "size": "medium"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'medium' | 'small'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "medium",
+          "source": "cva",
+          "options": [
+            "medium",
+            "small"
+          ]
+        }
+      }
+    },
+    {
+      "name": "StatusBadge",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
+      ],
+      "props": {
+        "status": {
+          "type": "StatusBadgeStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "disabled",
+            "completed",
+            "pending",
+            "failed"
+          ]
+        },
+        "appearance": {
+          "type": "StatusBadgeAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "light",
+            "stroke"
+          ]
+        },
+        "dot": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Leading status dot instead of the icon. Decorative — the label carries the meaning.",
+          "control": "boolean"
+        },
+        "icon": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "Leading status glyph. `true` (default) shows the Figma icon for `status`, a node replaces it, `false` hides it.",
+          "control": "boolean-or-slot"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "dir": "progress-bar",
+  "name": "ProgressBar",
+  "type": "registry:component",
+  "files": [
+    "src/components/progress-bar/index.ts",
+    "src/components/progress-bar/progress-bar.styles.ts",
+    "src/components/progress-bar/progress-bar.tsx",
+    "src/components/progress-bar/progress-bar.types.ts"
+  ],
+  "exports": [
+    "ProgressBar",
+    "ProgressBarProps",
+    "ProgressCircle",
+    "ProgressCircleProps",
+    "ProgressCircleSize",
+    "ProgressCircleVariantProps",
+    "ProgressColor",
+    "ProgressFillVariantProps",
+    "ProgressLabelPosition",
+    "ProgressLabelVariantProps",
+    "progressCircleStrokeVariants",
+    "progressCircleVariants",
+    "progressFillVariants",
+    "progressLabelVariants",
+    "progressTrackVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "ProgressBar",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ProgressCommonProps",
+        "Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'>"
+      ],
+      "props": {}
+    },
+    {
+      "name": "ProgressCircle",
+      "exported": true,
+      "variants": {
+        "size": [
+          "80",
+          "72",
+          "64",
+          "56",
+          "48",
+          "40"
+        ]
+      },
+      "defaultVariants": {
+        "size": 64
+      },
+      "slots": [],
+      "extends": [
+        "ProgressCommonProps",
+        "Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'>"
+      ],
+      "props": {
+        "size": {
+          "type": "ProgressCircleSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": 64,
+          "source": "cva",
+          "options": [
+            "80",
+            "72",
+            "64",
+            "56",
+            "48",
+            "40"
+          ]
+        },
+        "thickness": {
+          "type": "number",
+          "required": false,
+          "doc": "Stroke width in px.",
+          "control": "number"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Content in the middle. Defaults to the percentage when `showValue`.",
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "ProgressCircleStroke",
+      "exported": false,
+      "variants": {
+        "color": [
+          "primary",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "defaultVariants": {
+        "color": "primary"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "color": {
+          "type": "'primary' | 'success' | 'warning' | 'error'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "primary",
+          "source": "cva",
+          "options": [
+            "primary",
+            "success",
+            "warning",
+            "error"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ProgressCommon",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Current value, clamped to `0…max`. Ignored while `indeterminate`.",
+          "control": "number"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "color": {
+          "type": "ProgressColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "primary"
+          ]
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Unknown duration: drops `aria-valuenow` so assistive tech announces \"busy\" rather than inventing a percentage.",
+          "control": "boolean"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Visible label. Also becomes the accessible name.",
+          "control": "slot"
+        },
+        "labelPosition": {
+          "type": "ProgressLabelPosition",
+          "required": false,
+          "doc": "Figma's label `Type`.",
+          "control": "select",
+          "options": [
+            "end",
+            "top"
+          ]
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the bar. Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows the percentage.",
+          "control": "boolean"
+        },
+        "valueLabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Overrides the rendered readout — `'3 of 10 files'`, a size, an ETA.",
+          "control": "slot"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name when there is no visible `label` — a bare bar in a table cell has nothing to be named by otherwise.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "ProgressFill",
+      "exported": false,
+      "variants": {
+        "color": [
+          "primary",
+          "success",
+          "warning",
+          "error"
+        ],
+        "indeterminate": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "color": "primary",
+        "indeterminate": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "color": {
+          "type": "'primary' | 'success' | 'warning' | 'error'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "primary",
+          "source": "cva",
+          "options": [
+            "primary",
+            "success",
+            "warning",
+            "error"
+          ]
+        },
+        "indeterminate": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "ProgressLabel",
+      "exported": false,
+      "variants": {
+        "position": [
+          "top",
+          "end"
+        ]
+      },
+      "defaultVariants": {
+        "position": "top"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "position": {
+          "type": "'top' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "top",
+          "source": "cva",
+          "options": [
+            "top",
+            "end"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ProgressTrack",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

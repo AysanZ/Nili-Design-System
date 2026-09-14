@@ -111,3 +111,58 @@ export const tooltipArrowVariants = cva('absolute size-2 rotate-45', {
 });
 
 export type TooltipVariantProps = VariantProps<typeof tooltipVariants>;
+
+/* ──────────────────────────────────────────────────────────────────
+   Positioned by Floating UI, not by CSS
+   ──────────────────────────────────────────────────────────────────
+   `tooltipVariants` above encodes position in its `side` and `align`
+   classes (`bottom-full mb-2`, `start-1/2 -translate-x-1/2`). That is
+   correct for a bubble placed by the stylesheet and wrong for one placed
+   by a measuring engine: the inline `transform` Floating UI writes and
+   the Tailwind `-translate-x-1/2` fight, and the bubble lands half a
+   width off.
+
+   These two carry only appearance. Position, including the arrow's, comes
+   from `useAnchored`. `side` survives as a data attribute so the entrance
+   animation still knows which way the bubble grew from.
+
+   The originals stay exported and unchanged: anything outside this
+   package that composed them keeps working.
+   ────────────────────────────────────────────────────────────────── */
+
+export const tooltipSurfaceVariants = cva(
+  [
+    'z-50 w-max max-w-[16rem]',
+    'rounded-lg',
+    'shadow-md',
+    'transition-opacity duration-150 motion-reduce:transition-none',
+  ],
+  {
+    variants: {
+      size: {
+        '2xs': 'px-2 py-1 text-[11px] leading-4',
+        xs: 'px-2.5 py-1.5 text-[12px] leading-4',
+        lg: 'px-3 py-2 text-[12px] leading-4',
+      },
+      darkMode: {
+        true: 'bg-strong-950 text-static-white',
+        false: 'bg-white-0 text-strong-950 border border-soft-200',
+      },
+    },
+    defaultVariants: { size: 'xs', darkMode: true },
+  },
+);
+
+export const tooltipArrowSurfaceVariants = cva('absolute size-2 rotate-45', {
+  variants: {
+    darkMode: {
+      true: 'bg-strong-950',
+      false: 'bg-white-0 border-b border-e border-soft-200',
+    },
+  },
+  defaultVariants: { darkMode: true },
+});
+
+export type TooltipSurfaceVariantProps = VariantProps<
+  typeof tooltipSurfaceVariants
+>;

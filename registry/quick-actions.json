@@ -1,0 +1,376 @@
+{
+  "dir": "quick-actions",
+  "name": "QuickActions",
+  "type": "registry:component",
+  "files": [
+    "src/components/quick-actions/index.ts",
+    "src/components/quick-actions/quick-actions.styles.ts",
+    "src/components/quick-actions/quick-actions.tsx",
+    "src/components/quick-actions/quick-actions.types.ts"
+  ],
+  "exports": [
+    "QuickActionAppearance",
+    "QuickActionIconVariantProps",
+    "QuickActionItem",
+    "QuickActionItemLayout",
+    "QuickActionItemProps",
+    "QuickActionItemVariantProps",
+    "QuickActionSize",
+    "QuickActionTone",
+    "QuickActions",
+    "QuickActionsLayout",
+    "QuickActionsProps",
+    "QuickActionsVariantProps",
+    "quickActionDescriptionVariants",
+    "quickActionIconVariants",
+    "quickActionItemVariants",
+    "quickActionLabelVariants",
+    "quickActionShortcutVariants",
+    "quickActionsVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn",
+      "lib/slot"
+    ]
+  },
+  "components": [
+    {
+      "name": "QuickActionDescription",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "QuickActionIcon",
+      "exported": false,
+      "variants": {
+        "tone": [
+          "neutral",
+          "primary",
+          "information",
+          "success",
+          "warning",
+          "error",
+          "feature",
+          "away",
+          "verified"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "tone": "neutral",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "tone": {
+          "type": "'neutral' | 'primary' | 'information' | 'success' | 'warning' | 'error' | 'feature' | 'away' | 'verified'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "neutral",
+          "source": "cva",
+          "options": [
+            "neutral",
+            "primary",
+            "information",
+            "success",
+            "warning",
+            "error",
+            "feature",
+            "away",
+            "verified"
+          ]
+        },
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md"
+          ]
+        }
+      }
+    },
+    {
+      "name": "QuickActionItem",
+      "exported": true,
+      "variants": {
+        "appearance": [
+          "card",
+          "tile",
+          "ghost",
+          "list"
+        ],
+        "layout": [
+          "horizontal",
+          "vertical"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ],
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "appearance": "card",
+        "layout": "horizontal",
+        "size": "md",
+        "active": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'children' | 'title' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "appearance": {
+          "type": "QuickActionAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "card",
+            "tile",
+            "ghost",
+            "list"
+          ],
+          "default": "card",
+          "source": "cva"
+        },
+        "layout": {
+          "type": "QuickActionItemLayout",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "source": "cva"
+        },
+        "size": {
+          "type": "QuickActionSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "tone": {
+          "type": "QuickActionTone",
+          "required": false,
+          "doc": "Colour of the icon chip.",
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "feature",
+            "verified",
+            "away",
+            "primary",
+            "neutral",
+            "information"
+          ]
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The glyph. Wrapped in a tinted chip unless `iconWrapper={false}`.",
+          "control": "slot"
+        },
+        "iconWrapper": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Set `false` to drop the tinted chip and render the glyph bare.",
+          "control": "boolean"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💬 Sublabel` — muted text on the *label's* line.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Second line under the label.",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🎖️ Badge` — beside the label.",
+          "control": "slot"
+        },
+        "shortcut": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Keyboard hint at the trailing edge, e.g. `'⌘N'`.",
+          "control": "slot"
+        },
+        "endAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Anything at the trailing edge — a Badge, a count, a chevron.",
+          "control": "slot"
+        },
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Marks the shortcut as the one in effect: adds `aria-pressed`.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Render the child element instead of a `<button>` — for router links.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "QuickActionLabel",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md"
+          ]
+        }
+      }
+    },
+    {
+      "name": "QuickActionShortcut",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "QuickActions",
+      "exported": true,
+      "variants": {
+        "layout": [
+          "grid",
+          "row"
+        ],
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "layout": "grid",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
+      ],
+      "props": {
+        "layout": {
+          "type": "QuickActionsLayout",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "grid",
+            "row"
+          ],
+          "default": "grid",
+          "source": "cva"
+        },
+        "size": {
+          "type": "QuickActionSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "columns": {
+          "type": "number",
+          "required": false,
+          "doc": "Columns, when `layout=\"grid\"`. A number is applied at every width; pass a Tailwind class through `className` instead if you need it responsive.",
+          "control": "number"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the group, e.g. `'Quick actions'`.",
+          "control": "text"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Optional heading rendered above the group; also names it.",
+          "control": "slot"
+        },
+        "action": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing control beside the title — \"See all\", a menu.",
+          "control": "slot"
+        }
+      }
+    }
+  ]
+}

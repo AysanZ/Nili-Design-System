@@ -1,0 +1,159 @@
+{
+  "dir": "toggle",
+  "name": "Toggle",
+  "type": "registry:component",
+  "files": [
+    "src/components/toggle/index.ts",
+    "src/components/toggle/toggle.styles.ts",
+    "src/components/toggle/toggle.tsx",
+    "src/components/toggle/toggle.types.ts"
+  ],
+  "exports": [
+    "Toggle",
+    "ToggleGroup",
+    "ToggleGroupProps",
+    "ToggleProps",
+    "ToggleVariantProps",
+    "toggleGroupVariants",
+    "toggleVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Toggle",
+      "exported": true,
+      "variants": {
+        "iconOnly": [
+          "true",
+          "false"
+        ],
+        "selected": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "iconOnly": false,
+        "selected": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'value' | 'onChange' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "doc": "Identifies the segment inside its `ToggleGroup`. Required — a segmented control is a choice between named options, and a segment with no name cannot be the answer.",
+          "control": "text"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's \"Left Icon\". Logical, so it leads in both directions.",
+          "control": "slot"
+        },
+        "iconOnly": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's \"Only Icon\". Requires `aria-label`.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "selected": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "ToggleGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Selected segment. Controlled.",
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onValueChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔖 Label` — the visible label above the group, drawn with the same `Label` component the rest of the file uses.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Label's `💬 Sublabel` — the muted \"(Optional)\".",
+          "control": "slot"
+        },
+        "information": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
+          "control": "boolean-or-slot"
+        },
+        "informationLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for that glyph.",
+          "control": "text"
+        },
+        "ariaLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the set when no visible `label` is rendered.",
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Applied to the wrapper rather than to the group row.",
+          "control": "text"
+        }
+      }
+    }
+  ]
+}

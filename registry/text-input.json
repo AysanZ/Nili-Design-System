@@ -1,0 +1,948 @@
+{
+  "dir": "text-input",
+  "name": "TextInput",
+  "type": "registry:component",
+  "files": [
+    "src/components/text-input/counter-input.tsx",
+    "src/components/text-input/digit-input.tsx",
+    "src/components/text-input/index.ts",
+    "src/components/text-input/inline-input.tsx",
+    "src/components/text-input/input-select.tsx",
+    "src/components/text-input/tag-input.tsx",
+    "src/components/text-input/text-input.styles.ts",
+    "src/components/text-input/text-input.tsx",
+    "src/components/text-input/text-input.types.ts"
+  ],
+  "exports": [
+    "CounterInput",
+    "CounterInputProps",
+    "DigitInput",
+    "DigitInputProps",
+    "InlineInput",
+    "InlineInputProps",
+    "InputSelect",
+    "InputSelectProps",
+    "InputSelectSize",
+    "InputSelectVariantProps",
+    "TEXT_INPUT_TYPE_PRESETS",
+    "TagInput",
+    "TagInputProps",
+    "TextInput",
+    "TextInputProps",
+    "TextInputSize",
+    "TextInputType",
+    "TextInputVariantProps",
+    "inputSelectVariants",
+    "textInputAdornmentVariants",
+    "textInputAffixVariants",
+    "textInputAttachedVariants",
+    "textInputControlVariants",
+    "textInputFieldVariants",
+    "textInputPrefixVariants",
+    "textInputShortcutVariants",
+    "textInputSuffixVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon",
+      "key-components",
+      "tag"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn",
+      "lib/numerals"
+    ]
+  },
+  "components": [
+    {
+      "name": "CounterInput",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "TextInputSize",
+          "required": false,
+          "doc": "Figma `📏 Size` — Medium (40) · Small (36) · X-Small (32).",
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔖 Label`. Omit to hide.",
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💡 Hint Text`. Omit to hide.",
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Marks the field invalid *and* supplies the message. Figma `State=Error`.",
+          "control": "slot"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "defaultValue": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "onValueChange": {
+          "type": "(value: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "min": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "step": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "Digits follow the locale, so `16` renders in Persian digits under `fa`.",
+          "control": "text"
+        },
+        "formatValue": {
+          "type": "(value: number) => string",
+          "required": false,
+          "doc": "Overrides the rendered value — units, currency, `2 hrs`.",
+          "control": "handler"
+        },
+        "decrementLabel": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible names for the two buttons. Required, not optional: an icon-only button with no accessible name is announced as just \"button\".",
+          "control": "text"
+        },
+        "incrementLabel": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "fieldClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "DigitInput",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "length": {
+          "type": "number",
+          "required": false,
+          "doc": "How many cells. Figma draws one; the count is yours.",
+          "control": "number"
+        },
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onValueChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "onComplete": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": "Fires once the last cell is filled.",
+          "control": "handler"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Marks every cell invalid *and* supplies the message. Figma `State=Error`.",
+          "control": "slot"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "autoComplete": {
+          "type": "string",
+          "required": false,
+          "doc": "`one-time-code` by default, which is what lets iOS and Android autofill.",
+          "control": "text"
+        },
+        "groupLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the group, e.g. `'Verification code'`.",
+          "control": "text"
+        },
+        "cellLabel": {
+          "type": "(index: string, total: string) => string",
+          "required": false,
+          "doc": "Names each cell for a screen reader: `(index, total) => string`.",
+          "control": "handler"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "InlineInput",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'size' >"
+      ],
+      "props": {
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `⬅️ Left Icon` / `⬅️ Pick Left`.",
+          "control": "slot"
+        },
+        "button": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🕹️ Button` — a trailing CompactButton, usually a pencil.",
+          "control": "slot"
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Marks the field invalid. There is no message slot: this control is inline.",
+          "control": "boolean"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name, since an inline field rarely has a visible label.",
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "InputSelect",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'children' >"
+      ],
+      "props": {
+        "size": {
+          "type": "InputSelectSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🌍 Pick Country` — a flag, a currency mark, any leading glyph.",
+          "control": "slot"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `✏️ Edit Text` — `+98`, `EUR`, `can view`.",
+          "control": "slot"
+        },
+        "chevron": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Hides the chevron for a display-only affix.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "TagInput",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "TextInputSize",
+          "required": false,
+          "doc": "Figma `📏 Size` — Medium (40) · Small (36) · X-Small (32).",
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔖 Label`. Omit to hide.",
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💡 Hint Text`. Omit to hide.",
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Marks the field invalid *and* supplies the message. Figma `State=Error`.",
+          "control": "slot"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `⬅️ Left Icon` / `⬅️ Pick Left`.",
+          "control": "slot"
+        },
+        "value": {
+          "type": "string[]",
+          "required": false,
+          "doc": "The tags. Controlled.",
+          "control": "list"
+        },
+        "defaultValue": {
+          "type": "string[]",
+          "required": false,
+          "doc": null,
+          "control": "list"
+        },
+        "onValueChange": {
+          "type": "(tags: string[]) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "maxTags": {
+          "type": "number",
+          "required": false,
+          "doc": "Refuses to add beyond this many.",
+          "control": "number"
+        },
+        "dismissLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for each tag's dismiss button, e.g. `'Remove'`.",
+          "control": "text"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "fieldClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "TextInput",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'prefix' >"
+      ],
+      "props": {
+        "size": {
+          "type": "TextInputSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "type": {
+          "type": "TextInputType",
+          "required": false,
+          "doc": "Figma's `Type`. Sets the input mode, autofill hint and direction for the kind of value being asked for; see {@link TextInputType}.",
+          "control": "select",
+          "options": [
+            "basic",
+            "button",
+            "search",
+            "card",
+            "emoji",
+            "email",
+            "phone",
+            "website",
+            "amount",
+            "date",
+            "password",
+            "dropdown"
+          ]
+        },
+        "htmlType": {
+          "type": "ComponentPropsWithoutRef<'input'>['type']",
+          "required": false,
+          "doc": "Escape hatch: forces the native attribute when the preset gets it wrong.",
+          "control": "none"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Rendered above the field and tied to it.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Label's `💬 Sublabel` — the muted \"(Optional)\" beside the label.",
+          "control": "slot"
+        },
+        "information": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
+          "control": "boolean-or-slot"
+        },
+        "informationLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for that glyph.",
+          "control": "text"
+        },
+        "labelAction": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma Label's `🌟 Button` — trailing slot on the label row.",
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The line under the field. Becomes the error message when `error` is set.",
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Validation message. Its presence is what marks the field invalid, so the two can never disagree — a red border with no message, or a message with a field that still looks fine.",
+          "control": "slot"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Icon inside the field, on the leading edge.",
+          "control": "slot"
+        },
+        "endIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Icon or control inside the field, on the trailing edge.",
+          "control": "slot"
+        },
+        "startAffix": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Attached block before the field — `https://`, a currency.",
+          "control": "slot"
+        },
+        "endAffix": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Attached block after the field — `.com`, a unit.",
+          "control": "slot"
+        },
+        "shortcut": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`type=\"search\"` — the keyboard shortcut chip on the trailing edge (⌘K).",
+          "control": "slot"
+        },
+        "cardProvider": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`type=\"card\"` — the detected card brand, shown once enough digits exist.",
+          "control": "slot"
+        },
+        "strength": {
+          "type": "PasswordStrengthLevel | false",
+          "required": false,
+          "doc": "`type=\"password\"` — wires the existing `PasswordStrength` meter under the field. Pass a level, or `false` to hide it.",
+          "control": "none"
+        },
+        "strengthLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Text read out beside the strength meter, e.g. `'Strong password'`.",
+          "control": "text"
+        },
+        "emojiPicker": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`type=\"emoji\"` — the picker trigger on the leading edge.",
+          "control": "slot"
+        },
+        "select": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`type=\"dropdown\"` — an attached `<Dropdown>` sharing the field's border.",
+          "control": "slot"
+        },
+        "button": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "`type=\"button\"` — an attached action sharing the field's border.",
+          "control": "slot"
+        },
+        "suffix": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's `Suffix` — muted text pinned inside the trailing edge.",
+          "control": "slot"
+        },
+        "prefix": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text before the value — Figma's `€` on an Amount field.",
+          "control": "slot"
+        },
+        "selectPosition": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": "Overrides which edge `select` sits on. Defaults to the type's own side: `start` for Phone, `end` for Amount and Dropdown.",
+          "control": "select",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "latin": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Pins the field to left-to-right regardless of the ambient direction.",
+          "control": "boolean"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the `<input>` itself.",
+          "control": "text"
+        },
+        "fieldClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Class for the bordered field box.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "TextInputAdornment",
+      "exported": false,
+      "variants": {
+        "side": [
+          "start",
+          "end"
+        ],
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
+      "defaultVariants": {
+        "side": "start",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "side": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "start",
+          "source": "cva",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "size": {
+          "type": "'md' | 'sm' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TextInputAffix",
+      "exported": false,
+      "variants": {
+        "side": [
+          "start",
+          "end"
+        ],
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
+      "defaultVariants": {
+        "side": "start",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "side": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "start",
+          "source": "cva",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "size": {
+          "type": "'md' | 'sm' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TextInputAttached",
+      "exported": false,
+      "variants": {
+        "side": [
+          "start",
+          "end"
+        ]
+      },
+      "defaultVariants": {
+        "side": "end"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "side": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "start",
+            "end"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TextInputControl",
+      "exported": false,
+      "variants": {
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'md' | 'sm' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TextInputField",
+      "exported": false,
+      "variants": {
+        "size": [
+          "md",
+          "sm",
+          "xs"
+        ],
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'md' | 'sm' | 'xs'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "md",
+            "sm",
+            "xs"
+          ]
+        },
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TextInputPrefix",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TextInputShortcut",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "TextInputSuffix",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

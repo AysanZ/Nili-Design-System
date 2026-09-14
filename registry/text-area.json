@@ -1,0 +1,217 @@
+{
+  "dir": "text-area",
+  "name": "TextArea",
+  "type": "registry:component",
+  "files": [
+    "src/components/text-area/index.ts",
+    "src/components/text-area/text-area.styles.ts",
+    "src/components/text-area/text-area.tsx",
+    "src/components/text-area/text-area.types.ts"
+  ],
+  "exports": [
+    "TextArea",
+    "TextAreaControlVariantProps",
+    "TextAreaProps",
+    "TextAreaResize",
+    "TextAreaVariantProps",
+    "textAreaControlVariants",
+    "textAreaCounterVariants",
+    "textAreaFieldVariants",
+    "textAreaFooterVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "TextArea",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'textarea'>, 'size' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "error": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Validation message. Its presence is what marks the field invalid, so the border and the message can never disagree.",
+          "control": "slot"
+        },
+        "resize": {
+          "type": "TextAreaResize",
+          "required": false,
+          "doc": "Which handles the browser offers.",
+          "control": "select",
+          "options": [
+            "none",
+            "vertical",
+            "both"
+          ]
+        },
+        "autoResize": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Grow with the content instead of scrolling, up to `maxRows`. Off by default: a field that resizes on every keystroke moves everything below it, which is unpleasant in a long form.",
+          "control": "boolean"
+        },
+        "maxRows": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "showCount": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows `used / limit` under the field. Pass a number to set the limit without also passing `maxLength` — see the note in the component about why those are different things.",
+          "control": "boolean"
+        },
+        "countLimit": {
+          "type": "number",
+          "required": false,
+          "doc": "Soft limit for the counter. Defaults to `maxLength` when that is set.",
+          "control": "number"
+        },
+        "formatCount": {
+          "type": "(used: string, limit: string) => string",
+          "required": false,
+          "doc": "Formats the counter, e.g. `` (used, limit) => `${used} of ${limit}` ``.",
+          "control": "handler"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the counter digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the `<textarea>` itself.",
+          "control": "text"
+        },
+        "fieldClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Class for the bordered field box.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "TextAreaControl",
+      "exported": false,
+      "variants": {
+        "resize": [
+          "none",
+          "vertical",
+          "both"
+        ]
+      },
+      "defaultVariants": {
+        "resize": "vertical"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "resize": {
+          "type": "'none' | 'vertical' | 'both'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "vertical",
+          "source": "cva",
+          "options": [
+            "none",
+            "vertical",
+            "both"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TextAreaCounter",
+      "exported": false,
+      "variants": {
+        "over": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "over": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "over": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TextAreaField",
+      "exported": false,
+      "variants": {
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TextAreaFooter",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

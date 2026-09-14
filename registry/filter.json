@@ -1,0 +1,197 @@
+{
+  "dir": "filter",
+  "name": "Filter",
+  "type": "registry:component",
+  "files": [
+    "src/components/filter/filter.styles.ts",
+    "src/components/filter/filter.tsx",
+    "src/components/filter/index.ts"
+  ],
+  "exports": [
+    "FilterBar",
+    "FilterBarProps",
+    "FilterChip",
+    "FilterChipProps",
+    "FilterChipVariantProps",
+    "FilterList",
+    "FilterListItem",
+    "FilterListItemProps",
+    "FilterListProps",
+    "filterBarVariants",
+    "filterChipVariants",
+    "filterListItemVariants",
+    "filterListVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "FilterBar",
+      "exported": true,
+      "variants": {
+        "surface": [
+          "plain",
+          "panel"
+        ]
+      },
+      "defaultVariants": {
+        "surface": "plain"
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "surface": {
+          "type": "'plain' | 'panel'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "plain",
+            "panel"
+          ],
+          "default": "plain",
+          "source": "cva"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the group, e.g. \"Table filters\".",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "FilterChip",
+      "exported": true,
+      "variants": {
+        "active": [
+          "true",
+          "false"
+        ],
+        "placeholder": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "active": false,
+        "placeholder": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'value' >"
+      ],
+      "props": {
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": "A value is set. Renders `aria-pressed` so the state is announced.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "placeholder": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Dashed outline — an empty \"add filter\" affordance.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "value": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The chosen value, shown after the label.",
+          "control": "slot"
+        },
+        "onClear": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Shows a clear button. Requires `clearLabel`.",
+          "control": "handler"
+        },
+        "clearLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "FilterList",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "FilterListItem",
+      "exported": true,
+      "variants": {
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "active": false
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'button'>"
+      ],
+      "props": {
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "count": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Count chip at the trailing edge — pass a `<Badge>` or plain text.",
+          "control": "slot"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "dir": "pagination",
+  "name": "Pagination",
+  "type": "registry:component",
+  "files": [
+    "src/components/pagination/index.ts",
+    "src/components/pagination/pagination.styles.ts",
+    "src/components/pagination/pagination.tsx",
+    "src/components/pagination/pagination.types.ts"
+  ],
+  "exports": [
+    "Pagination",
+    "PaginationAlign",
+    "PaginationDeviceMode",
+    "PaginationEllipsis",
+    "PaginationEllipsisProps",
+    "PaginationItem",
+    "PaginationItemProps",
+    "PaginationItemVariantProps",
+    "PaginationLabels",
+    "PaginationProps",
+    "PaginationSlot",
+    "PaginationType",
+    "PaginationVariantProps",
+    "getPaginationRange",
+    "paginationEllipsisVariants",
+    "paginationGroupVariants",
+    "paginationItemVariants",
+    "paginationSummaryVariants",
+    "paginationVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "dropdown",
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "lib/cn",
+      "lib/numerals",
+      "lib/slot",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "Pagination",
+      "exported": true,
+      "variants": {
+        "align": [
+          "start",
+          "center",
+          "end",
+          "between"
+        ]
+      },
+      "defaultVariants": {
+        "align": "center"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'nav'>, 'onChange' | 'children' >"
+      ],
+      "props": {
+        "count": {
+          "type": "number",
+          "required": true,
+          "doc": "Total number of pages. Anything below 1 renders nothing.",
+          "control": "number"
+        },
+        "page": {
+          "type": "number",
+          "required": false,
+          "doc": "Current page, 1-based. Controlled.",
+          "control": "number"
+        },
+        "defaultPage": {
+          "type": "number",
+          "required": false,
+          "doc": "Starting page while uncontrolled.",
+          "control": "number"
+        },
+        "onPageChange": {
+          "type": "(page: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "siblingCount": {
+          "type": "number",
+          "required": false,
+          "doc": "Pages either side of the current one.",
+          "control": "number"
+        },
+        "boundaryCount": {
+          "type": "number",
+          "required": false,
+          "doc": "Pages pinned at each end of the trail.",
+          "control": "number"
+        },
+        "type": {
+          "type": "PaginationType",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "basic",
+            "full-radius",
+            "group"
+          ]
+        },
+        "deviceMode": {
+          "type": "PaginationDeviceMode",
+          "required": false,
+          "doc": "Figma's `Device Mode`. `mobile` shows arrows plus a summary, not cells.",
+          "control": "select",
+          "options": [
+            "desktop",
+            "mobile"
+          ]
+        },
+        "align": {
+          "type": "PaginationAlign",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "start",
+            "center",
+            "end",
+            "between"
+          ],
+          "default": "center",
+          "source": "cva"
+        },
+        "showEdges": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Adds first/last jumps outside the arrows.",
+          "control": "boolean"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Greys out the whole control — a table reloading, for instance.",
+          "control": "boolean"
+        },
+        "advanced": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's `🧪 Advanced`. Adds the \"Page 2 of 16\" summary before the trail and the rows-per-page control after it.",
+          "control": "boolean"
+        },
+        "pageSize": {
+          "type": "number",
+          "required": false,
+          "doc": "Rows per page. Only rendered when `advanced`.",
+          "control": "number"
+        },
+        "pageSizeOptions": {
+          "type": "number[]",
+          "required": false,
+          "doc": "Choices offered by the per-page control.",
+          "control": "list"
+        },
+        "onPageSizeChange": {
+          "type": "(pageSize: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "PaginationLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "PaginationEllipsis",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
+      ],
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name; the glyph itself is hidden.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "PaginationGroup",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "PaginationItem",
+      "exported": true,
+      "variants": {
+        "fullRadius": [
+          "true",
+          "false"
+        ],
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "fullRadius": false,
+        "active": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'children' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": "The page you are on: adds `aria-current=\"page\"`.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "fullRadius": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's `Full Radius`: a pill cell instead of a rounded rectangle.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "asChild": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Render the child element instead of a `<button>` — for router links.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "PaginationSummary",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

@@ -1,0 +1,489 @@
+{
+  "dir": "rating",
+  "name": "Rating",
+  "type": "registry:component",
+  "files": [
+    "src/components/rating/index.ts",
+    "src/components/rating/rating-bar.tsx",
+    "src/components/rating/rating.styles.ts",
+    "src/components/rating/rating.tsx",
+    "src/components/rating/rating.types.ts"
+  ],
+  "exports": [
+    "RATING_BAR_EMOJIS",
+    "Rating",
+    "RatingAlignment",
+    "RatingBar",
+    "RatingBarArea",
+    "RatingBarAreaProps",
+    "RatingBarLabels",
+    "RatingBarProps",
+    "RatingBarType",
+    "RatingBarVariantProps",
+    "RatingEmpty",
+    "RatingFillVariantProps",
+    "RatingItemVariantProps",
+    "RatingLabels",
+    "RatingProps",
+    "RatingReviewVariantProps",
+    "RatingType",
+    "ratingBarAreaVariants",
+    "ratingBarInputVariants",
+    "ratingBarItemVariants",
+    "ratingBarVariants",
+    "ratingFillVariants",
+    "ratingGlyphVariants",
+    "ratingInputVariants",
+    "ratingItemVariants",
+    "ratingReviewVariants",
+    "ratingValueVariants",
+    "ratingVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "Rating",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'color' >"
+      ],
+      "props": {
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Current score. Controlled.",
+          "control": "number"
+        },
+        "defaultValue": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "onValueChange": {
+          "type": "(value: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": "Number of items.",
+          "control": "number"
+        },
+        "type": {
+          "type": "RatingType",
+          "required": false,
+          "doc": "Figma's Type. Drives the glyph and its colour.",
+          "control": "select",
+          "options": [
+            "star",
+            "heart"
+          ]
+        },
+        "empty": {
+          "type": "RatingEmpty",
+          "required": false,
+          "doc": "Which empty glyph to draw. Figma's `Empty Line` / `Empty Filled`.",
+          "control": "select",
+          "options": [
+            "filled",
+            "line"
+          ]
+        },
+        "readOnly": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Display only — an average, a review score. Renders a single `role=\"img\"` instead of a set of radios, and accepts fractional values.",
+          "control": "boolean"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Replaces the glyph the `type` would pick.",
+          "control": "slot"
+        },
+        "emptyIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Empty-state glyph, when it is not simply the outline of `icon`.",
+          "control": "slot"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows the numeric score beside the items.",
+          "control": "boolean"
+        },
+        "valueLabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Replaces the readout — `'4.5 (128 reviews)'`, a count, anything.",
+          "control": "slot"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": "`name` for the underlying radios, when the form is submitted natively.",
+          "control": "text"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "RatingLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "alignment": {
+          "type": "RatingAlignment",
+          "required": false,
+          "doc": "Figma's `Rating & Review` → Alignment. `ratings` is the bare row; `vertical` and `horizontal` place `description` below it or beside it.",
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical",
+            "ratings"
+          ]
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Supporting copy. Figma's \"Description\".",
+          "control": "slot"
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the score. Figma's \"Link Button\".",
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "RatingBar",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {
+        "type": {
+          "type": "RatingBarType",
+          "required": false,
+          "doc": "Figma `🧩 Type`.",
+          "control": "select",
+          "options": [
+            "number",
+            "emoji",
+            "star",
+            "heart"
+          ]
+        },
+        "count": {
+          "type": "number",
+          "required": false,
+          "doc": "How many options. Figma draws five; the count is yours.",
+          "control": "number"
+        },
+        "value": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "defaultValue": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "onValueChange": {
+          "type": "(value: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "emojis": {
+          "type": "readonly ReactNode[]",
+          "required": false,
+          "doc": "Overrides the emoji set. Must be at least `count` long.",
+          "control": "list"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "Digits follow the locale, so `4` renders in Persian digits under `fa`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "RatingBarLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "RatingBarArea",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "RatingBarProps"
+      ],
+      "props": {
+        "commentPlaceholder": {
+          "type": "string",
+          "required": false,
+          "doc": "The comment field's placeholder — Figma's \"Tell us why!\".",
+          "control": "text"
+        },
+        "commentLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the comment field. Required if the comment is shown.",
+          "control": "text"
+        },
+        "comment": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "defaultComment": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onCommentChange": {
+          "type": "(comment: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "showComment": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Hides the comment box, leaving a bordered scale.",
+          "control": "boolean"
+        },
+        "rows": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "RatingFill",
+      "exported": false,
+      "variants": {
+        "type": [
+          "star",
+          "heart"
+        ]
+      },
+      "defaultVariants": {
+        "type": "star"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "type": {
+          "type": "'star' | 'heart'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "star",
+          "source": "cva",
+          "options": [
+            "star",
+            "heart"
+          ]
+        }
+      }
+    },
+    {
+      "name": "RatingGlyph",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "RatingInput",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "RatingItem",
+      "exported": false,
+      "variants": {
+        "interactive": [
+          "true",
+          "false"
+        ],
+        "disabled": [
+          "true",
+          "false"
+        ],
+        "empty": [
+          "line",
+          "filled"
+        ]
+      },
+      "defaultVariants": {
+        "interactive": false,
+        "disabled": false,
+        "empty": "line"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "interactive": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "empty": {
+          "type": "'line' | 'filled'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "line",
+          "source": "cva",
+          "options": [
+            "line",
+            "filled"
+          ]
+        }
+      }
+    },
+    {
+      "name": "RatingReview",
+      "exported": false,
+      "variants": {
+        "alignment": [
+          "ratings",
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "defaultVariants": {
+        "alignment": "ratings"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "alignment": {
+          "type": "'ratings' | 'vertical' | 'horizontal'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "ratings",
+          "source": "cva",
+          "options": [
+            "ratings",
+            "vertical",
+            "horizontal"
+          ]
+        }
+      }
+    },
+    {
+      "name": "RatingValue",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

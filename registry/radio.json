@@ -1,0 +1,402 @@
+{
+  "dir": "radio",
+  "name": "Radio",
+  "type": "registry:component",
+  "files": [
+    "src/components/radio/index.ts",
+    "src/components/radio/radio.styles.ts",
+    "src/components/radio/radio.tsx",
+    "src/components/radio/radio.types.ts"
+  ],
+  "exports": [
+    "Radio",
+    "RadioCard",
+    "RadioCardProps",
+    "RadioGroup",
+    "RadioGroupProps",
+    "RadioGroupVariantProps",
+    "RadioOrientation",
+    "RadioProps",
+    "RadioVariantProps",
+    "radioCardVariants",
+    "radioControlVariants",
+    "radioDescriptionVariants",
+    "radioGroupVariants",
+    "radioIndicatorVariants",
+    "radioLabelVariants",
+    "radioRootVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Radio",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'type' | 'size' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text inline after the label — Figma's \"Sublabel\".",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing slot on the label row — Figma's \"Badge\".",
+          "control": "slot"
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the description — Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Secondary line under the label. Figma's \"Description\" toggle.",
+          "control": "slot"
+        },
+        "labelPosition": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": "Which side the label sits on. Figma calls this \"Flip\". Logical, so `start` is left in English and right in Persian.",
+          "control": "select",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the control itself.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "RadioCard",
+      "exported": true,
+      "variants": {
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'type' | 'size' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "startAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Leading slot — an icon, an `<Avatar>`, a brand mark, a card provider.",
+          "control": "slot"
+        },
+        "hideControl": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Hides the radio dot, leaving the panel itself as the affordance.",
+          "control": "boolean"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the control itself.",
+          "control": "text"
+        },
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "RadioControl",
+      "exported": false,
+      "variants": {
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "RadioDescription",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "RadioGroup",
+      "exported": true,
+      "variants": {
+        "orientation": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "vertical"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'title' >"
+      ],
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Selected value. Controlled.",
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onValueChange": {
+          "type": "(value: string) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": "Shared `name`. Generated when omitted — without one the browser will not treat the inputs as a single group, and arrow keys stop moving between them.",
+          "control": "text"
+        },
+        "orientation": {
+          "type": "RadioOrientation",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "vertical",
+          "source": "cva"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Disables every radio in the group.",
+          "control": "boolean"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the group, e.g. `'Payment method'`.",
+          "control": "text"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Visible heading. Also names the group.",
+          "control": "slot"
+        },
+        "invalid": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Marks the whole group invalid, e.g. an unanswered required question.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "RadioIndicator",
+      "exported": false,
+      "variants": {
+        "invalid": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "invalid": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "invalid": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "RadioLabel",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "RadioRoot",
+      "exported": false,
+      "variants": {
+        "labelPosition": [
+          "end",
+          "start"
+        ],
+        "align": [
+          "center",
+          "start"
+        ]
+      },
+      "defaultVariants": {
+        "labelPosition": "end",
+        "align": "center"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "labelPosition": {
+          "type": "'end' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "end",
+            "start"
+          ]
+        },
+        "align": {
+          "type": "'center' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "center",
+          "source": "cva",
+          "options": [
+            "center",
+            "start"
+          ]
+        }
+      }
+    }
+  ]
+}

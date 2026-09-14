@@ -1,0 +1,414 @@
+{
+  "dir": "avatar",
+  "name": "Avatar",
+  "type": "registry:component",
+  "files": [
+    "src/components/avatar/avatar-group/avatar-group.tsx",
+    "src/components/avatar/avatar-group/compact-avatar-group.tsx",
+    "src/components/avatar/avatar-group/index.ts",
+    "src/components/avatar/avatar.styles.ts",
+    "src/components/avatar/avatar.tsx",
+    "src/components/avatar/avatar.types.ts",
+    "src/components/avatar/flat-avatar.parts.ts",
+    "src/components/avatar/flat-avatar.tsx",
+    "src/components/avatar/index.ts"
+  ],
+  "exports": [
+    "Avatar",
+    "AvatarBottomStatus",
+    "AvatarGroup",
+    "AvatarGroupItem",
+    "AvatarGroupProps",
+    "AvatarProps",
+    "AvatarSize",
+    "AvatarTone",
+    "AvatarTopStatus",
+    "CompactAvatarGroup",
+    "CompactAvatarGroupAppearance",
+    "CompactAvatarGroupProps",
+    "CompactAvatarGroupSize",
+    "FLAT_AVATAR_COUNTS",
+    "FlatAvatar",
+    "FlatAvatarProps",
+    "avatarGroupOverlap",
+    "avatarPixelSize",
+    "avatarStatusGeometry",
+    "avatarSupportsStatus",
+    "avatarSurfaceVariants",
+    "avatarTextVariant",
+    "avatarVariants",
+    "initialsFromName",
+    "legacyAvatarSize"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon",
+      "typography"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Avatar",
+      "exported": true,
+      "variants": {
+        "size": [
+          "3xl",
+          "2xl",
+          "xl",
+          "lg",
+          "md",
+          "sm",
+          "xs",
+          "2xs",
+          "3xs"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'color' | 'children' >"
+      ],
+      "props": {
+        "size": {
+          "type": "AvatarSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "3xl",
+            "2xl",
+            "xl",
+            "lg",
+            "md",
+            "sm",
+            "xs",
+            "2xs",
+            "3xs"
+          ],
+          "default": "md",
+          "source": "cva"
+        },
+        "tone": {
+          "type": "AvatarTone",
+          "required": false,
+          "doc": "Background/foreground pair for the fallback surface.",
+          "control": "select",
+          "options": [
+            "soft",
+            "yellow",
+            "blue",
+            "green",
+            "pink",
+            "purple",
+            "red"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible name. Required, because an avatar with no name is either an unlabelled image or a decorative blob, and only the call site knows which. Pass `''` to mark it decorative when the person's name is already visible next to it.",
+          "control": "text"
+        },
+        "src": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onImageError": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "initials": {
+          "type": "string",
+          "required": false,
+          "doc": "Initials to show when there is no image. Derived from `name` if omitted.",
+          "control": "text"
+        },
+        "fallback": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Arbitrary fallback content — overrides `initials`.",
+          "control": "slot"
+        },
+        "topStatus": {
+          "type": "AvatarTopStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "verified",
+            "pin",
+            "favorite",
+            "add",
+            "remove",
+            "notification"
+          ]
+        },
+        "bottomStatus": {
+          "type": "AvatarBottomStatus",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "online",
+            "offline",
+            "busy",
+            "away",
+            "company"
+          ]
+        },
+        "companyIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Rendered when `bottomStatus` is `'company'`.",
+          "control": "slot"
+        },
+        "statusLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the status marker, e.g. `'Online'`.",
+          "control": "text"
+        },
+        "placeholder": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's \"Icon\" style: a person silhouette on the tone colour, for accounts with no photo and no name worth initialising.",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "AvatarGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "size": {
+          "type": "AvatarSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "3xl",
+            "2xl",
+            "xl",
+            "lg",
+            "md",
+            "sm",
+            "xs",
+            "2xs",
+            "3xs"
+          ]
+        },
+        "items": {
+          "type": "AvatarGroupItem[]",
+          "required": true,
+          "doc": null,
+          "control": "list"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": "Render at most this many avatars, then a \"+N\" chip.",
+          "control": "number"
+        },
+        "overflowCount": {
+          "type": "number",
+          "required": false,
+          "doc": "Overrides the computed overflow count.",
+          "control": "number"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible label for the whole stack, e.g. `'Team members'`.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "AvatarSurface",
+      "exported": false,
+      "variants": {
+        "tone": [
+          "soft",
+          "yellow",
+          "blue",
+          "green",
+          "pink",
+          "purple",
+          "red"
+        ]
+      },
+      "defaultVariants": {
+        "tone": "soft"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "tone": {
+          "type": "'soft' | 'yellow' | 'blue' | 'green' | 'pink' | 'purple' | 'red'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "soft",
+          "source": "cva",
+          "options": [
+            "soft",
+            "yellow",
+            "blue",
+            "green",
+            "pink",
+            "purple",
+            "red"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CompactAvatarGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "items": {
+          "type": "AvatarGroupItem[]",
+          "required": true,
+          "doc": null,
+          "control": "list"
+        },
+        "size": {
+          "type": "CompactAvatarGroupSize",
+          "required": false,
+          "doc": "40px, 32px or 24px — the three sizes the design defines here.",
+          "control": "select",
+          "options": [
+            "sm",
+            "xs",
+            "2xs"
+          ]
+        },
+        "appearance": {
+          "type": "CompactAvatarGroupAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "stroke",
+            "default"
+          ]
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "FlatAvatar",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'svg'>, 'children' >"
+      ],
+      "props": {
+        "size": {
+          "type": "AvatarSize | number",
+          "required": false,
+          "doc": "An Avatar size token or a pixel size.",
+          "control": "none"
+        },
+        "background": {
+          "type": "number",
+          "required": false,
+          "doc": "Zero-based variant index of each Figma part.",
+          "control": "number"
+        },
+        "face": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "outfit": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "hair": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "eye": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "cheek": {
+          "type": "number | null",
+          "required": false,
+          "doc": "Optional parts: omit (or `null`) to leave them off.",
+          "control": "number"
+        },
+        "mouth": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "glasses": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "hat": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Without it the avatar is decorative.",
+          "control": "text"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "dir": "icon",
+  "name": "Icon",
+  "type": "registry:component",
+  "files": [
+    "src/components/icon/icon.tsx",
+    "src/components/icon/icon.types.ts",
+    "src/components/icon/index.ts"
+  ],
+  "exports": [
+    "Icon",
+    "IconComponent",
+    "IconProps",
+    "IconRenderProps"
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Icon",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< SVGProps<SVGSVGElement>, 'color' | 'children' | 'ref' >"
+      ],
+      "props": {
+        "icon": {
+          "type": "IconComponent",
+          "required": false,
+          "doc": "The icon component itself, e.g. `RiAddLine` from `@remixicon/react`.",
+          "control": "none"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Alternative to `icon`: pass an already-created element as a child.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "number | string",
+          "required": false,
+          "doc": "Pixel size, or any CSS length. `'1em'` makes the icon track font size.",
+          "control": "none"
+        },
+        "color": {
+          "type": "string",
+          "required": false,
+          "doc": "Overrides `currentColor`. Prefer a `text-*` token class instead.",
+          "control": "text"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Provide this ONLY when the icon carries meaning on its own; otherwise the icon stays `aria-hidden` and the adjacent text speaks.",
+          "control": "text"
+        },
+        "mirrored": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Flip horizontally in RTL. Set on directional glyphs (arrows, chevrons).",
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "IconRender",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< SVGProps<SVGSVGElement>, 'color' | 'children' | 'ref' >"
+      ],
+      "props": {
+        "color": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "size": {
+          "type": "number | string",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "children": {
+          "type": "never",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    }
+  ]
+}

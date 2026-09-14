@@ -1,0 +1,484 @@
+{
+  "dir": "key-components",
+  "name": "KeyComponents",
+  "type": "registry:component",
+  "files": [
+    "src/components/key-components/chart-legend.tsx",
+    "src/components/key-components/content-label.tsx",
+    "src/components/key-components/control-label.tsx",
+    "src/components/key-components/hint-text.tsx",
+    "src/components/key-components/index.ts",
+    "src/components/key-components/key-icon.tsx",
+    "src/components/key-components/label.tsx",
+    "src/components/key-components/password-strength.tsx"
+  ],
+  "exports": [
+    "ChartLegend",
+    "ChartLegendColor",
+    "ChartLegendDot",
+    "ChartLegendDotProps",
+    "ChartLegendProps",
+    "ChartLegendSize",
+    "ContentCard",
+    "ContentCardProps",
+    "ContentLabel",
+    "ContentLabelProps",
+    "ContentLabelSize",
+    "ControlLabel",
+    "ControlLabelProps",
+    "HintText",
+    "HintTextProps",
+    "KeyIcon",
+    "KeyIconAppearance",
+    "KeyIconColor",
+    "KeyIconProps",
+    "KeyIconSize",
+    "Label",
+    "LabelProps",
+    "PasswordStrength",
+    "PasswordStrengthLevel",
+    "PasswordStrengthProps",
+    "chartLegendDotVariants",
+    "chartLegendVariants",
+    "contentCardVariants",
+    "contentLabelVariants",
+    "hintTextVariants",
+    "keyIconVariants",
+    "labelRowVariants",
+    "labelVariants",
+    "passwordStrengthVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "ChartLegend",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'color' | 'disabled' | 'value' >"
+      ],
+      "props": {
+        "color": {
+          "type": "ChartLegendColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "yellow",
+            "blue",
+            "green",
+            "pink",
+            "purple",
+            "red",
+            "gray",
+            "orange",
+            "sky",
+            "teal",
+            "disabled",
+            "light-gray"
+          ]
+        },
+        "size": {
+          "type": "ChartLegendSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm"
+          ]
+        },
+        "value": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing figure — pre-formatted, since numerals are a locale decision.",
+          "control": "slot"
+        },
+        "hidden": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Series is hidden. Renders `aria-pressed` so the state is announced.",
+          "control": "boolean"
+        },
+        "onToggle": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Clicking toggles the series. Without it, renders as plain text.",
+          "control": "handler"
+        }
+      }
+    },
+    {
+      "name": "ChartLegendDot",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
+      ],
+      "props": {
+        "color": {
+          "type": "ChartLegendColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "yellow",
+            "blue",
+            "green",
+            "pink",
+            "purple",
+            "red",
+            "gray",
+            "orange",
+            "sky",
+            "teal",
+            "disabled",
+            "light-gray"
+          ]
+        },
+        "size": {
+          "type": "ChartLegendSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "md",
+            "sm"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ContentCard",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ContentLabelProps"
+      ],
+      "props": {
+        "onSelect": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Renders a `<button>` so the whole card is keyboard reachable.",
+          "control": "handler"
+        },
+        "selected": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        }
+      }
+    },
+    {
+      "name": "ContentLabel",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
+      ],
+      "props": {
+        "startAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Flag, icon, avatar, brand mark — all five Figma Types land here.",
+          "control": "slot"
+        },
+        "endAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💬 Sublabel` — the muted run *beside* the title, on the same line.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🎖️ Badge` — sits after the title, before any sublabel.",
+          "control": "slot"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma `🚨 Required` — the asterisk after the title. Decorative.",
+          "control": "boolean"
+        },
+        "toggle": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔀 Toggle` — trailing control. Rendered after `endAdornment`.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "ContentLabelSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "md"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ControlLabel",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
+      ],
+      "props": {
+        "htmlFor": {
+          "type": "string",
+          "required": false,
+          "doc": "Ties the label to its control. Omit when the label is not a `<label>`.",
+          "control": "text"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text sitting inline *after* the label — \"(optional)\", a unit, a count. Figma's `Sublabel`. Distinct from `description`, which is a second line rather than a continuation of the first.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Second line under the label. Figma's `Description`.",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing slot on the label row — a `<Badge>`.",
+          "control": "slot"
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the description — a `<LinkButton>`.",
+          "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "descriptionId": {
+          "type": "string",
+          "required": false,
+          "doc": "Wired to the control's `aria-describedby`.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "HintText",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'p'>",
+        "VariantProps<typeof hintTextVariants>"
+      ],
+      "props": {
+        "icon": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "`true` shows the default glyph for the status; a node overrides it.",
+          "control": "boolean-or-slot"
+        }
+      }
+    },
+    {
+      "name": "KeyIcon",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
+      ],
+      "props": {
+        "appearance": {
+          "type": "KeyIconAppearance",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lighter",
+            "stroke"
+          ]
+        },
+        "color": {
+          "type": "KeyIconColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "yellow",
+            "blue",
+            "green",
+            "pink",
+            "purple",
+            "red",
+            "gray",
+            "orange",
+            "sky",
+            "primary"
+          ]
+        },
+        "size": {
+          "type": "KeyIconSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "2xl",
+            "xl",
+            "lg",
+            "md",
+            "sm"
+          ]
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Provide only when the icon carries meaning alone. Usually it does not.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "Label",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'label'>",
+        "VariantProps<typeof labelVariants>"
+      ],
+      "props": {
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Adds an asterisk and, crucially, keeps it out of the accessible name.",
+          "control": "boolean"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💬 Sublabel` — the muted \"(Optional)\" after the asterisk.",
+          "control": "slot"
+        },
+        "information": {
+          "type": "boolean | ReactNode",
+          "required": false,
+          "doc": "Figma `ℹ️ Information` — the glyph that explains the field.",
+          "control": "boolean-or-slot"
+        },
+        "informationLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the information glyph.",
+          "control": "text"
+        },
+        "hint": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🌟 Button` — trailing slot, usually a LinkButton.",
+          "control": "slot"
+        },
+        "rowClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Applied to the row rather than to the `<label>` element.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "PasswordStrength",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "strength": {
+          "type": "PasswordStrengthLevel",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "strong",
+            "empty",
+            "weak",
+            "moderate"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Visible text beside the meter, e.g. \"Strong password\".",
+          "control": "text"
+        }
+      }
+    }
+  ]
+}

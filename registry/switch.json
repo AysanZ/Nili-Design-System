@@ -1,0 +1,166 @@
+{
+  "dir": "switch",
+  "name": "Switch",
+  "type": "registry:component",
+  "files": [
+    "src/components/switch/index.ts",
+    "src/components/switch/switch.styles.ts",
+    "src/components/switch/switch.tsx",
+    "src/components/switch/switch.types.ts"
+  ],
+  "exports": [
+    "Switch",
+    "SwitchProps",
+    "switchControlVariants",
+    "switchRootVariants",
+    "switchThumbVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [
+      "key-components"
+    ],
+    "shared": [
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Switch",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'input'>, 'type' | 'size' | 'onChange' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Secondary line under the label. Figma's \"Description\" toggle.",
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Muted text inline after the label — Figma's \"Sublabel\".",
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing slot on the label row — Figma's \"Badge\".",
+          "control": "slot"
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the description — Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "labelPosition": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": "Which side the label sits on. Figma calls this \"Flip\". Logical, so `start` is left in English and right in Persian.",
+          "control": "select",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "onCheckedChange": {
+          "type": "(checked: boolean) => void",
+          "required": false,
+          "doc": "Fires with the new state. The raw `onChange` event is still available as `onInputChange` when the event object is genuinely needed.",
+          "control": "handler"
+        },
+        "onInputChange": {
+          "type": "ComponentPropsWithoutRef<'input'>['onChange']",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Wrapper class. Use `className` for the control itself.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "SwitchControl",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "SwitchRoot",
+      "exported": false,
+      "variants": {
+        "labelPosition": [
+          "end",
+          "start"
+        ],
+        "align": [
+          "center",
+          "start"
+        ]
+      },
+      "defaultVariants": {
+        "labelPosition": "end",
+        "align": "center"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "labelPosition": {
+          "type": "'end' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "end",
+            "start"
+          ]
+        },
+        "align": {
+          "type": "'center' | 'start'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "center",
+          "source": "cva",
+          "options": [
+            "center",
+            "start"
+          ]
+        }
+      }
+    },
+    {
+      "name": "SwitchThumb",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

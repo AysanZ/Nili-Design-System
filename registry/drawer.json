@@ -1,0 +1,361 @@
+{
+  "dir": "drawer",
+  "name": "Drawer",
+  "type": "registry:component",
+  "files": [
+    "src/components/drawer/drawer.styles.ts",
+    "src/components/drawer/drawer.tsx",
+    "src/components/drawer/drawer.types.ts",
+    "src/components/drawer/index.ts"
+  ],
+  "exports": [
+    "Drawer",
+    "DrawerFooter",
+    "DrawerHeader",
+    "DrawerHeaderProps",
+    "DrawerProps",
+    "DrawerSide",
+    "DrawerSize",
+    "DrawerVariantProps",
+    "drawerBodyVariants",
+    "drawerFooterVariants",
+    "drawerHeaderVariants",
+    "drawerOverlayVariants",
+    "drawerPanelVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "button",
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-dismissable",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Drawer",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'children' >"
+      ],
+      "props": {
+        "open": {
+          "type": "boolean",
+          "required": true,
+          "doc": null,
+          "control": "boolean"
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": true,
+          "doc": null,
+          "control": "handler"
+        },
+        "side": {
+          "type": "DrawerSide",
+          "required": false,
+          "doc": "Logical: `end` is right in English, left in Persian.",
+          "control": "select",
+          "options": [
+            "start",
+            "end",
+            "top",
+            "bottom"
+          ]
+        },
+        "size": {
+          "type": "DrawerSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "md",
+            "sm",
+            "full"
+          ]
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma header \"Left Icon\" — leading slot before the title.",
+          "control": "slot"
+        },
+        "headerSize": {
+          "type": "'sm' | 'lg'",
+          "required": false,
+          "doc": "Header density: Figma's Small / Large.",
+          "control": "select",
+          "options": [
+            "sm",
+            "lg"
+          ]
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "footer": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "stretchFooter": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma footer \"Stretch\": actions fill the width.",
+          "control": "boolean"
+        },
+        "showClose": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "closeLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "closeOnOutsideClick": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "closeOnEscape": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "container": {
+          "type": "HTMLElement | null",
+          "required": false,
+          "doc": "Where to portal the drawer. Defaults to `document.body`.",
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "DrawerBody",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "lg"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "sm",
+          "source": "cva",
+          "options": [
+            "sm",
+            "lg"
+          ]
+        }
+      }
+    },
+    {
+      "name": "DrawerFooter",
+      "exported": true,
+      "variants": {
+        "stretch": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "stretch": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "stretch": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "DrawerHeader",
+      "exported": true,
+      "variants": {
+        "size": [
+          "sm",
+          "lg"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "A 20px icon, or a 48px key icon.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "'sm' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm",
+          "source": "cva"
+        },
+        "titleId": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "descriptionId": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "onClose": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Shows the × when set.",
+          "control": "handler"
+        },
+        "closeLabel": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "DrawerOverlay",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "DrawerPanel",
+      "exported": false,
+      "variants": {
+        "side": [
+          "start",
+          "end",
+          "top",
+          "bottom"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "full"
+        ]
+      },
+      "defaultVariants": {
+        "side": "end",
+        "size": "md"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "side": {
+          "type": "'start' | 'end' | 'top' | 'bottom'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "start",
+            "end",
+            "top",
+            "bottom"
+          ]
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg' | 'full'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "full"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,356 @@
+{
+  "dir": "tooltip",
+  "name": "Tooltip",
+  "type": "registry:component",
+  "files": [
+    "src/components/tooltip/index.ts",
+    "src/components/tooltip/tooltip.styles.ts",
+    "src/components/tooltip/tooltip.tsx",
+    "src/components/tooltip/tooltip.types.ts"
+  ],
+  "exports": [
+    "Tooltip",
+    "TooltipAlign",
+    "TooltipBaseProps",
+    "TooltipPlacement",
+    "TooltipProps",
+    "TooltipSide",
+    "TooltipSize",
+    "TooltipSurfaceVariantProps",
+    "TooltipVariantProps",
+    "tooltipArrowSurfaceVariants",
+    "tooltipArrowVariants",
+    "tooltipSurfaceVariants",
+    "tooltipVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@floating-ui/react",
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "hooks/use-anchored",
+      "hooks/use-controllable-state",
+      "lib/cn",
+      "lib/slot"
+    ]
+  },
+  "components": [
+    {
+      "name": "Tooltip",
+      "exported": true,
+      "variants": {
+        "size": [
+          "2xs",
+          "xs",
+          "lg"
+        ],
+        "darkMode": [
+          "true",
+          "false"
+        ],
+        "side": [
+          "top",
+          "bottom",
+          "start",
+          "end"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ]
+      },
+      "defaultVariants": {
+        "size": "xs",
+        "side": "top",
+        "align": "center",
+        "darkMode": true
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'2xs' | 'xs' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "xs",
+          "source": "cva",
+          "options": [
+            "2xs",
+            "xs",
+            "lg"
+          ]
+        },
+        "darkMode": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        },
+        "side": {
+          "type": "'top' | 'bottom' | 'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "top",
+          "source": "cva",
+          "options": [
+            "top",
+            "bottom",
+            "start",
+            "end"
+          ]
+        },
+        "align": {
+          "type": "'start' | 'center' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "center",
+          "source": "cva",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TooltipArrow",
+      "exported": false,
+      "variants": {
+        "darkMode": [
+          "true",
+          "false"
+        ],
+        "side": [
+          "top",
+          "bottom",
+          "start",
+          "end"
+        ]
+      },
+      "defaultVariants": {
+        "side": "top",
+        "darkMode": true
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "darkMode": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        },
+        "side": {
+          "type": "'top' | 'bottom' | 'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "top",
+          "source": "cva",
+          "options": [
+            "top",
+            "bottom",
+            "start",
+            "end"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TooltipArrowSurface",
+      "exported": false,
+      "variants": {
+        "darkMode": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "darkMode": true
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "darkMode": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "TooltipBase",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'content' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": "The trigger. A single element, which receives the hover, focus and `aria-describedby` wiring — so it must be able to take focus. Wrap plain text in a `<button>` or a focusable element; a tooltip on a `<span>` is invisible to keyboard users.",
+          "control": "slot"
+        },
+        "content": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": "Tooltip text. Keep it to a phrase and keep it non-essential: a tooltip is unreachable on touch and can be missed entirely, so anything the user *must* read belongs in the page.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Second line under the text. Figma's \"Edit Description\".",
+          "control": "slot"
+        },
+        "startIcon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Leading slot inside the bubble. Figma's \"Left Icon\".",
+          "control": "slot"
+        },
+        "size": {
+          "type": "TooltipSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "xs",
+            "2xs"
+          ]
+        },
+        "arrow": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's \"Tail\".",
+          "control": "boolean"
+        },
+        "darkMode": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's \"Dark Mode\". A tooltip is inverted against its surface, so this is a per-tooltip choice rather than something the theme decides. On by default, which is the dark bubble on a light page.",
+          "control": "boolean"
+        },
+        "open": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Controlled visibility.",
+          "control": "boolean"
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "delay": {
+          "type": "number",
+          "required": false,
+          "doc": "Milliseconds before it appears on hover. Focus opens it immediately.",
+          "control": "number"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Turns the tooltip off without unmounting the trigger.",
+          "control": "boolean"
+        },
+        "dismissible": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma's large tooltip carries a close (×) button.",
+          "control": "boolean"
+        },
+        "onDismiss": {
+          "type": "() => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "dismissLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the close button.",
+          "control": "text"
+        },
+        "contentClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Class for the bubble. Use `className` for the wrapper.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "TooltipSurface",
+      "exported": false,
+      "variants": {
+        "size": [
+          "2xs",
+          "xs",
+          "lg"
+        ],
+        "darkMode": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "xs",
+        "darkMode": true
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'2xs' | 'xs' | 'lg'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "xs",
+          "source": "cva",
+          "options": [
+            "2xs",
+            "xs",
+            "lg"
+          ]
+        },
+        "darkMode": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": true,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+{
+  "dir": "step-indicator",
+  "name": "StepIndicator",
+  "type": "registry:component",
+  "files": [
+    "src/components/step-indicator/index.ts",
+    "src/components/step-indicator/step-indicator.styles.ts",
+    "src/components/step-indicator/step-indicator.tsx",
+    "src/components/step-indicator/step-indicator.types.ts"
+  ],
+  "exports": [
+    "Step",
+    "StepIndicator",
+    "StepIndicatorLabels",
+    "StepIndicatorProps",
+    "StepIndicatorVariantProps",
+    "StepMarkerVariantProps",
+    "StepOrientation",
+    "StepProps",
+    "StepStatus",
+    "StepperDot",
+    "StepperDotProps",
+    "StepperDotSize",
+    "StepperDotVariantProps",
+    "stepConnectorVariants",
+    "stepDescriptionVariants",
+    "stepIndicatorVariants",
+    "stepItemVariants",
+    "stepLabelVariants",
+    "stepMarkerVariants",
+    "stepperDotVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn",
+      "lib/numerals",
+      "providers/direction"
+    ]
+  },
+  "components": [
+    {
+      "name": "Step",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'button'>, 'value' >"
+      ],
+      "props": {
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "status": {
+          "type": "StepStatus",
+          "required": false,
+          "doc": "Overrides the state derived from the indicator's `value`. Rarely needed — all three states follow from the position for free.",
+          "control": "select",
+          "options": [
+            "default",
+            "completed",
+            "active"
+          ]
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Replaces the number or the tick.",
+          "control": "slot"
+        },
+        "onSelect": {
+          "type": "() => void",
+          "required": false,
+          "doc": "Makes the step a real button — for a wizard whose earlier steps can be revisited. Without it the step is inert text, which is right when the flow is strictly forward.",
+          "control": "handler"
+        }
+      }
+    },
+    {
+      "name": "StepConnector",
+      "exported": false,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "complete": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal",
+        "complete": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "complete": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "StepDescription",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "StepIndicator",
+      "exported": true,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'nav'>, 'children' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Index of the current step, 0-based.",
+          "control": "number"
+        },
+        "orientation": {
+          "type": "StepOrientation",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "source": "cva"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag for the step numbers (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "StepIndicatorLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        }
+      }
+    },
+    {
+      "name": "StepItem",
+      "exported": false,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "interactive": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal",
+        "interactive": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "interactive": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "StepLabel",
+      "exported": false,
+      "variants": {
+        "status": [
+          "completed",
+          "active",
+          "default"
+        ]
+      },
+      "defaultVariants": {
+        "status": "default"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'completed' | 'active' | 'default'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "default",
+          "source": "cva",
+          "options": [
+            "completed",
+            "active",
+            "default"
+          ]
+        }
+      }
+    },
+    {
+      "name": "StepMarker",
+      "exported": false,
+      "variants": {
+        "status": [
+          "completed",
+          "active",
+          "default"
+        ]
+      },
+      "defaultVariants": {
+        "status": "default"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "status": {
+          "type": "'completed' | 'active' | 'default'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "default",
+          "source": "cva",
+          "options": [
+            "completed",
+            "active",
+            "default"
+          ]
+        }
+      }
+    },
+    {
+      "name": "StepperDot",
+      "exported": true,
+      "variants": {
+        "size": [
+          "sm",
+          "xs"
+        ],
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm",
+        "active": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "count": {
+          "type": "number",
+          "required": false,
+          "doc": "Number of dots.",
+          "control": "number"
+        },
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Index of the active dot, 0-based. Figma's \"1st / 2nd / 3rd Active\".",
+          "control": "number"
+        },
+        "size": {
+          "type": "StepperDotSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "sm",
+            "xs"
+          ],
+          "default": "sm",
+          "source": "cva"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name, e.g. `'Form steps'`.",
+          "control": "text"
+        },
+        "formatProgress": {
+          "type": "(index: string, total: string) => string",
+          "required": false,
+          "doc": "How the position is announced.",
+          "control": "handler"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "active": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

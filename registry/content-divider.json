@@ -1,0 +1,223 @@
+{
+  "dir": "content-divider",
+  "name": "ContentDivider",
+  "type": "registry:component",
+  "files": [
+    "src/components/content-divider/content-divider.styles.ts",
+    "src/components/content-divider/content-divider.tsx",
+    "src/components/content-divider/index.ts"
+  ],
+  "exports": [
+    "CONTENT_DIVIDER_TYPE_PRESETS",
+    "ContentDivider",
+    "ContentDividerAlign",
+    "ContentDividerOrientation",
+    "ContentDividerProps",
+    "ContentDividerSpacing",
+    "ContentDividerType",
+    "ContentDividerVariantProps",
+    "contentDividerContentVariants",
+    "contentDividerRuleVariants",
+    "contentDividerSolidVariants",
+    "contentDividerVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "ContentDivider",
+      "exported": true,
+      "variants": {
+        "spacing": [
+          "none",
+          "sm",
+          "md",
+          "lg"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "defaultVariants": {
+        "spacing": "none",
+        "align": "center",
+        "orientation": "horizontal"
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Text, a Button, a ButtonGroup — anything. Omit for a plain rule.",
+          "control": "slot"
+        },
+        "spacing": {
+          "type": "ContentDividerSpacing",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "none",
+          "source": "cva"
+        },
+        "align": {
+          "type": "ContentDividerAlign",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "center",
+          "source": "cva"
+        },
+        "orientation": {
+          "type": "ContentDividerOrientation",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal",
+          "source": "cva"
+        },
+        "appearance": {
+          "type": "'subtle' | 'solid'",
+          "required": false,
+          "doc": "`solid` is the stronger rule Figma uses for \"Solid Text Divider\".",
+          "control": "select",
+          "options": [
+            "subtle",
+            "solid"
+          ]
+        },
+        "type": {
+          "type": "ContentDividerType",
+          "required": false,
+          "doc": "Figma `🧩 Type`. A shorthand that sets `spacing`, `align` and `appearance` together; anything you pass explicitly still wins, so the preset is a floor rather than a ceiling.",
+          "control": "select",
+          "options": [
+            "line",
+            "line-spacing",
+            "text-and-line",
+            "text",
+            "solid-text",
+            "icon-button",
+            "icon-button-group",
+            "text-button",
+            "text-button-group"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ContentDividerContent",
+      "exported": false,
+      "variants": {
+        "variant": [
+          "text",
+          "element"
+        ]
+      },
+      "defaultVariants": {
+        "variant": "text"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "variant": {
+          "type": "'text' | 'element'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "text",
+          "source": "cva",
+          "options": [
+            "text",
+            "element"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ContentDividerRule",
+      "exported": false,
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "appearance": [
+          "subtle",
+          "solid"
+        ]
+      },
+      "defaultVariants": {
+        "orientation": "horizontal",
+        "appearance": "subtle"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "horizontal",
+          "source": "cva",
+          "options": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "appearance": {
+          "type": "'subtle' | 'solid'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "subtle",
+          "source": "cva",
+          "options": [
+            "subtle",
+            "solid"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ContentDividerSolid",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    }
+  ]
+}

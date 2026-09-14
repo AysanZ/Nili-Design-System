@@ -1,0 +1,317 @@
+{
+  "dir": "accordion",
+  "name": "Accordion",
+  "type": "registry:component",
+  "files": [
+    "src/components/accordion/accordion.styles.ts",
+    "src/components/accordion/accordion.tsx",
+    "src/components/accordion/accordion.types.ts",
+    "src/components/accordion/index.ts"
+  ],
+  "exports": [
+    "Accordion",
+    "AccordionGroup",
+    "AccordionGroupProps",
+    "AccordionProps",
+    "AccordionVariantProps",
+    "accordionContentVariants",
+    "accordionIndicatorVariants",
+    "accordionPanelVariants",
+    "accordionTriggerVariants",
+    "accordionVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon",
+      "typography"
+    ],
+    "shared": [
+      "hooks/use-controllable-state",
+      "hooks/use-id",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Accordion",
+      "exported": true,
+      "variants": {
+        "open": [
+          "true",
+          "false"
+        ],
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "open": false,
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'content' | 'onToggle' >"
+      ],
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "content": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Alias for `children`, kept for call sites that pass content as a prop.",
+          "control": "slot"
+        },
+        "open": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Controlled open state. Pair with `onOpenChange`.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Uncontrolled initial state.",
+          "control": "boolean"
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "indicatorPosition": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": "Where the expand/collapse indicator sits. Follows reading direction.",
+          "control": "select",
+          "options": [
+            "start",
+            "end"
+          ]
+        },
+        "indicator": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Replaces the default ＋ / － indicator entirely.",
+          "control": "slot"
+        },
+        "startAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Decorative element shown before the title (e.g. a category icon).",
+          "control": "slot"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": "Override the generated ids used to wire `aria-controls`/`aria-labelledby`.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "AccordionContent",
+      "exported": false,
+      "variants": {
+        "open": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "open": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "open": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "AccordionGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'defaultValue' | 'onChange' >"
+      ],
+      "props": {
+        "type": {
+          "type": "'single' | 'multiple'",
+          "required": false,
+          "doc": "`'single'` closes the others on open; `'multiple'` leaves them alone.",
+          "control": "select",
+          "options": [
+            "single",
+            "multiple"
+          ]
+        },
+        "collapsible": {
+          "type": "boolean",
+          "required": false,
+          "doc": "In `'single'` mode, allow closing the open item by clicking it again.",
+          "control": "boolean"
+        },
+        "value": {
+          "type": "string[]",
+          "required": false,
+          "doc": null,
+          "control": "list"
+        },
+        "defaultValue": {
+          "type": "string[]",
+          "required": false,
+          "doc": null,
+          "control": "list"
+        },
+        "onValueChange": {
+          "type": "(value: string[]) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "AccordionIndicator",
+      "exported": false,
+      "variants": {
+        "position": [
+          "start",
+          "end"
+        ]
+      },
+      "defaultVariants": {
+        "position": "end"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "position": {
+          "type": "'start' | 'end'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "end",
+          "source": "cva",
+          "options": [
+            "start",
+            "end"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AccordionPanel",
+      "exported": false,
+      "variants": {
+        "start": [
+          "0",
+          "1",
+          "2"
+        ],
+        "end": [
+          "0",
+          "1"
+        ]
+      },
+      "defaultVariants": {
+        "start": 0,
+        "end": 1
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "start": {
+          "type": "'0' | '1' | '2'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": 0,
+          "source": "cva",
+          "options": [
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        "end": {
+          "type": "'0' | '1'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": 1,
+          "source": "cva",
+          "options": [
+            "0",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AccordionTrigger",
+      "exported": false,
+      "variants": {
+        "open": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "open": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "open": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}
