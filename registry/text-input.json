@@ -324,6 +324,90 @@
         "Omit< ComponentPropsWithoutRef<'input'>, 'size' >"
       ],
       "props": {
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "checked": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "placeholder": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "maxLength": {
+          "type": "number",
+          "control": "number",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "autoComplete": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "startIcon": {
           "type": "ReactNode",
           "required": false,
@@ -366,6 +450,61 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `✏️ Edit Text` — `+98`, `EUR`, `can view`.",
+          "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "InputSelectSize",
           "required": false,
@@ -381,12 +520,6 @@
           "type": "ReactNode",
           "required": false,
           "doc": "Figma `🌍 Pick Country` — a flag, a currency mark, any leading glyph.",
-          "control": "slot"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": "Figma `✏️ Edit Text` — `+98`, `EUR`, `can view`.",
           "control": "slot"
         },
         "chevron": {
@@ -530,6 +663,90 @@
         "Omit< ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'prefix' >"
       ],
       "props": {
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "checked": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "placeholder": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "maxLength": {
+          "type": "number",
+          "control": "number",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "autoComplete": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "TextInputSize",
           "required": false,

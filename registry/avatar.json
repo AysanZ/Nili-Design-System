@@ -78,6 +78,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'color' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "AvatarSize",
           "required": false,
@@ -199,6 +213,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "AvatarSize",
           "required": false,
@@ -291,6 +319,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "items": {
           "type": "AvatarGroupItem[]",
           "required": true,
@@ -342,11 +384,37 @@
         "Omit< ComponentPropsWithoutRef<'svg'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "AvatarSize | number",
           "required": false,
           "doc": "An Avatar size token or a pixel size.",
-          "control": "none"
+          "control": "select",
+          "options": [
+            "3xl",
+            "2xl",
+            "xl",
+            "lg",
+            "md",
+            "sm",
+            "xs",
+            "2xs",
+            "3xs"
+          ],
+          "source": "stories"
         },
         "background": {
           "type": "number",

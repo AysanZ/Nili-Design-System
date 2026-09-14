@@ -66,6 +66,20 @@
         "Omit< ComponentPropsWithoutRef<'nav'>, 'onChange' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "count": {
           "type": "number",
           "required": true,
@@ -197,6 +211,20 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "label": {
           "type": "string",
           "required": false,
@@ -241,6 +269,55 @@
           "required": false,
           "doc": null,
           "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
         },
         "active": {
           "type": "boolean",

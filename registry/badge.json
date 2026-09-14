@@ -79,6 +79,19 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'color' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Badge content. Replaces the old `label` / `number` / `number_label` trio: a boolean flag plus two parallel content props meant three ways to say the same thing and one of them was always ignored.",
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "appearance": {
           "type": "BadgeAppearance",
           "required": false,
@@ -149,12 +162,6 @@
           "type": "ReactNode",
           "required": false,
           "doc": null,
-          "control": "slot"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": "Badge content. Replaces the old `label` / `number` / `number_label` trio: a boolean flag plus two parallel content props meant three ways to say the same thing and one of them was always ignored.",
           "control": "slot"
         }
       }
@@ -236,6 +243,19 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "status": {
           "type": "StatusBadgeStatus",
           "required": false,
@@ -269,12 +289,6 @@
           "required": false,
           "doc": "Leading status glyph. `true` (default) shows the Figma icon for `status`, a node replaces it, `false` hides it.",
           "control": "boolean-or-slot"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": null,
-          "control": "slot"
         }
       }
     }

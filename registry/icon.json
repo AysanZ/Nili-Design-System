@@ -47,7 +47,7 @@
           "type": "number | string",
           "required": false,
           "doc": "Pixel size, or any CSS length. `'1em'` makes the icon track font size.",
-          "control": "none"
+          "control": "number"
         },
         "color": {
           "type": "string",
@@ -89,7 +89,7 @@
           "type": "number | string",
           "required": false,
           "doc": null,
-          "control": "none"
+          "control": "number"
         },
         "children": {
           "type": "never",

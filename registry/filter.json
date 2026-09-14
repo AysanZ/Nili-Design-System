@@ -52,6 +52,20 @@
         "ComponentPropsWithoutRef<'div'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "surface": {
           "type": "'plain' | 'panel'",
           "required": false,
@@ -94,6 +108,61 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'value' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The chosen value, shown after the label.",
+          "control": "slot"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "active": {
           "type": "boolean",
           "required": false,
@@ -114,12 +183,6 @@
           "type": "ReactNode",
           "required": false,
           "doc": null,
-          "control": "slot"
-        },
-        "value": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": "The chosen value, shown after the label.",
           "control": "slot"
         },
         "onClear": {
@@ -146,6 +209,20 @@
         "ComponentPropsWithoutRef<'div'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "label": {
           "type": "string",
           "required": false,
@@ -171,6 +248,62 @@
         "ComponentPropsWithoutRef<'button'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "active": {
           "type": "boolean",
           "required": false,

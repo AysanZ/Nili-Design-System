@@ -60,6 +60,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "status": {
           "type": "BannerStatus",
           "required": false,

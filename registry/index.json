@@ -1598,8 +1598,7 @@
         "typographyVariants"
       ],
       "provides": [
-        "Typography",
-        "TypographyOwn"
+        "Typography"
       ],
       "dependencies": {
         "npm": [

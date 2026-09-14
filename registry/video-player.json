@@ -114,6 +114,20 @@
         "Omit< ComponentPropsWithoutRef<'video'>, 'src' | 'poster' | 'controls' | 'children' | 'autoPlay' | 'loop' | 'muted' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "src": {
           "type": "string",
           "required": true,

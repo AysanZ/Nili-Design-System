@@ -115,6 +115,62 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "color": {
           "type": "ButtonColor",
           "required": false,
@@ -223,6 +279,19 @@
         "ComponentPropsWithoutRef<'div'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "ButtonGroupSize",
           "required": false,
@@ -262,12 +331,6 @@
           "required": false,
           "doc": null,
           "control": "text"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": true,
-          "doc": null,
-          "control": "slot"
         }
       }
     },
@@ -304,6 +367,62 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "selected": {
           "type": "boolean",
           "required": false,
@@ -389,6 +508,60 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": "The glyph. Required — this control is always icon-only.",
+          "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible name. Required, not optional: a button whose only content is an SVG has no accessible name at all, so the type system asks for one.",
+          "control": "text"
+        },
         "appearance": {
           "type": "CompactButtonAppearance",
           "required": false,
@@ -423,18 +596,6 @@
           "control": "boolean",
           "default": false,
           "source": "cva"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": true,
-          "doc": "The glyph. Required — this control is always icon-only.",
-          "control": "slot"
-        },
-        "aria-label": {
-          "type": "string",
-          "required": true,
-          "doc": "Accessible name. Required, not optional: a button whose only content is an SVG has no accessible name at all, so the type system asks for one.",
-          "control": "text"
         }
       }
     },
@@ -469,6 +630,62 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "color": {
           "type": "FancyButtonColor",
           "required": false,
@@ -556,6 +773,20 @@
         "Omit< ComponentPropsWithoutRef<'a'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "color": {
           "type": "LinkButtonColor",
           "required": false,

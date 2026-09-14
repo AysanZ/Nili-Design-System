@@ -43,6 +43,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "value": {
           "type": "SliderValue",
           "required": false,

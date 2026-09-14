@@ -48,7 +48,91 @@
         "ProgressCommonProps",
         "Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'>"
       ],
-      "props": {}
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name when there is no visible `label` — a bare bar in a table cell has nothing to be named by otherwise.",
+          "control": "text"
+        },
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Current value, clamped to `0…max`. Ignored while `indeterminate`.",
+          "control": "number"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "color": {
+          "type": "ProgressColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "primary"
+          ]
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Unknown duration: drops `aria-valuenow` so assistive tech announces \"busy\" rather than inventing a percentage.",
+          "control": "boolean"
+        },
+        "label": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Visible label. Also becomes the accessible name.",
+          "control": "slot"
+        },
+        "labelPosition": {
+          "type": "ProgressLabelPosition",
+          "required": false,
+          "doc": "Figma's label `Type`.",
+          "control": "select",
+          "options": [
+            "end",
+            "top"
+          ]
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the bar. Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows the percentage.",
+          "control": "boolean"
+        },
+        "valueLabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Overrides the rendered readout — `'3 of 10 files'`, a size, an ETA.",
+          "control": "slot"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
+        }
+      }
     },
     {
       "name": "ProgressCircle",
@@ -72,6 +156,18 @@
         "Omit<ComponentPropsWithoutRef<'div'>, 'color' | 'children'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Content in the middle. Defaults to the percentage when `showValue`.",
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name when there is no visible `label` — a bare bar in a table cell has nothing to be named by otherwise.",
+          "control": "text"
+        },
         "size": {
           "type": "ProgressCircleSize",
           "required": false,
@@ -94,11 +190,75 @@
           "doc": "Stroke width in px.",
           "control": "number"
         },
-        "children": {
+        "value": {
+          "type": "number",
+          "required": false,
+          "doc": "Current value, clamped to `0…max`. Ignored while `indeterminate`.",
+          "control": "number"
+        },
+        "max": {
+          "type": "number",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "color": {
+          "type": "ProgressColor",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "error",
+            "warning",
+            "success",
+            "primary"
+          ]
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Unknown duration: drops `aria-valuenow` so assistive tech announces \"busy\" rather than inventing a percentage.",
+          "control": "boolean"
+        },
+        "label": {
           "type": "ReactNode",
           "required": false,
-          "doc": "Content in the middle. Defaults to the percentage when `showValue`.",
+          "doc": "Visible label. Also becomes the accessible name.",
           "control": "slot"
+        },
+        "labelPosition": {
+          "type": "ProgressLabelPosition",
+          "required": false,
+          "doc": "Figma's label `Type`.",
+          "control": "select",
+          "options": [
+            "end",
+            "top"
+          ]
+        },
+        "linkButton": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Action under the bar. Figma's \"Link Button\".",
+          "control": "slot"
+        },
+        "showValue": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows the percentage.",
+          "control": "boolean"
+        },
+        "valueLabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Overrides the rendered readout — `'3 of 10 files'`, a size, an ETA.",
+          "control": "slot"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag driving the digits (`'fa'` → Persian). Defaults to the ambient locale from `NiliProvider`.",
+          "control": "text"
         }
       }
     },

@@ -55,6 +55,62 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'value' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "label": {
           "type": "ReactNode",
           "required": false,
@@ -165,6 +221,13 @@
           "required": true,
           "doc": null,
           "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
         },
         "value": {
           "type": "number",
@@ -324,6 +387,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "count": {
           "type": "number",
           "required": false,

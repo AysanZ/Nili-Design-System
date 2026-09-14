@@ -199,6 +199,20 @@
         "Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "footer": {
           "type": "ReactNode",
           "required": false,
@@ -222,6 +236,58 @@
           "required": false,
           "doc": null,
           "control": "handler"
+        },
+        "calendar": {
+          "type": "CalendarSystem",
+          "required": false,
+          "doc": "`'jalali'` (Solar Hijri — Shamsi, also called Jalali) or `'gregorian'`. Defaults to Jalali under a Persian locale and Gregorian otherwise.",
+          "control": "select",
+          "options": [
+            "jalali",
+            "gregorian"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag for month names, weekday names and numerals.",
+          "control": "text"
+        },
+        "allowCalendarSwitch": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Let the user switch calendars from a toggle in the header.",
+          "control": "boolean"
+        },
+        "minDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "maxDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "markedDates": {
+          "type": "Date[]",
+          "required": false,
+          "doc": "Days that get a marker dot — Figma's \"Marked\" state.",
+          "control": "list"
+        },
+        "isDateDisabled": {
+          "type": "(date: Date) => boolean",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "labels": {
+          "type": "{\n    previousMonth?: string;\n    nextMonth?: string;\n    calendarSwitch?: string;\n    jalali?: string;\n    gregorian?: string;\n  }",
+          "required": false,
+          "doc": null,
+          "control": "none"
         }
       }
     },
@@ -245,6 +311,20 @@
         "Omit<ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "value": {
           "type": "DateRange",
           "required": false,
@@ -274,6 +354,58 @@
           "required": false,
           "doc": null,
           "control": "slot"
+        },
+        "calendar": {
+          "type": "CalendarSystem",
+          "required": false,
+          "doc": "`'jalali'` (Solar Hijri — Shamsi, also called Jalali) or `'gregorian'`. Defaults to Jalali under a Persian locale and Gregorian otherwise.",
+          "control": "select",
+          "options": [
+            "jalali",
+            "gregorian"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "BCP-47 tag for month names, weekday names and numerals.",
+          "control": "text"
+        },
+        "allowCalendarSwitch": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Let the user switch calendars from a toggle in the header.",
+          "control": "boolean"
+        },
+        "minDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "maxDate": {
+          "type": "Date",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "markedDates": {
+          "type": "Date[]",
+          "required": false,
+          "doc": "Days that get a marker dot — Figma's \"Marked\" state.",
+          "control": "list"
+        },
+        "isDateDisabled": {
+          "type": "(date: Date) => boolean",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "labels": {
+          "type": "{\n    previousMonth?: string;\n    nextMonth?: string;\n    calendarSwitch?: string;\n    jalali?: string;\n    gregorian?: string;\n  }",
+          "required": false,
+          "doc": null,
+          "control": "none"
         }
       }
     },

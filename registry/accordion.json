@@ -58,15 +58,22 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'title' | 'content' | 'onToggle' >"
       ],
       "props": {
-        "title": {
-          "type": "ReactNode",
-          "required": true,
-          "doc": null,
-          "control": "slot"
-        },
         "children": {
           "type": "ReactNode",
           "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
           "doc": null,
           "control": "slot"
         },
@@ -169,6 +176,19 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'defaultValue' | 'onChange' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "type": {
           "type": "'single' | 'multiple'",
           "required": false,
@@ -202,12 +222,6 @@
           "required": false,
           "doc": null,
           "control": "handler"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": null,
-          "control": "slot"
         }
       }
     },

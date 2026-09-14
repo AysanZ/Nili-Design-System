@@ -63,5 +63,18 @@ export default tseslint.config(
       '@typescript-eslint/consistent-type-imports': 'off',
     },
   },
+  {
+    files: ['apps/studio/**/*.tsx'],
+    rules: {
+      // `role="separator"` with a tabindex is the ARIA window-splitter pattern:
+      // a focusable divider that resizes its neighbours with the arrow keys.
+      // The rule does not model it, so the role is added to its allow list
+      // rather than the check being switched off.
+      'jsx-a11y/no-noninteractive-tabindex': [
+        'error',
+        { tags: [], roles: ['tabpanel', 'separator'], allowExpressionValues: true },
+      ],
+    },
+  },
   prettier,
 );

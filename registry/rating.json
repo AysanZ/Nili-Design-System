@@ -66,6 +66,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "value": {
           "type": "number",
           "required": false,
@@ -336,6 +350,84 @@
           "control": "slot"
         },
         "rootClassName": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "type": {
+          "type": "RatingBarType",
+          "required": false,
+          "doc": "Figma `🧩 Type`.",
+          "control": "select",
+          "options": [
+            "number",
+            "emoji",
+            "star",
+            "heart"
+          ]
+        },
+        "count": {
+          "type": "number",
+          "required": false,
+          "doc": "How many options. Figma draws five; the count is yours.",
+          "control": "number"
+        },
+        "value": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "defaultValue": {
+          "type": "number | null",
+          "required": false,
+          "doc": null,
+          "control": "number"
+        },
+        "onValueChange": {
+          "type": "(value: number) => void",
+          "required": false,
+          "doc": null,
+          "control": "handler"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean"
+        },
+        "emojis": {
+          "type": "readonly ReactNode[]",
+          "required": false,
+          "doc": "Overrides the emoji set. Must be at least `count` long.",
+          "control": "list"
+        },
+        "locale": {
+          "type": "string",
+          "required": false,
+          "doc": "Digits follow the locale, so `4` renders in Persian digits under `fa`.",
+          "control": "text"
+        },
+        "labels": {
+          "type": "RatingBarLabels",
+          "required": false,
+          "doc": null,
+          "control": "none"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "id": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "className": {
           "type": "string",
           "required": false,
           "doc": null,

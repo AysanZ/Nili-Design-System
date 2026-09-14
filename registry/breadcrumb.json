@@ -49,6 +49,13 @@
           "doc": null,
           "control": "slot"
         },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "divider": {
           "type": "BreadcrumbDivider",
           "required": false,
@@ -113,6 +120,13 @@
           "required": false,
           "doc": null,
           "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
         },
         "icon": {
           "type": "ReactNode",

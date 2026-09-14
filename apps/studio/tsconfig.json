@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    // `noUncheckedIndexedAccess` is deliberately off: the alias below pulls
+    // the library's own sources into this program, and they are compiled
+    // without it. Raising it here would report errors in code this app does
+    // not own.
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "noEmit": true,
+    "paths": {
+      "@nili/ui": ["./../../src/index.ts"],
+      "@nili/ui/*": ["./../../src/*"],
+      "@studio/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

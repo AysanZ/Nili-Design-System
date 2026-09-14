@@ -67,6 +67,13 @@
           "doc": "Text, a Button, a ButtonGroup — anything. Omit for a plain rule.",
           "control": "slot"
         },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "spacing": {
           "type": "ContentDividerSpacing",
           "required": false,

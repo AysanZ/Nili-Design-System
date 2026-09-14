@@ -65,6 +65,60 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "required": false,
+          "doc": "Arbitrary colour. Wins over `color`.",
+          "control": "text"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "required": true,
+          "doc": "Accessible name — a coloured circle has none.",
+          "control": "text"
+        },
         "color": {
           "type": "ColorDotColor",
           "required": false,
@@ -84,23 +138,11 @@
           ],
           "source": "cva"
         },
-        "value": {
-          "type": "string",
-          "required": false,
-          "doc": "Arbitrary colour. Wins over `color`.",
-          "control": "text"
-        },
         "selected": {
           "type": "boolean",
           "required": false,
           "doc": null,
           "control": "boolean"
-        },
-        "aria-label": {
-          "type": "string",
-          "required": true,
-          "doc": "Accessible name — a coloured circle has none.",
-          "control": "text"
         }
       }
     },
@@ -123,6 +165,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "value": {
           "type": "string",
           "required": false,
@@ -184,6 +240,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "type": {
           "type": "'hue' | 'opacity'",
           "required": false,
@@ -238,6 +308,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "hue": {
           "type": "number",
           "required": true,

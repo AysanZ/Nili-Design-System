@@ -65,6 +65,20 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'onSelect' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "appearance": {
           "type": "TagAppearance",
           "required": false,
@@ -177,6 +191,20 @@
         "ComponentPropsWithoutRef<'div'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "label": {
           "type": "string",
           "required": false,

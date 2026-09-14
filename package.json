@@ -48,7 +48,9 @@
     "prebuild-storybook": "node scripts/doctor.mjs",
     "prebuild": "node scripts/doctor.mjs && npm run registry",
     "registry": "node scripts/build-registry.mjs",
-    "registry:check": "node scripts/build-registry.mjs --check"
+    "registry:check": "node scripts/build-registry.mjs --check",
+    "studio": "npm run dev -w @nili/studio",
+    "studio:build": "npm run registry && npm run build -w @nili/studio"
   },
   "peerDependencies": {
     "@remixicon/react": ">=4.2.0",
@@ -81,7 +83,7 @@
     "@types/node": "^22.15.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -120,6 +122,7 @@
     "node": ">=20.0.0"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ]
 }

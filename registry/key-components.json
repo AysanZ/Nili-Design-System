@@ -71,6 +71,61 @@
         "Omit< ComponentPropsWithoutRef<'button'>, 'color' | 'disabled' | 'value' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Trailing figure — pre-formatted, since numerals are a locale decision.",
+          "control": "slot"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "color": {
           "type": "ChartLegendColor",
           "required": false,
@@ -101,12 +156,6 @@
             "sm"
           ]
         },
-        "value": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": "Trailing figure — pre-formatted, since numerals are a locale decision.",
-          "control": "slot"
-        },
         "hidden": {
           "type": "boolean",
           "required": false,
@@ -131,6 +180,20 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "color": {
           "type": "ChartLegendColor",
           "required": false,
@@ -184,6 +247,64 @@
           "required": false,
           "doc": null,
           "control": "boolean"
+        },
+        "startAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Flag, icon, avatar, brand mark — all five Figma Types land here.",
+          "control": "slot"
+        },
+        "endAdornment": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "sublabel": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `💬 Sublabel` — the muted run *beside* the title, on the same line.",
+          "control": "slot"
+        },
+        "description": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🎖️ Badge` — sits after the title, before any sublabel.",
+          "control": "slot"
+        },
+        "required": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Figma `🚨 Required` — the asterisk after the title. Decorative.",
+          "control": "boolean"
+        },
+        "toggle": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma `🔀 Toggle` — trailing control. Rendered after `endAdornment`.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "ContentLabelSize",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "options": [
+            "lg",
+            "md"
+          ]
         }
       }
     },
@@ -197,6 +318,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "startAdornment": {
           "type": "ReactNode",
           "required": false,
@@ -267,6 +402,20 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "htmlFor": {
           "type": "string",
           "required": false,
@@ -328,6 +477,20 @@
         "VariantProps<typeof hintTextVariants>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "icon": {
           "type": "boolean | ReactNode",
           "required": false,
@@ -346,6 +509,19 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "appearance": {
           "type": "KeyIconAppearance",
           "required": false,
@@ -387,12 +563,6 @@
             "sm"
           ]
         },
-        "children": {
-          "type": "ReactNode",
-          "required": true,
-          "doc": null,
-          "control": "slot"
-        },
         "label": {
           "type": "string",
           "required": false,
@@ -412,6 +582,20 @@
         "VariantProps<typeof labelVariants>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "required": {
           "type": "boolean",
           "required": false,
@@ -460,6 +644,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "strength": {
           "type": "PasswordStrengthLevel",
           "required": false,

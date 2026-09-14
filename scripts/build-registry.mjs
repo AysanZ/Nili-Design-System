@@ -42,11 +42,12 @@ const project = new Project({
     : undefined,
   skipAddingFilesFromTsConfig: true,
 });
+// Stories are parsed for their `argTypes` but never emitted as component
+// files, which is why they are added here and filtered out in `SKIP_FILE`.
 project.addSourceFilesAtPaths([
   join(SRC, '**/*.ts'),
   join(SRC, '**/*.tsx'),
   `!${join(SRC, '**/*.test.ts*')}`,
-  `!${join(SRC, '**/*.stories.tsx')}`,
 ]);
 
 /* ══════════════════════════════════════════════════════════════════
@@ -162,6 +163,9 @@ function classifyType(typeText) {
   }
   if (/^'[^']*'$/.test(t)) return { control: 'select', options: [t.slice(1, -1)] };
   if (t === 'boolean') return { control: 'boolean' };
+  // `number | string` is the CSS-length pattern (`16` or `'1em'`); a number
+  // control covers the common case and the value stays assignable either way.
+  if (/^(number \| string|string \| number)$/.test(t)) return { control: 'number' };
   if (t === 'number') return { control: 'number' };
   if (t === 'string') return { control: 'text' };
   if (/^ReactNode$/.test(t)) return { control: 'slot' };
@@ -192,18 +196,111 @@ function classifyResolved(member) {
   return null;
 }
 
+/**
+ * DOM props worth exposing in a builder. `ComponentPropsWithoutRef<'input'>`
+ * contributes about 280 attributes and event handlers; all but these are
+ * noise in a props panel, and listing them would bury the twelve that
+ * matter. Everything else stays reachable in code — it is simply not
+ * surfaced as a control.
+ */
+const DOM_PROPS = {
+  disabled: { type: 'boolean', control: 'boolean' },
+  required: { type: 'boolean', control: 'boolean' },
+  readOnly: { type: 'boolean', control: 'boolean' },
+  checked: { type: 'boolean', control: 'boolean' },
+  defaultChecked: { type: 'boolean', control: 'boolean' },
+  placeholder: { type: 'string', control: 'text' },
+  value: { type: 'string', control: 'text' },
+  defaultValue: { type: 'string', control: 'text' },
+  name: { type: 'string', control: 'text' },
+  maxLength: { type: 'number', control: 'number' },
+  rows: { type: 'number', control: 'number' },
+  autoComplete: { type: 'string', control: 'text' },
+  'aria-label': { type: 'string', control: 'text' },
+};
+
+/**
+ * `children` is declared on almost no props interface in this library,
+ * because React contributes it through `ComponentPropsWithoutRef`. It is
+ * still the most important editable thing about a Button or a Tag, so it is
+ * added for every element that can hold content — which is every element
+ * except the void ones.
+ */
+const VOID_ELEMENTS = new Set(['input', 'img', 'hr', 'br', 'area', 'col', 'embed', 'source', 'track', 'wbr']);
+
+/** Which DOM element an interface inherits from, if any. */
+function domElementOf(heritage) {
+  const m = heritage.join(' ').match(/ComponentPropsWithoutRef<'(\w+)'>/);
+  return m?.[1] ?? null;
+}
+
 function readProps(sourceFile, componentName) {
   const out = {};
   const extendsFrom = [];
 
-  for (const iface of sourceFile.getInterfaces()) {
-    const name = iface.getName();
-    if (name !== componentName + 'Props') continue;
+  /* Polymorphic components declare `TypographyOwnProps` and export
+     `TypographyProps` as a type alias over `PolymorphicProps`, so looking
+     only for `<Name>Props` as an interface finds nothing at all. */
+  const alias = sourceFile.getTypeAlias(componentName + 'Props');
+  const aliasText = alias?.getTypeNode()?.getText() ?? '';
+  const polymorphic = /PolymorphicProps</.test(aliasText);
 
+  const target =
+    sourceFile.getInterface(componentName + 'Props') ??
+    sourceFile.getInterface(componentName + 'OwnProps');
+  if (!target) return { props: out, extends: extendsFrom };
+
+  if (polymorphic)
+    out.children = { type: 'ReactNode', control: 'slot', required: false, doc: null, source: 'dom' };
+
+  /* Walk local base interfaces too. `ProgressBarProps extends
+     ProgressCommonProps` put every meaningful prop one level up, where the
+     first version of this function could not see it — ProgressBar came out
+     of the registry with zero editable props, which is how the bug was
+     found. Base members are read first so the derived interface can
+     override them. */
+  const chain = [];
+  const collect = (iface, depth = 0) => {
+    if (depth > 4) return;
     for (const clause of iface.getHeritageClauses())
-      for (const t of clause.getTypeNodes())
-        extendsFrom.push(t.getText().replace(/\s+/g, ' '));
+      for (const t of clause.getTypeNodes()) {
+        const text = t.getText().replace(/\s+/g, ' ');
+        if (depth === 0) extendsFrom.push(text);
+        const baseName = text.match(/^([A-Za-z_$][\w$]*)/)?.[1];
+        const base = baseName && sourceFile.getInterface(baseName);
+        if (base) collect(base, depth + 1);
+      }
+    chain.unshift(iface);
+  };
+  collect(target);
 
+  const omitted = new Set(
+    (extendsFrom.join(' ').match(/Omit<[^>]*>/g) ?? [])
+      .flatMap((o) => [...o.matchAll(/'([^']+)'/g)].map((m) => m[1])),
+  );
+
+  const element = domElementOf(extendsFrom);
+  if (element && !VOID_ELEMENTS.has(element) && !omitted.has('children'))
+    out.children = { type: 'ReactNode', control: 'slot', required: false, doc: null, source: 'dom' };
+  if (element) {
+    for (const [key, meta] of Object.entries(DOM_PROPS)) {
+      if (omitted.has(key)) continue;
+      // `disabled` on a <span> is not a prop, it is a typo that compiles.
+      // Only surface an attribute where the element actually takes it.
+      const FORM = new Set(['input', 'textarea', 'select', 'button']);
+      const TEXTUAL = new Set(['input', 'textarea']);
+      if (key === 'rows' && element !== 'textarea') continue;
+      if (!FORM.has(element)
+          && ['disabled', 'required', 'readOnly', 'value', 'defaultValue', 'name'].includes(key))
+        continue;
+      if (!TEXTUAL.has(element)
+          && ['checked', 'defaultChecked', 'placeholder', 'maxLength', 'autoComplete'].includes(key))
+        continue;
+      out[key] = { ...meta, required: false, doc: null, source: 'dom' };
+    }
+  }
+
+  for (const iface of chain) {
     for (const member of iface.getProperties()) {
       const key = member.getName().replace(/^['"]|['"]$/g, '');
       const typeText = member.getTypeNode()?.getText() ?? 'unknown';
@@ -220,6 +317,62 @@ function readProps(sourceFile, componentName) {
   }
 
   return { props: out, extends: extendsFrom };
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   2b. *.stories.tsx → argTypes
+   ══════════════════════════════════════════════════════════════════ */
+
+/**
+ * Storybook's `argTypes` is the third place a prop's options are written down,
+ * and sometimes the only one: a prop typed `string` can still have a fixed set
+ * of values the stories enumerate. Reading them here means a control that
+ * works in Storybook works in the studio, without a second list to maintain.
+ */
+function readArgTypes(dir) {
+  const out = new Map();
+  const files = project
+    .getSourceFiles()
+    .filter((f) => f.getFilePath().startsWith(dir + '/') && f.getBaseName().endsWith('.stories.tsx'));
+
+  for (const file of files) {
+    file.forEachDescendant((node) => {
+      if (!Node.isPropertyAssignment(node) || node.getName() !== 'argTypes') return;
+      const init = node.getInitializer();
+      if (!Node.isObjectLiteralExpression(init)) return;
+
+      for (const prop of init.getProperties()) {
+        if (!Node.isPropertyAssignment(prop)) continue;
+        const key = prop.getName().replace(/^['"]|['"]$/g, '');
+        const value = prop.getInitializer();
+        if (!Node.isObjectLiteralExpression(value)) continue;
+
+        const optionsProp = value.getProperty('options');
+        const optionsInit = optionsProp?.getInitializer?.();
+        if (!Node.isArrayLiteralExpression(optionsInit)) continue;
+
+        const options = optionsInit
+          .getElements()
+          .filter((e) => Node.isStringLiteral(e))
+          .map((e) => e.getLiteralValue());
+        if (!options.length || out.has(key)) continue;
+
+        const controlProp = value.getProperty('control');
+        const controlInit = controlProp?.getInitializer?.();
+        let control = null;
+        if (Node.isStringLiteral(controlInit)) control = controlInit.getLiteralValue();
+        else if (Node.isObjectLiteralExpression(controlInit)) {
+          const typeProp = controlInit.getProperty('type');
+          const typeInit = typeProp?.getInitializer?.();
+          if (Node.isStringLiteral(typeInit)) control = typeInit.getLiteralValue();
+        }
+
+        out.set(key, { options, control });
+      }
+    });
+  }
+
+  return out;
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -306,7 +459,9 @@ function buildComponent(dir) {
     for (const iface of file.getInterfaces()) {
       const n = iface.getName();
       if (!n.endsWith('Props')) continue;
-      const name = n.slice(0, -'Props'.length);
+      // `TypographyOwnProps` belongs to `Typography`, not to a component
+      // called `TypographyOwn`.
+      const name = n.replace(/(Own)?Props$/, '');
       if (propsByComponent.has(name)) continue;
       propsByComponent.set(name, readProps(file, name));
     }
@@ -318,6 +473,23 @@ function buildComponent(dir) {
     ...cvaByComponent.keys(),
     ...propsByComponent.keys(),
   ]);
+
+  /**
+   * Every variant axis declared anywhere in the folder. A prop often shares
+   * its name with a variant on a *sibling* cva — Avatar's `tone` is declared
+   * on `avatarSurfaceVariants`, not on `avatarVariants` — and without this
+   * it comes out of the registry as an uneditable opaque alias.
+   */
+  const folderVariants = new Map();
+  for (const c of cvaByComponent.values()) {
+    for (const [k, opts] of Object.entries(c.variants))
+      if (!folderVariants.has(k)) folderVariants.set(k, opts);
+    for (const slot of c.slots ?? [])
+      for (const [k, opts] of Object.entries(slot.variants ?? {}))
+        if (!folderVariants.has(k)) folderVariants.set(k, opts);
+  }
+
+  const argTypes = readArgTypes(abs);
 
   const components = [...names].sort().map((name) => {
     const cva = cvaByComponent.get(name);
@@ -340,6 +512,30 @@ function buildComponent(dir) {
       };
       if (isBool) delete props[key].options;
       else props[key].options = options;
+    }
+
+    for (const [key, meta] of Object.entries(props)) {
+      const fromStories = argTypes.get(key);
+      if (!fromStories) continue;
+      if (meta.control === 'select' && meta.options?.length) continue;
+      props[key] = {
+        ...meta,
+        control: 'select',
+        options: fromStories.options,
+        source: meta.source ?? 'stories',
+      };
+    }
+
+    for (const [key, meta] of Object.entries(props)) {
+      if (meta.control !== 'none' || !folderVariants.has(key)) continue;
+      const opts = folderVariants.get(key);
+      const isBool = opts.length === 2 && opts.includes('true') && opts.includes('false');
+      props[key] = {
+        ...meta,
+        control: isBool ? 'boolean' : 'select',
+        ...(isBool ? {} : { options: opts }),
+        source: 'cva:sibling',
+      };
     }
 
     return {

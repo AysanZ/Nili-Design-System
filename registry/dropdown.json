@@ -50,6 +50,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "options": {
           "type": "DropdownOption[]",
           "required": true,

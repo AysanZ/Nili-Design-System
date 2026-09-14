@@ -63,6 +63,20 @@
         "ComponentPropsWithoutRef<'table'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "size": {
           "type": "TableSize",
           "required": false,
@@ -149,6 +163,20 @@
         "Omit< ComponentPropsWithoutRef<'td'>, 'align' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "align": {
           "type": "TableAlign",
           "required": false,
@@ -233,6 +261,20 @@
         "Omit< ComponentPropsWithoutRef<'th'>, 'align' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "align": {
           "type": "TableAlign",
           "required": false,
@@ -348,6 +390,20 @@
         "ComponentPropsWithoutRef<'tr'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "selected": {
           "type": "boolean",
           "required": false,

@@ -211,6 +211,13 @@
           "doc": "The trigger. A single element, which receives the hover, focus and `aria-describedby` wiring — so it must be able to take focus. Wrap plain text in a `<button>` or a focusable element; a tooltip on a `<span>` is invisible to keyboard users.",
           "control": "slot"
         },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "content": {
           "type": "ReactNode",
           "required": true,

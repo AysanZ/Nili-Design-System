@@ -107,6 +107,20 @@
         "Omit< ComponentPropsWithoutRef<'span'>, 'color' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "fileName": {
           "type": "string",
           "required": true,
@@ -214,6 +228,20 @@
         "Omit< ComponentPropsWithoutRef<'label'>, 'onDrop' | 'onChange' | 'title' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "onFiles": {
           "type": "(files: File[]) => void",
           "required": true,
@@ -292,6 +320,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "fileName": {
           "type": "string",
           "required": true,
@@ -373,6 +415,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'onChange' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "shape": {
           "type": "ImageUploadShape",
           "required": false,

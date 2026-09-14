@@ -32,6 +32,20 @@
         "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "illustration": {
           "type": "ReactNode",
           "required": false,

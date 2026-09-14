@@ -57,6 +57,20 @@
         "Omit< ComponentPropsWithoutRef<'section'>, 'title' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "title": {
           "type": "ReactNode",
           "required": false,
@@ -168,6 +182,19 @@
         "Omit< ComponentPropsWithoutRef<'li'>, 'title' | 'children' >"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "type": {
           "type": "ActivityFeedItemType",
           "required": false,
@@ -259,12 +286,6 @@
           "required": false,
           "doc": "Makes the whole card selectable. The title becomes a real button that stretches over the card, so actions and the menu inside stay separate, valid, focusable buttons.",
           "control": "handler"
-        },
-        "children": {
-          "type": "ReactNode",
-          "required": false,
-          "doc": null,
-          "control": "slot"
         }
       }
     },
@@ -294,6 +315,62 @@
         "ComponentPropsWithoutRef<'button'>"
       ],
       "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
         "selected": {
           "type": "boolean",
           "required": false,
