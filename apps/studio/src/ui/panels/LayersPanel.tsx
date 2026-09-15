@@ -1,146 +1,157 @@
-import { useState } from 'react';
-import type { DragEvent, KeyboardEvent, MouseEvent } from 'react';
-import { useStudio } from '../../document/StudioContext';
-import type { DocNode } from '../../document/types';
-import { isFrame } from '../../document/types';
-import { DRAG_ASSET, DRAG_NODE } from '../canvas/dnd';
-import { createComponent, createFrame } from '../../document/factory';
-import { locate } from '../../document/tree';
-import { useContextMenu } from '../ContextMenu';
+import { useState, type DragEvent } from 'react';
+import { label as labelOf, parentOf } from '../../core/tree';
+import { container, describeCond, type AnyNode } from '../../core/model';
+import { useStudio } from '../../core/store';
+import { useT } from '../../i18n';
+import { Empty, Glyph, ICON, IconBtn } from '../controls';
 
-interface RowProps {
-  node: DocNode;
-  depth: number;
+type Where = 'before' | 'after' | 'inside';
+interface Drop {
+  id: string;
+  where: Where;
 }
 
-type DropEdge = 'before' | 'after' | 'inside';
+const iconFor = (node: AnyNode): string => {
+  if (node.kind === 'box') return node.layout.dir === 'row' ? ICON.row : ICON.col;
+  if (node.kind === 'text') return ICON.text;
+  if (node.kind === 'slot') return ICON.slot;
+  return ICON.box;
+};
 
-function Row({ node, depth }: RowProps): JSX.Element {
-  const { state, dispatch, findingsByNode } = useStudio();
-  const menu = useContextMenu();
-  const [edge, setEdge] = useState<DropEdge | null>(null);
-  const selected = state.selection.has(node.id);
-  const expanded = state.expanded.has(node.id);
-  const findings = (findingsByNode.get(node.id) ?? []).filter((f) => f.severity !== 'info');
-  const severity = findings.some((f) => f.severity === 'error') ? 'error' : findings.length ? 'warning' : null;
-  const isRoot = node.id === state.root.id;
+export function LayersPanel(): JSX.Element {
+  const { component, state, dispatch } = useStudio();
+  const t = useT();
+  const [dragging, setDragging] = useState<string | null>(null);
+  const [drop, setDrop] = useState<Drop | null>(null);
 
-  const label = isFrame(node)
-    ? isRoot
-      ? 'Page'
-      : `${node.layout.direction === 'vertical' ? 'Vertical' : 'Horizontal'} frame`
-    : node.component;
+  const root = component.root;
 
-  const onClick = (event: MouseEvent): void => {
-    dispatch({ type: 'select', ids: [node.id], additive: event.shiftKey || event.metaKey || event.ctrlKey });
-  };
-
-  const onDragStart = (event: DragEvent): void => {
-    if (isRoot) return;
-    event.stopPropagation();
-    event.dataTransfer.setData(DRAG_NODE, node.id);
-    event.dataTransfer.effectAllowed = 'move';
-  };
-
-  /**
-   * A row is three drop zones: the top and bottom thirds insert as a sibling,
-   * the middle drops inside when the row is a frame. Without the thirds, a
-   * dense tree gives you no way to land beside a frame instead of in it.
-   */
-  const edgeAt = (event: DragEvent): DropEdge => {
-    const box = event.currentTarget.getBoundingClientRect();
-    const ratio = (event.clientY - box.top) / box.height;
-    if (isFrame(node) && ratio > 0.3 && ratio < 0.7) return 'inside';
-    return ratio < 0.5 ? 'before' : 'after';
-  };
-
-  const onDragOver = (event: DragEvent): void => {
-    const types = event.dataTransfer.types;
-    if (!types.includes(DRAG_NODE) && !types.includes(DRAG_ASSET)) return;
-    event.preventDefault();
-    event.stopPropagation();
-    event.dataTransfer.dropEffect = types.includes(DRAG_ASSET) ? 'copy' : 'move';
-    setEdge(isRoot ? 'inside' : edgeAt(event));
-  };
-
-  const onDrop = (event: DragEvent): void => {
-    const target = isRoot ? 'inside' : edgeAt(event);
-    setEdge(null);
-    event.preventDefault();
-    event.stopPropagation();
-
-    const located = locate(state.root, node.id);
-    const parentId = target === 'inside' ? node.id : located?.parent?.id ?? state.root.id;
-    const index = target === 'inside'
-      ? (isFrame(node) ? node.children.length : 0)
-      : (located?.index ?? 0) + (target === 'after' ? 1 : 0);
-
-    const asset = event.dataTransfer.getData(DRAG_ASSET);
-    if (asset) {
-      const created = asset === '__frame'
-        ? createFrame({ padding: 16, radius: 12, background: 'weak' })
-        : createComponent(asset);
-      dispatch({ type: 'insert', parentId, index, nodes: [created] });
+  const place = (targetId: string, where: Where): void => {
+    if (!dragging || dragging === targetId) return;
+    if (where === 'inside') {
+      const node = findNode(root, targetId);
+      const children = node ? (container(node) ?? []) : [];
+      dispatch({ type: 'node.move', id: dragging, target: { parent: targetId, index: children.length } });
       return;
     }
-
-    const moved = event.dataTransfer.getData(DRAG_NODE);
-    if (moved && moved !== node.id) dispatch({ type: 'move', id: moved, parentId, index });
+    const parent = parentOf(root, targetId);
+    if (!parent) return;
+    const siblings = container(parent) ?? [];
+    const index = siblings.findIndex((child: AnyNode) => child.id === targetId);
+    dispatch({
+      type: 'node.move',
+      id: dragging,
+      target: { parent: parent.id, index: where === 'before' ? index : index + 1 },
+    });
   };
 
-  const onKeyDown = (event: KeyboardEvent): void => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    event.preventDefault();
-    dispatch({ type: 'select', ids: [node.id], additive: event.shiftKey });
-  };
+  const rows: JSX.Element[] = [];
+  const walkInto = (node: AnyNode, depth: number): void => {
+    const selected = state.ui.selected === node.id;
+    const children = container(node);
+    const isRoot = node.id === root.id;
 
-  return (
-    <>
+    rows.push(
       <div
-        className={`layer${selected ? ' is-selected' : ''}${edge ? ` is-drop-${edge}` : ''}`}
-        style={{ paddingInlineStart: 8 + depth * 13 }}
-        draggable={!isRoot}
+        key={node.id}
+        className="layer"
         role="treeitem"
         tabIndex={0}
         aria-selected={selected}
-        aria-expanded={isFrame(node) && node.children.length ? expanded : undefined}
-        onDragStart={onDragStart}
-        onDragOver={onDragOver}
-        onDragLeave={() => setEdge(null)}
-        onDrop={onDrop}
-        onClick={onClick}
-        onKeyDown={onKeyDown}
-        onContextMenu={(event) => menu.open(event, node.id)}
+        aria-level={depth + 1}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            dispatch({ type: 'ui', patch: { selected: node.id } });
+          }
+        }}
+        data-selected={selected ? '' : undefined}
+        data-drop={drop?.id === node.id ? drop.where : undefined}
+        style={{ paddingInlineStart: 8 + depth * 14 }}
+        draggable={!isRoot}
+        onDragStart={(event) => {
+          setDragging(node.id);
+          event.dataTransfer.effectAllowed = 'move';
+        }}
+        onDragEnd={() => {
+          setDragging(null);
+          setDrop(null);
+        }}
+        onDragOver={(event: DragEvent<HTMLDivElement>) => {
+          if (!dragging) return;
+          event.preventDefault();
+          const box = event.currentTarget.getBoundingClientRect();
+          const offset = (event.clientY - box.top) / box.height;
+          const where: Where = children
+            ? offset < 0.28
+              ? 'before'
+              : offset > 0.72
+                ? 'after'
+                : 'inside'
+            : offset < 0.5
+              ? 'before'
+              : 'after';
+          setDrop({ id: node.id, where: isRoot ? 'inside' : where });
+        }}
+        onDrop={(event) => {
+          event.preventDefault();
+          if (drop) place(drop.id, drop.where);
+          setDragging(null);
+          setDrop(null);
+        }}
+        onClick={() => dispatch({ type: 'ui', patch: { selected: node.id } })}
       >
-        <button
-          type="button"
-          className={`layer__caret${expanded ? ' is-open' : ''}`}
-          aria-label={expanded ? 'Collapse' : 'Expand'}
-          onClick={(event) => {
-            event.stopPropagation();
-            dispatch({ type: 'toggleExpanded', id: node.id });
-          }}
-        >
-          {isFrame(node) && node.children.length ? '›' : ''}
-        </button>
-        <span className="layer__name">{label}</span>
-        {severity ? <span className={`layer__flag layer__flag--${severity}`} aria-label={severity} /> : null}
+        <span className="layer__icon">
+          <Glyph d={iconFor(node)} size={12} />
+        </span>
+        <span className="layer__name">{labelOf(node)}</span>
+        {node.when ? (
+          <span className="layer__cond" title={describeCond(node.when)}>
+            <Glyph d={ICON.eye} size={11} />
+          </span>
+        ) : null}
+        {!isRoot ? (
+          <span className="layer__actions">
+            <IconBtn label={t('Duplicate')} onClick={() => dispatch({ type: 'node.duplicate', id: node.id })}>
+              <Glyph d={ICON.copy} size={12} />
+            </IconBtn>
+            <IconBtn
+              label={t('Delete')}
+              tone="danger"
+              onClick={() => dispatch({ type: 'node.remove', id: node.id })}
+            >
+              <Glyph d={ICON.trash} size={12} />
+            </IconBtn>
+          </span>
+        ) : null}
+      </div>,
+    );
+
+    for (const child of children ?? []) walkInto(child, depth + 1);
+  };
+  walkInto(root, 0);
+
+  return (
+    <div className="panel">
+      <div className="panel__scroll panel__scroll--flush" role="tree" aria-label="Layers">
+        {root.children.length === 0 ? (
+          <>
+            {rows[0]}
+            <Empty title={t('Nothing drawn yet')} body={t('Pick a component from Insert')} />
+          </>
+        ) : (
+          rows
+        )}
       </div>
-      {isFrame(node) && expanded
-        ? node.children.map((child) => <Row key={child.id} node={child} depth={depth + 1} />)
-        : null}
-    </>
+    </div>
   );
 }
 
-export function LayersPanel(): JSX.Element {
-  const { state } = useStudio();
-  return (
-    <>
-      <div className="layers" role="tree" aria-label="Layers">
-        <Row node={state.root} depth={0} />
-      </div>
-      <p className="note">Shift-click to select several. Drag a row to move it.</p>
-    </>
-  );
+function findNode(root: AnyNode, id: string): AnyNode | null {
+  if (root.id === id) return root;
+  for (const child of container(root) ?? []) {
+    const hit = findNode(child, id);
+    if (hit) return hit;
+  }
+  return null;
 }

@@ -92,7 +92,8 @@
           "type": "ReactNode",
           "required": false,
           "doc": null,
-          "control": "slot"
+          "control": "slot",
+          "default": "Select…"
         },
         "size": {
           "type": "DropdownSize",
@@ -103,7 +104,8 @@
             "md",
             "sm",
             "xs"
-          ]
+          ],
+          "default": "md"
         },
         "itemSize": {
           "type": "DropdownItemSize",
@@ -113,7 +115,8 @@
           "options": [
             "lg",
             "sm"
-          ]
+          ],
+          "default": "sm"
         },
         "appearance": {
           "type": "DropdownAppearance",
@@ -124,37 +127,43 @@
             "default",
             "compact",
             "inline"
-          ]
+          ],
+          "default": "default"
         },
         "disabled": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "invalid": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "searchable": {
           "type": "boolean",
           "required": false,
           "doc": "Figma misc. item \"Search\".",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "searchPlaceholder": {
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Search…"
         },
         "emptyMessage": {
           "type": "ReactNode",
           "required": false,
           "doc": null,
-          "control": "slot"
+          "control": "slot",
+          "default": "No results"
         },
         "footer": {
           "type": "ReactNode",
@@ -178,7 +187,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": false
         },
         "informationLabel": {
           "type": "string",

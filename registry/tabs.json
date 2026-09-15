@@ -76,7 +76,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": ""
         },
         "onValueChange": {
           "type": "(value: string) => void",
@@ -92,7 +93,8 @@
           "options": [
             "horizontal",
             "vertical"
-          ]
+          ],
+          "default": "horizontal"
         },
         "appearance": {
           "type": "TabsAppearance",
@@ -102,7 +104,8 @@
           "options": [
             "card",
             "list"
-          ]
+          ],
+          "default": "list"
         },
         "activationMode": {
           "type": "TabsActivationMode",
@@ -112,7 +115,8 @@
           "options": [
             "automatic",
             "manual"
-          ]
+          ],
+          "default": "automatic"
         }
       }
     },
@@ -150,7 +154,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Keep the panel mounted while hidden. Off by default: an unmounted panel cannot run effects or hold stale data. Turn it on to preserve scroll position, form state or a chart that is expensive to rebuild.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },

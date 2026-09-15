@@ -108,13 +108,35 @@ const GLOBAL_HIDDEN = new Set([
  */
 const NOISY_DOM_PROPS = new Set(['value', 'checked', 'placeholder', 'disabled']);
 const EXPOSE_DOM: Record<string, readonly string[]> = {
-  TextInput: ['placeholder', 'disabled'],
+  /* `value` used to be hidden here as DOM noise, and it was — right up until
+     components got variables. On a controlled input it is now the single most
+     important prop on the component, so it comes back for the inputs that
+     have one and stays hidden on the components where it is still plumbing. */
+  TextInput: ['placeholder', 'disabled', 'value'],
+  TextArea: ['placeholder', 'disabled', 'value'],
+  InlineInput: ['placeholder', 'disabled', 'value'],
   Checkbox: ['checked', 'disabled'],
   Radio: ['checked', 'disabled'],
   Switch: ['checked', 'disabled'],
   Button: ['disabled'],
   Badge: ['disabled'],
   Tag: ['disabled'],
+};
+
+/** Props on `GLOBAL_HIDDEN` that a specific component owns outright. */
+const EXPOSE_GLOBAL: Record<string, readonly string[]> = {
+  // Avatar's `name` is the person, not a form field — it produces the
+  // initials and the accessible name, and a list of people needs to bind it.
+  // `src` is on the global hidden list as DOM plumbing. On an avatar it is the
+  // picture — which only became worth having once the document could carry one.
+  Avatar: ['name', 'src'],
+  FlatAvatar: ['name'],
+};
+
+const difference = (set: Set<string>, remove: readonly string[]): Set<string> => {
+  const out = new Set(set);
+  for (const key of remove) out.delete(key);
+  return out;
 };
 
 function byName(entry: RegistryEntry, name: string): ComponentMeta | undefined {
@@ -143,7 +165,10 @@ function build(): Map<string, StudioComponent> {
       category: d.category,
       meta,
       owns: d.owns ?? DEFAULT_OWNS,
-      hidden: new Set([...GLOBAL_HIDDEN, ...noisy, ...(d.hidden ?? [])]),
+      hidden: difference(
+        new Set([...GLOBAL_HIDDEN, ...noisy, ...(d.hidden ?? [])]),
+        EXPOSE_GLOBAL[d.component] ?? [],
+      ),
     });
   }
   return out;
@@ -169,8 +194,8 @@ export function groupedByCategory(): [string, StudioComponent[]][] {
   return [...groups.entries()];
 }
 
-/** Props the inspector shows, in a stable order: variants, content, state, a11y. */
-export type PropGroup = 'variant' | 'content' | 'state' | 'a11y';
+/** Props the inspector shows, in a stable order. */
+export type PropGroup = 'variant' | 'content' | 'state' | 'data' | 'a11y';
 
 const A11Y_PROPS = new Set(['aria-label', 'dismissLabel', 'loadingLabel', 'informationLabel', 'statusLabel']);
 
@@ -205,8 +230,61 @@ export function groupOfProp(key: string, meta: { control: string; source?: strin
   if (meta.control === 'select') return 'variant';
   if (meta.control === 'text' || meta.control === 'number') return 'content';
   if (meta.control === 'slot' && TEXT_SLOTS.has(key)) return 'content';
+  /* A list is authorable — it is JSON, and the studio already edits JSON for
+     a property's sample. Dropping these meant `ColorPicker` could not be given
+     swatches and `Pagination` could not be given page sizes, which made two
+     components look broken rather than unfinished. */
+  if (meta.control === 'list') return 'data';
   return null;
+}
+
+/**
+ * The props this component *has* and the inspector cannot offer.
+ *
+ * Named rather than hidden. A composite slot — `Alert`'s actions, an
+ * `Accordion`'s content — takes an element, and the studio has no way to author
+ * one inside a library component's prop. Saying so is the difference between
+ * a tool with a known edge and a tool that looks like it forgot.
+ */
+export function unauthorable(name: string): { key: string; kind: string }[] {
+  const { meta, hidden } = getComponent(name);
+  return Object.entries(meta.props)
+    .filter(([key, prop]) =>
+      !hidden.has(key) && prop.control !== 'handler' && !groupOfProp(key, prop))
+    .map(([key, prop]) => ({ key, kind: prop.control }));
+}
+
+/** Handler props the component actually declares, in registry order. */
+export function handlerProps(name: string): string[] {
+  const { meta, hidden } = getComponent(name);
+  return Object.entries(meta.props)
+    .filter(([key, prop]) => !hidden.has(key) && prop.control === 'handler')
+    .map(([key]) => key);
 }
 
 /** A `ReactNode` prop the editor is willing to treat as plain text. */
 export const isTextSlot = (key: string): boolean => TEXT_SLOTS.has(key);
+
+/**
+ * A cva variant key can be a number; a JSON object key cannot.
+ *
+ * `size: { 80: '…', 72: '…' }` types the prop as `80 | 72`, but the registry
+ * is JSON, so its `options` come back as `['80','72']`. The document stores
+ * the string — that is what a `<select>` gives you — and this converts it back
+ * at the two boundaries where the real type matters: rendering on the canvas,
+ * where a string key misses the variant and silently falls back to the
+ * default, and code generation, where `size="40"` does not compile.
+ *
+ * The signal is `default`, which the registry records with its real type.
+ * Failing that, options that are entirely digits are numeric: a string variant
+ * whose every value is a bare number would be indistinguishable anyway.
+ */
+export function coerceOption(
+  value: unknown,
+  prop: { default?: unknown; options?: readonly string[] },
+): unknown {
+  if (typeof value !== 'string' || !/^-?\d+(\.\d+)?$/.test(value)) return value;
+  const numeric = typeof prop.default === 'number'
+    || (prop.default === undefined && Boolean(prop.options?.length) && prop.options!.every((o) => /^-?\d+(\.\d+)?$/.test(o)));
+  return numeric ? Number(value) : value;
+}

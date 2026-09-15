@@ -258,7 +258,8 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "disabled": {
           "type": "boolean",
@@ -280,7 +281,8 @@
           "type": "ReactNode",
           "required": false,
           "doc": null,
-          "control": "slot"
+          "control": "slot",
+          "default": "Choose a file or drag it here"
         },
         "description": {
           "type": "ReactNode",
@@ -298,7 +300,8 @@
           "type": "string",
           "required": false,
           "doc": "Accessible name for the hidden file input.",
-          "control": "text"
+          "control": "text",
+          "default": "Upload file"
         },
         "dragging": {
           "type": "'true' | 'false'",
@@ -355,13 +358,15 @@
             "error",
             "success",
             "progress"
-          ]
+          ],
+          "default": "progress"
         },
         "progress": {
           "type": "number",
           "required": false,
           "doc": "0–100. Ignored unless `status` is `'progress'`.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "errorMessage": {
           "type": "ReactNode",
@@ -385,13 +390,15 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Remove"
         },
         "retryLabel": {
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Retry"
         }
       }
     },
@@ -452,7 +459,8 @@
           "options": [
             "vertical",
             "horizontal"
-          ]
+          ],
+          "default": "vertical"
         },
         "src": {
           "type": "string",
@@ -470,13 +478,15 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "image/*"
         },
         "label": {
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Upload image"
         },
         "hint": {
           "type": "ReactNode",
@@ -494,7 +504,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": ""
         }
       }
     },

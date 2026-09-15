@@ -176,31 +176,36 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "loop": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "muted": {
           "type": "boolean",
           "required": false,
           "doc": "Starts muted. Required by browsers for autoplay to be allowed at all.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "nativeControls": {
           "type": "boolean",
           "required": false,
           "doc": "Hand control back to the browser's own UI. Worth doing when the platform player is better than anything you would ship — picture-in-picture, AirPlay, and caption styling all come free with it.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "seekStep": {
           "type": "number",
           "required": false,
           "doc": "Seconds jumped by the arrow keys.",
-          "control": "number"
+          "control": "number",
+          "default": 5
         },
         "onPlayChange": {
           "type": "(playing: boolean) => void",

@@ -50,8 +50,11 @@ import { getIconComponent } from '@nili/ui/icons';
 import type { IconName } from '@nili/ui/icons';
 import type { Locale } from '../i18n/types';
 import { isText, resolve } from '../i18n/catalog';
+import { isBinding } from '../logic/types';
+import { evaluateSource } from '../expr';
+import type { Scope } from '../expr';
 import type { ComponentNode, PropBag } from '../document/types';
-import { getComponent, isIconSlot } from './catalogue';
+import { coerceOption, getComponent, isIconSlot } from './catalogue';
 
 /**
  * The one place the studio gives up static typing. A visual editor builds its
@@ -115,18 +118,31 @@ const FALLBACKS: Record<string, PropBag> = {
   Avatar: { name: '' },
   FlatAvatar: { name: '' },
   Icon: { icon: undefined },
-  Pagination: { count: 10, page: 1 },
+  Pagination: { count: 10, component: 1 },
   FileUploadCard: { fileName: 'report.pdf' },
   VideoPlayer: { src: '' },
 };
 
+export type Handlers = Record<string, (...args: unknown[]) => void>;
+
+/** Props that hold a picture rather than a word. */
+const ASSET_PROPS = new Set(['src', 'image', 'avatar', 'poster', 'thumbnail']);
+export const isAssetProp = (key: string): boolean => ASSET_PROPS.has(key);
+
 /**
- * Turns an authored prop bag into real component props: text values are
- * resolved in the active locale, empty strings are dropped so the component's
- * own defaults apply, and handlers are supplied where a prop only takes effect
- * with one.
+ * Turns an authored prop bag into real component props: bindings are
+ * evaluated against the component's scope, text values are resolved in the active
+ * locale, empty strings are dropped so the component's own defaults apply, and
+ * handlers are supplied where a prop only takes effect with one.
  */
-export function materialize(node: ComponentNode, locale: Locale | undefined): Record<string, unknown> {
+export function materialize(
+  node: ComponentNode,
+  locale: Locale | undefined,
+  scope: Scope = {},
+  handlers: Handlers = {},
+  /** Name → data URL, so an asset reference draws on the canvas. */
+  assets: Record<string, string> = {},
+): Record<string, unknown> {
   const { meta, hidden } = getComponent(node.component);
   const out: Record<string, unknown> = { ...FALLBACKS[node.component] };
 
@@ -134,6 +150,30 @@ export function materialize(node: ComponentNode, locale: Locale | undefined): Re
     if (hidden.has(key) || raw === undefined) continue;
     const prop = meta.props[key];
     if (!prop) continue;
+
+    if (isBinding(raw)) {
+      /* An expression that fails is left off rather than passed through as
+         `undefined`: the component falls back to its own default and the
+         canvas keeps drawing, while the Checks panel says what broke. */
+      const { value, error } = evaluateSource(raw.expr, scope);
+      if (!error && value !== undefined && value !== null && value !== '') out[key] = value;
+      continue;
+    }
+
+    /* `asset:name` rather than a data URL in the document: the picker writes a
+       reference, the canvas resolves it to the bytes, and the export resolves
+       it to a file path. One value, three right answers. */
+    if (isAssetProp(key) && isText(raw) && raw.kind === 'literal' && raw.value.startsWith('asset:')) {
+      const resolved = assets[raw.value.slice(6)];
+      if (resolved) out[key] = resolved;
+      continue;
+    }
+
+    if (prop.control === 'select' && typeof raw === 'string') {
+      const coerced = coerceOption(raw, prop);
+      if (coerced !== '') out[key] = coerced;
+      continue;
+    }
 
     if (isText(raw)) {
       const text = resolve(raw, locale);
@@ -164,7 +204,16 @@ export function materialize(node: ComponentNode, locale: Locale | undefined): Re
   if (node.component === 'Avatar' && typeof out.name !== 'string') out.name = '';
   if (node.className) out.className = node.className;
 
-  return out;
+  /* Validation is a message or nothing, and it goes where the design system
+     already draws invalid states rather than somewhere the studio invents. */
+  if (node.validate && 'error' in meta.props && !hidden.has('error')) {
+    const { value, error } = evaluateSource(node.validate.expr, scope);
+    if (!error && typeof value === 'string' && value) out.error = value;
+  }
+
+  // Authored handlers win over the placeholders above: once a node has an
+  // action list, the canvas should run it rather than swallow the click.
+  return { ...out, ...handlers };
 }
 
 function noop(): void {
@@ -195,9 +244,11 @@ const PREVIEW_OVERRIDES: Record<string, Record<string, unknown>> = {
   ProgressCircle: { value: 60 },
   Rating: { value: 3 },
   Slider: { value: 40 },
-  Pagination: { count: 4, page: 1 },
+  Pagination: { count: 4, component: 1 },
   PasswordStrength: { level: 'good' },
-  Icon: { name: 'check' },
+  /* `Icon` takes a component, not a name — `name` is not one of its props at
+     all, so the thumbnail was rendering an icon with nothing to draw. */
+  Icon: { icon: getIconComponent('check' as IconName) },
 };
 
 /** Props for a palette thumbnail: defaults, plus just enough content to see. */

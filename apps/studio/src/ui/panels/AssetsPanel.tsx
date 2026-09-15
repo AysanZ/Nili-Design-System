@@ -1,109 +1,179 @@
-import { useMemo, useState } from 'react';
-import type { DragEvent, KeyboardEvent } from 'react';
+import { useRef, useState } from 'react';
 import { useStudio } from '../../document/StudioContext';
-import { groupedByCategory } from '../../registry/catalogue';
-import { createComponent, createFrame } from '../../document/factory';
-import { locate } from '../../document/tree';
-import { isFrame } from '../../document/types';
-import { DRAG_ASSET } from '../canvas/dnd';
+import { nextId } from '../../document/ids';
+import type { Asset } from '../../document/types';
+import { assetPath } from '../../document/types';
 
+const LIMIT = 1_500_000;
+
+const size = (bytes: number): string =>
+  bytes > 1_000_000 ? `${(bytes / 1_048_576).toFixed(1)} MB` : `${Math.round(bytes / 1024)} KB`;
+
+/**
+ * Images the document carries.
+ *
+ * Stored as data URLs, which is a deliberate trade: a document stays one file
+ * that opens anywhere, with no asset server and no links that rot after an
+ * export. The cost is document size, so there is a ceiling and the panel says
+ * what the document weighs — a design tool that silently grows a 40MB JSON
+ * file is a design tool people stop trusting with real photographs.
+ */
 export function AssetsPanel(): JSX.Element {
   const { state, dispatch } = useStudio();
-  const [query, setQuery] = useState('');
+  const input = useRef<HTMLInputElement>(null);
+  const [problem, setProblem] = useState<string | null>(null);
 
-  const groups = useMemo(() => {
-    const term = query.trim().toLowerCase();
-    return groupedByCategory()
-      .map(([category, items]) => [category, items.filter((i) => !term || i.name.toLowerCase().includes(term))] as const)
-      .filter(([, items]) => items.length);
-  }, [query]);
+  const total = state.assets.reduce((sum, asset) => sum + asset.size, 0);
 
-  const add = (name: string): void => {
-    const [first] = [...state.selection];
-    const located = first ? locate(state.root, first) : null;
-    const parentId = located && isFrame(located.node) ? located.node.id : located?.parent?.id ?? state.root.id;
-    const index = located && !isFrame(located.node) ? located.index + 1 : Number.MAX_SAFE_INTEGER;
-    const node = name === '__frame'
-      ? createFrame({ padding: 16, radius: 12, background: 'weak' })
-      : createComponent(name);
-    dispatch({ type: 'insert', parentId, index, nodes: [node] });
-  };
-
-  const onDragStart = (name: string) => (event: DragEvent): void => {
-    event.dataTransfer.setData(DRAG_ASSET, name);
-    event.dataTransfer.effectAllowed = 'copy';
+  const accept = async (files: FileList): Promise<void> => {
+    setProblem(null);
+    for (const file of Array.from(files)) {
+      if (!file.type.startsWith('image/')) {
+        setProblem(`${file.name} is not an image.`);
+        continue;
+      }
+      if (file.size > LIMIT) {
+        setProblem(`${file.name} is ${size(file.size)}. Keep images under ${size(LIMIT)} — the document carries them.`);
+        continue;
+      }
+      const asset = await read(file);
+      dispatch({ type: 'addAsset', asset });
+    }
   };
 
   return (
-    <>
-      <input
-        className="input input--search"
-        placeholder="Search components"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <div className="assets">
-        <p className="assets__category">Layout</p>
-        <ul className="assets__list">
-          <Row name="Frame" meta="container" onAdd={() => add('__frame')} onDragStart={onDragStart('__frame')} />
-        </ul>
-        {groups.map(([category, items]) => (
-          <div key={category}>
-            <p className="assets__category">{category}</p>
-            <ul className="assets__list">
-              {items.map((item) => (
-                <Row
-                  key={item.name}
-                  name={item.name}
-                  meta={`${Object.keys(item.meta.variants).length || '—'}`}
-                  onAdd={() => add(item.name)}
-                  onDragStart={onDragStart(item.name)}
-                />
-              ))}
-            </ul>
-          </div>
-        ))}
+    <div className="assets">
+      {/* A drop target, not a control: the button inside it is how the
+          keyboard gets here, which is why the region itself carries no role
+          and claims no tab stop. */}
+      <div
+        className="assets__drop"
+        role="presentation"
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event) => {
+          event.preventDefault();
+          void accept(event.dataTransfer.files);
+        }}
+      >
+        <p>Drop images here</p>
+        <button type="button" className="action action--dashed" onClick={() => input.current?.click()}>
+          or choose files
+        </button>
+        <input
+          ref={input}
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          onChange={(event) => {
+            if (event.target.files) void accept(event.target.files);
+            event.target.value = '';
+          }}
+        />
       </div>
-    </>
+
+      {problem ? <p className="note note--warning">{problem}</p> : null}
+
+      {state.assets.length ? (
+        <>
+          <ul className="assets__list">
+            {state.assets.map((asset) => (
+              <li key={asset.id} className="assets__item">
+                <span className="assets__thumb" style={{ backgroundImage: `url(${asset.dataUrl})` }} />
+                <span className="assets__text">
+                  <input
+                    className="input input--inline"
+                    value={asset.name}
+                    onChange={(event) => dispatch({ type: 'renameAsset', id: asset.id, name: event.target.value })}
+                  />
+                  <em>
+                    {asset.width}×{asset.height} · {size(asset.size)}
+                  </em>
+                  <code>{assetPath(asset)}</code>
+                </span>
+                <button
+                  type="button"
+                  className="pair__remove"
+                  aria-label={`Remove ${asset.name}`}
+                  onClick={() => dispatch({ type: 'removeAsset', id: asset.id })}
+                >
+                  ×
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="note note--quiet">
+            {state.assets.length} image{state.assets.length === 1 ? '' : 's'}, {size(total)} in the document.
+            Exported to <code>public/assets/</code>.
+          </p>
+        </>
+      ) : (
+        <p className="note note--quiet">
+          Nothing yet. An image here can be picked on any <code>src</code> field, and lands in{' '}
+          <code>public/assets/</code> when you export.
+        </p>
+      )}
+    </div>
   );
 }
 
-interface RowProps {
-  name: string;
-  meta: string;
-  onAdd: () => void;
-  onDragStart: (event: DragEvent) => void;
+/** Reads the file and measures it, because the panel should say what it holds. */
+async function read(file: File): Promise<Asset> {
+  const dataUrl = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error('Could not read the file.'));
+    reader.readAsDataURL(file);
+  });
+
+  const { width, height } = await new Promise<{ width: number; height: number }>((resolve) => {
+    const image = new Image();
+    image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    // SVGs and anything the browser cannot measure still import; they just
+    // report zero rather than blocking the upload.
+    image.onerror = () => resolve({ width: 0, height: 0 });
+    image.src = dataUrl;
+  });
+
+  return { id: nextId(), name: file.name, dataUrl, size: file.size, width, height };
 }
 
-/**
- * A plain list. Thumbnails looked richer and read worse: forty-five scaled
- * previews are forty-five different shapes to parse before finding a name.
- *
- * A div rather than a button, because a draggable <button> is unreliable
- * across browsers — that is why nothing could be dragged out of this panel.
- */
-function Row({ name, meta, onAdd, onDragStart }: RowProps): JSX.Element {
-  const onKeyDown = (event: KeyboardEvent): void => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    event.preventDefault();
-    onAdd();
-  };
+/** The picker that appears on any prop holding a picture. */
+export function AssetPicker({ value, onChange }: {
+  value: string;
+  onChange: (value: string) => void;
+}): JSX.Element {
+  const { state, dispatch } = useStudio();
+  const current = value.startsWith('asset:') ? value.slice(6) : '';
+  const asset = state.assets.find((item) => item.name === current);
 
   return (
-    <li>
-      <div
-        className="asset"
-        role="button"
-        tabIndex={0}
-        title={`${name} — drag onto the canvas`}
-        draggable
-        onDragStart={onDragStart}
-        onClick={onAdd}
-        onKeyDown={onKeyDown}
+    <div className="picker">
+      <span
+        className="picker__preview"
+        style={asset ? { backgroundImage: `url(${asset.dataUrl})` } : undefined}
+        aria-hidden
+      />
+      <select
+        className="select"
+        value={current}
+        onChange={(event) => onChange(event.target.value ? `asset:${event.target.value}` : '')}
       >
-        <span className="asset__name">{name}</span>
-        <span className="asset__meta">{meta}</span>
-      </div>
-    </li>
+        <option value="">none</option>
+        {state.assets.map((item) => (
+          <option key={item.id} value={item.name}>{item.name}</option>
+        ))}
+      </select>
+      {state.assets.length === 0 ? (
+        <button
+          type="button"
+          className="picker__add"
+          title="Upload one in Styles → Assets"
+          onClick={() => dispatch({ type: 'ui', patch: { panel: 'images' } })}
+        >
+          +
+        </button>
+      ) : null}
+    </div>
   );
 }

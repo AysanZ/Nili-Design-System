@@ -142,7 +142,8 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },
@@ -189,7 +190,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "#335CFF"
         },
         "onChange": {
           "type": "(hex: string) => void",
@@ -201,7 +203,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Show the alpha track.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "swatches": {
           "type": "string[]",
@@ -282,7 +285,8 @@
           "type": "string",
           "required": false,
           "doc": "For the opacity track, the colour the gradient fades to.",
-          "control": "text"
+          "control": "text",
+          "default": "#000"
         },
         "thumbColor": {
           "type": "string",
@@ -350,7 +354,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Saturation and brightness"
         }
       }
     },

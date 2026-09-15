@@ -65,6 +65,48 @@ function objectKeys(prop) {
   });
 }
 
+/**
+ * Defaults taken from the component's own parameter destructuring.
+ *
+ * `cva`'s `defaultVariants` only covers variants. Everything else — a reveal
+ * toggle, a size guard, a flag that starts on — writes its default in the
+ * function signature, and that is the only place it exists.
+ */
+function readDestructuredDefaults(abs) {
+  const out = new Map();
+
+  const files = project
+    .getSourceFiles()
+    .filter((f) => f.getFilePath().startsWith(abs + '/') && !f.getBaseName().endsWith('.stories.tsx'));
+
+  for (const file of files) {
+    // `forwardRef(function Name({ a = 1 }, ref) {…})` is a function expression;
+    // a plain component is a declaration. Both are how Nili writes components.
+    const functions = [
+      ...file.getDescendantsOfKind(SyntaxKind.FunctionExpression),
+      ...file.getFunctions(),
+    ];
+    for (const fn of functions) {
+      const name = fn.getName?.();
+      if (!name) continue;
+      const [first] = fn.getParameters();
+      const pattern = first?.getNameNode?.();
+      if (!pattern || !Node.isObjectBindingPattern(pattern)) continue;
+
+      const defaults = {};
+      for (const element of pattern.getElements()) {
+        const value = literalValue(element);
+        if (value !== undefined) defaults[element.getName()] = value;
+      }
+      if (Object.keys(defaults).length) {
+        out.set(name, { ...(out.get(name) ?? {}), ...defaults });
+      }
+    }
+  }
+
+  return out;
+}
+
 function literalValue(prop) {
   const init = prop?.getInitializer?.();
   if (!init) return undefined;
@@ -490,6 +532,7 @@ function buildComponent(dir) {
   }
 
   const argTypes = readArgTypes(abs);
+  const destructured = readDestructuredDefaults(abs);
 
   const components = [...names].sort().map((name) => {
     const cva = cvaByComponent.get(name);
@@ -512,6 +555,18 @@ function buildComponent(dir) {
       };
       if (isBool) delete props[key].options;
       else props[key].options = options;
+    }
+
+    /* A default written where the component is implemented — `reveal = true`
+       in the parameter list — is as real as one written in `defaultVariants`,
+       and the Studio needs it for the same reason: without it, a prop whose
+       default is `true` cannot be turned off, because "false" and "not set"
+       look identical once the value leaves the editor. */
+    const own = destructured.get(name);
+    if (own) {
+      for (const [key, value] of Object.entries(own)) {
+        if (props[key] && props[key].default === undefined) props[key].default = value;
+      }
     }
 
     for (const [key, meta] of Object.entries(props)) {

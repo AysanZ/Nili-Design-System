@@ -66,13 +66,15 @@
           "type": "number",
           "required": false,
           "doc": "Current value, clamped to `0…max`. Ignored while `indeterminate`.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "max": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 100
         },
         "color": {
           "type": "ProgressColor",
@@ -84,13 +86,15 @@
             "warning",
             "success",
             "primary"
-          ]
+          ],
+          "default": "primary"
         },
         "indeterminate": {
           "type": "boolean",
           "required": false,
           "doc": "Unknown duration: drops `aria-valuenow` so assistive tech announces \"busy\" rather than inventing a percentage.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "label": {
           "type": "ReactNode",
@@ -106,7 +110,8 @@
           "options": [
             "end",
             "top"
-          ]
+          ],
+          "default": "top"
         },
         "linkButton": {
           "type": "ReactNode",
@@ -118,7 +123,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Shows the percentage.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "valueLabel": {
           "type": "ReactNode",
@@ -194,13 +200,15 @@
           "type": "number",
           "required": false,
           "doc": "Current value, clamped to `0…max`. Ignored while `indeterminate`.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "max": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 100
         },
         "color": {
           "type": "ProgressColor",
@@ -212,13 +220,15 @@
             "warning",
             "success",
             "primary"
-          ]
+          ],
+          "default": "primary"
         },
         "indeterminate": {
           "type": "boolean",
           "required": false,
           "doc": "Unknown duration: drops `aria-valuenow` so assistive tech announces \"busy\" rather than inventing a percentage.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "label": {
           "type": "ReactNode",
@@ -246,7 +256,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Shows the percentage.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "valueLabel": {
           "type": "ReactNode",

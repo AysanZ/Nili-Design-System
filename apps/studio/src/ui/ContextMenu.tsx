@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import { useStudio } from '../document/StudioContext';
-import { ROOT_ID } from '../document/types';
 import {
   ArrowDownIcon, ArrowUpIcon, CopyIcon, DuplicateIcon, GroupIcon, PasteIcon, TrashIcon,
 } from './icons';
@@ -16,12 +15,19 @@ interface ContextMenuValue {
   open: (event: ReactMouseEvent, nodeId: string) => void;
 }
 
-const ContextMenuContext = createContext<ContextMenuValue | null>(null);
+/**
+ * Defaults to a no-op rather than null.
+ *
+ * `NodeView` renders in two places: inside the editor, where right-clicking a
+ * node should open this menu, and inside the app shell, where there is no
+ * editor and nothing to right-click into. Throwing when the provider is absent
+ * turned the second case into a blank component — a missing convenience taking down
+ * the whole screen, which is the wrong trade for a context menu.
+ */
+const ContextMenuContext = createContext<ContextMenuValue>({ open: () => undefined });
 
 export function useContextMenu(): ContextMenuValue {
-  const value = useContext(ContextMenuContext);
-  if (!value) throw new Error('useContextMenu must be used inside <ContextMenuProvider>.');
-  return value;
+  return useContext(ContextMenuContext);
 }
 
 export function ContextMenuProvider({ children }: { children: ReactNode }): JSX.Element {
@@ -77,7 +83,10 @@ interface Item {
 
 function Menu({ position, onClose }: { position: MenuPosition; onClose: () => void }): JSX.Element {
   const { state, dispatch } = useStudio();
-  const ids = [...state.selection].filter((id) => id !== ROOT_ID);
+  // ComponentDef roots can be selected but not copied, wrapped or deleted from here:
+  // deleting a component is a component-level action, not a node-level one.
+  const roots = new Set(state.components.map((component) => component.root.id));
+  const ids = [...state.selection].filter((id) => !roots.has(id));
   const single = ids.length === 1;
   const none = ids.length === 0;
 

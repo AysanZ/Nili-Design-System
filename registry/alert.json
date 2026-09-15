@@ -140,7 +140,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "`true` shows the default glyph for `status`; pass a node to override it; `false` hides it. The default glyph is decorative — the alert's meaning is carried by `role`, not by the picture.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": true
         },
         "actions": {
           "type": "AlertAction[]",
@@ -152,7 +153,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Shows a close button. Requires `dismissLabel` for the accessible name.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "onDismiss": {
           "type": "() => void",
@@ -164,7 +166,8 @@
           "type": "string",
           "required": false,
           "doc": "Accessible name for the close button, e.g. `'Close'`.",
-          "control": "text"
+          "control": "text",
+          "default": "Dismiss"
         },
         "urgency": {
           "type": "'assertive' | 'polite' | 'off'",

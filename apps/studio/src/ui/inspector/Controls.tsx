@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import type { PropValue } from '../../document/types';
 import type { TextValue } from '../../i18n/types';
@@ -9,20 +9,63 @@ interface FieldProps {
   propKey: string;
   doc?: string | null;
   invalid?: boolean;
+  /**
+   * Present on every prop that can hold an expression. The switch lives on the
+   * field rather than inside each control, which is why adding bindings did
+   * not mean touching the select, the swatch row, the number stepper and the
+   * icon picker one at a time.
+   */
+  bindable?: { bound: boolean; onToggle: (bound: boolean) => void };
+  /**
+   * Turns this prop into one of the component's properties, in one click.
+   *
+   * This is the gesture that replaced the data layer. A flag nobody has
+   * decided — is this loading, is this in error — used to need a variable
+   * somewhere else and a binding back to here. Now it stops being a value and
+   * becomes part of what the component asks for.
+   */
+  expose?: () => void;
   children: React.ReactNode;
 }
 
-export function Field({ label, propKey, doc, invalid, children }: FieldProps): JSX.Element {
+export function Field({ label, propKey, doc, invalid, bindable, expose, children }: FieldProps): JSX.Element {
   return (
-    <div className={`field${invalid ? ' field--invalid' : ''}`}>
+    <div className={`field${invalid ? ' field--invalid' : ''}${bindable?.bound ? ' field--bound' : ''}`}>
       <div className="field__head">
         <span className="field__label">{label}</span>
         {doc ? <abbr className="field__doc" title={doc}>?</abbr> : null}
+        <span className="field__spacer" />
+        {expose ? (
+          <button
+            type="button"
+            className="expose"
+            title="Leave this to whoever places the component"
+            onClick={expose}
+          >
+            +prop
+          </button>
+        ) : null}
+        {bindable ? (
+          <button
+            type="button"
+            className="fx"
+            aria-pressed={bindable.bound}
+            title={bindable.bound ? 'Back to a fixed value' : 'Compute it from a property'}
+            onClick={() => bindable.onToggle(!bindable.bound)}
+          >
+            fx
+          </button>
+        ) : null}
         <code className="field__key">{propKey}</code>
       </div>
       {children}
     </div>
   );
+}
+
+/** The toggle on its own, for when it sits inside a `Field` rather than a row. */
+export function BoolSwitch({ value, onChange }: { value: boolean; onChange: (value: boolean) => void }): JSX.Element {
+  return <button type="button" className="toggle" aria-pressed={value} onClick={() => onChange(!value)} />;
 }
 
 interface OptionsProps {
@@ -196,3 +239,38 @@ export function ColourControl({ value, onChange }: { value: string; onChange: (v
 
 export const asText = (value: PropValue): TextValue =>
   isText(value) ? value : literal(typeof value === 'string' ? value : '');
+
+
+/**
+ * A list or an object, edited as JSON.
+ *
+ * It commits only when the text parses, so typing a `[` never destroys what
+ * was there. The alternative — dropping these props — is what made
+ * `ColorPicker` look like it had no swatches and `Pagination` like it had no
+ * page sizes.
+ */
+export function JsonControl({ value, onChange }: {
+  value: unknown;
+  onChange: (value: unknown) => void;
+}): JSX.Element {
+  const [draft, setDraft] = useState(() => JSON.stringify(value ?? [], null, 2));
+  const [broken, setBroken] = useState(false);
+
+  return (
+    <textarea
+      className={`input input--code${broken ? ' input--invalid' : ''}`}
+      value={draft}
+      rows={4}
+      spellCheck={false}
+      onChange={(event) => {
+        setDraft(event.target.value);
+        try {
+          onChange(JSON.parse(event.target.value) as unknown);
+          setBroken(false);
+        } catch {
+          setBroken(true);
+        }
+      }}
+    />
+  );
+}

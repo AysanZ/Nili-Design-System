@@ -1,7 +1,7 @@
 import { CSS_VARIABLE, cssVariables } from '../theme/tokens';
 import type { ThemeTokens } from '../theme/tokens';
 import type { Locale } from '../i18n/types';
-import type { FrameNode } from '../document/types';
+import type { ComponentDef } from '../document/types';
 import { keysUsed } from '../lint/engine';
 
 export function themeSource(tokens: ThemeTokens): string {
@@ -20,25 +20,32 @@ ${lines}
 `;
 }
 
-/** Only the keys this document actually references, so the export is reviewable. */
-export function translationSource(root: FrameNode, locales: Locale[]): string {
-  const used = keysUsed(root);
+/** Only the keys the document actually references, so the export is reviewable. */
+export function translationSource(components: ComponentDef[], locales: Locale[]): string {
+  const used = new Set<string>();
+  for (const component of components) for (const key of keysUsed(component.root)) used.add(key);
+
   const out: Record<string, Record<string, string>> = {};
   for (const locale of locales) {
     const messages: Record<string, string> = {};
-    for (const key of used) messages[key] = locale.messages[key] ?? '';
+    for (const key of [...used].sort()) messages[key] = locale.messages[key] ?? '';
     out[locale.code] = messages;
   }
   return JSON.stringify(out, null, 2);
 }
 
-export function documentSource(root: FrameNode, tokens: ThemeTokens, locales: Locale[]): string {
+/**
+ * The document is the one artefact that round-trips. Pages carry their own
+ * variables and resources, so a saved file is enough to rebuild every screen,
+ * its logic and its sample data without a second file alongside it.
+ */
+export function documentSource(components: ComponentDef[], tokens: ThemeTokens, locales: Locale[]): string {
   return JSON.stringify(
     {
-      version: '1.0.0',
+      version: '2.0.0',
       theme: tokens,
-      locales: locales.map((l) => ({ code: l.code, label: l.label, dir: l.dir })),
-      root,
+      locales: locales.map((locale) => ({ code: locale.code, label: locale.label, dir: locale.dir })),
+      components,
     },
     null,
     2,

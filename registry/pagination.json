@@ -96,7 +96,8 @@
           "type": "number",
           "required": false,
           "doc": "Starting page while uncontrolled.",
-          "control": "number"
+          "control": "number",
+          "default": 1
         },
         "onPageChange": {
           "type": "(page: number) => void",
@@ -108,13 +109,15 @@
           "type": "number",
           "required": false,
           "doc": "Pages either side of the current one.",
-          "control": "number"
+          "control": "number",
+          "default": 1
         },
         "boundaryCount": {
           "type": "number",
           "required": false,
           "doc": "Pages pinned at each end of the trail.",
-          "control": "number"
+          "control": "number",
+          "default": 1
         },
         "type": {
           "type": "PaginationType",
@@ -125,7 +128,8 @@
             "basic",
             "full-radius",
             "group"
-          ]
+          ],
+          "default": "basic"
         },
         "deviceMode": {
           "type": "PaginationDeviceMode",
@@ -135,7 +139,8 @@
           "options": [
             "desktop",
             "mobile"
-          ]
+          ],
+          "default": "desktop"
         },
         "align": {
           "type": "PaginationAlign",
@@ -155,19 +160,22 @@
           "type": "boolean",
           "required": false,
           "doc": "Adds first/last jumps outside the arrows.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "disabled": {
           "type": "boolean",
           "required": false,
           "doc": "Greys out the whole control — a table reloading, for instance.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "advanced": {
           "type": "boolean",
           "required": false,
           "doc": "Figma's `🧪 Advanced`. Adds the \"Page 2 of 16\" summary before the trail and the rows-per-page control after it.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "pageSize": {
           "type": "number",
@@ -229,7 +237,8 @@
           "type": "string",
           "required": false,
           "doc": "Accessible name; the glyph itself is hidden.",
-          "control": "text"
+          "control": "text",
+          "default": "More pages"
         }
       }
     },
@@ -339,7 +348,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Render the child element instead of a `<button>` — for router links.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },

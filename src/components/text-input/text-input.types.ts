@@ -95,6 +95,17 @@ export interface TextInputProps extends Omit<
   select?: ReactNode;
   /** `type="button"` — an attached action sharing the field's border. */
   button?: ReactNode;
+  /**
+   * Shows a reveal toggle on a password field. On by default — a field nobody
+   * can read back is a field people get wrong twice and then paste from a
+   * note. Turn it off where a shoulder is the threat model.
+   */
+  reveal?: boolean;
+  /** Accessible name for the reveal toggle while the value is hidden. */
+  revealLabel?: string;
+  /** Accessible name for the reveal toggle while the value is visible. */
+  hideLabel?: string;
+
   /** Figma's `Suffix` — muted text pinned inside the trailing edge. */
   suffix?: ReactNode;
   /** Muted text before the value — Figma's `€` on an Amount field. */

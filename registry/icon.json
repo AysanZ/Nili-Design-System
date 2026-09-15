@@ -47,7 +47,8 @@
           "type": "number | string",
           "required": false,
           "doc": "Pixel size, or any CSS length. `'1em'` makes the icon track font size.",
-          "control": "number"
+          "control": "number",
+          "default": 24
         },
         "color": {
           "type": "string",
@@ -65,7 +66,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Flip horizontally in RTL. Set on directional glyphs (arrows, chevrons).",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },

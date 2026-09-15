@@ -144,7 +144,8 @@
             "teal",
             "disabled",
             "light-gray"
-          ]
+          ],
+          "default": "blue"
         },
         "size": {
           "type": "ChartLegendSize",
@@ -154,13 +155,15 @@
           "options": [
             "md",
             "sm"
-          ]
+          ],
+          "default": "md"
         },
         "hidden": {
           "type": "boolean",
           "required": false,
           "doc": "Series is hidden. Renders `aria-pressed` so the state is announced.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "onToggle": {
           "type": "() => void",
@@ -212,7 +215,8 @@
             "teal",
             "disabled",
             "light-gray"
-          ]
+          ],
+          "default": "blue"
         },
         "size": {
           "type": "ChartLegendSize",
@@ -222,7 +226,8 @@
           "options": [
             "md",
             "sm"
-          ]
+          ],
+          "default": "md"
         }
       }
     },
@@ -246,7 +251,8 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "startAdornment": {
           "type": "ReactNode",
@@ -372,7 +378,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Figma `🚨 Required` — the asterisk after the title. Decorative.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "toggle": {
           "type": "ReactNode",
@@ -388,7 +395,8 @@
           "options": [
             "lg",
             "md"
-          ]
+          ],
+          "default": "md"
         }
       }
     },
@@ -456,7 +464,8 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "descriptionId": {
           "type": "string",
@@ -495,7 +504,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "`true` shows the default glyph for the status; a node overrides it.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": false
         }
       }
     },
@@ -530,7 +540,8 @@
           "options": [
             "lighter",
             "stroke"
-          ]
+          ],
+          "default": "lighter"
         },
         "color": {
           "type": "KeyIconColor",
@@ -548,7 +559,8 @@
             "orange",
             "sky",
             "primary"
-          ]
+          ],
+          "default": "primary"
         },
         "size": {
           "type": "KeyIconSize",
@@ -561,7 +573,8 @@
             "lg",
             "md",
             "sm"
-          ]
+          ],
+          "default": "lg"
         },
         "label": {
           "type": "string",
@@ -600,7 +613,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Adds an asterisk and, crucially, keeps it out of the accessible name.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "sublabel": {
           "type": "ReactNode",
@@ -612,7 +626,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "Figma `ℹ️ Information` — the glyph that explains the field.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": false
         },
         "informationLabel": {
           "type": "string",
@@ -668,7 +683,8 @@
             "empty",
             "weak",
             "moderate"
-          ]
+          ],
+          "default": "empty"
         },
         "label": {
           "type": "string",

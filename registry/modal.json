@@ -113,7 +113,8 @@
           "options": [
             "sm",
             "md"
-          ]
+          ],
+          "default": "sm"
         },
         "alignment": {
           "type": "'horizontal' | 'vertical'",
@@ -123,7 +124,8 @@
           "options": [
             "horizontal",
             "vertical"
-          ]
+          ],
+          "default": "horizontal"
         },
         "size": {
           "type": "ModalSize",
@@ -135,7 +137,8 @@
             "lg",
             "md",
             "sm"
-          ]
+          ],
+          "default": "md"
         },
         "footer": {
           "type": "ReactNode",
@@ -147,31 +150,36 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "showClose": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "closeLabel": {
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Close"
         },
         "closeOnOutsideClick": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "closeOnEscape": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "container": {
           "type": "HTMLElement | null",
@@ -353,7 +361,8 @@
           "options": [
             "horizontal",
             "vertical"
-          ]
+          ],
+          "default": "vertical"
         }
       }
     }

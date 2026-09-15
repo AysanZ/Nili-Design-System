@@ -150,7 +150,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Renders a dot before the label. Mutually exclusive with `startIcon`.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "startIcon": {
           "type": "ReactNode",
@@ -266,7 +267,8 @@
             "completed",
             "pending",
             "failed"
-          ]
+          ],
+          "default": "completed"
         },
         "appearance": {
           "type": "StatusBadgeAppearance",
@@ -276,19 +278,22 @@
           "options": [
             "light",
             "stroke"
-          ]
+          ],
+          "default": "stroke"
         },
         "dot": {
           "type": "boolean",
           "required": false,
           "doc": "Leading status dot instead of the icon. Decorative — the label carries the meaning.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "icon": {
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "Leading status glyph. `true` (default) shows the Figma icon for `status`, a node replaces it, `false` hides it.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": true
         }
       }
     }

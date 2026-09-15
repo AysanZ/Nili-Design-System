@@ -251,7 +251,8 @@
             "primary",
             "neutral",
             "information"
-          ]
+          ],
+          "default": "neutral"
         },
         "icon": {
           "type": "ReactNode",
@@ -263,7 +264,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Set `false` to drop the tinted chip and render the glyph bare.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "sublabel": {
           "type": "ReactNode",
@@ -307,7 +309,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Render the child element instead of a `<button>` — for router links.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },
@@ -413,7 +416,8 @@
           "type": "number",
           "required": false,
           "doc": "Columns, when `layout=\"grid\"`. A number is applied at every width; pass a Tailwind class through `className` instead if you need it responsive.",
-          "control": "number"
+          "control": "number",
+          "default": 2
         },
         "label": {
           "type": "string",

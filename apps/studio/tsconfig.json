@@ -23,7 +23,13 @@
     "paths": {
       "@nili/ui": ["./../../src/index.ts"],
       "@nili/ui/*": ["./../../src/*"],
-      "@studio/*": ["./src/*"]
+      "@studio/*": ["./src/*"],
+      "@components/*": ["./../../src/components/*"],
+      "@lib/*": ["./../../src/lib/*"],
+      "@hooks/*": ["./../../src/hooks/*"],
+      "@providers/*": ["./../../src/providers/*"],
+      "@icons/*": ["./../../src/icons/*"],
+      "@/*": ["./../../src/*"]
     }
   },
   "include": ["src", "vite.config.ts"]

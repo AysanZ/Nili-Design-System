@@ -1,4 +1,5 @@
 import { useStudio } from '../../document/StudioContext';
+import { ownerOf } from '../../document/state';
 import { ancestors } from '../../document/tree';
 import { RULES } from '../../lint/rules';
 
@@ -18,7 +19,8 @@ export function ProblemsPanel(): JSX.Element {
   }
 
   const reveal = (nodeId: string): void => {
-    dispatch({ type: 'expand', ids: ancestors(state.root, nodeId).map((n) => n.id) });
+    const owner = ownerOf(state, nodeId);
+    if (owner) dispatch({ type: 'expand', ids: ancestors(owner.root, nodeId).map((n) => n.id) });
     dispatch({ type: 'select', ids: [nodeId] });
     dispatch({ type: 'ui', patch: { panel: 'layers' } });
   };
@@ -38,9 +40,11 @@ export function ProblemsPanel(): JSX.Element {
           </li>
         ))}
       </ul>
-      <p className="note">
-        {RULES.length} rules, each traceable to a line in the design system.
-      </p>
+      <div className="panel__foot">
+        <p className="note">
+          {RULES.length} rules, each traceable to a line in the design system.
+        </p>
+      </div>
     </>
   );
 }

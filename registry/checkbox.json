@@ -163,19 +163,22 @@
           "options": [
             "start",
             "end"
-          ]
+          ],
+          "default": "end"
         },
         "indeterminate": {
           "type": "boolean",
           "required": false,
           "doc": "Tri-state. Not a DOM attribute — it has to be assigned to the element, which is why this component always attaches a ref internally.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "invalid": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "rootClassName": {
           "type": "string",

@@ -90,7 +90,8 @@
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "onValueChange": {
           "type": "(value: number) => void",
@@ -102,7 +103,8 @@
           "type": "number",
           "required": false,
           "doc": "Number of items.",
-          "control": "number"
+          "control": "number",
+          "default": 5
         },
         "type": {
           "type": "RatingType",
@@ -112,7 +114,8 @@
           "options": [
             "star",
             "heart"
-          ]
+          ],
+          "default": "star"
         },
         "empty": {
           "type": "RatingEmpty",
@@ -122,19 +125,22 @@
           "options": [
             "filled",
             "line"
-          ]
+          ],
+          "default": "line"
         },
         "readOnly": {
           "type": "boolean",
           "required": false,
           "doc": "Display only — an average, a review score. Renders a single `role=\"img\"` instead of a set of radios, and accepts fractional values.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "disabled": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "icon": {
           "type": "ReactNode",
@@ -152,7 +158,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Shows the numeric score beside the items.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "valueLabel": {
           "type": "ReactNode",
@@ -187,7 +194,8 @@
             "horizontal",
             "vertical",
             "ratings"
-          ]
+          ],
+          "default": "ratings"
         },
         "description": {
           "type": "ReactNode",
@@ -221,13 +229,15 @@
             "emoji",
             "star",
             "heart"
-          ]
+          ],
+          "default": "star"
         },
         "count": {
           "type": "number",
           "required": false,
           "doc": "How many options. Figma draws five; the count is yours.",
-          "control": "number"
+          "control": "number",
+          "default": 5
         },
         "value": {
           "type": "number | null",
@@ -251,7 +261,8 @@
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "emojis": {
           "type": "readonly ReactNode[]",
@@ -323,7 +334,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": ""
         },
         "onCommentChange": {
           "type": "(comment: string) => void",
@@ -335,13 +347,15 @@
           "type": "boolean",
           "required": false,
           "doc": "Hides the comment box, leaving a bordered scale.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "rows": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 4
         },
         "footer": {
           "type": "ReactNode",

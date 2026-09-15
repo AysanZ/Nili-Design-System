@@ -67,7 +67,8 @@
           "type": "SliderValue",
           "required": false,
           "doc": null,
-          "control": "none"
+          "control": "none",
+          "default": 0
         },
         "onValueChange": {
           "type": "(value: SliderValue) => void",
@@ -85,31 +86,36 @@
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "max": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 100
         },
         "step": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 1
         },
         "minStepsBetweenThumbs": {
           "type": "number",
           "required": false,
           "doc": "Smallest allowed gap between the two thumbs of a range.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "disabled": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "label": {
           "type": "ReactNode",
@@ -127,13 +133,15 @@
           "type": "boolean",
           "required": false,
           "doc": "Shows the current value beside the label. Figma's \"Edit Amount\".",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "tooltip": {
           "type": "boolean",
           "required": false,
           "doc": "Value bubble above the thumb while dragging. Figma's \"Tooltip\".",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "formatValue": {
           "type": "(value: number) => string",

@@ -160,7 +160,8 @@
           "options": [
             "start",
             "end"
-          ]
+          ],
+          "default": "end"
         },
         "onCheckedChange": {
           "type": "(checked: boolean) => void",

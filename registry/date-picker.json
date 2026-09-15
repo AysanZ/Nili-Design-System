@@ -251,13 +251,15 @@
           "type": "string",
           "required": false,
           "doc": "BCP-47 tag for month names, weekday names and numerals.",
-          "control": "text"
+          "control": "text",
+          "default": "en"
         },
         "allowCalendarSwitch": {
           "type": "boolean",
           "required": false,
           "doc": "Let the user switch calendars from a toggle in the header.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "minDate": {
           "type": "Date",
@@ -369,13 +371,15 @@
           "type": "string",
           "required": false,
           "doc": "BCP-47 tag for month names, weekday names and numerals.",
-          "control": "text"
+          "control": "text",
+          "default": "en"
         },
         "allowCalendarSwitch": {
           "type": "boolean",
           "required": false,
           "doc": "Let the user switch calendars from a toggle in the header.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "minDate": {
           "type": "Date",

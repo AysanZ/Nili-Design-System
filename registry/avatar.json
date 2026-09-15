@@ -124,7 +124,8 @@
             "pink",
             "purple",
             "red"
-          ]
+          ],
+          "default": "soft"
         },
         "name": {
           "type": "string",
@@ -199,7 +200,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Figma's \"Icon\" style: a person silhouette on the tone colour, for accounts with no photo and no name worth initialising.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         }
       }
     },
@@ -242,7 +244,8 @@
             "xs",
             "2xs",
             "3xs"
-          ]
+          ],
+          "default": "md"
         },
         "items": {
           "type": "AvatarGroupItem[]",
@@ -348,7 +351,8 @@
             "sm",
             "xs",
             "2xs"
-          ]
+          ],
+          "default": "sm"
         },
         "appearance": {
           "type": "CompactAvatarGroupAppearance",
@@ -358,7 +362,8 @@
           "options": [
             "stroke",
             "default"
-          ]
+          ],
+          "default": "default"
         },
         "max": {
           "type": "number",
@@ -403,6 +408,7 @@
           "required": false,
           "doc": "An Avatar size token or a pixel size.",
           "control": "select",
+          "default": "md",
           "options": [
             "3xl",
             "2xl",
@@ -420,43 +426,50 @@
           "type": "number",
           "required": false,
           "doc": "Zero-based variant index of each Figma part.",
-          "control": "number"
+          "control": "number",
+          "default": 4
         },
         "face": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "outfit": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "hair": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "eye": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "cheek": {
           "type": "number | null",
           "required": false,
           "doc": "Optional parts: omit (or `null`) to leave them off.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "mouth": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "glasses": {
           "type": "number | null",

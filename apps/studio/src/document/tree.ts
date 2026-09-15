@@ -1,5 +1,5 @@
 import type { DocNode, FrameNode, NodeId } from './types';
-import { isFrame } from './types';
+import { hasChildren } from './types';
 
 export interface Located {
   node: DocNode;
@@ -9,7 +9,7 @@ export interface Located {
 
 export function walk(node: DocNode, visit: (node: DocNode, parent: FrameNode | null) => void, parent: FrameNode | null = null): void {
   visit(node, parent);
-  if (isFrame(node)) for (const child of node.children) walk(child, visit, node);
+  if (hasChildren(node)) for (const child of node.children) walk(child, visit, node as FrameNode);
 }
 
 export function locate(root: FrameNode, id: NodeId): Located | null {
@@ -37,7 +37,7 @@ export function ancestors(root: FrameNode, id: NodeId): FrameNode[] {
 /** True when `maybeAncestor` contains `id`, used to refuse self-nesting drops. */
 export function contains(root: FrameNode, maybeAncestor: NodeId, id: NodeId): boolean {
   const node = findNode(root, maybeAncestor);
-  if (!node || !isFrame(node)) return false;
+  if (!node || !hasChildren(node)) return false;
   let hit = false;
   walk(node, (child) => {
     if (child.id === id) hit = true;
@@ -55,9 +55,9 @@ type Mapper = (node: DocNode, parent: FrameNode | null) => DocNode | null;
 export function rebuild(node: DocNode, map: Mapper, parent: FrameNode | null = null): DocNode | null {
   const mapped = map(node, parent);
   if (mapped === null) return null;
-  if (!isFrame(mapped)) return mapped;
+  if (!hasChildren(mapped)) return mapped;
   const children = mapped.children
-    .map((child) => rebuild(child, map, mapped))
+    .map((child) => rebuild(child, map, mapped as FrameNode))
     .filter((child): child is DocNode => child !== null);
   return { ...mapped, children };
 }
@@ -74,7 +74,7 @@ export function replace(root: FrameNode, id: NodeId, produce: (node: DocNode) =>
 
 export function insert(root: FrameNode, parentId: NodeId, index: number, nodes: DocNode[]): FrameNode {
   const next = rebuild(root, (node) => {
-    if (node.id !== parentId || !isFrame(node)) return node;
+    if (node.id !== parentId || !hasChildren(node)) return node;
     const children = [...node.children];
     children.splice(Math.max(0, Math.min(index, children.length)), 0, ...nodes);
     return { ...node, children };

@@ -195,7 +195,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Clear"
         }
       }
     },

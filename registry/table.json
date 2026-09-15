@@ -85,7 +85,8 @@
           "options": [
             "xl",
             "lg"
-          ]
+          ],
+          "default": "xl"
         },
         "label": {
           "type": "string",
@@ -103,13 +104,15 @@
           "type": "boolean",
           "required": false,
           "doc": "Keeps the header visible while the body scrolls.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "scrollable": {
           "type": "boolean",
           "required": false,
           "doc": "Wrap in a scrollable, keyboard-focusable region. On by default: a table that overflows horizontally is unreachable by keyboard otherwise.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "scrollClassName": {
           "type": "string",
@@ -216,7 +219,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Makes the cell a row header (`<th scope=\"row\">`). The first column of a data table usually is one, and marking it lets a screen reader say which row it is reading.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "size": {
           "type": "'xl' | 'lg'",
@@ -305,7 +309,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Renders a sort button and manages `aria-sort` on the cell.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "sortDirection": {
           "type": "SortDirection | null",

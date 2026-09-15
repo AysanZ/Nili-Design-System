@@ -126,7 +126,8 @@
           "control": "number",
           "required": false,
           "doc": null,
-          "source": "dom"
+          "source": "dom",
+          "default": 4
         },
         "autoComplete": {
           "type": "string",
@@ -169,25 +170,29 @@
             "none",
             "vertical",
             "both"
-          ]
+          ],
+          "default": "vertical"
         },
         "autoResize": {
           "type": "boolean",
           "required": false,
           "doc": "Grow with the content instead of scrolling, up to `maxRows`. Off by default: a field that resizes on every keystroke moves everything below it, which is unpleasant in a long form.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "maxRows": {
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 10
         },
         "showCount": {
           "type": "boolean",
           "required": false,
           "doc": "Shows `used / limit` under the field. Pass a number to set the limit without also passing `maxLength` — see the note in the component about why those are different things.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "countLimit": {
           "type": "number",

@@ -27,6 +27,7 @@ export function useHotkeys(dispatch: Dispatch<Action>, selected: string | null):
       if (mod && key === 'g') return run({ type: 'wrapInFrame' });
       if (mod && key === 'a') return run({ type: 'selectAll' });
       if (mod && key === 'e') return run({ type: 'ui', patch: { codeOpen: true } });
+
       if (key === 'delete' || key === 'backspace') return run({ type: 'delete' });
       if (key === 'escape') return run({ type: 'clearSelection' });
       if (selected && key === ']') return run({ type: 'reorder', id: selected, delta: 1 });

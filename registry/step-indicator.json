@@ -233,7 +233,8 @@
           "type": "number",
           "required": false,
           "doc": "Index of the current step, 0-based.",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "orientation": {
           "type": "StepOrientation",
@@ -405,13 +406,15 @@
           "type": "number",
           "required": false,
           "doc": "Number of dots.",
-          "control": "number"
+          "control": "number",
+          "default": 3
         },
         "value": {
           "type": "number",
           "required": false,
           "doc": "Index of the active dot, 0-based. Figma's \"1st / 2nd / 3rd Active\".",
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "size": {
           "type": "StepperDotSize",

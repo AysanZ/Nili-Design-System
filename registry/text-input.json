@@ -78,7 +78,8 @@
             "md",
             "sm",
             "xs"
-          ]
+          ],
+          "default": "md"
         },
         "label": {
           "type": "ReactNode",
@@ -114,7 +115,8 @@
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "onValueChange": {
           "type": "(value: number) => void",
@@ -126,7 +128,8 @@
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 0
         },
         "max": {
           "type": "number",
@@ -138,7 +141,8 @@
           "type": "number",
           "required": false,
           "doc": null,
-          "control": "number"
+          "control": "number",
+          "default": 1
         },
         "disabled": {
           "type": "boolean",
@@ -214,7 +218,8 @@
           "type": "number",
           "required": false,
           "doc": "How many cells. Figma draws one; the count is yours.",
-          "control": "number"
+          "control": "number",
+          "default": 4
         },
         "value": {
           "type": "string",
@@ -226,7 +231,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": ""
         },
         "onValueChange": {
           "type": "(value: string) => void",
@@ -274,7 +280,8 @@
           "type": "string",
           "required": false,
           "doc": "`one-time-code` by default, which is what lets iOS and Android autofill.",
-          "control": "text"
+          "control": "text",
+          "default": "one-time-code"
         },
         "groupLabel": {
           "type": "string",
@@ -424,7 +431,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Marks the field invalid. There is no message slot: this control is inline.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "label": {
           "type": "string",
@@ -514,7 +522,8 @@
             "md",
             "sm",
             "xs"
-          ]
+          ],
+          "default": "md"
         },
         "icon": {
           "type": "ReactNode",
@@ -526,7 +535,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Hides the chevron for a display-only affix.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         }
       }
     },
@@ -547,7 +557,8 @@
             "md",
             "sm",
             "xs"
-          ]
+          ],
+          "default": "md"
         },
         "label": {
           "type": "ReactNode",
@@ -756,7 +767,8 @@
             "md",
             "sm",
             "xs"
-          ]
+          ],
+          "default": "md"
         },
         "type": {
           "type": "TextInputType",
@@ -776,7 +788,8 @@
             "date",
             "password",
             "dropdown"
-          ]
+          ],
+          "default": "basic"
         },
         "htmlType": {
           "type": "ComponentPropsWithoutRef<'input'>['type']",
@@ -800,7 +813,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": false
         },
         "informationLabel": {
           "type": "string",
@@ -866,7 +880,8 @@
           "type": "PasswordStrengthLevel | false",
           "required": false,
           "doc": "`type=\"password\"` — wires the existing `PasswordStrength` meter under the field. Pass a level, or `false` to hide it.",
-          "control": "none"
+          "control": "none",
+          "default": false
         },
         "strengthLabel": {
           "type": "string",
@@ -891,6 +906,27 @@
           "required": false,
           "doc": "`type=\"button\"` — an attached action sharing the field's border.",
           "control": "slot"
+        },
+        "reveal": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Shows a reveal toggle on a password field. On by default — a field nobody can read back is a field people get wrong twice and then paste from a note. Turn it off where a shoulder is the threat model.",
+          "control": "boolean",
+          "default": true
+        },
+        "revealLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the reveal toggle while the value is hidden.",
+          "control": "text",
+          "default": "Show password"
+        },
+        "hideLabel": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the reveal toggle while the value is visible.",
+          "control": "text",
+          "default": "Hide password"
         },
         "suffix": {
           "type": "ReactNode",

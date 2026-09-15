@@ -15,7 +15,7 @@ export function LocalesPanel(): JSX.Element {
   const fileRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const used = keysUsed(state.root);
+  const used = [...new Set(state.components.flatMap((component) => keysUsed(component.root)))].sort();
   const missing = findMissing(used, state.locales);
 
   const onFile = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {

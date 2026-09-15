@@ -1,4 +1,5 @@
-import type { FrameLayout } from '../document/types';
+import type { DocNode, FrameLayout } from '../document/types';
+import { BREAKPOINTS, isFrame } from '../document/types';
 
 const SPACING: Record<number, string> = {
   0: '0', 2: '0.5', 4: '1', 6: '1.5', 8: '2', 10: '2.5', 12: '3', 14: '3.5',
@@ -45,6 +46,47 @@ export function sizeClasses(size: NodeSize, parentDirection: 'vertical' | 'horiz
   else if (typeof cross === 'number') classes.push(`${crossAxis}-[${cross}px]`);
 
   return classes.join(' ');
+}
+
+/**
+ * The same utilities again, prefixed.
+ *
+ * Tailwind is mobile-first, so the base classes are the narrow case and each
+ * breakpoint adds only what it changes. Emitting the full set at every stop
+ * would work and would be unreadable — and the point of generating Tailwind
+ * rather than a stylesheet is that a person can read the result.
+ */
+export function responsiveLayoutClasses(node: DocNode): string {
+  const out: string[] = [];
+  for (const stop of BREAKPOINTS) {
+    const override = node.responsive?.[stop.id]?.layout;
+    if (!override || !isFrame(node)) continue;
+    const merged = { ...node.layout, ...override };
+    const base = layoutClasses(node.layout, false).split(' ');
+    for (const token of layoutClasses(merged, false).split(' ')) {
+      if (token && !base.includes(token)) out.push(`${stop.id}:${token}`);
+    }
+    // A direction that flips has to cancel the base, which Tailwind does by
+    // simply restating the axis — `flex-col md:flex-row`.
+    if (override.direction && override.direction !== node.layout.direction) {
+      out.push(`${stop.id}:${override.direction === 'vertical' ? 'flex-col' : 'flex-row'}`);
+    }
+  }
+  return [...new Set(out)].join(' ');
+}
+
+export function responsiveSizeClasses(node: DocNode, parentDirection: 'vertical' | 'horizontal' = 'vertical'): string {
+  const out: string[] = [];
+  for (const stop of BREAKPOINTS) {
+    const override = node.responsive?.[stop.id]?.size;
+    if (!override) continue;
+    const merged = { ...node.size, ...override };
+    const base = sizeClasses(node.size, parentDirection).split(' ');
+    for (const token of sizeClasses(merged, parentDirection).split(' ')) {
+      if (token && !base.includes(token)) out.push(`${stop.id}:${token}`);
+    }
+  }
+  return [...new Set(out)].join(' ');
 }
 
 export function layoutClasses(layout: FrameLayout, isRoot: boolean): string {

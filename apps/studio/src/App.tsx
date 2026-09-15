@@ -7,8 +7,10 @@ import { Canvas } from './ui/canvas/Canvas';
 import { BottomBar } from './ui/BottomBar';
 import { ContextMenuProvider } from './ui/ContextMenu';
 import { ResizeHandle } from './ui/ResizeHandle';
-import { Inspector } from './ui/inspector/Inspector';
+import { RightPanel } from './ui/RightPanel';
+import { ComponentPage } from './ui/ComponentPage';
 import { CodeDrawer } from './ui/CodeDrawer';
+import { CommandPalette } from './ui/CommandPalette';
 
 function Studio(): JSX.Element {
   const { state, dispatch } = useStudio();
@@ -36,8 +38,8 @@ function Studio(): JSX.Element {
       <ResizeHandle
         side="left"
         width={state.leftWidth}
-        min={220}
-        max={420}
+        min={266}
+        max={460}
         onResize={(leftWidth) => dispatch({ type: 'ui', patch: { leftWidth } })}
       />
       <Canvas />
@@ -48,13 +50,11 @@ function Studio(): JSX.Element {
         max={440}
         onResize={(rightWidth) => dispatch({ type: 'ui', patch: { rightWidth } })}
       />
-      <aside className="panel panel--right">
-        <div className="panel__body">
-          <Inspector />
-        </div>
-      </aside>
+      <RightPanel />
       <BottomBar />
       <CodeDrawer />
+      <ComponentPage />
+      <CommandPalette />
     </div>
   );
 }

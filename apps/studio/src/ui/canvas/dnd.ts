@@ -4,6 +4,14 @@ import { findNode } from '../../document/tree';
 
 export const DRAG_ASSET = 'application/x-nili-asset';
 export const DRAG_NODE = 'application/x-nili-node';
+/**
+ * The props a dragged variant arrives with, as JSON.
+ *
+ * Carried beside `DRAG_ASSET` rather than instead of it, so every existing
+ * drop path keeps working and a drag from the plain library grid is still a
+ * drag of a component with its defaults.
+ */
+export const DRAG_PRESET = 'application/x-nili-preset';
 
 export type DropKind =
   | { mode: 'into'; parentId: NodeId; index: number }
@@ -105,7 +113,7 @@ export function dropTargetAt(root: FrameNode, x: number, y: number, rtl: boolean
     ? sideOf(overNode, x, rtl, overNode === frameElement ? FRAME_SIDE_ZONE : SIDE_ZONE)
     : null;
 
-  // The page frame has no siblings, so nothing can sit beside it.
+  // The component frame has no siblings, so nothing can sit beside it.
   if (beside && overNode?.dataset.node && overNode.dataset.node !== root.id) {
     return {
       kind: { mode: 'beside', targetId: overNode.dataset.node, side: beside.side },

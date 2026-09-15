@@ -166,7 +166,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": ""
         },
         "onValueChange": {
           "type": "(value: string) => void",
@@ -196,7 +197,8 @@
           "type": "boolean | ReactNode",
           "required": false,
           "doc": "Figma Label's `ℹ️ Information` glyph. `true` uses the default icon.",
-          "control": "boolean-or-slot"
+          "control": "boolean-or-slot",
+          "default": false
         },
         "informationLabel": {
           "type": "string",

@@ -1,4 +1,5 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
+import { RiEyeLine, RiEyeOffLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { useId } from '../../hooks/use-id';
 import { Label } from '../key-components/label';
@@ -67,6 +68,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       suffix,
       prefix,
       selectPosition,
+      reveal = true,
+      revealLabel = 'Show password',
+      hideLabel = 'Hide password',
       latin,
       disabled,
       id,
@@ -86,6 +90,18 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     // Figma's Type is a preset. Anything the caller passes explicitly wins, so
     // the table sets a floor rather than a ceiling.
     const preset = TEXT_INPUT_TYPE_PRESETS[type] ?? {};
+
+    /* A password field with no way to see what you typed is a field people get
+       wrong twice and then paste from a note. The toggle is on by default
+       because that is the right default, and off is one prop away for the
+       rare screen where a shoulder is the threat model.
+
+       It is a button rather than a checkbox: it performs an action on the
+       field, it does not record a preference, and it must not be reachable as
+       a form value. */
+    const [revealed, setRevealed] = useState(false);
+    const isPassword = (htmlType ?? preset.htmlType) === 'password';
+    const showReveal = isPassword && reveal && endIcon == null && button == null;
     const isLatin = latin ?? preset.latin ?? false;
 
     // The leading edge can be an emoji picker or an attached dropdown; the
@@ -154,7 +170,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <input
             ref={ref}
             id={inputId}
-            type={htmlType ?? preset.htmlType ?? 'text'}
+            type={showReveal && revealed ? 'text' : htmlType ?? preset.htmlType ?? 'text'}
             inputMode={rest.inputMode ?? preset.inputMode}
             autoComplete={rest.autoComplete ?? preset.autoComplete}
             required={required}
@@ -166,6 +182,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             // Latin values stay LTR even in a Persian UI: rendered RTL, a URL's
             // slashes and dots migrate to the wrong end.
             dir={dir ?? (isLatin ? 'ltr' : undefined)}
+            /* An address, a URL or a card number is not prose, and the browser
+               underlining it in red reads as an error the field never
+               reported. Explicit rather than left to the browser, because the
+               browsers disagree about which input types they check. */
+            spellCheck={rest.spellCheck ?? (isLatin ? false : undefined)}
             className={cn(textInputControlVariants({ size }), className)}
             {...rest}
           />
@@ -185,6 +206,25 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             <span className={textInputAdornmentVariants({ side: 'end', size })}>
               {endIcon}
             </span>
+          )}
+          {showReveal && (
+            <button
+              type="button"
+              // `tabIndex={-1}` deliberately not set: someone navigating by
+              // keyboard is exactly who needs to check what they typed.
+              onClick={() => setRevealed((shown) => !shown)}
+              aria-label={revealed ? hideLabel : revealLabel}
+              aria-pressed={revealed}
+              disabled={disabled}
+              className={cn(
+                textInputAdornmentVariants({ side: 'end', size }),
+                'cursor-pointer text-soft-400 transition-colors hover:text-sub-600',
+                'focus-visible:outline-none focus-visible:text-primary-base',
+                'disabled:cursor-default disabled:text-disabled-300',
+              )}
+            >
+              {revealed ? <RiEyeOffLine aria-hidden /> : <RiEyeLine aria-hidden />}
+            </button>
           )}
           {endAffix != null && (
             <span className={textInputAffixVariants({ side: 'end', size })}>

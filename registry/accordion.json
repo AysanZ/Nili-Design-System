@@ -95,7 +95,8 @@
           "type": "boolean",
           "required": false,
           "doc": "Uncontrolled initial state.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "onOpenChange": {
           "type": "(open: boolean) => void",
@@ -119,7 +120,8 @@
           "options": [
             "start",
             "end"
-          ]
+          ],
+          "default": "end"
         },
         "indicator": {
           "type": "ReactNode",
@@ -197,13 +199,15 @@
           "options": [
             "single",
             "multiple"
-          ]
+          ],
+          "default": "multiple"
         },
         "collapsible": {
           "type": "boolean",
           "required": false,
           "doc": "In `'single'` mode, allow closing the open item by clicking it again.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "value": {
           "type": "string[]",

@@ -84,7 +84,8 @@
             "end",
             "top",
             "bottom"
-          ]
+          ],
+          "default": "end"
         },
         "size": {
           "type": "DrawerSize",
@@ -96,7 +97,8 @@
             "md",
             "sm",
             "full"
-          ]
+          ],
+          "default": "md"
         },
         "title": {
           "type": "ReactNode",
@@ -124,7 +126,8 @@
           "options": [
             "sm",
             "lg"
-          ]
+          ],
+          "default": "sm"
         },
         "footer": {
           "type": "ReactNode",
@@ -136,31 +139,36 @@
           "type": "boolean",
           "required": false,
           "doc": "Figma footer \"Stretch\": actions fill the width.",
-          "control": "boolean"
+          "control": "boolean",
+          "default": false
         },
         "showClose": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "closeLabel": {
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Close"
         },
         "closeOnOutsideClick": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "closeOnEscape": {
           "type": "boolean",
           "required": false,
           "doc": null,
-          "control": "boolean"
+          "control": "boolean",
+          "default": true
         },
         "container": {
           "type": "HTMLElement | null",
@@ -291,7 +299,8 @@
           "type": "string",
           "required": false,
           "doc": null,
-          "control": "text"
+          "control": "text",
+          "default": "Close"
         },
         "className": {
           "type": "string",
