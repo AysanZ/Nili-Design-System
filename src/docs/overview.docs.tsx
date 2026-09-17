@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import type { RemixiconComponentType } from '@remixicon/react';
 import { FigmaFrame } from './figma.docs';
 
-const PAD = 'px-6 lg:px-[100px]';
+const PAD = 'px-6 lg:px-10';
 
 export interface OverviewFeature {
   icon: RemixiconComponentType;

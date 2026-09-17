@@ -1,0 +1,96 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      /* This app's own code. Deliberately NOT `@/*`: the library already uses
+         `@/lib/...` for its own internals, and one alias cannot mean two
+         directories. */
+      "@www/*": [
+        "./src/*"
+      ],
+      /* The library, consumed as source from the repository root. The exact
+         match must be listed before the wildcard, or `@nili/ui/styles/...`
+         would resolve against `index.ts`. */
+      "@nili/ui": [
+        "../../src/index.ts"
+      ],
+      "@nili/ui/icons": [
+        "../../src/icons/index.ts"
+      ],
+      "@nili/ui/*": [
+        "../../src/*"
+      ],
+      /* The library's internal aliases. Its source imports `@components/icon`
+         and friends, so this app has to be able to resolve them too. */
+      "@": [
+        "../../src"
+      ],
+      "@/*": [
+        "../../src/*"
+      ],
+      "@components": [
+        "../../src/components"
+      ],
+      "@components/*": [
+        "../../src/components/*"
+      ],
+      "@lib": [
+        "../../src/lib"
+      ],
+      "@lib/*": [
+        "../../src/lib/*"
+      ],
+      "@hooks": [
+        "../../src/hooks"
+      ],
+      "@hooks/*": [
+        "../../src/hooks/*"
+      ],
+      "@providers": [
+        "../../src/providers"
+      ],
+      "@providers/*": [
+        "../../src/providers/*"
+      ],
+      "@icons": [
+        "../../src/icons"
+      ],
+      "@icons/*": [
+        "../../src/icons/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
+}

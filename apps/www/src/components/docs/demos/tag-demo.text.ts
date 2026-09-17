@@ -1,0 +1,88 @@
+import { defineDemoText } from './demo-text';
+
+export const tagText = defineDemoText({
+  'appearances.title': { en: 'Appearances', fa: 'ظاهرها', ar: 'المظاهر', tr: 'Görünümler' },
+  'appearances.body': {
+    en: 'Two treatments — Stroke on white, or Gray on a filled chip.',
+    fa: 'دو پرداخت — stroke روی سفید، یا gray روی چیپ پرشده.',
+    ar: 'معالجتان — stroke على أبيض، أو gray على شريحة معبّأة.',
+    tr: 'İki işleyiş — beyaz üzerinde stroke ya da dolu bir çip üzerinde gray.',
+  },
+  'states.title': { en: 'States', fa: 'حالت‌ها', ar: 'الحالات', tr: 'Durumlar' },
+  'states.body': {
+    en: '`selected` marks an applied tag and adds `aria-pressed` when the tag is selectable. `disabled` greys it out and drops it from the tab order.',
+    fa: '`selected` یعنی برچسب اعمال شده و وقتی برچسب انتخاب‌شدنی باشد `aria-pressed` هم اضافه می‌کند. `disabled` آن را خاکستری و از ترتیب تب خارج می‌کند.',
+    ar: 'يشير `selected` إلى وسم مطبَّق ويضيف `aria-pressed` حين يكون الوسم قابلًا للاختيار. أما `disabled` فيجعله رماديًا ويخرجه من ترتيب التنقّل.',
+    tr: '`selected` uygulanmış bir etiketi imler ve etiket seçilebilirse `aria-pressed` ekler. `disabled` onu soluklaştırır ve sekme sırasından çıkarır.',
+  },
+  'states.static': { en: 'static', fa: 'ایستا', ar: 'ساكن', tr: 'durağan' },
+  'states.selectable': {
+    en: 'selectable (try it)',
+    fa: 'انتخاب‌شدنی (امتحان کنید)',
+    ar: 'قابل للاختيار (جرّبه)',
+    tr: 'seçilebilir (deneyin)',
+  },
+  'states.default': { en: 'Default', fa: 'پیش‌فرض', ar: 'افتراضي', tr: 'Varsayılan' },
+  'states.selected': { en: 'Selected', fa: 'انتخاب‌شده', ar: 'مختار', tr: 'Seçili' },
+  'states.disabled': { en: 'Disabled', fa: 'غیرفعال', ar: 'معطّل', tr: 'Devre dışı' },
+  'slot.title': {
+    en: 'Leading slot',
+    fa: 'اسلات پیشرو',
+    ar: 'الفتحة المتقدّمة',
+    tr: 'Öndeki yuva',
+  },
+  'slot.body': {
+    en: '`startAdornment` covers every Figma Type in one prop — an icon, an avatar, a flag, a brand mark. As an enum they would be mutually exclusive, and a seventh kind would need a library release.',
+    fa: '`startAdornment` همه‌ی Typeهای فیگما را در یک پراپ جمع می‌کند — آیکون، آواتار، پرچم، نشان برند. اگر enum بود این‌ها ناسازگار می‌شدند و نوع هفتم یک انتشار تازه‌ی کتابخانه می‌خواست.',
+    ar: 'يغطّي `startAdornment` كل أنواع فيجما في خاصية واحدة — أيقونة أو صورة رمزية أو علم أو شعار. ولو كانت قائمة ثابتة لصارت متنافية، ولاحتاج النوع السابع إلى إصدار جديد من المكتبة.',
+    tr: '`startAdornment` Figma’daki her Type’ı tek bir prop’ta toplar — bir simge, bir avatar, bir bayrak, bir marka işareti. Bir enum olsalardı birbirini dışlarlardı ve yedinci bir tür yeni bir kitaplık sürümü isterdi.',
+  },
+  'slot.icon': { en: 'Icon', fa: 'آیکون', ar: 'أيقونة', tr: 'Simge' },
+  'slot.iran': { en: 'Iran', fa: 'ایران', ar: 'إيران', tr: 'İran' },
+  'slot.withSublabel': {
+    en: 'With sublabel',
+    fa: 'با زیربرچسب',
+    ar: 'مع تسمية فرعية',
+    tr: 'Alt etiketli',
+  },
+  'dismiss.title': {
+    en: 'Dismissible',
+    fa: 'قابل‌حذف',
+    ar: 'قابل للإزالة',
+    tr: 'Kaldırılabilir',
+  },
+  'dismiss.body': {
+    en: '`onDismiss` shows the remove button. `dismissLabel` is required alongside it — an ✕ has no accessible name, and “button” is all a screen reader would get.',
+    fa: '`onDismiss` دکمه‌ی حذف را نشان می‌دهد. `dismissLabel` همراهش الزامی است — یک ✕ نام دسترس‌پذیری ندارد و تمام چیزی که صفحه‌خوان می‌گیرد «دکمه» است.',
+    ar: 'يُظهر `onDismiss` زرّ الإزالة. و`dismissLabel` مطلوبة معه — فعلامة ✕ بلا اسم وصفي، وكل ما سيسمعه قارئ الشاشة هو «زر».',
+    tr: '`onDismiss` kaldırma düğmesini gösterir. Yanında `dismissLabel` zorunludur — bir ✕’in erişilebilir adı yoktur ve ekran okuyucunun duyacağı tek şey “düğme” olur.',
+  },
+  'dismiss.remove': {
+    en: 'Remove {tag}',
+    fa: 'حذف {tag}',
+    ar: 'إزالة {tag}',
+    tr: '{tag} kaldır',
+  },
+  'dismiss.reset': { en: 'Reset', fa: 'بازنشانی', ar: 'إعادة تعيين', tr: 'Sıfırla' },
+  'group.teams': { en: 'Teams', fa: 'تیم‌ها', ar: 'الفرق', tr: 'Takımlar' },
+  'group.filters': {
+    en: 'Applied filters',
+    fa: 'فیلترهای اعمال‌شده',
+    ar: 'المرشّحات المطبَّقة',
+    tr: 'Uygulanan filtreler',
+  },
+  'team.design': { en: 'Design', fa: 'طراحی', ar: 'التصميم', tr: 'Tasarım' },
+  'team.engineering': {
+    en: 'Engineering',
+    fa: 'مهندسی',
+    ar: 'الهندسة',
+    tr: 'Mühendislik',
+  },
+  'team.research': { en: 'Research', fa: 'پژوهش', ar: 'البحث', tr: 'Araştırma' },
+  'team.marketing': {
+    en: 'Marketing',
+    fa: 'بازاریابی',
+    ar: 'التسويق',
+    tr: 'Pazarlama',
+  },
+});

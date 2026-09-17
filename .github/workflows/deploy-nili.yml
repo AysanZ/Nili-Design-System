@@ -1,0 +1,96 @@
+name: Deploy nili.aysanz.dev
+
+# Separate from the existing ci.yml / deploy.yml pair (which build and
+# publish the library itself, and a since-superseded Storybook container on a
+# different host). This workflow only concerns apps/www.
+on:
+  push:
+    branches: [main]
+    paths:
+      # Anything the image's traced import graph can reach. `src/**` and
+      # `registry/**` because apps/www imports @nili/ui straight from source
+      # (see next.config.ts and apps/www/Dockerfile's header comment) — a
+      # component change with no apps/www edit at all still has to rebuild
+      # this image, or the deployed site drifts from the library.
+      - 'apps/www/**'
+      - 'src/**'
+      - 'registry/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-nili.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-nili-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ghcr.io/aysanz/nili-www
+
+jobs:
+  build-and-push:
+    name: Build and push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      tag: ${{ steps.tag.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Short SHA
+        id: tag
+        run: echo "sha=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build context is the repository root, not apps/www — see the
+      # Dockerfile's own header comment for why: @nili/ui resolves to root
+      # source, and a context scoped to apps/www would never see it.
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/www/Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.tag.outputs.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      # Matches the manual recipe in the runbook exactly, so a hand-run
+      # deploy and this workflow never disagree about what "deployed" means:
+      # write TAG into .env, pull, up -d. The same three lines are what
+      # §"Rollback" says to run by hand with a different TAG.
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -euo pipefail
+            cd /opt/nili
+            sed -i "s|^TAG=.*|TAG=${{ needs.build-and-push.outputs.tag }}|" .env
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose --env-file .env -f docker-compose.prod.yml pull
+            docker compose --env-file .env -f docker-compose.prod.yml up -d
+            docker image prune -af --filter "until=168h" >/dev/null 2>&1 || true

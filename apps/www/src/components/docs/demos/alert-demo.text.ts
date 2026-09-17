@@ -1,0 +1,105 @@
+import { defineDemoText } from './demo-text';
+
+export const alertText = defineDemoText({
+  'statuses.title': { en: 'Statuses', fa: 'وضعیت‌ها', ar: 'الحالات', tr: 'Durumlar' },
+  'statuses.body': {
+    en: 'Five meanings. `error` is announced assertively by default; the rest wait for a pause.',
+    fa: 'پنج معنا. `error` به‌طور پیش‌فرض قاطعانه اعلام می‌شود؛ بقیه منتظر یک مکث می‌مانند.',
+    ar: 'خمسة معانٍ. تُعلَن `error` بحزم افتراضيًا، أما البقية فتنتظر توقّفًا.',
+    tr: 'Beş anlam. `error` varsayılan olarak kesintili duyurulur; diğerleri bir duraklamayı bekler.',
+  },
+  'statuses.sample': {
+    en: 'This is a {status} alert.',
+    fa: 'این یک هشدار {status} است.',
+    ar: 'هذا تنبيه {status}.',
+    tr: 'Bu bir {status} uyarısıdır.',
+  },
+  'appearances.title': { en: 'Appearances', fa: 'ظاهرها', ar: 'المظاهر', tr: 'Görünümler' },
+  'appearances.body': {
+    en: 'Filled, Light, Lighter and Stroke. Filled is the loudest — keep it for things that genuinely interrupt.',
+    fa: 'filled، light، lighter و stroke. filled بلندترین است؛ نگهش دارید برای چیزهایی که واقعاً باید کار کاربر را قطع کنند.',
+    ar: 'filled وlight وlighter وstroke. الأعلى صوتًا هو filled — احتفظ به لما يقاطع المستخدم فعلًا.',
+    tr: 'filled, light, lighter ve stroke. En yükseği filled — onu gerçekten böleni bildirmeye saklayın.',
+  },
+  'appearances.sample': {
+    en: 'Appearance: {appearance}',
+    fa: 'ظاهر: {appearance}',
+    ar: 'المظهر: {appearance}',
+    tr: 'Görünüm: {appearance}',
+  },
+  'sizes.title': { en: 'Sizes', fa: 'اندازه‌ها', ar: 'الأحجام', tr: 'Boyutlar' },
+  'sizes.body': {
+    en: 'X-Small is a single line with no icon padding; Large carries a description and actions.',
+    fa: 'x-small یک خط است بدون فضای آیکون؛ large توضیح و کنش هم می‌گیرد.',
+    ar: 'الحجم x-small سطر واحد بلا حشوة للأيقونة؛ أما large فيحمل وصفًا وإجراءات.',
+    tr: 'x-small, simge boşluğu olmayan tek satırdır; large açıklama ve eylem taşır.',
+  },
+  'sizes.saved': {
+    en: 'Your changes have been saved.',
+    fa: 'تغییرات شما ذخیره شد.',
+    ar: 'تم حفظ تغييراتك.',
+    tr: 'Değişiklikleriniz kaydedildi.',
+  },
+  'sizes.savedBody': {
+    en: 'Everyone on the team can see them now.',
+    fa: 'حالا همه‌ی اعضای تیم آن‌ها را می‌بینند.',
+    ar: 'يمكن لكل أعضاء الفريق رؤيتها الآن.',
+    tr: 'Ekipteki herkes artık görebilir.',
+  },
+  'actions.title': {
+    en: 'Actions, icons and dismissal',
+    fa: 'کنش‌ها، آیکون‌ها و بستن',
+    ar: 'الإجراءات والأيقونات والإغلاق',
+    tr: 'Eylemler, simgeler ve kapatma',
+  },
+  'actions.body': {
+    en: '`actions` takes up to two inline actions. `icon` accepts true for the default glyph, a node to replace it, or false to drop it. `dismissible` needs `dismissLabel` — an ✕ has no accessible name.',
+    fa: '`actions` تا دو کنش درون‌خطی می‌گیرد. `icon` با true آیکون پیش‌فرض را می‌آورد، با یک نود جایگزینش می‌کند و با false حذفش می‌کند. `dismissible` به `dismissLabel` نیاز دارد — یک ✕ هیچ نام دسترس‌پذیری ندارد.',
+    ar: 'يقبل `actions` إجراءين داخليين على الأكثر. ويقبل `icon` القيمة true للأيقونة الافتراضية، أو عنصرًا يحل محلها، أو false لإزالتها. ويحتاج `dismissible` إلى `dismissLabel` — فعلامة ✕ بلا اسم وصفي.',
+    tr: '`actions` en çok iki satır içi eylem alır. `icon` varsayılan simge için true, onu değiştirmek için bir düğüm, kaldırmak için false kabul eder. `dismissible` için `dismissLabel` gerekir — bir ✕’in erişilebilir adı yoktur.',
+  },
+  'actions.planTitle': {
+    en: 'Your plan is almost full.',
+    fa: 'ظرفیت پلن شما تقریباً پر شده.',
+    ar: 'خطتك على وشك الامتلاء.',
+    tr: 'Planınız neredeyse dolu.',
+  },
+  'actions.planBody': {
+    en: 'You have used 92% of your storage.',
+    fa: '۹۲٪ فضای ذخیره‌سازی‌تان مصرف شده است.',
+    ar: 'استهلكت ٩٢٪ من مساحتك التخزينية.',
+    tr: 'Depolama alanınızın %92’sini kullandınız.',
+  },
+  'actions.upgrade': { en: 'Upgrade', fa: 'ارتقا', ar: 'ترقية', tr: 'Yükselt' },
+  'actions.learnMore': {
+    en: 'Learn more',
+    fa: 'بیشتر بدانید',
+    ar: 'اعرف المزيد',
+    tr: 'Daha fazla',
+  },
+  'actions.feature': {
+    en: 'Introducing smart filters.',
+    fa: 'فیلترهای هوشمند از راه رسیدند.',
+    ar: 'نقدّم المرشّحات الذكية.',
+    tr: 'Akıllı filtreler geldi.',
+  },
+  'actions.noIcon': {
+    en: 'No icon at all.',
+    fa: 'بدون هیچ آیکونی.',
+    ar: 'بلا أي أيقونة.',
+    tr: 'Hiç simge yok.',
+  },
+  'actions.dismissMe': {
+    en: 'Dismiss me.',
+    fa: 'مرا ببندید.',
+    ar: 'أغلقني.',
+    tr: 'Beni kapat.',
+  },
+  'actions.dismissed': {
+    en: 'Dismissed. Reload the page to bring it back.',
+    fa: 'بسته شد. برای بازگرداندنش صفحه را دوباره بارگذاری کنید.',
+    ar: 'أُغلق. أعد تحميل الصفحة لإعادته.',
+    tr: 'Kapatıldı. Geri getirmek için sayfayı yeniden yükleyin.',
+  },
+  'close': { en: 'Close', fa: 'بستن', ar: 'إغلاق', tr: 'Kapat' },
+});

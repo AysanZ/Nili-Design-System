@@ -56,7 +56,7 @@ describe('Checkbox', () => {
 
   it('forwards its ref while keeping indeterminate working', () => {
     let node: HTMLInputElement | null = null;
-    render(<Checkbox label="All" indeterminate ref={(el) => (node = el)} />);
+    render(<Checkbox label="All" indeterminate ref={(el) => { node = el; }} />);
     expect(node).toBeInstanceOf(HTMLInputElement);
     expect((node as unknown as HTMLInputElement).indeterminate).toBe(true);
   });

@@ -1,0 +1,88 @@
+import { defineDemoText } from './demo-text';
+
+export const contentDividerText = defineDemoText({
+  'rules.title': { en: 'Rules', fa: 'خط‌ها', ar: 'الخطوط', tr: 'Çizgiler' },
+  'rules.body': {
+    en: 'With no children it is a plain separator. `spacing` sets the vertical room around it; `type` picks one of the named Figma presets.',
+    fa: 'بدون فرزند، فقط یک جداکنندهٔ ساده است. `spacing` فضای عمودی اطرافش را تعیین می‌کند و `type` یکی از پیش‌تنظیم‌های نام‌دار فیگما را برمی‌دارد.',
+    ar: 'بلا أبناء يكون مجرّد فاصل. يضبط `spacing` المساحة الرأسية حوله، ويختار `type` أحد إعدادات فيجما المسمّاة.',
+    tr: 'Çocuğu yoksa düz bir ayraçtır. `spacing` çevresindeki dikey boşluğu belirler; `type` adlandırılmış Figma ön ayarlarından birini seçer.',
+  },
+  'rules.above': { en: 'Above', fa: 'بالا', ar: 'أعلى', tr: 'Üstte' },
+  'rules.below': { en: 'Below', fa: 'پایین', ar: 'أسفل', tr: 'Altta' },
+  'text.title': { en: 'With text', fa: 'با متن', ar: 'مع نص', tr: 'Metinle' },
+  'text.body': {
+    en: 'A string child renders as the label. `text-and-line` centres it between two rules; `text` puts it alone at the start; `solid-text` gives it the filled chip.',
+    fa: 'فرزندی که رشته باشد به‌صورت برچسب رندر می‌شود. `text-and-line` آن را بین دو خط وسط می‌گذارد، `text` تنها در ابتدا، و `solid-text` چیپ پرشده به آن می‌دهد.',
+    ar: 'يُرسم الابن النصّي كتسمية. يضعه `text-and-line` في الوسط بين خطّين، ويضعه `text` وحده في البداية، ويمنحه `solid-text` شريحة معبّأة.',
+    tr: 'Dize olan bir çocuk etiket olarak çizilir. `text-and-line` onu iki çizgi arasında ortalar; `text` başa yalnız koyar; `solid-text` dolu çipi verir.',
+  },
+  'text.or': { en: 'OR', fa: 'یا', ar: 'أو', tr: 'VEYA' },
+  'text.today': { en: 'Today', fa: 'امروز', ar: 'اليوم', tr: 'Bugün' },
+  'text.newMessages': {
+    en: 'New messages',
+    fa: 'پیام‌های تازه',
+    ar: 'رسائل جديدة',
+    tr: 'Yeni iletiler',
+  },
+  'align.title': {
+    en: 'Alignment',
+    fa: 'تراز',
+    ar: 'المحاذاة',
+    tr: 'Hizalama',
+  },
+  'align.body': {
+    en: '`align` decides where the content sits on the rule. Logical, so `start` follows reading direction.',
+    fa: '`align` تعیین می‌کند محتوا کجای خط بنشیند. منطقی است، پس `start` از جهت خواندن پیروی می‌کند.',
+    ar: 'يحدّد `align` موضع المحتوى على الخط. وهو منطقي، فـ`start` يتبع اتجاه القراءة.',
+    tr: '`align` içeriğin çizgi üzerinde nerede duracağını belirler. Mantıksaldır, `start` okuma yönünü izler.',
+  },
+  'align.start': { en: 'start', fa: 'ابتدا', ar: 'البداية', tr: 'başta' },
+  'align.center': { en: 'center', fa: 'وسط', ar: 'الوسط', tr: 'ortada' },
+  'align.end': { en: 'end', fa: 'انتها', ar: 'النهاية', tr: 'sonda' },
+  'controls.title': {
+    en: 'With controls',
+    fa: 'با کنترل‌ها',
+    ar: 'مع عناصر تحكّم',
+    tr: 'Denetimlerle',
+  },
+  'controls.body': {
+    en: 'The four button presets differ only in what you pass as children — a compact button, a group of them, a text button. Same geometry, named for the case you are building.',
+    fa: 'چهار پیش‌تنظیم دکمه‌ای فقط در چیزی که به‌عنوان فرزند می‌دهید فرق دارند — یک دکمهٔ فشرده، گروهی از آن‌ها، یک دکمهٔ متنی. هندسه یکی است؛ اسم‌ها برای حالتی است که می‌سازید.',
+    ar: 'لا تختلف إعدادات الأزرار الأربعة إلا فيما تمرّره كأبناء — زر مدمج أو مجموعة منها أو زر نصّي. الهندسة واحدة، والتسمية للحالة التي تبنيها.',
+    tr: 'Dört düğme ön ayarı yalnızca çocuk olarak ne verdiğinizde ayrışır — kompakt bir düğme, bunlardan bir grup, metin düğmesi. Geometri aynı; adlar kurduğunuz duruma göredir.',
+  },
+  'controls.add': { en: 'Add', fa: 'افزودن', ar: 'إضافة', tr: 'Ekle' },
+  'controls.more': { en: 'More', fa: 'بیشتر', ar: 'المزيد', tr: 'Daha fazla' },
+  'controls.showMore': {
+    en: 'Show more',
+    fa: 'نمایش بیشتر',
+    ar: 'عرض المزيد',
+    tr: 'Daha fazla göster',
+  },
+  'vertical.title': {
+    en: 'Vertical',
+    fa: 'عمودی',
+    ar: 'رأسي',
+    tr: 'Dikey',
+  },
+  'vertical.body': {
+    en: 'A vertical orientation separates items in a row — a toolbar, a set of stats. It stretches to the height of its container.',
+    fa: 'جهت عمودی آیتم‌های یک ردیف را از هم جدا می‌کند — یک نوار ابزار، یک دسته آمار. تا ارتفاع ظرفش کش می‌آید.',
+    ar: 'يفصل الاتجاه الرأسي العناصر في صفّ — شريط أدوات أو مجموعة إحصاءات. ويمتد إلى ارتفاع حاويته.',
+    tr: 'Dikey yönelim bir satırdaki öğeleri ayırır — bir araç çubuğu, bir istatistik kümesi. Kapsayıcısının yüksekliğine uzar.',
+  },
+  'vertical.open': { en: '12 open', fa: '۱۲ باز', ar: '١٢ مفتوح', tr: '12 açık' },
+  'vertical.closed': {
+    en: '4 closed',
+    fa: '۴ بسته',
+    ar: '٤ مغلق',
+    tr: '4 kapalı',
+  },
+  'vertical.draft': {
+    en: '2 draft',
+    fa: '۲ پیش‌نویس',
+    ar: '٢ مسوّدة',
+    tr: '2 taslak',
+  },
+});

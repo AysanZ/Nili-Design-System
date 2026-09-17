@@ -1,0 +1,19 @@
+/* ────────────────────────────────────────────────────────────────
+   nili/www — stylesheet entry point
+
+   This file imports the library's own entry rather than re-declaring
+   anything. Tailwind's layer order, the token chain, the `dark` variant
+   and the `hovered`/`focused` variants all arrive from there, so the site
+   can never drift from the components it documents.
+   ──────────────────────────────────────────────────────────────── */
+
+@import '../../../../src/styles/globals.css';
+@import './site.css';
+
+/* `globals.css` ends with `@source '../'`, which from its own location means
+   the repository root — that is how the site picks up every class the library
+   writes, plus the ones written here. Two subtrees are then removed again:
+   Storybook and the studio are separate applications whose classes would
+   otherwise be compiled into this site's stylesheet. */
+@source not '../../../../apps/studio';
+@source not '../../../../.storybook';

@@ -53,4 +53,31 @@ describe('Breadcrumb', () => {
     expect(screen.getByText('Components')).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Projects' })).toBeNull();
   });
+
+  /* `asChild` used to hand `Slot` the icon-and-label fragment rather than the
+     consumer's element, so the crumb's classes landed on a fragment — React
+     warned and the styling vanished. The element the consumer passes has to be
+     the one that ends up in the DOM, carrying both. */
+  it('gives asChild the consumer element, carrying the crumb classes', () => {
+    render(
+      <Breadcrumb label="Breadcrumb">
+        <BreadcrumbItem asChild>
+          <a href="/" data-testid="router-link">
+            Home
+          </a>
+        </BreadcrumbItem>
+        <BreadcrumbItem current>Components</BreadcrumbItem>
+      </Breadcrumb>,
+    );
+
+    const link = screen.getByTestId('router-link');
+    expect(link.tagName).toBe('A');
+    expect(link).toHaveAttribute('href', '/');
+    // The crumb's own classes are on the consumer's element, not a wrapper.
+    expect(link.className).not.toBe('');
+    // And the label still sits in its own slot, as it does without asChild.
+    expect(link.querySelector('[data-slot="label"]')?.textContent).toBe('Home');
+    // One element, not a wrapper around it.
+    expect(link.parentElement?.tagName).toBe('LI');
+  });
 });

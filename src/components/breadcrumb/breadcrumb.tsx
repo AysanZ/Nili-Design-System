@@ -1,4 +1,11 @@
-import { Children, forwardRef, isValidElement, type ReactNode } from 'react';
+import {
+  Children,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import { RiArrowRightSLine, RiMoreLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { Slot } from '../../lib/slot';
@@ -46,11 +53,40 @@ export const BreadcrumbItem = forwardRef<HTMLElement, BreadcrumbItemProps>(
       );
     }
 
-    const Component = asChild ? Slot : 'a';
+    /*
+       `asChild` cannot simply swap the element type here.
+ 
+       `content` is a fragment — the icon plus the label span — and handing it
+       to `Slot` as the child meant Slot cloned the *fragment* and pushed
+       `className` onto it. React says so out loud ("Invalid prop `className`
+       supplied to `React.Fragment`") and the crumb loses its styling, because
+       a fragment has nowhere to put a class.
+ 
+       The consumer's element is the crumb, so it has to receive the classes
+       *and* the content: clone it with the icon and the label as its own
+       children, then let Slot merge the crumb's props onto it. The result is
+       one `<a>` — the router's — carrying the crumb's styling, which is the
+       whole point of `asChild`. */
+    if (asChild && isValidElement(children)) {
+      const child = children as ReactElement<{ children?: ReactNode }>;
+      return (
+        <Slot ref={ref as never} className={classes} {...rest}>
+          {cloneElement(
+            child,
+            undefined,
+            <>
+              {icon}
+              <span data-slot="label">{child.props.children}</span>
+            </>,
+          )}
+        </Slot>
+      );
+    }
+
     return (
-      <Component ref={ref as never} className={classes} {...rest}>
+      <a ref={ref as never} className={classes} {...rest}>
         {content}
-      </Component>
+      </a>
     );
   },
 );

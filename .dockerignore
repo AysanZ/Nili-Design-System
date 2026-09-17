@@ -1,1 +1,38 @@
+# Built from the repository root — see apps/www/Dockerfile's header comment
+# for why the context has to be the root rather than apps/www.
+
 node_modules
+**/node_modules
+.next
+**/.next
+dist
+**/dist
+
+# apps/studio is not run by this image. Its manifest still has to reach the
+# deps stage (COPYed explicitly there) so `npm ci` can resolve the workspace
+# tree, but not its source or output.
+apps/studio/src
+apps/studio/dist
+apps/studio/public
+packages/cli/dist
+
+.storybook
+storybook-static
+
+.git
+.gitignore
+**/.gitignore
+.dockerignore
+
+*.md
+!README.md
+
+.vscode
+.idea
+.DS_Store
+*.log
+npm-debug.log*
+
+.env
+.env.*
+!.env.example

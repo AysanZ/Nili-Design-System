@@ -22,7 +22,7 @@ describe('Badge', () => {
 
   it('forwards its ref', () => {
     let node: HTMLSpanElement | null = null;
-    render(<Badge ref={(element) => (node = element)}>Active</Badge>);
+    render(<Badge ref={(element) => { node = element; }}>Active</Badge>);
     expect(node).toBeInstanceOf(HTMLSpanElement);
   });
 

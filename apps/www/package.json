@@ -1,0 +1,38 @@
+{
+  "name": "@nili/www",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Nili — the documentation and presentation site.",
+  "scripts": {
+    "predev": "node scripts/sync-public.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/sync-public.mjs",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@floating-ui/react": "^0.27.0",
+    "@remixicon/react": "^4.6.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "i18next": "^24.2.3",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-i18next": "^15.7.4",
+    "tabbable": "^6.2.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.8.3"
+  },
+  "nili": {
+    "note": "@nili/ui is the repository root, not a workspace package, so it is consumed through the tsconfig paths below rather than as a dependency — the same arrangement apps/studio uses for Vite."
+  }
+}

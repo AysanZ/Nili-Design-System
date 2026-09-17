@@ -1,0 +1,127 @@
+import { defineDemoText } from './demo-text';
+
+export const textAreaText = defineDemoText({
+  'basic.title': {
+    en: 'Label, hint and error',
+    fa: 'برچسب، راهنما و خطا',
+    ar: 'التسمية والتلميح والخطأ',
+    tr: 'Etiket, ipucu ve hata',
+  },
+  'basic.body': {
+    en: 'The presence of `error` is what marks the field invalid, so the border and the message can never disagree — there is no separate `invalid` flag to forget.',
+    fa: 'وجود `error` است که فیلد را نامعتبر می‌کند، پس حاشیه و پیام هیچ‌وقت با هم نمی‌جنگند — پرچم جداگانه‌ای به نام `invalid` نیست که یادتان برود.',
+    ar: 'وجود `error` هو ما يجعل الحقل غير صالح، فلا يتناقض الإطار مع الرسالة أبدًا — ولا توجد راية `invalid` منفصلة كي تُنسى.',
+    tr: 'Alanı geçersiz kılan şey `error`’ın varlığıdır; böylece kenarlık ile mesaj asla çelişmez — unutulacak ayrı bir `invalid` bayrağı yoktur.',
+  },
+  'basic.label': {
+    en: 'Description',
+    fa: 'توضیح',
+    ar: 'الوصف',
+    tr: 'Açıklama',
+  },
+  'basic.placeholder': {
+    en: 'Tell us a little about the project…',
+    fa: 'کمی دربارهٔ پروژه بنویسید…',
+    ar: 'أخبرنا قليلًا عن المشروع…',
+    tr: 'Proje hakkında biraz yazın…',
+  },
+  'basic.hint': {
+    en: 'Markdown is supported.',
+    fa: 'مارک‌داون پشتیبانی می‌شود.',
+    ar: 'الماركداون مدعوم.',
+    tr: 'Markdown desteklenir.',
+  },
+  'basic.tooShort': {
+    en: 'Too short',
+    fa: 'خیلی کوتاه',
+    ar: 'قصير جدًا',
+    tr: 'Çok kısa',
+  },
+  'basic.error': {
+    en: 'Please write at least twenty characters.',
+    fa: 'لطفاً دست‌کم بیست نویسه بنویسید.',
+    ar: 'اكتب عشرين حرفًا على الأقل من فضلك.',
+    tr: 'Lütfen en az yirmi karakter yazın.',
+  },
+  'basic.disabled': {
+    en: 'Disabled',
+    fa: 'غیرفعال',
+    ar: 'معطّل',
+    tr: 'Devre dışı',
+  },
+  'basic.disabledValue': {
+    en: 'You cannot edit this.',
+    fa: 'این را نمی‌توانید ویرایش کنید.',
+    ar: 'لا يمكنك تحرير هذا.',
+    tr: 'Bunu düzenleyemezsiniz.',
+  },
+  'count.title': {
+    en: 'Character counter',
+    fa: 'شمارندهٔ نویسه',
+    ar: 'عدّاد الأحرف',
+    tr: 'Karakter sayacı',
+  },
+  'count.body': {
+    en: '`showCount` puts `used / limit` under the field. `countLimit` sets a soft limit without also setting `maxLength` — a hard `maxLength` silently swallows the end of a paste, which is worse than showing someone they are over.',
+    fa: '`showCount` نسبت `used / limit` را زیر فیلد می‌گذارد. `countLimit` یک سقف نرم می‌گذارد بدون اینکه `maxLength` هم ست شود — `maxLength` سخت، انتهای یک پیست را بی‌صدا می‌بلعد، و این بدتر از آن است که به کاربر نشان دهید از حد گذشته.',
+    ar: 'يضع `showCount` النسبة `used / limit` تحت الحقل. ويضبط `countLimit` حدًّا مرنًا دون ضبط `maxLength` — فـ`maxLength` الصارمة تبتلع آخر ما يُلصق بصمت، وهذا أسوأ من إخبار المستخدم بتجاوزه الحد.',
+    tr: '`showCount` alanın altına `used / limit` koyar. `countLimit`, `maxLength` da ayarlamadan yumuşak bir sınır koyar — katı bir `maxLength` yapıştırılan metnin sonunu sessizce yutar ki bu, kişiye sınırı aştığını göstermekten kötüdür.',
+  },
+  'count.bio': { en: 'Bio', fa: 'بیوگرافی', ar: 'نبذة', tr: 'Biyografi' },
+  'count.bioPlaceholder': {
+    en: 'Type past 120 characters to see the counter turn.',
+    fa: 'بیش از ۱۲۰ نویسه بنویسید تا تغییر رنگ شمارنده را ببینید.',
+    ar: 'اكتب أكثر من ١٢٠ حرفًا لترى العدّاد يتغيّر.',
+    tr: '120 karakteri aşacak kadar yazın; sayacın döndüğünü görün.',
+  },
+  'count.notes': { en: 'Notes', fa: 'یادداشت‌ها', ar: 'ملاحظات', tr: 'Notlar' },
+  'count.format': {
+    en: '{used} of {limit}',
+    fa: '{used} از {limit}',
+    ar: '{used} من {limit}',
+    tr: '{limit} karakterin {used} tanesi',
+  },
+  'resize.title': {
+    en: 'Resize handles',
+    fa: 'دستگیره‌های تغییر اندازه',
+    ar: 'مقابض تغيير الحجم',
+    tr: 'Yeniden boyutlandırma tutamakları',
+  },
+  'resize.body': {
+    en: 'Which handles the browser offers. `vertical` is the default; `none` for a field inside a tight layout that must not be dragged out of shape.',
+    fa: 'اینکه مرورگر کدام دستگیره‌ها را بدهد. `vertical` پیش‌فرض است؛ `none` برای فیلدی در چیدمانی تنگ که نباید از ریخت بیفتد.',
+    ar: 'أي المقابض يقدّمها المتصفّح. القيمة `vertical` هي الافتراضية، و`none` لحقل داخل تخطيط ضيّق يجب ألا يُسحب فيفقد شكله.',
+    tr: 'Tarayıcının hangi tutamakları sunduğu. Varsayılan `vertical`; dar bir düzendeki, biçimi bozulmaması gereken bir alan için `none`.',
+  },
+  'resize.label': {
+    en: 'Resize: {value}',
+    fa: 'تغییر اندازه: {value}',
+    ar: 'تغيير الحجم: {value}',
+    tr: 'Boyutlandırma: {value}',
+  },
+  'resize.value': {
+    en: 'Drag the corner to see what this allows.',
+    fa: 'گوشه را بکشید تا ببینید چه چیزی مجاز است.',
+    ar: 'اسحب الزاوية لترى ما يسمح به هذا.',
+    tr: 'Neye izin verdiğini görmek için köşeyi sürükleyin.',
+  },
+  'auto.title': {
+    en: 'Auto resize',
+    fa: 'تغییر اندازهٔ خودکار',
+    ar: 'تغيير الحجم التلقائي',
+    tr: 'Otomatik boyutlandırma',
+  },
+  'auto.body': {
+    en: 'Grows with the content instead of scrolling, up to `maxRows`. Off by default: a field that resizes on every keystroke moves everything below it, which is unpleasant in a long form.',
+    fa: 'به‌جای اسکرول، تا `maxRows` با محتوا رشد می‌کند. پیش‌فرض خاموش است: فیلدی که با هر کلید اندازه‌اش عوض شود همه‌چیزِ زیرش را جابه‌جا می‌کند، و این در فرم بلند آزاردهنده است.',
+    ar: 'ينمو مع المحتوى بدل التمرير، حتى `maxRows`. وهو مطفأ افتراضيًا: فحقل يتغيّر حجمه مع كل ضغطة يحرّك كل ما تحته، وهذا مزعج في نموذج طويل.',
+    tr: 'Kaydırmak yerine `maxRows`’a kadar içerikle büyür. Varsayılan kapalı: her tuş vuruşunda boyutlanan bir alan altındaki her şeyi oynatır ki bu uzun bir formda tatsızdır.',
+  },
+  'auto.label': { en: 'Message', fa: 'پیام', ar: 'الرسالة', tr: 'İleti' },
+  'auto.placeholder': {
+    en: 'Type a few lines and watch it grow — up to eight rows.',
+    fa: 'چند خط بنویسید و رشدش را ببینید — تا هشت سطر.',
+    ar: 'اكتب بضعة أسطر وراقب نموّه — حتى ثمانية صفوف.',
+    tr: 'Birkaç satır yazın ve büyüdüğünü görün — sekiz satıra kadar.',
+  },
+});

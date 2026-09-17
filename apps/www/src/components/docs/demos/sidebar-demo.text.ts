@@ -1,0 +1,118 @@
+import { defineDemoText } from './demo-text';
+
+export const sidebarText = defineDemoText({
+  'panel.title': { en: 'The panel', fa: 'پنل', ar: 'اللوحة', tr: 'Panel' },
+  'panel.body': {
+    en: 'Header, groups of items, and a footer. It collapses itself: leave `collapsed` off and the panel keeps its own state, and a `SidebarTrigger` anywhere inside folds it. A sidebar that needs the app to write a useState before it can fold is one most apps ship unfoldable.',
+    fa: 'سربرگ، گروه‌هایی از آیتم‌ها، و یک پابرگ. خودش جمع می‌شود: `collapsed` را ندهید و پنل وضعیت خودش را نگه می‌دارد، و هر `SidebarTrigger` داخلش تایش می‌کند. سایدباری که برای جمع‌شدن نیاز دارد اپ یک useState بنویسد، همانی است که بیشتر اپ‌ها بدون قابلیت جمع‌شدن منتشرش می‌کنند.',
+    ar: 'ترويسة ومجموعات عناصر وتذييل. وتطوي نفسها: اترك `collapsed` دون تمرير فتحتفظ اللوحة بحالتها، ويطويها أي `SidebarTrigger` بداخلها. فشريط جانبي يحتاج إلى أن يكتب التطبيق useState قبل أن يُطوى هو ما تشحنه معظم التطبيقات غير قابل للطي.',
+    tr: 'Başlık, öğe grupları ve bir alt bilgi. Kendini katlar: `collapsed`’ı vermeyin, panel kendi durumunu tutar ve içindeki herhangi bir `SidebarTrigger` onu katlar. Katlanabilmek için uygulamanın bir useState yazmasını gerektiren bir kenar çubuğu, çoğu uygulamanın katlanamaz olarak yayımladığı şeydir.',
+  },
+  'rail.title': { en: 'The rail', fa: 'ریل', ar: 'الشريط الضيّق', tr: 'Ray' },
+  'rail.body': {
+    en: 'Expanded and collapsed are one component: every row is the same row with its label faded to zero width, so a row added to one is added to both. The labels stay in the DOM rather than unmounting — a rail of unlabelled icons is the layout that needs its accessible names most.',
+    fa: 'باز و جمع‌شده یک کامپوننت‌اند: هر ردیف همان ردیف است با برچسبی که تا عرض صفر محو شده، پس ردیفی که به یکی اضافه شود به هر دو اضافه می‌شود. برچسب‌ها به‌جای آنکه از DOM حذف شوند در آن می‌مانند — ریلی از آیکون‌های بی‌برچسب همان چیدمانی است که بیش از همه به نام‌های دسترس‌پذیرش نیاز دارد.',
+    ar: 'الموسّع والمطوي مكوّن واحد: فكل صف هو الصف نفسه بتسمية تلاشت إلى عرض صفر، فالصف المضاف إلى أحدهما مضاف إلى كليهما. وتبقى التسميات في DOM بدل إزالتها — فشريط من أيقونات بلا تسميات هو التخطيط الأحوج إلى أسمائه الوصفية.',
+    tr: 'Genişletilmiş ve katlanmış tek bir bileşendir: her satır, etiketi sıfır genişliğe solmuş aynı satırdır; birine eklenen satır ikisine de eklenir. Etiketler kaldırılmak yerine DOM’da kalır — etiketsiz simgelerden oluşan bir ray, erişilebilir adlarına en çok ihtiyaç duyan düzendir.',
+  },
+  'rail.state': {
+    en: 'controlled — {state}',
+    fa: 'کنترل‌شده — {state}',
+    ar: 'مُتحكَّم به — {state}',
+    tr: 'denetimli — {state}',
+  },
+  'rail.collapsed': {
+    en: 'collapsed',
+    fa: 'جمع‌شده',
+    ar: 'مطوي',
+    tr: 'katlanmış',
+  },
+  'rail.expanded': {
+    en: 'expanded',
+    fa: 'باز',
+    ar: 'موسّع',
+    tr: 'genişletilmiş',
+  },
+  'rail.expand': { en: 'Expand', fa: 'بازکردن', ar: 'توسيع', tr: 'Genişlet' },
+  'rail.collapse': { en: 'Collapse', fa: 'جمع‌کردن', ar: 'طيّ', tr: 'Katla' },
+  'nav.main': {
+    en: 'Main navigation',
+    fa: 'ناوبری اصلی',
+    ar: 'التنقّل الرئيسي',
+    tr: 'Ana gezinme',
+  },
+  'nav.rail': {
+    en: 'Rail navigation',
+    fa: 'ناوبری ریل',
+    ar: 'تنقّل الشريط الضيّق',
+    tr: 'Ray gezinmesi',
+  },
+  'group.main': { en: 'Main', fa: 'اصلی', ar: 'الرئيسي', tr: 'Ana' },
+  'group.favs': {
+    en: 'Favs',
+    fa: 'برگزیده‌ها',
+    ar: 'المفضّلة',
+    tr: 'Favoriler',
+  },
+  'item.home': { en: 'Home', fa: 'خانه', ar: 'الرئيسية', tr: 'Ana sayfa' },
+  'item.projects': {
+    en: 'Projects',
+    fa: 'پروژه‌ها',
+    ar: 'المشاريع',
+    tr: 'Projeler',
+  },
+  'item.reports': {
+    en: 'Reports',
+    fa: 'گزارش‌ها',
+    ar: 'التقارير',
+    tr: 'Raporlar',
+  },
+  'item.settings': {
+    en: 'Settings',
+    fa: 'تنظیمات',
+    ar: 'الإعدادات',
+    tr: 'Ayarlar',
+  },
+  'item.designSystem': {
+    en: 'Design system',
+    fa: 'سیستم طراحی',
+    ar: 'نظام التصميم',
+    tr: 'Tasarım sistemi',
+  },
+  'item.marketing': {
+    en: 'Marketing site',
+    fa: 'سایت بازاریابی',
+    ar: 'موقع التسويق',
+    tr: 'Pazarlama sitesi',
+  },
+  'item.reportsSoon': {
+    en: 'Reports (soon)',
+    fa: 'گزارش‌ها (به‌زودی)',
+    ar: 'التقارير (قريبًا)',
+    tr: 'Raporlar (yakında)',
+  },
+  'header.plan': {
+    en: 'Pro plan',
+    fa: 'پلن حرفه‌ای',
+    ar: 'الخطة الاحترافية',
+    tr: 'Pro plan',
+  },
+  'card.trial': {
+    en: 'Trial ends in 4 days',
+    fa: 'دورهٔ آزمایشی تا ۴ روز دیگر تمام می‌شود',
+    ar: 'تنتهي الفترة التجريبية خلال ٤ أيام',
+    tr: 'Deneme 4 gün sonra bitiyor',
+  },
+  'card.trialBody': {
+    en: 'Upgrade to keep your projects.',
+    fa: 'برای حفظ پروژه‌هایتان ارتقا دهید.',
+    ar: 'رقِّ خطتك للاحتفاظ بمشاريعك.',
+    tr: 'Projelerinizi korumak için yükseltin.',
+  },
+  'card.upgrade': {
+    en: 'Upgrade',
+    fa: 'ارتقا',
+    ar: 'ترقية',
+    tr: 'Yükselt',
+  },
+});

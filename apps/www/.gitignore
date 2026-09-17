@@ -1,0 +1,9 @@
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Copied from the repository root by scripts/sync-public.mjs — never edited here.
+public/fonts/
+public/flags/
+public/avatars/
+public/card-providers/

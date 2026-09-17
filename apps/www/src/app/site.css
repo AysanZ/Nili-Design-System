@@ -1,0 +1,185 @@
+/* ────────────────────────────────────────────────────────────────
+   nili/www — site layer
+
+   Everything here is about this website, not about the library. Two things
+   live in it:
+
+   1. Two more scripts. The library ships Persian and Latin; the site also
+      shows Arabic and Turkish, so it extends the same token names rather
+      than inventing new ones. When those stacks graduate into the library,
+      this block is deleted and nothing else changes.
+
+   2. Page-level behaviour a component library has no business setting —
+      smooth scrolling, selection colour.
+   ──────────────────────────────────────────────────────────────── */
+
+:root {
+  /* One face per script, chosen for that script rather than for coverage.
+
+     Persian is Vazirmatn, which is what the library already ships and loads
+     from `public/fonts`. This file used to point Persian at IBM Plex Sans
+     Arabic as well, on the theory that one Arabic-script face could serve
+     both languages. It cannot: Arabic and Persian are the same script drawn
+     differently. Plex gives Persian the Arabic ك and ي, a flat-tailed ه, and
+     Arabic-Indic digit shapes — correct Arabic, and visibly wrong Persian to
+     anyone who reads it. Vazirmatn is the Persian cut, with the Persian ک and
+     ی and the taller, rounder counters Persian expects.
+
+     Arabic stays on IBM Plex Sans Arabic for the same reason in reverse.
+
+     Latin no longer falls back to the Arabic face. A Latin string that misses
+     Inter should land on the system sans, not on a face designed around an
+     Arabic baseline — that was how an English page ended up with mismatched
+     metrics whenever Inter was slow. */
+  --nili-font-persian:
+    'Vazirmatn', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+  --nili-font-arabic:
+    'IBM Plex Sans Arabic', 'Vazirmatn', ui-sans-serif, system-ui, sans-serif;
+  --nili-font-latin: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --nili-font-display: var(--nili-font-latin);
+  --nili-font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'Menlo', monospace;
+
+  /* The header's own height, in one place.
+     The docs sidebar is sticky under the header and sized to the rest of the
+     viewport, so the two numbers have to agree. They were written out twice as
+     `3.5rem` in three Tailwind `calc()` strings, which is three places to miss
+     when the header grows a row on a narrow screen. */
+  --site-header-h: 3.5rem;
+}
+
+/* Same shape as the library's `[lang='fa']` block: marking a subtree with
+   `lang` is enough, no class and no prop. */
+[lang='ar'],
+[lang^='ar-'] {
+  --nili-font-sans: var(--nili-font-arabic);
+  --nili-font-display: var(--nili-font-arabic);
+  --nili-leading-multiplier: 1.15;
+}
+
+/* Persian takes the display face from its own cut, not the Arabic one. The
+   library already points `--nili-font-sans` here under `[lang='fa']`; this
+   line only stops headings from drifting back to Plex. */
+[lang='fa'],
+[lang^='fa-'] {
+  --nili-font-sans: var(--nili-font-persian);
+  --nili-font-display: var(--nili-font-persian);
+  /* Persian carries more above and below the baseline than Latin. The library
+     leaves this at 1; the site sets it here for the same reason it sets 1.15
+     for Arabic — the two scripts need the room, Latin and Turkish do not. */
+  --nili-leading-multiplier: 1.12;
+}
+
+[lang='tr'],
+[lang^='tr-'] {
+  --nili-font-sans: var(--nili-font-latin);
+  --nili-font-display: var(--nili-font-latin);
+  --nili-leading-multiplier: 1;
+}
+
+@layer base {
+  [lang='ar'],
+  [lang^='ar-'] {
+    font-family: var(--nili-font-arabic);
+    line-height: calc(1em * var(--nili-leading-multiplier));
+  }
+
+  /* The library sets this too, but the site's own `[lang]` rules sit in the
+     same layer and would otherwise win by source order. */
+  [lang='fa'],
+  [lang^='fa-'] {
+    font-family: var(--nili-font-persian);
+  }
+
+  [lang='tr'],
+  [lang^='tr-'] {
+    font-family: var(--nili-font-latin);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Persian and Arabic carry more marks above and below the baseline than
+     Latin does, so running text needs the extra leading to stop lines from
+     colliding. Scoped to prose elements — it must not stretch a control. */
+  :where([lang='fa'], [lang='ar']) :where(p, h1, h2, h3, h4, li) {
+    line-height: 1.75;
+  }
+
+  ::selection {
+    background: var(--nili-primary-alpha-16);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   Scroll surfaces
+
+   A panel that scrolls inside the page — the docs sidebar, a long code
+   block — gets the platform's default scrollbar, and on Windows and most
+   Linux desktops that is a wide, high-contrast track painted permanently
+   down the edge. Beside a 240px navigation column it reads as a second
+   border, and in the docs layout it lands next to the window's own bar, so
+   two of them sit side by side.
+
+   `scrollbar-width: thin` and the WebKit pseudo-elements say the same thing
+   to both engines. The thumb is a token, so it follows the theme rather than
+   staying grey on a dark page, and it only gains contrast on hover — an
+   indicator while you are reading, a control while you are using it.
+
+   `scrollbar-gutter: stable` reserves the space whether or not the bar is
+   showing, so the list does not shift sideways by 8px the moment it becomes
+   scrollable. `overscroll-behavior: contain` stops a flick at the end of the
+   sidebar from carrying on and scrolling the page behind it.
+   ──────────────────────────────────────────────────────────────── */
+@layer base {
+  .nili-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--nili-soft-200) transparent;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
+  }
+
+  .nili-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .nili-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .nili-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--nili-soft-200);
+    border: 2px solid transparent;
+    border-radius: 9999px;
+    background-clip: content-box;
+  }
+
+  .nili-scroll:hover::-webkit-scrollbar-thumb,
+  .nili-scroll:focus-within::-webkit-scrollbar-thumb {
+    background-color: var(--nili-sub-300);
+  }
+
+  .nili-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Horizontal strips — the mobile tab rails — hide the bar outright: the
+     content is swipeable and already cut off at the edge, which is the
+     affordance. */
+  .nili-scroll-none {
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .nili-scroll-none::-webkit-scrollbar {
+    display: none;
+  }
+}

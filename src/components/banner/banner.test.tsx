@@ -75,7 +75,7 @@ describe('Banner', () => {
 
   it('forwards its ref', () => {
     let node: HTMLDivElement | null = null;
-    render(<Banner ref={(element) => (node = element)} title="Trial ending" />);
+    render(<Banner ref={(element) => { node = element; }} title="Trial ending" />);
     expect(node).toBeInstanceOf(HTMLDivElement);
   });
 });

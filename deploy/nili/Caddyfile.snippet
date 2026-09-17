@@ -1,0 +1,16 @@
+# Add this block to /opt/edge/Caddyfile, then validate and reload — see
+# the runbook's "Adding the next project → Containerised" section and
+# "Reload Caddy after editing the Caddyfile".
+#
+#   cd /opt/edge
+#   docker compose exec caddy caddy validate --config /etc/caddy/Caddyfile
+#   docker compose restart caddy
+#
+# No DNS change needed: the wildcard A record already covers
+# nili.aysanz.dev. Caddy requests its own certificate for this hostname on
+# first request — Let's Encrypt allows 50 per domain per week, so this is
+# safe to add once and leave.
+
+nili.aysanz.dev {
+	reverse_proxy nili-web-1:3000
+}

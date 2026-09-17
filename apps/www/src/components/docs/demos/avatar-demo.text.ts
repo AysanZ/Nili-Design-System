@@ -1,0 +1,105 @@
+import { defineDemoText } from './demo-text';
+
+export const avatarText = defineDemoText({
+  'sizes.title': { en: 'Sizes', fa: 'اندازه‌ها', ar: 'الأحجام', tr: 'Boyutlar' },
+  'sizes.body': {
+    en: 'Nine sizes, 80px down to 16px. `name` is required: an avatar with no name is either an unlabelled image or a decorative blob, and only the call site knows which. Pass an empty string to mark it decorative.',
+    fa: 'نُه اندازه، از ۸۰ تا ۱۶ پیکسل. `name` الزامی است: آواتار بی‌نام یا تصویری بی‌برچسب است یا یک لکهٔ تزئینی، و فقط محل استفاده می‌داند کدام. برای تزئینی‌کردنش رشتهٔ خالی بدهید.',
+    ar: 'تسعة أحجام، من ٨٠ إلى ١٦ بكسل. و`name` مطلوب: فصورة رمزية بلا اسم إمّا صورة غير مسمّاة أو بقعة زخرفية، ولا يعرف أيّهما إلا موضع الاستدعاء. مرِّر سلسلة فارغة لجعلها زخرفية.',
+    tr: 'Dokuz boyut, 80 pikselden 16’ya. `name` zorunludur: adı olmayan bir avatar ya etiketsiz bir görsel ya da süsleyici bir lekedir ve hangisi olduğunu yalnızca çağrı yeri bilir. Süs olduğunu belirtmek için boş bir dize verin.',
+  },
+  'fallbacks.title': {
+    en: 'Fallbacks',
+    fa: 'جایگزین‌ها',
+    ar: 'البدائل',
+    tr: 'Yedekler',
+  },
+  'fallbacks.body': {
+    en: 'With no image, initials are derived from `name`. Override them with `initials`, replace them entirely with `fallback`, or use `placeholder` for the silhouette — an account with no photo and no name worth initialising.',
+    fa: 'بدون تصویر، حروف اول از `name` درمی‌آید. با `initials` بازنویسی‌شان کنید، با `fallback` کاملاً جایگزینشان کنید، یا برای شبح از `placeholder` استفاده کنید — حسابی که نه عکس دارد و نه نامی که ارزش مخفف‌شدن داشته باشد.',
+    ar: 'بلا صورة، تُشتق الأحرف الأولى من `name`. تجاوزها بـ`initials`، أو استبدلها كليًا بـ`fallback`، أو استخدم `placeholder` للظلّ — لحساب بلا صورة وبلا اسم يستحق الاختصار.',
+    tr: 'Görsel yoksa baş harfler `name`’den türetilir. Bunları `initials` ile geçersiz kılın, `fallback` ile tamamen değiştirin ya da siluet için `placeholder` kullanın — fotoğrafı ve baş harfe değer bir adı olmayan bir hesap.',
+  },
+  'tones.title': { en: 'Tones', fa: 'تن‌ها', ar: 'الدرجات', tr: 'Tonlar' },
+  'tones.body': {
+    en: 'Figma has no colour axis on Avatar — the tones are an extension, and they exist for groups: a stack of six identical grey circles is unreadable, and tinting them is the cheapest way to tell them apart before the images load.',
+    fa: 'فیگما روی Avatar محور رنگ ندارد — تن‌ها یک افزوده‌اند و برای گروه‌ها وجود دارند: پشتهٔ شش دایرهٔ خاکستریِ یکسان خوانا نیست، و رنگ‌زدنشان ارزان‌ترین راه تشخیصشان پیش از بارگذاری تصویرهاست.',
+    ar: 'لا يملك فيجما محور لون لـAvatar — فالدرجات إضافة، وهي موجودة للمجموعات: فكومة من ست دوائر رمادية متطابقة غير مقروءة، وتلوينها أرخص طريقة لتمييزها قبل تحميل الصور.',
+    tr: 'Figma’da Avatar’ın renk ekseni yok — tonlar bir eklentidir ve gruplar için vardır: altı özdeş gri dairenin yığını okunmaz ve onları renklendirmek, görseller yüklenmeden ayırt etmenin en ucuz yoludur.',
+  },
+  'statuses.title': {
+    en: 'Statuses',
+    fa: 'وضعیت‌ها',
+    ar: 'الحالات',
+    tr: 'Durumlar',
+  },
+  'statuses.body': {
+    en: 'A marker at the top and one at the bottom. Give it a `statusLabel` — a coloured dot has no accessible name. Not every size can carry one; the small end drops the marker rather than drawing an illegible speck.',
+    fa: 'یک نشانگر بالا و یکی پایین. به آن `statusLabel` بدهید — یک نقطهٔ رنگی نام دسترس‌پذیری ندارد. همهٔ اندازه‌ها نمی‌توانند نشانگر بگیرند؛ سر کوچک طیف به‌جای کشیدن یک لکهٔ ناخوانا، نشانگر را حذف می‌کند.',
+    ar: 'علامة في الأعلى وأخرى في الأسفل. امنحها `statusLabel` — فالنقطة الملوّنة بلا اسم وصفي. ولا تحتمل كل الأحجام علامة؛ فالطرف الصغير يُسقطها بدل رسم بقعة غير مقروءة.',
+    tr: 'Üstte bir, altta bir işaret. Ona bir `statusLabel` verin — renkli bir noktanın erişilebilir adı yoktur. Her boyut bir işaret taşıyamaz; küçük uç, okunaksız bir benek çizmek yerine işareti düşürür.',
+  },
+  'statuses.bottom': { en: 'bottom', fa: 'پایین', ar: 'الأسفل', tr: 'alt' },
+  'statuses.top': { en: 'top', fa: 'بالا', ar: 'الأعلى', tr: 'üst' },
+  'group.title': {
+    en: 'Avatar Group',
+    fa: 'گروه آواتار',
+    ar: 'مجموعة الصور الرمزية',
+    tr: 'Avatar grubu',
+  },
+  'group.body': {
+    en: 'A stack with a “+N” chip. `max` caps how many are drawn; `overflowCount` overrides the computed remainder when the list you hold is only a page of a larger set.',
+    fa: 'یک پشته با چیپ «+N». `max` سقف تعداد رسم‌شده را می‌گذارد؛ `overflowCount` باقی‌ماندهٔ محاسبه‌شده را بازنویسی می‌کند وقتی فهرستی که در دست دارید فقط یک صفحه از مجموعه‌ای بزرگ‌تر است.',
+    ar: 'كومة مع شريحة «+N». يحدّ `max` عدد المرسوم، ويتجاوز `overflowCount` الباقي المحسوب حين تكون القائمة التي بين يديك صفحة من مجموعة أكبر.',
+    tr: '“+N” çipli bir yığın. `max` kaç tanesinin çizileceğini sınırlar; `overflowCount`, elinizdeki liste daha büyük bir kümenin yalnızca bir sayfasıyken hesaplanan kalanı geçersiz kılar.',
+  },
+  'group.sizes': { en: 'sizes', fa: 'اندازه‌ها', ar: 'الأحجام', tr: 'boyutlar' },
+  'group.overflow': {
+    en: 'overflow',
+    fa: 'سرریز',
+    ar: 'الفائض',
+    tr: 'taşma',
+  },
+  'group.members': {
+    en: 'Team members',
+    fa: 'اعضای تیم',
+    ar: 'أعضاء الفريق',
+    tr: 'Takım üyeleri',
+  },
+  'group.everyone': {
+    en: 'Everyone',
+    fa: 'همه',
+    ar: 'الجميع',
+    tr: 'Herkes',
+  },
+  'compact.title': {
+    en: 'Compact Avatar Group',
+    fa: 'گروه آواتار فشرده',
+    ar: 'مجموعة الصور الرمزية المدمجة',
+    tr: 'Kompakt avatar grubu',
+  },
+  'compact.body': {
+    en: "A denser stack in a pill — for table rows and list items, where Avatar Group's spacing is too generous. Three sizes, two treatments.",
+    fa: 'پشته‌ای فشرده‌تر داخل یک قرص — برای ردیف‌های جدول و آیتم‌های فهرست، جایی که فاصله‌گذاری Avatar Group زیادی سخاوتمند است. سه اندازه، دو پرداخت.',
+    ar: 'كومة أكثف داخل قرص — لصفوف الجداول وعناصر القوائم، حيث تكون مسافات Avatar Group سخيّة أكثر من اللازم. ثلاثة أحجام ومعالجتان.',
+    tr: 'Hap içinde daha yoğun bir yığın — Avatar Group’un boşluklarının fazla cömert kaldığı tablo satırları ve liste öğeleri için. Üç boyut, iki işleyiş.',
+  },
+  'compact.assignees': {
+    en: 'Assignees',
+    fa: 'مسئولان',
+    ar: 'المكلّفون',
+    tr: 'Atananlar',
+  },
+  'flat.title': {
+    en: 'Flat Avatar',
+    fa: 'آواتار تخت',
+    ar: 'الصورة الرمزية المسطّحة',
+    tr: 'Düz avatar',
+  },
+  'flat.body': {
+    en: 'The illustrated avatar, built from interchangeable Figma parts. Indices wrap, so any number is a valid and deterministic choice — handy for deriving a stable avatar from a user id.',
+    fa: 'آواتار تصویرسازی‌شده، ساخته‌شده از قطعات جایگزین‌پذیر فیگما. اندیس‌ها دور می‌زنند، پس هر عددی انتخابی معتبر و قطعی است — برای ساختن آواتاری پایدار از شناسهٔ کاربر به کار می‌آید.',
+    ar: 'الصورة الرمزية المرسومة، مبنيّة من أجزاء فيجما القابلة للتبديل. وتلتف الفهارس، فأي رقم خيار صالح وحتمي — وهو مفيد لاشتقاق صورة ثابتة من معرّف المستخدم.',
+    tr: 'Değiştirilebilir Figma parçalarından kurulan çizimli avatar. Dizinler başa döner; yani her sayı geçerli ve belirlenimci bir seçimdir — bir kullanıcı kimliğinden kararlı bir avatar türetmek için elverişlidir.',
+  },
+});

@@ -1,0 +1,116 @@
+import { defineDemoText } from './demo-text';
+
+export const bannerText = defineDemoText({
+  'statuses.title': { en: 'Statuses', fa: 'وضعیت‌ها', ar: 'الحالات', tr: 'Durumlar' },
+  'statuses.body': {
+    en: 'The same five meanings as Alert. A banner is usually on screen at first paint, so it is announced politely by default.',
+    fa: 'همان پنج معنای Alert. بنر معمولاً از همان اولین رندر روی صفحه است، پس به‌طور پیش‌فرض مؤدبانه اعلام می‌شود.',
+    ar: 'المعاني الخمسة نفسها في Alert. غالبًا ما يكون الشريط ظاهرًا منذ أول رسم، لذا يُعلَن بلطف افتراضيًا.',
+    tr: 'Alert ile aynı beş anlam. Afiş genelde ilk boyamada zaten ekrandadır, bu yüzden varsayılan olarak nazikçe duyurulur.',
+  },
+  'statuses.sample': {
+    en: 'This is a {status} banner.',
+    fa: 'این یک بنر {status} است.',
+    ar: 'هذا شريط {status}.',
+    tr: 'Bu bir {status} afişidir.',
+  },
+  'appearances.title': { en: 'Appearances', fa: 'ظاهرها', ar: 'المظاهر', tr: 'Görünümler' },
+  'appearances.body': {
+    en: 'Four treatments, matching Alert.',
+    fa: 'چهار پرداخت، هم‌راستا با Alert.',
+    ar: 'أربع معالجات، مطابقة لـ Alert.',
+    tr: 'Alert ile eşleşen dört işleyiş.',
+  },
+  'appearances.sample': {
+    en: 'Appearance: {appearance}',
+    fa: 'ظاهر: {appearance}',
+    ar: 'المظهر: {appearance}',
+    tr: 'Görünüm: {appearance}',
+  },
+  'content.title': {
+    en: 'Description, action and dismissal',
+    fa: 'توضیح، کنش و بستن',
+    ar: 'الوصف والإجراء والإغلاق',
+    tr: 'Açıklama, eylem ve kapatma',
+  },
+  'content.body': {
+    en: '`description` is appended after the title, separated by a dot. Banner takes a single inline `action`, per the design — if you need two, you want an Alert.',
+    fa: '`description` بعد از عنوان و با یک نقطه جدا می‌آید. بنر طبق طراحی فقط یک `action` درون‌خطی می‌گیرد؛ اگر دوتا لازم دارید، چیزی که می‌خواهید Alert است.',
+    ar: 'يُلحق `description` بعد العنوان مفصولًا بنقطة. ويأخذ الشريط إجراءً `action` واحدًا فقط حسب التصميم — وإن احتجت اثنين فأنت تريد Alert.',
+    tr: '`description` başlıktan sonra bir noktayla ayrılarak eklenir. Afiş tasarım gereği tek bir satır içi `action` alır — ikiye ihtiyacınız varsa istediğiniz şey Alert’tir.',
+  },
+  'content.withAction': {
+    en: 'with description & action',
+    fa: 'با توضیح و کنش',
+    ar: 'مع وصف وإجراء',
+    tr: 'açıklama ve eylemle',
+  },
+  'content.customIcon': {
+    en: 'custom icon',
+    fa: 'آیکون سفارشی',
+    ar: 'أيقونة مخصّصة',
+    tr: 'özel simge',
+  },
+  'content.dismissible': {
+    en: 'dismissible',
+    fa: 'قابل‌بستن',
+    ar: 'قابل للإغلاق',
+    tr: 'kapatılabilir',
+  },
+  'content.maintenance': {
+    en: 'Scheduled maintenance tonight.',
+    fa: 'امشب تعمیرات برنامه‌ریزی‌شده داریم.',
+    ar: 'صيانة مجدولة الليلة.',
+    tr: 'Bu gece planlı bakım var.',
+  },
+  'content.maintenanceBody': {
+    en: 'Between 02:00 and 03:00 UTC.',
+    fa: 'بین ساعت ۰۲:۰۰ تا ۰۳:۰۰ به وقت UTC.',
+    ar: 'بين الساعة ٠٢:٠٠ و٠٣:٠٠ بتوقيت UTC.',
+    tr: 'UTC 02:00 ile 03:00 arasında.',
+  },
+  'content.details': {
+    en: 'Details',
+    fa: 'جزئیات',
+    ar: 'التفاصيل',
+    tr: 'Ayrıntılar',
+  },
+  'content.feature': {
+    en: 'Smart filters are here.',
+    fa: 'فیلترهای هوشمند آمدند.',
+    ar: 'وصلت المرشّحات الذكية.',
+    tr: 'Akıllı filtreler geldi.',
+  },
+  'content.takeALook': {
+    en: 'Take a look',
+    fa: 'یک نگاهی بیندازید',
+    ar: 'ألقِ نظرة',
+    tr: 'Göz atın',
+  },
+  'content.verified': {
+    en: 'Your account is verified.',
+    fa: 'حساب شما تأیید شد.',
+    ar: 'تم توثيق حسابك.',
+    tr: 'Hesabınız doğrulandı.',
+  },
+  'content.dismissed': {
+    en: 'Dismissed. Reload the page to bring it back.',
+    fa: 'بسته شد. برای بازگرداندنش صفحه را دوباره بارگذاری کنید.',
+    ar: 'أُغلق. أعد تحميل الصفحة لإعادته.',
+    tr: 'Kapatıldı. Geri getirmek için sayfayı yeniden yükleyin.',
+  },
+  'sticky.title': { en: 'Sticky', fa: 'چسبان', ar: 'ملتصق', tr: 'Yapışkan' },
+  'sticky.body': {
+    en: '`sticky` pins the banner to the top of the viewport. Right for a page-level announcement; wrong for one inside a card.',
+    fa: '`sticky` بنر را به بالای ویوپورت سنجاق می‌کند. برای اعلان در سطح صفحه درست است؛ برای بنری داخل یک کارت غلط.',
+    ar: 'يثبّت `sticky` الشريط أعلى إطار العرض. مناسب لإعلان على مستوى الصفحة، وغير مناسب لشريط داخل بطاقة.',
+    tr: '`sticky` afişi görünüm alanının üstüne sabitler. Sayfa düzeyindeki bir duyuru için doğru, kartın içindeki için yanlış.',
+  },
+  'sticky.archive': {
+    en: 'You are viewing a read-only archive.',
+    fa: 'شما در حال دیدن یک آرشیو فقط‌خواندنی هستید.',
+    ar: 'أنت تتصفّح أرشيفًا للقراءة فقط.',
+    tr: 'Salt okunur bir arşivi görüntülüyorsunuz.',
+  },
+  'close': { en: 'Close', fa: 'بستن', ar: 'إغلاق', tr: 'Kapat' },
+});

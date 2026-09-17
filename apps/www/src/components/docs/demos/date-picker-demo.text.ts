@@ -1,0 +1,116 @@
+import { defineDemoText } from './demo-text';
+
+export const datePickerText = defineDemoText({
+  'basic.title': { en: 'Basic', fa: 'پایه', ar: 'أساسي', tr: 'Temel' },
+  'basic.body': {
+    en: 'Uncontrolled with `defaultValue`, or controlled with `value` plus `onChange`. The calendar defaults to Jalali under a Persian locale and Gregorian otherwise — you rarely have to say which.',
+    fa: 'با `defaultValue` بدون کنترل، یا با `value` به‌همراه `onChange` کنترل‌شده. تقویم زیر لوکال فارسی پیش‌فرض جلالی است و در بقیه میلادی — به‌ندرت لازم می‌شود خودتان بگویید کدام.',
+    ar: 'غير متحكَّم به عبر `defaultValue`، أو متحكَّم به عبر `value` مع `onChange`. ويكون التقويم جلاليًا افتراضيًا في اللغة الفارسية وميلاديًا فيما عداها — ونادرًا ما تحتاج إلى تحديده.',
+    tr: '`defaultValue` ile denetimsiz ya da `value` artı `onChange` ile denetimli. Takvim Farsça yerel ayarda varsayılan olarak Celali, diğerlerinde Miladi olur — hangisi olduğunu söylemeniz seyrek gerekir.',
+  },
+  'calendars.title': {
+    en: 'Calendar systems',
+    fa: 'گاه‌شماری‌ها',
+    ar: 'أنظمة التقويم',
+    tr: 'Takvim sistemleri',
+  },
+  'calendars.body': {
+    en: '`calendar` forces Jalali (Solar Hijri) or Gregorian; `locale` drives month names, weekday names and numerals. `allowCalendarSwitch` puts a toggle in the header so the user can change it themselves.',
+    fa: '`calendar` جلالی (هجری شمسی) یا میلادی را تحمیل می‌کند؛ `locale` نام ماه‌ها، نام روزهای هفته و ارقام را تعیین می‌کند. `allowCalendarSwitch` یک کلید در سربرگ می‌گذارد تا کاربر خودش عوضش کند.',
+    ar: 'يفرض `calendar` التقويم الجلالي (الهجري الشمسي) أو الميلادي، ويحدّد `locale` أسماء الأشهر وأيام الأسبوع والأرقام. ويضع `allowCalendarSwitch` مفتاحًا في الترويسة ليغيّره المستخدم بنفسه.',
+    tr: '`calendar` Celali (Hicri Şemsi) ya da Miladi’yi dayatır; `locale` ay adlarını, gün adlarını ve rakamları belirler. `allowCalendarSwitch` başlığa bir anahtar koyar; kullanıcı kendisi değiştirir.',
+  },
+  'calendars.jalali': {
+    en: 'jalali · fa',
+    fa: 'جلالی · فارسی',
+    ar: 'جلالي · الفارسية',
+    tr: 'celali · fa',
+  },
+  'calendars.gregorian': {
+    en: 'gregorian · en',
+    fa: 'میلادی · انگلیسی',
+    ar: 'ميلادي · الإنجليزية',
+    tr: 'miladi · en',
+  },
+  'calendars.switchable': {
+    en: 'switchable',
+    fa: 'قابل‌تعویض',
+    ar: 'قابل للتبديل',
+    tr: 'değiştirilebilir',
+  },
+  'calendars.switchLabel': {
+    en: 'Change calendar',
+    fa: 'تغییر گاه‌شماری',
+    ar: 'تغيير التقويم',
+    tr: 'Takvimi değiştir',
+  },
+  'calendars.jalaliName': {
+    en: 'Jalali',
+    fa: 'شمسی',
+    ar: 'جلالي',
+    tr: 'Celali',
+  },
+  'calendars.gregorianName': {
+    en: 'Gregorian',
+    fa: 'میلادی',
+    ar: 'ميلادي',
+    tr: 'Miladi',
+  },
+  'bounds.title': {
+    en: 'Bounds, disabled days and markers',
+    fa: 'کران‌ها، روزهای غیرفعال و نشانگرها',
+    ar: 'الحدود والأيام المعطّلة والعلامات',
+    tr: 'Sınırlar, devre dışı günler ve işaretler',
+  },
+  'bounds.body': {
+    en: "`minDate` and `maxDate` clamp the range; `isDateDisabled` handles the rest — weekends, holidays, days a room is already booked. `markedDates` gets Figma's marker dot.",
+    fa: '`minDate` و `maxDate` بازه را محدود می‌کنند؛ بقیه با `isDateDisabled` — آخر هفته‌ها، تعطیلات، روزهایی که اتاق قبلاً رزرو شده. `markedDates` نقطهٔ نشانگر فیگما را می‌گیرد.',
+    ar: 'تحصر `minDate` و`maxDate` النطاق، ويتكفّل `isDateDisabled` بالباقي — عطل نهاية الأسبوع والأعياد والأيام المحجوزة. وتحصل `markedDates` على نقطة العلامة في فيجما.',
+    tr: '`minDate` ve `maxDate` aralığı kırpar; gerisini `isDateDisabled` halleder — hafta sonları, tatiller, odanın zaten dolu olduğu günler. `markedDates` Figma’nın işaret noktasını alır.',
+  },
+  'footer.title': {
+    en: 'Footer',
+    fa: 'پابرگ',
+    ar: 'التذييل',
+    tr: 'Alt bilgi',
+  },
+  'footer.body': {
+    en: '`footer` is a free slot; `DatePickerFooter` is the Figma row that usually goes in it. Use it when the picker sits in a popover and the selection should only apply on Apply.',
+    fa: '`footer` یک اسلات آزاد است؛ `DatePickerFooter` همان ردیفی از فیگماست که معمولاً داخلش می‌رود. وقتی انتخابگر در یک پاپ‌اور است و انتخاب باید فقط با زدن «اعمال» اثر کند از آن استفاده کنید.',
+    ar: '`footer` فتحة حرّة، و`DatePickerFooter` هو صفّ فيجما الذي يوضع فيها عادةً. استخدمها حين يجلس المنتقي في نافذة منبثقة ويجب ألا يسري الاختيار إلا عند الضغط على «تطبيق».',
+    tr: '`footer` serbest bir yuvadır; `DatePickerFooter` genelde içine konan Figma satırıdır. Seçici bir açılır katmandayken ve seçim yalnızca Uygula’ya basınca geçerli olmalıyken kullanın.',
+  },
+  'range.title': {
+    en: 'Date Range Picker',
+    fa: 'انتخابگر بازهٔ تاریخ',
+    ar: 'منتقي نطاق التواريخ',
+    tr: 'Tarih aralığı seçici',
+  },
+  'range.body': {
+    en: "Two dates instead of one. `presets` is Figma's Period Range — the shortcut column. Every range is `{ from, to }`, and either end may be null while the user is mid-selection.",
+    fa: 'دو تاریخ به‌جای یکی. `presets` همان Period Range فیگماست — ستون میان‌برها. هر بازه `{ from, to }` است، و تا وقتی کاربر وسط انتخاب است هر سرش می‌تواند null باشد.',
+    ar: 'تاريخان بدل واحد. و`presets` هو Period Range في فيجما — عمود الاختصارات. وكل نطاق هو `{ from, to }`، وقد يكون أي طرف null بينما المستخدم في منتصف الاختيار.',
+    tr: 'Bir yerine iki tarih. `presets`, Figma’nın Period Range’idir — kısayol sütunu. Her aralık `{ from, to }`’dur ve kullanıcı seçimin ortasındayken iki uçtan biri null olabilir.',
+  },
+  'preset.last7': {
+    en: 'Last 7 days',
+    fa: '۷ روز گذشته',
+    ar: 'آخر ٧ أيام',
+    tr: 'Son 7 gün',
+  },
+  'preset.last30': {
+    en: 'Last 30 days',
+    fa: '۳۰ روز گذشته',
+    ar: 'آخر ٣٠ يومًا',
+    tr: 'Son 30 gün',
+  },
+  'preset.next14': {
+    en: 'Next 14 days',
+    fa: '۱۴ روز آینده',
+    ar: 'الـ١٤ يومًا القادمة',
+    tr: 'Sonraki 14 gün',
+  },
+  'action.cancel': { en: 'Cancel', fa: 'انصراف', ar: 'إلغاء', tr: 'Vazgeç' },
+  'action.apply': { en: 'Apply', fa: 'اعمال', ar: 'تطبيق', tr: 'Uygula' },
+  'action.clear': { en: 'Clear', fa: 'پاک‌کردن', ar: 'مسح', tr: 'Temizle' },
+});

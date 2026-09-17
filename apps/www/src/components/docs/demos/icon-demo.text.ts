@@ -1,0 +1,105 @@
+import { defineDemoText } from './demo-text';
+
+export const iconText = defineDemoText({
+  'basic.title': { en: 'Basic', fa: 'پایه', ar: 'أساسي', tr: 'Temel' },
+  'basic.body': {
+    en: 'Pass the icon component itself to `icon`, or an already-created element as children. Both forms exist because a call site that already holds an element should not have to unwrap it.',
+    fa: 'خود کامپوننت آیکون را به `icon` بدهید، یا یک المان از پیش ساخته‌شده را به‌عنوان فرزند. هر دو شکل هست چون جایی که از قبل یک المان در دست دارد نباید مجبور شود بازش کند.',
+    ar: 'مرِّر مكوّن الأيقونة نفسه إلى `icon`، أو عنصرًا جاهزًا كابن. الشكلان موجودان لأن موضع استدعاء يحمل عنصرًا أصلًا لا ينبغي أن يُضطر إلى تفكيكه.',
+    tr: 'Simge bileşeninin kendisini `icon`’a verin ya da hazır bir öğeyi çocuk olarak geçin. İki biçim de var; çünkü elinde zaten bir öğe olan bir çağrı yeri onu açmak zorunda kalmamalı.',
+  },
+  'sizes.title': { en: 'Sizes', fa: 'اندازه‌ها', ar: 'الأحجام', tr: 'Boyutlar' },
+  'sizes.body': {
+    en: "`size` takes a number of pixels or any CSS length. `'1em'` makes the glyph track the surrounding font size, which is what you want for an icon sitting inside a line of text.",
+    fa: "`size` یک عدد پیکسل یا هر طول CSS را می‌گیرد. `'1em'` باعث می‌شود آیکون اندازه‌ی فونت اطرافش را دنبال کند — همان چیزی که برای آیکونِ داخل یک خط متن می‌خواهید.",
+    ar: "يقبل `size` عددًا بالبكسل أو أي طول CSS. وتجعل `'1em'` الأيقونة تتبع حجم الخط المحيط، وهو المطلوب لأيقونة داخل سطر نصّي.",
+    tr: "`size` piksel sayısı ya da herhangi bir CSS uzunluğu alır. `'1em'`, simgeyi çevresindeki yazı boyutuna bağlar — bir metin satırının içindeki simge için istediğiniz budur.",
+  },
+  'sizes.pixels': {
+    en: 'pixel sizes',
+    fa: 'اندازه‌های پیکسلی',
+    ar: 'أحجام بالبكسل',
+    tr: 'piksel boyutları',
+  },
+  'sizes.search': {
+    en: 'Search',
+    fa: 'جست‌وجو',
+    ar: 'بحث',
+    tr: 'Ara',
+  },
+  'colour.title': { en: 'Colour', fa: 'رنگ', ar: 'اللون', tr: 'Renk' },
+  'colour.body': {
+    en: 'An icon paints itself with `currentColor`, so it inherits from whatever it sits in — which is why it works inside a Button or a Badge with no colour prop at all. Prefer a `text-*` token class over the `color` escape hatch.',
+    fa: 'آیکون خودش را با `currentColor` می‌کشد، پس رنگ را از هرچه داخلش نشسته ارث می‌برد — به همین دلیل داخل Button یا Badge بدون هیچ پراپ رنگی کار می‌کند. به‌جای راه فرارِ `color`، یک کلاس توکنِ `text-*` را ترجیح دهید.',
+    ar: 'ترسم الأيقونة نفسها بـ`currentColor`، فترث اللون ممّا تجلس داخله — ولهذا تعمل داخل Button أو Badge بلا أي خاصية لون. وفضّل صنف الرمز `text-*` على مخرج الطوارئ `color`.',
+    tr: 'Bir simge kendini `currentColor` ile boyar, yani içinde durduğu şeyden devralır — Button ya da Badge içinde hiçbir renk prop’u olmadan çalışmasının nedeni budur. `color` kaçış kapısı yerine bir `text-*` belirteç sınıfını yeğleyin.',
+  },
+  'colour.inherited': {
+    en: 'inherited from a token class',
+    fa: 'ارث‌بری از یک کلاس توکن',
+    ar: 'موروث من صنف رمز',
+    tr: 'bir belirteç sınıfından devralınan',
+  },
+  'colour.inside': {
+    en: 'inside other components',
+    fa: 'داخل کامپوننت‌های دیگر',
+    ar: 'داخل مكوّنات أخرى',
+    tr: 'başka bileşenlerin içinde',
+  },
+  'colour.approve': {
+    en: 'Approve',
+    fa: 'تأیید',
+    ar: 'موافقة',
+    tr: 'Onayla',
+  },
+  'colour.report': {
+    en: 'Report',
+    fa: 'گزارش',
+    ar: 'إبلاغ',
+    tr: 'Bildir',
+  },
+  'colour.done': { en: 'Done', fa: 'انجام شد', ar: 'تم', tr: 'Bitti' },
+  'mirror.title': {
+    en: 'Mirroring',
+    fa: 'آینه‌کردن',
+    ar: 'الانعكاس',
+    tr: 'Aynalama',
+  },
+  'mirror.body': {
+    en: '`mirrored` flips the glyph horizontally under RTL. Set it on directional icons — arrows, chevrons, a send plane — and leave it off everything else: a mirrored clock or magnifying glass is simply wrong, not localised.',
+    fa: '`mirrored` آیکون را در حالت راست‌به‌چپ افقی برمی‌گرداند. آن را روی آیکون‌های جهت‌دار بگذارید — فلش‌ها، شورون‌ها، هواپیمای ارسال — و روی بقیه نه: ساعت یا ذره‌بینِ آینه‌شده فقط غلط است، نه بومی‌شده.',
+    ar: 'يقلب `mirrored` الأيقونة أفقيًا في الاتجاه من اليمين إلى اليسار. ضعه على الأيقونات الاتجاهية — الأسهم والزوايا وطائرة الإرسال — ودعه عن غيرها: فالساعة أو العدسة المعكوسة خطأ لا توطين.',
+    tr: '`mirrored` simgeyi RTL’de yatay çevirir. Yönlü simgelere koyun — oklar, şevronlar, gönder uçağı — ötekilere koymayın: aynalanmış bir saat ya da büyüteç yerelleştirme değil, düpedüz yanlıştır.',
+  },
+  'mirror.rtlNote': {
+    en: 'rtl — the first two flip, the third does not',
+    fa: 'راست‌به‌چپ — دوتای اول برمی‌گردند، سومی نه',
+    ar: 'من اليمين إلى اليسار — الأوليان تنعكسان والثالثة لا',
+    tr: 'rtl — ilk ikisi döner, üçüncüsü dönmez',
+  },
+  'names.title': {
+    en: 'Accessible names',
+    fa: 'نام‌های دسترس‌پذیر',
+    ar: 'الأسماء الوصفية',
+    tr: 'Erişilebilir adlar',
+  },
+  'names.body': {
+    en: 'An icon is `aria-hidden` by default, because almost every icon sits beside text that already says what it means — and an icon that repeats the label makes a screen reader say it twice. Pass `label` only when the glyph is the whole message.',
+    fa: 'آیکون به‌طور پیش‌فرض `aria-hidden` است، چون تقریباً هر آیکونی کنار متنی نشسته که معنایش را می‌گوید — و آیکونی که برچسب را تکرار کند، صفحه‌خوان را وادار می‌کند دو بار بگویدش. `label` را فقط وقتی بدهید که خود آیکون تمام پیام است.',
+    ar: 'الأيقونة `aria-hidden` افتراضيًا، لأن كل أيقونة تقريبًا تجلس بجوار نص يقول معناها — وأيقونة تكرّر التسمية تجعل قارئ الشاشة ينطقها مرتين. مرِّر `label` فقط حين تكون الأيقونة هي الرسالة كلها.',
+    tr: 'Bir simge varsayılan olarak `aria-hidden`’dır; çünkü neredeyse her simge, anlamını zaten söyleyen bir metnin yanında durur — etiketi yineleyen bir simge, ekran okuyucuya onu iki kez söyletir. `label`’ı yalnızca simge mesajın tamamıyken verin.',
+  },
+  'names.approved': {
+    en: 'Approved',
+    fa: 'تأیید شد',
+    ar: 'تمت الموافقة',
+    tr: 'Onaylandı',
+  },
+  'names.passed': { en: 'Passed', fa: 'قبول', ar: 'ناجح', tr: 'Geçti' },
+  'names.note': {
+    en: '← named, because the glyph is the whole message',
+    fa: '← نام دارد، چون خود آیکون تمام پیام است',
+    ar: '← مسمّاة، لأن الأيقونة هي الرسالة كلها',
+    tr: '← adlandırıldı, çünkü simge mesajın tamamı',
+  },
+});

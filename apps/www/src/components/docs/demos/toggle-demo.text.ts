@@ -1,0 +1,101 @@
+import { defineDemoText } from './demo-text';
+
+export const toggleText = defineDemoText({
+  'basic.title': { en: 'Basic', fa: 'پایه', ar: 'أساسي', tr: 'Temel' },
+  'basic.body': {
+    en: 'One choice out of a few, always visible — the shape a Radio Group takes when the options are short and exclusive. `value` plus `onValueChange` to control it, `defaultValue` to leave it alone.',
+    fa: 'یک انتخاب از میان چندتا، همیشه دیده‌شدنی — شکلی که Radio Group وقتی گزینه‌ها کوتاه و ناسازگارند به خود می‌گیرد. برای کنترل `value` و `onValueChange`، و برای رهاکردنش `defaultValue`.',
+    ar: 'خيار واحد من بضعة خيارات، ظاهرة دائمًا — الشكل الذي تتخذه Radio Group حين تكون الخيارات قصيرة ومتنافية. استخدم `value` مع `onValueChange` للتحكّم، و`defaultValue` لتركه وشأنه.',
+    tr: 'Birkaç seçenek arasından biri, hep görünür — seçenekler kısa ve birbirini dışlayıcıyken Radio Group’un aldığı biçim. Denetlemek için `value` ve `onValueChange`, kendi hâline bırakmak için `defaultValue`.',
+  },
+  'view.label': { en: 'View', fa: 'نما', ar: 'العرض', tr: 'Görünüm' },
+  'view.grid': { en: 'Grid', fa: 'شبکه‌ای', ar: 'شبكة', tr: 'Izgara' },
+  'view.list': { en: 'List', fa: 'فهرستی', ar: 'قائمة', tr: 'Liste' },
+  'view.table': { en: 'Table', fa: 'جدولی', ar: 'جدول', tr: 'Tablo' },
+  'icons.title': {
+    en: 'With icons',
+    fa: 'همراه با آیکون',
+    ar: 'مع الأيقونات',
+    tr: 'Simgelerle',
+  },
+  'icons.body': {
+    en: '`startIcon` puts a glyph before the label. `iconOnly` drops the label for a square button — give it an `aria-label`, since the icon is then the only thing naming it.',
+    fa: '`startIcon` یک نشان پیش از برچسب می‌گذارد. `iconOnly` برچسب را برمی‌دارد و دکمه را مربعی می‌کند — به آن `aria-label` بدهید، چون آن‌وقت تنها چیزی که نامش می‌دهد همان آیکون است.',
+    ar: 'يضع `startIcon` رمزًا قبل التسمية. ويسقط `iconOnly` التسمية لزرّ مربّع — فامنحه `aria-label`، إذ تصبح الأيقونة وحدها ما يسمّيه.',
+    tr: '`startIcon` etiketten önce bir simge koyar. `iconOnly` etiketi kaldırıp kare bir düğme bırakır — ona bir `aria-label` verin, çünkü artık onu adlandıran tek şey simgedir.',
+  },
+  'icons.labelled': {
+    en: 'label and icon',
+    fa: 'برچسب و آیکون',
+    ar: 'تسمية وأيقونة',
+    tr: 'etiket ve simge',
+  },
+  'icons.only': {
+    en: 'icon only',
+    fa: 'فقط آیکون',
+    ar: 'أيقونة فقط',
+    tr: 'yalnızca simge',
+  },
+  'labelled.title': {
+    en: 'Labelled group',
+    fa: 'گروه برچسب‌دار',
+    ar: 'مجموعة مسمّاة',
+    tr: 'Etiketli grup',
+  },
+  'labelled.body': {
+    en: '`label`, `sublabel` and `information` render the same field header a Text Input gets, so a toggle inside a form lines up with everything around it.',
+    fa: '`label`، `sublabel` و `information` همان سربرگ فیلدی را می‌سازند که Text Input می‌گیرد، تا یک toggle داخل فرم با بقیه تراز بماند.',
+    ar: 'تُنتج `label` و`sublabel` و`information` ترويسة الحقل نفسها التي يحصل عليها Text Input، فيتحاذى المفتاح داخل النموذج مع كل ما حوله.',
+    tr: '`label`, `sublabel` ve `information`, Text Input’un aldığı alan başlığının aynısını üretir; böylece formdaki bir toggle çevresindeki her şeyle hizalanır.',
+  },
+  'theme.label': {
+    en: 'Appearance',
+    fa: 'ظاهر',
+    ar: 'المظهر',
+    tr: 'Görünüm',
+  },
+  'theme.sub': {
+    en: '(syncs across devices)',
+    fa: '(بین دستگاه‌ها همگام می‌شود)',
+    ar: '(يُزامَن عبر الأجهزة)',
+    tr: '(cihazlar arasında eşitlenir)',
+  },
+  'theme.info': {
+    en: 'How we choose your theme',
+    fa: 'چطور تم شما را انتخاب می‌کنیم',
+    ar: 'كيف نختار سمتك',
+    tr: 'Temanızı nasıl seçiyoruz',
+  },
+  'theme.light': { en: 'Light', fa: 'روشن', ar: 'فاتح', tr: 'Açık' },
+  'theme.dark': { en: 'Dark', fa: 'تیره', ar: 'داكن', tr: 'Koyu' },
+  'theme.system': {
+    en: 'System',
+    fa: 'سیستم',
+    ar: 'النظام',
+    tr: 'Sistem',
+  },
+  'disabled.title': {
+    en: 'Disabled',
+    fa: 'غیرفعال',
+    ar: 'معطّل',
+    tr: 'Devre dışı',
+  },
+  'disabled.body': {
+    en: 'Disable the whole group, or a single option that is unavailable for this account.',
+    fa: 'کل گروه را غیرفعال کنید، یا فقط گزینه‌ای را که برای این حساب در دسترس نیست.',
+    ar: 'عطّل المجموعة كلها، أو خيارًا واحدًا غير متاح لهذا الحساب.',
+    tr: 'Tüm grubu ya da bu hesapta kullanılamayan tek bir seçeneği devre dışı bırakın.',
+  },
+  'disabled.whole': {
+    en: 'whole group',
+    fa: 'کل گروه',
+    ar: 'المجموعة كلها',
+    tr: 'tüm grup',
+  },
+  'disabled.one': {
+    en: 'one option',
+    fa: 'یک گزینه',
+    ar: 'خيار واحد',
+    tr: 'tek seçenek',
+  },
+});

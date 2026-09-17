@@ -1,0 +1,32 @@
+# /opt/nili/docker-compose.prod.yml
+#
+# Mirrors /opt/alidade's shape from the runbook: one service on the edge
+# network, no published ports (only Caddy publishes ports on this box), a
+# mem_limit, and TAG pulled from .env so rollback is the same
+# `sed -i 's|^TAG=.*|TAG=PREVIOUS_SHA|'` recipe already documented for
+# Alidade.
+
+services:
+  web:
+    image: ghcr.io/aysanz/nili-www:${TAG:-latest}
+    container_name: nili-web-1
+    restart: unless-stopped
+    networks:
+      - edge
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    mem_limit: 256m
+    # `next start` in standalone mode has no separate health endpoint; the
+    # root path is enough to confirm the Node process is up and serving.
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3000/en', r => process.exit(r.statusCode < 500 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  edge:
+    external: true
