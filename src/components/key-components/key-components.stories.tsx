@@ -17,7 +17,7 @@ import { Icon } from '@components/icon';
 import { Avatar } from '@components/avatar';
 import { Badge } from '@components/badge';
 import { FigmaFrame } from '../../docs/figma.docs';
-import { PaymentIconSet } from './key-components.docs';
+import { ChartLegendDotSet, PaymentIconSet } from './key-components.docs';
 
 const meta: Meta<typeof Label> = {
   title: 'Base Components/Key Components/Key Components',
@@ -221,6 +221,14 @@ export const ContentLabelsAndCards = () => {
 };
 
 // ====================== Figma component sets ======================
+
+/** Figma "Chart Legend Dots": every colour, both sizes. */
+export const ChartLegendDots = () => (
+  <FigmaFrame>
+    <ChartLegendDotSet />
+  </FigmaFrame>
+);
+ChartLegendDots.parameters = { docs: { source: { code: null } } };
 
 export const PaymentIcons = () => (
   <FigmaFrame>

@@ -18,6 +18,7 @@
     "FilterListItemProps",
     "FilterListProps",
     "filterBarVariants",
+    "filterChipClearVariants",
     "filterChipVariants",
     "filterListItemVariants",
     "filterListVariants"
@@ -90,6 +91,10 @@
       "name": "FilterChip",
       "exported": true,
       "variants": {
+        "size": [
+          "sm",
+          "md"
+        ],
         "active": [
           "true",
           "false"
@@ -100,6 +105,7 @@
         ]
       },
       "defaultVariants": {
+        "size": "sm",
         "active": false,
         "placeholder": false
       },
@@ -163,6 +169,18 @@
           "doc": null,
           "source": "dom"
         },
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": "`sm` (32px) matches the Figma toolbar row.",
+          "control": "select",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "sm",
+          "source": "cva"
+        },
         "active": {
           "type": "boolean",
           "required": false,
@@ -197,6 +215,35 @@
           "doc": null,
           "control": "text",
           "default": "Clear"
+        }
+      }
+    },
+    {
+      "name": "FilterChipClear",
+      "exported": false,
+      "variants": {
+        "size": [
+          "sm",
+          "md"
+        ]
+      },
+      "defaultVariants": {
+        "size": "sm"
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "size": {
+          "type": "'sm' | 'md'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "sm",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md"
+          ]
         }
       }
     },

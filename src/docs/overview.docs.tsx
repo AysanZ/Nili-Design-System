@@ -54,10 +54,17 @@ export function OverviewPage({ children }: OverviewPageProps) {
 export function ComponentSection({
   title,
   body,
+  eyebrow,
   children,
 }: {
   title: string;
   body: string;
+  /**
+   * The band caption. Figma writes "COMPONENTS" over a component set and
+   * "ASSETS" over a sheet of flags, badges or logos — same band, different
+   * word — so the asset pages pass their own.
+   */
+  eyebrow?: string;
   children: ReactNode;
 }) {
   const { t } = useTranslation();
@@ -66,7 +73,7 @@ export function ComponentSection({
       <div
         className={`${PAD} flex h-12 items-center bg-weak-50 text-[14px] leading-5 tracking-[0.06em] text-sub-600 uppercase`}
       >
-        {t('docs.eyebrowComponents')}
+        {eyebrow ?? t('docs.eyebrowComponents')}
       </div>
       <div className={`${PAD} min-w-0 pt-20`}>
         <h2 className="text-[32px] leading-10 font-medium tracking-[-0.005em]">

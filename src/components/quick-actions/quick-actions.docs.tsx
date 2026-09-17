@@ -78,7 +78,7 @@ const LEADS: [ReactNode, string][] = [
       key="a"
       size="2xs"
       name="Sophia Williams"
-      src="/avatars/olivia-rhye.webp"
+      src="/avatars/persona.png"
       bottomStatus="online"
     />,
     'avatar',

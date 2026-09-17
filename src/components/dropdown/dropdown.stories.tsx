@@ -8,6 +8,8 @@ import { Button } from '@components/button';
 import { Icon } from '@components/icon';
 import { FigmaFrame } from '../../docs/figma.docs';
 import {
+  DropdownCompactSet,
+  DropdownInlineSet,
   DropdownItemSet,
   DropdownMiscSet,
   DropdownTriggerSet,
@@ -272,6 +274,25 @@ export const Compact = () => {
   );
 };
 
+/** Figma "Inline Dropdown" — no box, for running text and chart axes. */
+export const Inline = () => {
+  const { t } = useTranslation();
+  return (
+    <p className="max-w-md text-[16px] leading-6 text-strong-950">
+      {t('dropdown.inlineLead')}{' '}
+      <Dropdown
+        appearance="inline"
+        size="sm"
+        className="inline-flex align-baseline"
+        options={useCountries()}
+        ariaLabel={t('dropdown.label')}
+        defaultValue="us"
+      />{' '}
+      {t('dropdown.inlineTail')}
+    </p>
+  );
+};
+
 // ====================== Figma component sets ======================
 
 export const DropdownSet = () => (
@@ -289,6 +310,22 @@ export const DropdownItemSetStory = () => (
 );
 DropdownItemSetStory.storyName = 'Dropdown Item';
 DropdownItemSetStory.parameters = { docs: { source: { code: null } } };
+
+export const CompactSet = () => (
+  <FigmaFrame>
+    <DropdownCompactSet />
+  </FigmaFrame>
+);
+CompactSet.storyName = 'Compact Dropdown set';
+CompactSet.parameters = { docs: { source: { code: null } } };
+
+export const InlineSet = () => (
+  <FigmaFrame>
+    <DropdownInlineSet />
+  </FigmaFrame>
+);
+InlineSet.storyName = 'Inline Dropdown set';
+InlineSet.parameters = { docs: { source: { code: null } } };
 
 export const DropdownMiscItem = () => (
   <FigmaFrame>

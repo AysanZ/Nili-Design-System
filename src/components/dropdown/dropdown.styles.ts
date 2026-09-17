@@ -10,7 +10,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  *   Compact / Inline Dropdowns
  *
  * The six **Types** differ only by what sits in the item's leading slot — a
- * flag, an avatar, a card-provider mark. That is a slot, not a variant: as an
+ * flag, an avatar, a company logo. That is a slot, not a variant: as an
  * enum, "avatar plus a trailing badge" is unreachable and every new kind of
  * adornment needs a library release. `startAdornment` covers all six.
  */

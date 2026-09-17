@@ -35,6 +35,8 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
+          'Core Elements',
+          ['*', ['Overview', '*']],
           'Base Components',
           [
             '*',
@@ -46,6 +48,11 @@ const preview: Preview = {
               'Compact Button',
             ],
           ],
+          /* Assets last: they are raw material for the components above, not
+             components in their own right, so they should not be the first
+             thing the sidebar offers. */
+          'Assets',
+          ['*', ['Overview', '*']],
         ],
       },
     },

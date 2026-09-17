@@ -17,7 +17,8 @@
     "textAreaControlVariants",
     "textAreaCounterVariants",
     "textAreaFieldVariants",
-    "textAreaFooterVariants"
+    "textAreaFooterVariants",
+    "textAreaGripVariants"
   ],
   "dependencies": {
     "npm": [
@@ -264,15 +265,28 @@
         "over": [
           "true",
           "false"
+        ],
+        "disabled": [
+          "true",
+          "false"
         ]
       },
       "defaultVariants": {
-        "over": false
+        "over": false,
+        "disabled": false
       },
       "slots": [],
       "extends": [],
       "props": {
         "over": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "disabled": {
           "type": "'true' | 'false'",
           "required": false,
           "doc": null,
@@ -315,6 +329,31 @@
       "slots": [],
       "extends": [],
       "props": {}
+    },
+    {
+      "name": "TextAreaGrip",
+      "exported": false,
+      "variants": {
+        "disabled": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "disabled": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "disabled": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
     }
   ]
 }

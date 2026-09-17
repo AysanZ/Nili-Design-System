@@ -1,0 +1,221 @@
+{
+  "dir": "topbar",
+  "name": "Topbar",
+  "type": "registry:component",
+  "files": [
+    "src/components/topbar/index.ts",
+    "src/components/topbar/topbar.styles.ts",
+    "src/components/topbar/topbar.tsx",
+    "src/components/topbar/topbar.types.ts"
+  ],
+  "exports": [
+    "Topbar",
+    "TopbarItem",
+    "TopbarItemProps",
+    "TopbarItemVariantProps",
+    "TopbarProps",
+    "TopbarUser",
+    "TopbarUserProps",
+    "topbarItemVariants",
+    "topbarUserVariants",
+    "topbarVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Topbar",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'header'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name for the navigation landmark inside the bar.",
+          "control": "text"
+        },
+        "logo": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The brand mark on the leading edge.",
+          "control": "slot"
+        },
+        "actions": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Controls pinned to the trailing edge — search, notifications, account.",
+          "control": "slot"
+        }
+      }
+    },
+    {
+      "name": "TopbarItem",
+      "exported": true,
+      "variants": {
+        "active": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "active": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'a'>, 'color' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": "The current page.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "href": {
+          "type": "string",
+          "required": false,
+          "doc": "Makes it a link; without it the item renders as a `<button>`.",
+          "control": "text"
+        },
+        "menu": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Adds a chevron — the \"Others ▾\" item that opens a menu.",
+          "control": "boolean",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "TopbarUser",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'button'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "avatar": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        }
+      }
+    }
+  ]
+}

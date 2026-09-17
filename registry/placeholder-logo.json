@@ -1,0 +1,124 @@
+{
+  "dir": "placeholder-logo",
+  "name": "PlaceholderLogo",
+  "type": "registry:component",
+  "files": [
+    "src/components/placeholder-logo/index.ts",
+    "src/components/placeholder-logo/placeholder-logo.data.ts",
+    "src/components/placeholder-logo/placeholder-logo.styles.ts",
+    "src/components/placeholder-logo/placeholder-logo.tsx",
+    "src/components/placeholder-logo/placeholder-logo.types.ts"
+  ],
+  "exports": [
+    "PLACEHOLDER_COMPANIES",
+    "PLACEHOLDER_COMPANY_BY_ID",
+    "PLACEHOLDER_COMPANY_IDS",
+    "PLACEHOLDER_EMPTY_MARK",
+    "PLACEHOLDER_LOGO_SIZES",
+    "PlaceholderCompany",
+    "PlaceholderCompanyId",
+    "PlaceholderLogo",
+    "PlaceholderLogoProps",
+    "PlaceholderLogoSize",
+    "PlaceholderLogoVariant",
+    "PlaceholderLogoVariantProps",
+    "getPlaceholderCompany",
+    "placeholderLogoVariants"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "PlaceholderLogo",
+      "exported": true,
+      "variants": {
+        "size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ],
+        "variant": [
+          "original",
+          "black",
+          "white"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "variant": "original"
+      },
+      "slots": [],
+      "extends": [
+        "Omit<ComponentPropsWithoutRef<'span'>, 'children'>",
+        "PlaceholderLogoVariantProps"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "company": {
+          "type": "PlaceholderCompanyId | (string & {})",
+          "required": false,
+          "doc": "Which fictional company. Omit it for Figma's empty tile — the neutral disc you draw when a record genuinely has no logo, rather than leaving a hole in the row.",
+          "control": "none"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Defaults to the company name; pass `''` when the name is already written beside the logo, which is the common case.",
+          "control": "text"
+        },
+        "size": {
+          "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ]
+        },
+        "variant": {
+          "type": "'original' | 'black' | 'white'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "original",
+          "source": "cva",
+          "options": [
+            "original",
+            "black",
+            "white"
+          ]
+        }
+      }
+    }
+  ]
+}

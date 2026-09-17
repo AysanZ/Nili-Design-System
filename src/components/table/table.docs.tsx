@@ -39,7 +39,7 @@ export function TableRowCellSet() {
               <Avatar
                 size="xs"
                 name="Sophia Williams"
-                src="/avatars/olivia-rhye.webp"
+                src="/avatars/persona.png"
               />
             )}
             <span className="flex flex-col">

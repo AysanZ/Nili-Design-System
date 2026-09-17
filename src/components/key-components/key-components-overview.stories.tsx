@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useTranslation } from 'react-i18next';
 import { RiKey2Line, RiLightbulbLine, RiPriceTag3Line } from '@remixicon/react';
 import { ComponentSection, OverviewPage } from '../../docs/overview.docs';
-import { PaymentIconSet } from './key-components.docs';
+import { ChartLegendDotSet, PaymentIconSet } from './key-components.docs';
 import {
   ChartLegends,
   ContentLabelsAndCards,
@@ -85,6 +85,12 @@ export const Overview: StoryObj = {
           body={t('keyDocs.sectionPaymentBody')}
         >
           <PaymentIconSet />
+        </ComponentSection>
+        <ComponentSection
+          title={t('keyDocs.sectionDots')}
+          body={t('keyDocs.sectionDotsBody')}
+        >
+          <ChartLegendDotSet />
         </ComponentSection>
         <ComponentSection
           title={t('keyDocs.sectionLegends')}

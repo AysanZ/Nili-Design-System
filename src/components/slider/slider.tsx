@@ -9,7 +9,7 @@ import {
 import { cn } from '../../lib/cn';
 import { useId } from '../../hooks/use-id';
 import { useControllableState } from '../../hooks/use-controllable-state';
-import { useDirection } from '../../providers/direction';
+import { directionOf, useDirection } from '../../providers/direction';
 import { formatNumber } from '../../lib/numerals';
 import {
   sliderRootVariants,
@@ -44,13 +44,23 @@ function snap(value: number, min: number, max: number, step: number): number {
  *
  * ## RTL
  *
- * The pointer ratio is mirrored under `dir="rtl"`, otherwise dragging towards
- * the higher end lowers the value. The fill and the thumbs are positioned with
- * `inset-inline-start` and offset with `margin-inline-start`, so nothing needs
- * a physical `left` and nothing breaks inside a nested RTL subtree. Arrow keys
- * follow the same rule: `ArrowRight` raises the value in English and lowers it
- * in Persian, which is what WAI-ARIA specifies and what a Persian user's hand
- * expects. Up and Down always raise and lower, in both directions.
+ * The fill and the thumbs are positioned with `inset-inline-start` and offset
+ * with `margin-inline-start`, so nothing needs a physical `left` and nothing
+ * breaks inside a nested RTL subtree. The pointer ratio is mirrored to match,
+ * otherwise dragging towards the higher end lowers the value.
+ *
+ * **The direction is read off the track element, not from context.** It has to
+ * be. `dir="rtl"` on any ancestor flips `inset-inline-start` whether or not a
+ * `DirectionProvider` is mounted, and hosts routinely set `dir` on `<html>` or
+ * on a wrapper without mounting one. When that happened here the CSS mirrored
+ * and the arithmetic did not, so in Persian the thumb ran *away* from the
+ * pointer: drag left, and the handle moved right and the value fell.
+ * `getComputedStyle().direction` asks the layout engine the same question it
+ * already answered, so the two cannot disagree.
+ *
+ * Arrow keys follow the same rule: `ArrowRight` raises the value in English
+ * and lowers it in Persian, which is what WAI-ARIA specifies and what a
+ * Persian user's hand expects. Up and Down always raise and lower.
  *
  * ## Two callbacks, on purpose
  *
@@ -88,10 +98,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   },
   ref,
 ) {
-  const { dir: ambientDir, locale: ambientLocale } = useDirection();
-  // A pinned direction wins over the ambient one: see the note on `dir` in
-  // slider.types.ts. Without it the CSS and the pointer maths disagree.
-  const dir = dirProp ?? ambientDir;
+  const { locale: ambientLocale } = useDirection();
   const locale = localeProp ?? ambientLocale;
   const trackRef = useRef<HTMLDivElement>(null);
   const activeThumb = useRef<number | null>(null);
@@ -151,15 +158,22 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     ],
   );
 
+  /** The direction the track is drawn in; `dir` overrides it when pinned. */
+  const resolvedDir = useCallback(
+    (element?: Element | null) => dirProp ?? directionOf(element ?? trackRef.current),
+    [dirProp],
+  );
+
   const ratioFromEvent = useCallback(
     (event: ReactPointerEvent<HTMLDivElement>) => {
-      const box = trackRef.current?.getBoundingClientRect();
+      const track = trackRef.current;
+      const box = track?.getBoundingClientRect();
       if (!box) return 0;
       const raw = (event.clientX - box.left) / box.width;
       // Mirrored under RTL, or dragging towards the high end lowers the value.
-      return clamp(dir === 'rtl' ? 1 - raw : raw, 0, 1);
+      return clamp(resolvedDir(track) === 'rtl' ? 1 - raw : raw, 0, 1);
     },
-    [dir],
+    [resolvedDir],
   );
 
   const nearestThumb = (next: number) =>
@@ -198,7 +212,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
 
   const onKeyDown = (event: ReactKeyboardEvent<HTMLElement>, index: number) => {
     if (disabled) return;
-    const sign = dir === 'rtl' ? -1 : 1;
+    const sign = resolvedDir(event.currentTarget) === 'rtl' ? -1 : 1;
     const big = step * 10;
     const current = values[index];
 

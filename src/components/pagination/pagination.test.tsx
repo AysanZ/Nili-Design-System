@@ -107,10 +107,33 @@ describe('Pagination', () => {
     expect(screen.getByText('۲')).toBeInTheDocument();
   });
 
-  it('collapses to a summary when type is arrows', () => {
+  /*
+   * Mobile is a narrower pagination, not a different one. It used to drop the
+   * cells for a "Page 3 of 10" line, which is not what Figma draws and which
+   * removed the only way to jump more than one page on the device where that
+   * matters most.
+   */
+  it('keeps a compact cell range on mobile', () => {
     render(<Pagination count={10} page={3} deviceMode="mobile" />);
-    expect(screen.getByText('Page 3 of 10')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Go to page 2' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Page 3' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Go to page 1' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Go to page 10' })).toBeInTheDocument();
+    // …but not the siblings a desktop row would show.
+    expect(screen.queryByRole('button', { name: 'Go to page 5' })).toBeNull();
+  });
+
+  it('stacks rows-per-page under the trail on mobile', () => {
+    render(
+      <Pagination
+        count={10}
+        page={3}
+        deviceMode="mobile"
+        advanced
+        pageSize={7}
+      />,
+    );
+    expect(screen.queryByText('Page 3 of 10')).toBeNull();
+    expect(screen.getByText('7 / page')).toBeInTheDocument();
   });
 
   it('renders nothing without pages', () => {

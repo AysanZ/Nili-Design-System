@@ -221,6 +221,7 @@
 
   /* ── typography ── */
   --font-sans: var(--nili-font-sans);
+  --font-display: var(--nili-font-display);
   --font-latin: var(--nili-font-latin);
   --font-persian: var(--nili-font-persian);
   --font-mono: var(--nili-font-mono);

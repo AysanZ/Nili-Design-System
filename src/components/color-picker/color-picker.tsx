@@ -11,7 +11,7 @@ import { RiArrowDownSLine, RiSipLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
 import { useId } from '../../hooks/use-id';
 import { useControllableState } from '../../hooks/use-controllable-state';
-import { useDirection } from '../../providers/direction';
+import { directionOf } from '../../providers/direction';
 import {
   hsvToRgb,
   rgbToHsv,
@@ -184,22 +184,25 @@ export const ColorSlider = forwardRef<HTMLDivElement, ColorSliderProps>(
     ref,
   ) {
     const trackRef = useRef<HTMLDivElement>(null);
-    const { dir } = useDirection();
     const max = type === 'hue' ? 360 : 100;
     const thumbColor =
       thumbColorProp ?? (type === 'hue' ? `hsl(${value} 100% 50%)` : baseColor);
 
     const apply = useCallback(
       (event: ReactPointerEvent<HTMLDivElement>) => {
-        const box = trackRef.current?.getBoundingClientRect();
+        const track = trackRef.current;
+        const box = track?.getBoundingClientRect();
         if (!box) return;
         const raw = (event.clientX - box.left) / box.width;
-        // In RTL the track is mirrored, so the pointer ratio must be too —
-        // otherwise dragging right lowers the value.
-        const ratio = dir === 'rtl' ? 1 - raw : raw;
+        // The gradient is mirrored by `rtl:` and the thumb sits on
+        // `inset-inline-start`, both of which follow the element's *computed*
+        // direction. Read that same value rather than the context one, or a
+        // host that sets `dir` without mounting a DirectionProvider gets a
+        // thumb that runs away from the pointer.
+        const ratio = directionOf(track) === 'rtl' ? 1 - raw : raw;
         onChange(Math.round(clamp(ratio, 0, 1) * max));
       },
-      [dir, max, onChange],
+      [max, onChange],
     );
 
     const percent = (value / max) * 100;

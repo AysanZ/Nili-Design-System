@@ -161,7 +161,7 @@ export const PaginationEllipsis = forwardRef<
   HTMLSpanElement,
   PaginationEllipsisProps
 >(function PaginationEllipsis(
-  { label = 'More pages', className, ...rest },
+  { label = 'More pages', fullRadius = false, className, ...rest },
   ref,
 ) {
   return (
@@ -170,7 +170,7 @@ export const PaginationEllipsis = forwardRef<
       role="presentation"
       data-slot="ellipsis"
       aria-label={label}
-      className={cn(paginationEllipsisVariants(), className)}
+      className={cn(paginationEllipsisVariants({ fullRadius }), className)}
       {...rest}
     >
       <Icon icon={RiMoreLine} />
@@ -243,15 +243,23 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     const format = (value: number) => formatNumber(value, { locale });
     const goTo = (next: number) => setPage(Math.min(Math.max(next, 1), count));
 
-    const slots =
-      deviceMode === 'mobile'
-        ? []
-        : getPaginationRange({
-            count,
-            page: current,
-            siblingCount,
-            boundaryCount,
-          });
+    /*
+     * Mobile is a *narrower* pagination, not a different one.
+     *
+     * It used to render no cells at all and a "Page 2 of 16" line between the
+     * arrows, which is not what Figma draws: the mobile group keeps the cells
+     * and simply shows fewer of them — first, current, ellipsis, last — and
+     * moves the rows-per-page control onto its own line underneath. Dropping
+     * the cells also dropped the only way to jump more than one page at a
+     * time on the device where that matters most.
+     */
+    const isMobile = deviceMode === 'mobile';
+    const slots = getPaginationRange({
+      count,
+      page: current,
+      siblingCount: isMobile ? 0 : siblingCount,
+      boundaryCount: isMobile ? 1 : boundaryCount,
+    });
 
     const arrow = (
       key: string,
@@ -305,12 +313,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             atStart,
           )}
 
-        {deviceMode === 'mobile' && (
-          <li className={paginationSummaryVariants()} aria-live="polite">
-            {text.summary(format(current), format(count))}
-          </li>
-        )}
-
         {slots.map((slot, index) =>
           typeof slot === 'number' ? (
             <li key={slot}>
@@ -331,7 +333,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             </li>
           ) : (
             <li key={`${slot}-${index}`}>
-              <PaginationEllipsis label={text.ellipsis} />
+              <PaginationEllipsis
+                label={text.ellipsis}
+                fullRadius={type === 'full-radius'}
+              />
             </li>
           ),
         )}
@@ -352,9 +357,44 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       );
     }
 
-    // Figma's Advanced layout: summary — trail — rows-per-page, the trail
-    // centred between two equal-width flanks so it does not drift sideways as
-    // the page number grows from 1 to 16.
+    const perPage = pageSize != null && (
+      <Dropdown
+        appearance="compact"
+        size="xs"
+        ariaLabel={text.perPageLabel}
+        value={String(pageSize)}
+        disabled={disabled}
+        onChange={(next) => onPageSizeChange?.(Number(next))}
+        options={pageSizeOptions.map((option) => ({
+          value: String(option),
+          label: text.perPage(format(option)),
+        }))}
+      />
+    );
+
+    /*
+     * Figma's mobile Advanced group stacks: the trail on one line, the
+     * rows-per-page control centred underneath. There is no summary — at that
+     * width it would push the cells off the row, and the cells already say
+     * which page you are on.
+     */
+    if (isMobile) {
+      return (
+        <nav
+          ref={ref}
+          aria-label={text.root}
+          className={cn('flex w-full flex-col items-center gap-3', className)}
+          {...rest}
+        >
+          {list}
+          {perPage}
+        </nav>
+      );
+    }
+
+    // Figma's desktop Advanced layout: summary — trail — rows-per-page, the
+    // trail centred between two equal-width flanks so it does not drift
+    // sideways as the page number grows from 1 to 16.
     return (
       <nav
         ref={ref}
@@ -371,22 +411,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
         {list}
 
-        <div className="flex w-48 shrink-0 justify-end">
-          {pageSize != null && (
-            <Dropdown
-              appearance="compact"
-              size="xs"
-              ariaLabel={text.perPageLabel}
-              value={String(pageSize)}
-              disabled={disabled}
-              onChange={(next) => onPageSizeChange?.(Number(next))}
-              options={pageSizeOptions.map((option) => ({
-                value: String(option),
-                label: text.perPage(format(option)),
-              }))}
-            />
-          )}
-        </div>
+        <div className="flex w-48 shrink-0 justify-end">{perPage}</div>
       </nav>
     );
   },

@@ -6,6 +6,9 @@ import {
   RiEyeOffLine,
   RiBankCardLine,
   RiCalendarLine,
+  RiUser6Line,
+  RiLockLine,
+  RiEmotionLine,
 } from '@remixicon/react';
 import { TextInput, InputSelect } from '.';
 import { Icon } from '@components/icon';
@@ -456,5 +459,187 @@ export const TypeSizeMatrix = () => (
     )}
   </div>
 );
+
+// ====================== One story per Figma type ======================
+
+/*
+ * The Overview draws every type at once, which is the right picture but the
+ * wrong thing to copy out of: you cannot read one field's props from a grid of
+ * twelve. These are the same fields, one per story, so the Docs "Show code"
+ * panel gives you exactly the snippet for the type you are looking at.
+ */
+
+const useFigmaLabel = () => {
+  const { t } = useTranslation();
+  return {
+    sublabel: t('textInput.optional'),
+    information: true as const,
+    informationLabel: t('textInput.info'),
+    required: true,
+    hint: t('textInput.hintFigma'),
+  };
+};
+
+/** 📂 Basic — an icon and nothing else. */
+export const BasicType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="basic"
+        label={t('textInput.basicLabel')}
+        placeholder={t('textInput.basicPlaceholder')}
+        startIcon={<Icon icon={RiUser6Line} />}
+      />
+    </div>
+  );
+};
+
+/** 💌 Email — `type="email"`, the email keyboard, and pinned LTR. */
+export const EmailType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="email"
+        label={t('textInput.emailLabel')}
+        placeholder="hello@husan.ir"
+        startIcon={<Icon icon={RiMailLine} />}
+      />
+    </div>
+  );
+};
+
+/**
+ * 🔒 Password — the reveal toggle is built in, not an `endIcon` you supply.
+ * A field nobody can read back is a field people get wrong twice and then
+ * paste from a note; pass `reveal={false}` where a shoulder is the threat
+ * model.
+ */
+export const PasswordType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="password"
+        label={t('textInput.password')}
+        placeholder="••••••••••"
+        startIcon={<Icon icon={RiLockLine} />}
+      />
+    </div>
+  );
+};
+
+/** 💳 Card Number — numeric keyboard, `cc-number` autofill, pinned LTR. */
+export const CardType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="card"
+        label={t('textInput.cardLabel')}
+        placeholder={t('textInput.cardPlaceholder')}
+        startIcon={<Icon icon={RiBankCardLine} />}
+        endIcon={<Icon icon={RiBankCardLine} />}
+      />
+    </div>
+  );
+};
+
+/**
+ * 🌐 Website — `https://` is a bordered block *attached* to the field, not
+ * muted text inside it. Two different drawings in Figma, two different slots.
+ */
+export const WebsiteType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="website"
+        label={t('textInput.websiteLabel')}
+        placeholder="www.example.com"
+        startAffix="https://"
+      />
+    </div>
+  );
+};
+
+/**
+ * 💰 Amount — the currency mark sits *inside* the padded frame and the
+ * currency picker is attached at the trailing edge. Figma puts the country
+ * code before a phone number and the currency after an amount, so the side is
+ * a property of the type rather than a free choice.
+ */
+export const AmountType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="amount"
+        label={t('textInput.amount')}
+        placeholder="0.00"
+        prefix="€"
+        select={
+          <InputSelect aria-label={t('textInput.currency')}>EUR</InputSelect>
+        }
+      />
+    </div>
+  );
+};
+
+/** 🔍 Search — the ⌘1 chip is a hint, so it is `aria-hidden`. */
+export const SearchType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="search"
+        label={t('textInput.search')}
+        placeholder={t('textInput.searchPlaceholder')}
+        startIcon={<Icon icon={RiSearchLine} />}
+        shortcut="⌘1"
+      />
+    </div>
+  );
+};
+
+/** 😀 Emoji — the leading slot holds the chosen emoji once one is picked. */
+export const EmojiType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="emoji"
+        label={t('textInput.emojiLabel')}
+        placeholder={t('textInput.emojiPlaceholder')}
+        startIcon={<Icon icon={RiEmotionLine} />}
+      />
+    </div>
+  );
+};
+
+/** 📅 Date — numeric keyboard and a calendar affordance. */
+export const DateType = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="w-[360px]">
+      <TextInput
+        {...useFigmaLabel()}
+        type="date"
+        label={t('textInput.dateLabel')}
+        placeholder={t('textInput.datePlaceholder')}
+        startIcon={<Icon icon={RiCalendarLine} />}
+      />
+    </div>
+  );
+};
 
 export default meta;

@@ -10,6 +10,7 @@ import { Icon } from '../icon';
 import {
   filterBarVariants,
   filterChipVariants,
+  filterChipClearVariants,
   filterListVariants,
   filterListItemVariants,
 } from './filter.styles';
@@ -51,6 +52,8 @@ export interface FilterChipProps extends Omit<
   ComponentPropsWithoutRef<'button'>,
   'value'
 > {
+  /** `sm` (32px) matches the Figma toolbar row. */
+  size?: 'sm' | 'md';
   /** A value is set. Renders `aria-pressed` so the state is announced. */
   active?: boolean;
   /** Dashed outline — an empty "add filter" affordance. */
@@ -68,11 +71,14 @@ export interface FilterChipProps extends Omit<
  *
  * The clear affordance is a **sibling** button, not a nested one: a `<button>`
  * inside a `<button>` is invalid HTML, and browsers resolve it by dropping the
- * inner one — so the clear target silently stops working.
+ * inner one — so the clear target silently stops working. The two are drawn as
+ * one control by removing the shared border and rounding only the outer edges,
+ * logically, so the seam lands on the correct side in RTL.
  */
 export const FilterChip = forwardRef<HTMLButtonElement, FilterChipProps>(
   function FilterChip(
     {
+      size = 'sm',
       active = false,
       placeholder = false,
       startIcon,
@@ -92,8 +98,8 @@ export const FilterChip = forwardRef<HTMLButtonElement, FilterChipProps>(
         type={type ?? 'button'}
         aria-pressed={active}
         className={cn(
-          filterChipVariants({ active, placeholder }),
-          onClear && active && 'rounded-e-none border-e-0',
+          filterChipVariants({ size, active, placeholder }),
+          onClear && active && 'rounded-e-none pe-2',
           className,
         )}
         {...rest}
@@ -114,15 +120,19 @@ export const FilterChip = forwardRef<HTMLButtonElement, FilterChipProps>(
     if (!onClear || !active) return chip;
 
     return (
-      <span className="inline-flex">
+      /* `-space-x-px` would leave a doubled border between the halves; the
+         clear button drops its own leading border instead and inherits the
+         chip's, so the divider is exactly one pixel wide at any zoom. */
+      <span className="inline-flex shrink-0 items-center">
         {chip}
         <button
           type="button"
           onClick={onClear}
           aria-label={clearLabel}
           className={cn(
-            filterChipVariants({ active }),
-            'rounded-s-none border-s border-s-primary-base px-1.5',
+            filterChipVariants({ size, active }),
+            filterChipClearVariants({ size }),
+            'justify-center',
           )}
         >
           <Icon icon={RiCloseLine} />

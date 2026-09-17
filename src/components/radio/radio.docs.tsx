@@ -95,7 +95,7 @@ const CARD_LEADS: ReactNode[] = [
     key="a"
     size="2xs"
     name="Sophia Williams"
-    src="/avatars/olivia-rhye.webp"
+    src="/avatars/persona.png"
   />,
 ];
 

@@ -47,6 +47,41 @@ describe('Slider', () => {
     expect(onValueChange).toHaveBeenCalledWith(41);
   });
 
+  /*
+   * The regression this guards: the decorator set `dir="rtl"` on a wrapper
+   * without mounting a DirectionProvider, so CSS mirrored the track while the
+   * arithmetic stayed LTR and the thumb ran away from the pointer. Direction
+   * is now read off the element, so a bare `dir` attribute is enough.
+   */
+  it('mirrors the arrows from a bare dir attribute, with no provider', async () => {
+    const onValueChange = vi.fn();
+    render(
+      <div dir="rtl">
+        <Slider value={40} label="Volume" onValueChange={onValueChange} />
+      </div>,
+    );
+    screen.getByRole('slider').focus();
+    await userEvent.keyboard('{ArrowRight}');
+    expect(onValueChange).toHaveBeenCalledWith(39);
+  });
+
+  it('lets an explicit dir prop override the surrounding direction', async () => {
+    const onValueChange = vi.fn();
+    render(
+      <div dir="rtl">
+        <Slider
+          value={40}
+          dir="ltr"
+          label="Volume"
+          onValueChange={onValueChange}
+        />
+      </div>,
+    );
+    screen.getByRole('slider').focus();
+    await userEvent.keyboard('{ArrowRight}');
+    expect(onValueChange).toHaveBeenCalledWith(41);
+  });
+
   it('jumps to the ends with Home and End', async () => {
     const onValueChange = vi.fn();
     render(

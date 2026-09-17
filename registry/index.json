@@ -16,6 +16,7 @@
       "name": "lib",
       "type": "registry:lib",
       "files": [
+        "src/lib/assets.ts",
         "src/lib/calendar.ts",
         "src/lib/cn.ts",
         "src/lib/color.ts",
@@ -543,6 +544,39 @@
       }
     },
     {
+      "name": "CountryFlag",
+      "dir": "country-flag",
+      "exports": [
+        "COUNTRY_CODES",
+        "COUNTRY_FLAG_PX",
+        "COUNTRY_FLAG_SIZES",
+        "CountryCode",
+        "CountryFlag",
+        "CountryFlagProps",
+        "CountryFlagSize",
+        "CountryFlagVariantProps",
+        "FLAGS",
+        "FlagEntry",
+        "countryFlagVariants",
+        "flagUrl",
+        "getFlag",
+        "hasFlag"
+      ],
+      "provides": [
+        "CountryFlag"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/assets",
+          "lib/cn"
+        ]
+      }
+    },
+    {
       "name": "DatePicker",
       "dir": "date-picker",
       "exports": [
@@ -767,6 +801,7 @@
         "FilterListItemProps",
         "FilterListProps",
         "filterBarVariants",
+        "filterChipClearVariants",
         "filterChipVariants",
         "filterListItemVariants",
         "filterListVariants"
@@ -774,6 +809,7 @@
       "provides": [
         "FilterBar",
         "FilterChip",
+        "FilterChipClear",
         "FilterList",
         "FilterListItem"
       ],
@@ -968,6 +1004,38 @@
       }
     },
     {
+      "name": "PlaceholderLogo",
+      "dir": "placeholder-logo",
+      "exports": [
+        "PLACEHOLDER_COMPANIES",
+        "PLACEHOLDER_COMPANY_BY_ID",
+        "PLACEHOLDER_COMPANY_IDS",
+        "PLACEHOLDER_EMPTY_MARK",
+        "PLACEHOLDER_LOGO_SIZES",
+        "PlaceholderCompany",
+        "PlaceholderCompanyId",
+        "PlaceholderLogo",
+        "PlaceholderLogoProps",
+        "PlaceholderLogoSize",
+        "PlaceholderLogoVariant",
+        "PlaceholderLogoVariantProps",
+        "getPlaceholderCompany",
+        "placeholderLogoVariants"
+      ],
+      "provides": [
+        "PlaceholderLogo"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
       "name": "ProgressBar",
       "dir": "progress-bar",
       "exports": [
@@ -1155,6 +1223,58 @@
           "lib/cn",
           "lib/numerals",
           "providers/direction"
+        ]
+      }
+    },
+    {
+      "name": "Sidebar",
+      "dir": "sidebar",
+      "exports": [
+        "Sidebar",
+        "SidebarCard",
+        "SidebarDot",
+        "SidebarFooter",
+        "SidebarFooterProps",
+        "SidebarGroup",
+        "SidebarGroupProps",
+        "SidebarHeader",
+        "SidebarHeaderProps",
+        "SidebarItem",
+        "SidebarItemProps",
+        "SidebarProps",
+        "SidebarUser",
+        "SidebarUserProps",
+        "SidebarVariantProps",
+        "sidebarFooterVariants",
+        "sidebarGroupLabelVariants",
+        "sidebarHeaderVariants",
+        "sidebarItemLabelVariants",
+        "sidebarItemTrailingVariants",
+        "sidebarItemVariants",
+        "sidebarVariants",
+        "useSidebarCollapsed"
+      ],
+      "provides": [
+        "Sidebar",
+        "SidebarFooter",
+        "SidebarGroup",
+        "SidebarGroupLabel",
+        "SidebarHeader",
+        "SidebarItem",
+        "SidebarItemLabel",
+        "SidebarItemTrailing",
+        "SidebarUser"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
         ]
       }
     },
@@ -1422,14 +1542,16 @@
         "textAreaControlVariants",
         "textAreaCounterVariants",
         "textAreaFieldVariants",
-        "textAreaFooterVariants"
+        "textAreaFooterVariants",
+        "textAreaGripVariants"
       ],
       "provides": [
         "TextArea",
         "TextAreaControl",
         "TextAreaCounter",
         "TextAreaField",
-        "TextAreaFooter"
+        "TextAreaFooter",
+        "TextAreaGrip"
       ],
       "dependencies": {
         "npm": [
@@ -1586,12 +1708,49 @@
       }
     },
     {
+      "name": "Topbar",
+      "dir": "topbar",
+      "exports": [
+        "Topbar",
+        "TopbarItem",
+        "TopbarItemProps",
+        "TopbarItemVariantProps",
+        "TopbarProps",
+        "TopbarUser",
+        "TopbarUserProps",
+        "topbarItemVariants",
+        "topbarUserVariants",
+        "topbarVariants"
+      ],
+      "provides": [
+        "Topbar",
+        "TopbarItem",
+        "TopbarUser"
+      ],
+      "dependencies": {
+        "npm": [
+          "@remixicon/react",
+          "class-variance-authority"
+        ],
+        "registry": [
+          "icon"
+        ],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
       "name": "Typography",
       "dir": "typography",
       "exports": [
+        "TYPOGRAPHY_GROUPS",
+        "TYPOGRAPHY_SPECS",
         "Typography",
+        "TypographyGroup",
         "TypographyOwnProps",
         "TypographyProps",
+        "TypographySpec",
         "TypographyVariant",
         "TypographyVariantProps",
         "defaultElementForVariant",

@@ -1,0 +1,448 @@
+{
+  "dir": "sidebar",
+  "name": "Sidebar",
+  "type": "registry:component",
+  "files": [
+    "src/components/sidebar/index.ts",
+    "src/components/sidebar/sidebar.styles.ts",
+    "src/components/sidebar/sidebar.tsx",
+    "src/components/sidebar/sidebar.types.ts"
+  ],
+  "exports": [
+    "Sidebar",
+    "SidebarCard",
+    "SidebarDot",
+    "SidebarFooter",
+    "SidebarFooterProps",
+    "SidebarGroup",
+    "SidebarGroupProps",
+    "SidebarHeader",
+    "SidebarHeaderProps",
+    "SidebarItem",
+    "SidebarItemProps",
+    "SidebarProps",
+    "SidebarUser",
+    "SidebarUserProps",
+    "SidebarVariantProps",
+    "sidebarFooterVariants",
+    "sidebarGroupLabelVariants",
+    "sidebarHeaderVariants",
+    "sidebarItemLabelVariants",
+    "sidebarItemTrailingVariants",
+    "sidebarItemVariants",
+    "sidebarVariants",
+    "useSidebarCollapsed"
+  ],
+  "dependencies": {
+    "npm": [
+      "@remixicon/react",
+      "class-variance-authority"
+    ],
+    "registry": [
+      "icon"
+    ],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "Sidebar",
+      "exported": true,
+      "variants": {
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'nav'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "collapsed": {
+          "type": "boolean",
+          "required": false,
+          "doc": "The rail. One boolean rather than a second component: every row is the same row with its label faded out.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name, e.g. \"Main\". A page usually has more than one `<nav>`, and \"navigation, navigation, navigation\" is not a landmark list.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "SidebarFooter",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
+    },
+    {
+      "name": "SidebarGroup",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'div'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Figma's \"MAIN\" / \"FAVS\" caption. Becomes a rule on the rail.",
+          "control": "text"
+        }
+      }
+    },
+    {
+      "name": "SidebarGroupLabel",
+      "exported": false,
+      "variants": {
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "collapsed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SidebarHeader",
+      "exported": true,
+      "variants": {
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'div'>, 'title' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "logo": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The workspace mark — a `PlaceholderLogo`, an `Avatar`, an `<img>`.",
+          "control": "slot"
+        },
+        "title": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "subtitle": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "action": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's workspace switcher, on the trailing edge. Hidden on the rail.",
+          "control": "slot"
+        },
+        "collapsed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SidebarItem",
+      "exported": true,
+      "variants": {
+        "active": [
+          "true",
+          "false"
+        ],
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "active": false,
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit< ComponentPropsWithoutRef<'a'>, 'color' >"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "icon": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "active": {
+          "type": "boolean",
+          "required": false,
+          "doc": "The current page. Draws the primary marker in the gutter.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        },
+        "href": {
+          "type": "string",
+          "required": false,
+          "doc": "Makes it a link. Without it the row renders as a `<button>`.",
+          "control": "text"
+        },
+        "shortcut": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Figma's ⌘1 chip on a FAVS row. Replaces the trailing chevron.",
+          "control": "slot"
+        },
+        "trailing": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "Overrides the trailing chevron with anything else — a count, a badge.",
+          "control": "slot"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false
+        },
+        "collapsed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SidebarItemLabel",
+      "exported": false,
+      "variants": {
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "collapsed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SidebarItemTrailing",
+      "exported": false,
+      "variants": {
+        "collapsed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "collapsed": false
+      },
+      "slots": [],
+      "extends": [],
+      "props": {
+        "collapsed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    },
+    {
+      "name": "SidebarUser",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [
+        "ComponentPropsWithoutRef<'button'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "disabled": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "required": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "control": "boolean",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "value": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "defaultValue": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "doc": null,
+          "control": "text"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "avatar": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": null,
+          "control": "slot"
+        },
+        "email": {
+          "type": "string",
+          "required": false,
+          "doc": null,
+          "control": "text"
+        },
+        "badge": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The verified tick beside the name.",
+          "control": "slot"
+        }
+      }
+    }
+  ]
+}

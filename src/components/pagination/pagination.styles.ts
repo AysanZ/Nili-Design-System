@@ -85,8 +85,24 @@ export const paginationGroupVariants = cva(
   'gap-0 overflow-hidden rounded-md border border-soft-200 [&>li>*]:rounded-none [&>li>*]:border-0 [&>li+li>*]:border-s [&>li+li>*]:border-soft-200',
 );
 
+/**
+ * The skipped-pages marker.
+ *
+ * It carried a hard-coded `rounded-md`, so in the Full Radius row it sat as a
+ * rounded rectangle in a line of circles. It is drawn as a cell in Figma, so
+ * it takes the cell's radius.
+ */
 export const paginationEllipsisVariants = cva(
-  'inline-flex size-8 shrink-0 select-none items-center justify-center rounded-md border border-soft-200 bg-white-0 text-[14px] leading-5 text-sub-600',
+  'inline-flex size-8 shrink-0 select-none items-center justify-center border border-soft-200 bg-white-0 text-[14px] leading-5 text-sub-600',
+  {
+    variants: {
+      fullRadius: {
+        true: 'rounded-full',
+        false: 'rounded-md',
+      },
+    },
+    defaultVariants: { fullRadius: false },
+  },
 );
 
 export const paginationSummaryVariants = cva(

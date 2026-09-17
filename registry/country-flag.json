@@ -1,0 +1,136 @@
+{
+  "dir": "country-flag",
+  "name": "CountryFlag",
+  "type": "registry:component",
+  "files": [
+    "src/components/country-flag/country-flag.styles.ts",
+    "src/components/country-flag/country-flag.tsx",
+    "src/components/country-flag/country-flag.types.ts",
+    "src/components/country-flag/flags.data.ts",
+    "src/components/country-flag/index.ts"
+  ],
+  "exports": [
+    "COUNTRY_CODES",
+    "COUNTRY_FLAG_PX",
+    "COUNTRY_FLAG_SIZES",
+    "CountryCode",
+    "CountryFlag",
+    "CountryFlagProps",
+    "CountryFlagSize",
+    "CountryFlagVariantProps",
+    "FLAGS",
+    "FlagEntry",
+    "countryFlagVariants",
+    "flagUrl",
+    "getFlag",
+    "hasFlag"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/assets",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "CountryFlag",
+      "exported": true,
+      "variants": {
+        "size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ],
+        "bordered": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "bordered": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit<ComponentPropsWithoutRef<'span'>, 'children'>",
+        "CountryFlagVariantProps"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "code": {
+          "type": "CountryCode | (string & {})",
+          "required": true,
+          "doc": "ISO 3166-1 alpha-2 code, case-insensitive. Subdivisions and a handful of non-country flags use a longer slug (`'gb-eng'`, `'x-un'`); `COUNTRY_CODES` is the full list. An unrecognised code renders a neutral disc rather than a gap.",
+          "control": "none"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Omit it and the flag is decorative, which is what you want whenever the country name is already on screen beside it.",
+          "control": "text"
+        },
+        "basePath": {
+          "type": "string",
+          "required": false,
+          "doc": "Override where the SVG files are served from, for this one flag. Prefer `setAssetBasePath()` at startup; this is for the odd case of two asset origins in one app.",
+          "control": "text"
+        },
+        "loading": {
+          "type": "'lazy' | 'eager'",
+          "required": false,
+          "doc": "Defaults to `'lazy'`. Use `'eager'` for a flag above the fold.",
+          "control": "select",
+          "options": [
+            "lazy",
+            "eager"
+          ],
+          "default": "lazy"
+        },
+        "size": {
+          "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ]
+        },
+        "bordered": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

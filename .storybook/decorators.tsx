@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../src/i18n/i18n';
+import { DirectionProvider } from '../src/providers/direction';
 import { updateHtmlLang, updateHtmlTheme } from './langUtils';
 import type { Decorator } from '@storybook/react';
 import '@styles/globals.css';
@@ -40,20 +41,30 @@ function GlobalSettings({ locale, theme, children }: GlobalSettingsProps) {
   return (
     <I18nextProvider i18n={i18n}>
       {/*
+        DirectionProvider, not just a `dir` attribute. The attribute alone
+        flips every CSS logical property but leaves `useDirection()` reporting
+        the default 'ltr', so any component doing pointer maths in JS disagreed
+        with its own layout — that is what made the Persian slider run
+        backwards. `attributeTarget="document"` because the wrapper below
+        already carries `lang`/`dir` itself and a second nested div would only
+        add a layout box.
+
         data-theme, lang and dir are set here during render as well as on
         <html> in the effects above. The wrapper is what actually guarantees
         correctness: on a Docs page every story shares one document, so the
         last one to render would otherwise win, and lang drives the font stack
         (Vazirmatn vs Inter) so it has to wrap the content.
       */}
-      <div
-        data-theme={theme}
-        lang={locale}
-        dir={locale === 'fa' ? 'rtl' : 'ltr'}
-        className={theme === 'dark' ? 'storybook-dark' : 'storybook-light'}
-      >
-        {children}
-      </div>
+      <DirectionProvider locale={locale} attributeTarget="document">
+        <div
+          data-theme={theme}
+          lang={locale}
+          dir={locale === 'fa' ? 'rtl' : 'ltr'}
+          className={theme === 'dark' ? 'storybook-dark' : 'storybook-light'}
+        >
+          {children}
+        </div>
+      </DirectionProvider>
     </I18nextProvider>
   );
 }

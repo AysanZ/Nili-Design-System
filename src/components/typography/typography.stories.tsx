@@ -9,7 +9,7 @@ const VARIANTS = Object.keys(defaultElementForVariant) as Array<
 >;
 
 const meta: Meta<typeof Typography> = {
-  title: 'Core Elements/Typography',
+  title: 'Core Elements/Typography/Typography',
   component: Typography,
   parameters: {
     docs: {
@@ -17,7 +17,7 @@ const meta: Meta<typeof Typography> = {
         component: `The **Typography** component is the foundation of consistent text presentation across the system. It applies the design system's type scale and leaves colour, weight and spacing to tokens rather than ad-hoc classes.
 
 **Key Features:**
-- **22 variants** across headings, labels, paragraphs and subheadings
+- **26 variants** across titles, labels, paragraphs, subheadings, body and document copy
 - **Semantic elements by default**: \`h1\` renders \`<h1>\`, \`paragraph-*\` renders \`<p>\`, \`label-*\` renders \`<span>\` — override with \`as\`
 - **Polymorphic and typed**: \`<Typography as="a" href="…" />\` type-checks; \`as="div" href="…"\` does not
 - **Ref forwarding** to whichever element is rendered
@@ -32,7 +32,17 @@ This replaced Roboto + YekanBakh. YekanBakh is commercial and could not lawfully
 
 The old font was the \`FaNum\` cut, which maps Persian digit *glyphs* onto ASCII digit *codepoints*. Numbers looked Persian but the DOM still held \`123\`, so find-in-page, copy-paste and screen readers all disagreed with what was on screen. Numerals are now a formatting decision: use \`formatNumber(value, { locale: 'fa-IR' })\`, which also gets the Persian thousands separator (\`٬\`) right.
 
-**Fixed:** every variant wrote \`tracking[-0.01em]\` instead of \`tracking-[-0.01em]\` — a missing hyphen meant Tailwind emitted nothing and the entire scale shipped with default letter-spacing.`,
+**Rebuilt from Figma**
+
+The scale now matches "Typography EN/FA [Overview]" value for value. Three things changed:
+
+- **Tracking is in px again.** Figma states \`-0.4px\`, \`0px\`, \`0.8px\`, \`0.4px\` and nothing else; the old scale carried invented \`em\` values that matched no row in the frame.
+- **The Body group exists.** \`body-large\` / \`body-medium\` / \`body-small\` were missing entirely. Same sizes as Paragraph, looser leading — Paragraph is for UI copy, Body is for reading.
+- **\`label-large\` and \`paragraph-large\` are 18/28**, not 18/24.
+
+Family is part of the scale: Title and Label take \`font-display\` (Inter Display), everything else \`font-sans\` (Inter), matching the frame's band headers. Both resolve through \`--nili-font-*\`, so Persian still swaps to Vazirmatn.
+
+\`TYPOGRAPHY_SPECS\` exports the same numbers as data if you need to generate tokens elsewhere.`,
       },
     },
   },
@@ -121,6 +131,35 @@ export const Paragraphs = () => (
     ).map((variant) => (
       <Typography key={variant} variant={variant}>
         Insert the description here. It would look better as two lines of text.
+      </Typography>
+    ))}
+  </div>
+);
+
+/** Body is Paragraph's reading counterpart: same sizes, looser leading. */
+export const BodyCopy = () => (
+  <div className="flex max-w-xl flex-col gap-6">
+    {(['body-large', 'body-medium', 'body-small'] as const).map((variant) => (
+      <Typography key={variant} variant={variant}>
+        Insert the description here. It would look better as two lines of text.
+      </Typography>
+    ))}
+  </div>
+);
+
+/** Subheadings carry `uppercase` in the style, not at the call site. */
+export const Subheadings = () => (
+  <div className="flex flex-col gap-3">
+    {(
+      [
+        'subheading-medium',
+        'subheading-small',
+        'subheading-xsmall',
+        'subheading-2xsmall',
+      ] as const
+    ).map((variant) => (
+      <Typography key={variant} variant={variant}>
+        Section label
       </Typography>
     ))}
   </div>

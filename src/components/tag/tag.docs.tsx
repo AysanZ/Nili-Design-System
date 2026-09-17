@@ -16,7 +16,7 @@ const LEADS: [string, ReactNode][] = [
       key="a"
       size="3xs"
       name="Sophia Williams"
-      src="/avatars/olivia-rhye.webp"
+      src="/avatars/persona.png"
     />,
   ],
   [

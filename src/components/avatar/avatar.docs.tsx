@@ -1,13 +1,17 @@
 /**
  * Docs-only: the Figma Avatar page — personas, statuses, the size matrix,
  * groups and the Flat Avatar parts — drawn with the real components.
- * Not part of the library (see src/docs/figma.docs.tsx). The persona photos
- * live in public/avatars (extracted from the Figma file, 256px WebP).
+ * Not part of the library (see src/docs/figma.docs.tsx).
+ *
+ * The 32 named personas used to point at 64 files in public/avatars that were
+ * never committed, so every avatar in every story rendered as a broken image
+ * and the docs quietly taught you that Avatar does not work. There is now one
+ * committed photo and every persona uses it: the names still differ, which is
+ * all AvatarGroup and the initials fallback need, and nothing 404s.
  */
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RiLink, RiFlashlightFill } from '@remixicon/react';
-import { Icon } from '../icon';
+import { RiFlashlightFill } from '@remixicon/react';
 import { Caption } from '../../docs/figma.docs';
 import { Avatar } from './avatar';
 import { AvatarGroup, CompactAvatarGroup } from './avatar-group';
@@ -20,226 +24,58 @@ import type {
   AvatarBottomStatus,
 } from './avatar.types';
 
+/** The one committed persona photo. Every persona points at it. */
+export const PERSONA_PHOTO = '/avatars/persona.png';
+
+/**
+ * Names for the avatar examples.
+ *
+ * Figma ships 32 personas, each as a photo and a background-removed cut-out.
+ * Those 64 files are not in this repo, and shipping licensed stock photography
+ * in a component library is a licence question rather than a technical one —
+ * so the docs use a single image and keep the names. What the stories are
+ * actually demonstrating is sizing, stacking, status markers and the initials
+ * fallback, and none of that needs 32 different faces.
+ *
+ * Drop the real exports into `public/avatars/` and point `photo` / `cutout`
+ * back at per-persona paths when the licensing is settled; nothing else here
+ * has to change.
+ */
 export const PERSONAS = [
-  {
-    name: 'Olivia Rhye',
-    photo: '/avatars/olivia-rhye.webp',
-    cutout: '/avatars/olivia-rhye-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-wearing-white-blazer-IXYxqP4zejo',
-  },
-  {
-    name: 'Phoenix Baker',
-    photo: '/avatars/phoenix-baker.webp',
-    cutout: '/avatars/phoenix-baker-cutout.webp',
-    source:
-      'https://unsplash.com/photos/man-wearing-yellow-sweater-M7i6iMgzPwc',
-  },
-  {
-    name: 'Lana Steiner',
-    photo: '/avatars/lana-steiner.webp',
-    cutout: '/avatars/lana-steiner-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/curly-haired-woman-holding-sheets-of-hard-papers-7552448/',
-  },
-  {
-    name: 'Demi Wilkinson',
-    photo: '/avatars/demi-wilkinson.webp',
-    cutout: '/avatars/demi-wilkinson-cutout.webp',
-    source:
-      'https://unsplash.com/photos/a-woman-with-an-afro-is-looking-at-the-camera-_cvwXhGqG-o',
-  },
-  {
-    name: 'Candice Wu',
-    photo: '/avatars/candice-wu.webp',
-    cutout: '/avatars/candice-wu-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-leaning-on-white-table-f2ar0ltTvaI',
-  },
-  {
-    name: 'Natali Craig',
-    photo: '/avatars/natali-craig.webp',
-    cutout: '/avatars/natali-craig-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-with-black-white-and-grey-blanket-leaning-on-wall-with-no-lifeguard-on-duty-signage-N5GCRjEMboQ',
-  },
-  {
-    name: 'Drew Cano',
-    photo: '/avatars/drew-cano.webp',
-    cutout: '/avatars/drew-cano-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/man-in-brown-button-up-shirt-3785079/',
-  },
-  {
-    name: 'Orlando Diggs',
-    photo: '/avatars/orlando-diggs.webp',
-    cutout: '/avatars/orlando-diggs-cutout.webp',
-    source:
-      'https://unsplash.com/photos/man-in-white-crew-neck-t-shirt-and-black-pants-sitting-on-rock-during-daytime-h0qUAPHoXmE',
-  },
-  {
-    name: 'Andi Lane',
-    photo: '/avatars/andi-lane.webp',
-    cutout: '/avatars/andi-lane-cutout.webp',
-    source: 'https://www.pexels.com/photo/fashion-person-people-woman-7956286/',
-  },
-  {
-    name: 'Kate Morrison',
-    photo: '/avatars/kate-morrison.webp',
-    cutout: '/avatars/kate-morrison-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/woman-in-wearing-half-of-black-coat-8479814/',
-  },
-  {
-    name: 'Koray Okumus',
-    photo: '/avatars/koray-okumus.webp',
-    cutout: '/avatars/koray-okumus-cutout.webp',
-    source: 'https://unsplash.com/photos/man-wearing-eyeglasses-K84vnnzxmTQ',
-  },
-  {
-    name: 'Ava Wright',
-    photo: '/avatars/ava-wright.webp',
-    cutout: '/avatars/ava-wright-cutout.webp',
-    source: 'https://www.pexels.com/photo/woman-holding-a-laptop-4347368/',
-  },
-  {
-    name: 'Zahir Mays',
-    photo: '/avatars/zahir-mays.webp',
-    cutout: '/avatars/zahir-mays-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/serious-young-black-man-with-bag-and-netbook-in-hands-against-white-background-5745181/',
-  },
-  {
-    name: 'Joshua Wilson',
-    photo: '/avatars/joshua-wilson.webp',
-    cutout: '/avatars/joshua-wilson-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/a-handsome-model-wearing-a-brown-jacket-7388867/',
-  },
-  {
-    name: 'Rene Wells',
-    photo: '/avatars/rene-wells.webp',
-    cutout: '/avatars/rene-wells-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/woman-in-white-shirt-wearing-eyeglasses-8107620/',
-  },
-  {
-    name: 'Lori Bryson',
-    photo: '/avatars/lori-bryson.webp',
-    cutout: '/avatars/lori-bryson-cutout.webp',
-    source: 'https://unsplash.com/photos/woman-taking-selfie-c-mgSuxqpzA',
-  },
-  {
-    name: 'Anaiah Whitten',
-    photo: '/avatars/anaiah-whitten.webp',
-    cutout: '/avatars/anaiah-whitten-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-in-white-and-red-shirt-vp9mRauo68c',
-  },
-  {
-    name: 'Noah Pierre',
-    photo: '/avatars/noah-pierre.webp',
-    cutout: '/avatars/noah-pierre-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/a-man-in-black-suit-holding-a-tablet-5862269/',
-  },
-  {
-    name: 'Katherine Moss',
-    photo: '/avatars/katherine-moss.webp',
-    cutout: '/avatars/katherine-moss-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-wearing-black-and-white-striped-top-and-round-eyeglasses-Brl7bqld05E',
-  },
-  {
-    name: 'Eduard Franz',
-    photo: '/avatars/eduard-franz.webp',
-    cutout: '/avatars/eduard-franz-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/man-in-brown-coat-and-blue-denim-jeans-sitting-on-chair-6625967/',
-  },
-  {
-    name: 'Alec Whitten',
-    photo: '/avatars/alec-whitten.webp',
-    cutout: '/avatars/alec-whitten-cutout.webp',
-    source:
-      'https://unsplash.com/photos/man-in-gray-and-white-plaid-button-up-shirt-TAkcKn99UC0',
-  },
-  {
-    name: 'Eva Bond',
-    photo: '/avatars/eva-bond.webp',
-    cutout: '/avatars/eva-bond-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/a-doctor-holding-a-clipboard-5215024/',
-  },
-  {
-    name: 'Sophia Perez',
-    photo: '/avatars/sophia-perez.webp',
-    cutout: '/avatars/sophia-perez-cutout.webp',
-    source:
-      'https://unsplash.com/photos/selective-focus-photography-of-woman-wearing-red-knit-cap-8vT-DgHZDG4',
-  },
-  {
-    name: 'Lyle Kauffman',
-    photo: '/avatars/lyle-kauffman.webp',
-    cutout: '/avatars/lyle-kauffman-cutout.webp',
-    source: 'https://unsplash.com/photos/mens-gray-crew-neck-shirt-v2aKnjMbP_k',
-  },
-  {
-    name: 'Kelly Williams',
-    photo: '/avatars/kelly-williams.webp',
-    cutout: '/avatars/kelly-williams-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/woman-with-curly-hair-wearing-a-gray-knitted-sweater-7244701/',
-  },
-  {
-    name: 'Lucy Bond',
-    photo: '/avatars/lucy-bond.webp',
-    cutout: '/avatars/lucy-bond-cutout.webp',
-    source: 'https://www.pexels.com/photo/woman-in-white-dress-shirt-4972985/',
-  },
-  {
-    name: 'Alisa Hester',
-    photo: '/avatars/alisa-hester.webp',
-    cutout: '/avatars/alisa-hester-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/smiling-black-model-with-afro-braids-on-gray-background-7275385/',
-  },
-  {
-    name: 'Rosalee Melvin',
-    photo: '/avatars/rosalee-melvin.webp',
-    cutout: '/avatars/rosalee-melvin-cutout.webp',
-    source:
-      'https://unsplash.com/photos/woman-smiling-while-standing-in-garden-HRZUzoX1e6w',
-  },
-  {
-    name: 'Loki Bright',
-    photo: '/avatars/loki-bright.webp',
-    cutout: '/avatars/loki-bright-cutout.webp',
-    source:
-      'https://unsplash.com/photos/mens-blue-and-white-button-up-collared-top-DItYlc26zVI',
-  },
-  {
-    name: 'Aliah Lane',
-    photo: '/avatars/aliah-lane.webp',
-    cutout: '/avatars/aliah-lane-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/woman-wearing-pink-collared-half-sleeved-top-1036623/',
-  },
-  {
-    name: 'Anita Cruz',
-    photo: '/avatars/anita-cruz.webp',
-    cutout: '/avatars/anita-cruz-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/attractive-woman-wearing-white-top-2744193/',
-  },
-  {
-    name: 'Kari Rasmussen',
-    photo: '/avatars/kari-rasmussen.webp',
-    cutout: '/avatars/kari-rasmussen-cutout.webp',
-    source:
-      'https://www.pexels.com/photo/photo-of-man-wearing-eyeglasses-6801642/',
-  },
+  { name: 'Olivia Rhye', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Phoenix Baker', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Lana Steiner', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Demi Wilkinson', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Candice Wu', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Natali Craig', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Drew Cano', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Orlando Diggs', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Andi Lane', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Kate Morrison', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Koray Okumus', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Ava Wright', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Zahir Mays', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Joshua Wilson', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Rene Wells', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Lori Bryson', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Anaiah Whitten', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Noah Pierre', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Katherine Moss', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Eduard Franz', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Alec Whitten', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Eva Bond', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Sophia Perez', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Lyle Kauffman', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Kelly Williams', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Lucy Bond', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Alisa Hester', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Rosalee Melvin', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Loki Bright', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Aliah Lane', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Anita Cruz', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
+  { name: 'Kari Rasmussen', photo: PERSONA_PHOTO, cutout: PERSONA_PHOTO },
 ] as const;
+
 
 export const AVATAR_SIZES: AvatarSize[] = [
   '3xl',
@@ -253,41 +89,26 @@ export const AVATAR_SIZES: AvatarSize[] = [
   '3xs',
 ];
 
-/** Figma Avatar Images: every persona as a photo card and a cut-out card. */
+/**
+ * Figma draws a wall of 32 photos and 32 cut-outs here. One is enough: the
+ * section documents that Avatar takes an image and crops it to a circle, and
+ * 63 more faces do not make that point any harder to miss.
+ */
 export function PersonaGrid() {
   const { t } = useTranslation();
   return (
-    <div className="grid grid-cols-4 gap-4 lg:grid-cols-8">
-      {PERSONAS.flatMap((p) =>
-        (['photo', 'cutout'] as const).map((kind) => (
-          <figure
-            key={p.name + kind}
-            className="flex flex-col items-center gap-2 rounded-xl border border-soft-200 bg-white-0 px-3 pt-3 pb-4"
-          >
-            <img
-              src={p[kind]}
-              alt={p.name}
-              width={100}
-              height={100}
-              className="size-[100px] object-cover"
-              loading="lazy"
-            />
-            <figcaption className="text-center text-[14px] leading-5 font-medium text-strong-950">
-              {p.name}
-            </figcaption>
-            <a
-              href={p.source}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1 text-[12px] leading-4 text-sub-600 underline decoration-from-font"
-            >
-              <Icon icon={RiLink} size={12} />
-              {t('avatarDocs.imageLink')}
-            </a>
-          </figure>
-        )),
-      )}
-    </div>
+    <figure className="flex w-fit flex-col items-center gap-3 rounded-xl border border-soft-200 bg-white-0 px-5 pt-5 pb-6">
+      <img
+        src={PERSONA_PHOTO}
+        alt=""
+        width={100}
+        height={100}
+        className="size-[100px] rounded-full object-cover"
+      />
+      <figcaption className="text-center text-[14px] leading-5 font-medium text-strong-950">
+        {t('avatarDocs.imageCaption')}
+      </figcaption>
+    </figure>
   );
 }
 

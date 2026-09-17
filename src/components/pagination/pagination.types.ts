@@ -62,6 +62,8 @@ export interface PaginationEllipsisProps extends Omit<
 > {
   /** Accessible name; the glyph itself is hidden. */
   label?: string;
+  /** Match the cells it sits among. Circles in Figma's Full Radius row. */
+  fullRadius?: boolean;
 }
 
 export interface PaginationProps extends Omit<

@@ -52,19 +52,51 @@ export const textAreaControlVariants = cva(
   },
 );
 
-/** The counter row, sitting inside the box under the text. */
+/**
+ * The counter row, inside the box under the text.
+ *
+ * It used to be a filled grey band with a rule across the top. Figma draws no
+ * band: the count sits on the field's own surface, pinned to the trailing
+ * edge, with the resize grip beside it. The band added a second horizontal
+ * line right under the one the field already has, which is why a Text Area
+ * with a counter looked a size taller than one without.
+ */
 export const textAreaFooterVariants = cva(
-  'flex items-center justify-end gap-2 border-t border-soft-200 bg-weak-50 px-3 py-1.5',
+  'flex items-center justify-end gap-1.5 px-3 pb-2 text-[12px] leading-4',
 );
 
+/**
+ * Figma's Character Counter states: Default, Error, Disabled.
+ *
+ * Disabled was missing, so a disabled Text Area faded its text, its border and
+ * its placeholder while the count underneath stayed at full contrast — the one
+ * element still claiming to be live.
+ */
 export const textAreaCounterVariants = cva('tabular-nums', {
   variants: {
     over: {
       true: 'font-medium text-error-base',
       false: 'text-sub-600',
     },
+    disabled: {
+      true: 'text-sub-300',
+      false: '',
+    },
   },
-  defaultVariants: { over: false },
+  compoundVariants: [
+    /* Disabled wins over the limit: a field nobody can type in cannot be over
+       its limit in any sense the user can act on. */
+    { over: true, disabled: true, class: 'font-normal text-sub-300' },
+  ],
+  defaultVariants: { over: false, disabled: false },
+});
+
+/** Figma's resize grip, beside the count. Decorative — the handle is native. */
+export const textAreaGripVariants = cva('shrink-0', {
+  variants: {
+    disabled: { true: 'text-sub-300', false: 'text-soft-400' },
+  },
+  defaultVariants: { disabled: false },
 });
 
 export type TextAreaVariantProps = VariantProps<typeof textAreaFieldVariants>;

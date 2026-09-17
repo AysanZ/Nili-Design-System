@@ -17,6 +17,7 @@ import {
   textAreaControlVariants,
   textAreaFooterVariants,
   textAreaCounterVariants,
+  textAreaGripVariants,
 } from './text-area.styles';
 import type { TextAreaProps } from './text-area.types';
 
@@ -178,10 +179,29 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
               */}
               <span
                 aria-live="polite"
-                className={textAreaCounterVariants({ over })}
+                className={textAreaCounterVariants({ over, disabled })}
               >
                 {counter}
               </span>
+              {/* Figma's grip. The real resize handle is the browser's, drawn
+                  in the corner; this is the mark that says the field has one,
+                  so it is hidden when resizing is off. */}
+              {resize !== 'none' && !autoResize && (
+                <svg
+                  aria-hidden
+                  viewBox="0 0 12 12"
+                  className={cn(
+                    textAreaGripVariants({ disabled }),
+                    'size-3 rtl:-scale-x-100',
+                  )}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                >
+                  <path d="M10.5 4.5 4.5 10.5M10.5 8.5l-2 2" />
+                </svg>
+              )}
             </div>
           )}
         </div>

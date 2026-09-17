@@ -212,8 +212,15 @@
     {
       "name": "PaginationEllipsis",
       "exported": true,
-      "variants": {},
-      "defaultVariants": {},
+      "variants": {
+        "fullRadius": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "fullRadius": false
+      },
       "slots": [],
       "extends": [
         "Omit< ComponentPropsWithoutRef<'span'>, 'children' >"
@@ -239,6 +246,14 @@
           "doc": "Accessible name; the glyph itself is hidden.",
           "control": "text",
           "default": "More pages"
+        },
+        "fullRadius": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Match the cells it sits among. Circles in Figma's Full Radius row.",
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
         }
       }
     },

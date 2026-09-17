@@ -7,11 +7,13 @@ import {
 } from '@remixicon/react';
 import { ComponentSection, OverviewPage } from '../../docs/overview.docs';
 import {
+  DropdownCompactSet,
+  DropdownInlineSet,
   DropdownItemSet,
   DropdownMiscSet,
   DropdownTriggerSet,
 } from './dropdown.docs';
-import { Compact, Default } from './dropdown.stories';
+import { Default } from './dropdown.stories';
 
 /** Figma "Dropdown EN/FA [Overview]". */
 const meta: Meta = {
@@ -79,7 +81,13 @@ export const Overview: StoryObj = {
           title={t('dropdownDocs.sectionCompact')}
           body={t('dropdownDocs.sectionCompactBody')}
         >
-          <Compact />
+          <DropdownCompactSet />
+        </ComponentSection>
+        <ComponentSection
+          title={t('dropdownDocs.sectionInline')}
+          body={t('dropdownDocs.sectionInlineBody')}
+        >
+          <DropdownInlineSet />
         </ComponentSection>
       </OverviewPage>
     );
