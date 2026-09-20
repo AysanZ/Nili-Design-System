@@ -1,0 +1,156 @@
+{
+  "dir": "card-provider",
+  "name": "CardProvider",
+  "type": "registry:component",
+  "files": [
+    "src/components/card-provider/card-provider.data.ts",
+    "src/components/card-provider/card-provider.styles.ts",
+    "src/components/card-provider/card-provider.tsx",
+    "src/components/card-provider/card-provider.types.ts",
+    "src/components/card-provider/index.ts"
+  ],
+  "exports": [
+    "CARD_PROVIDERS",
+    "CARD_PROVIDER_IDS",
+    "CARD_PROVIDER_SIZES",
+    "CARD_PROVIDER_VARIANTS",
+    "CardProvider",
+    "CardProviderEntry",
+    "CardProviderId",
+    "CardProviderProps",
+    "CardProviderSize",
+    "CardProviderVariant",
+    "CardProviderVariantProps",
+    "cardProviderUrl",
+    "cardProviderVariants",
+    "getCardProvider",
+    "hasCardProvider"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/assets",
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "CardProvider",
+      "exported": true,
+      "variants": {
+        "size": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "2xl"
+        ],
+        "variant": [
+          "original",
+          "mono",
+          "outline"
+        ],
+        "framed": [
+          "true",
+          "false"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "variant": "original",
+        "framed": false
+      },
+      "slots": [],
+      "extends": [
+        "Omit<ComponentPropsWithoutRef<'span'>, 'children'>",
+        "Omit<CardProviderVariantProps, 'variant'>"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "provider": {
+          "type": "CardProviderId | (string & {})",
+          "required": true,
+          "doc": "Which scheme. `CARD_PROVIDER_IDS` is the list; an unknown id falls back to `generic`, the neutral card glyph.",
+          "control": "none"
+        },
+        "variant": {
+          "type": "CardProviderVariant",
+          "required": false,
+          "doc": "`original` is full colour, `mono` single colour, `outline` a stroked outline — the three treatments the schemes publish.",
+          "control": "select",
+          "options": [
+            "original",
+            "mono",
+            "outline"
+          ],
+          "default": "original",
+          "source": "cva"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Defaults to the scheme name, because a row of accepted cards is usually *only* logos and the names are the content. Pass `''` when the name is already written beside the mark.",
+          "control": "text"
+        },
+        "basePath": {
+          "type": "string",
+          "required": false,
+          "doc": "Override the asset origin for this one mark. See `setAssetBasePath()`.",
+          "control": "text"
+        },
+        "loading": {
+          "type": "'lazy' | 'eager'",
+          "required": false,
+          "doc": "Defaults to `'lazy'`.",
+          "control": "select",
+          "options": [
+            "lazy",
+            "eager"
+          ],
+          "default": "lazy"
+        },
+        "size": {
+          "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ]
+        },
+        "framed": {
+          "type": "'true' | 'false'",
+          "required": false,
+          "doc": null,
+          "control": "boolean",
+          "default": false,
+          "source": "cva"
+        }
+      }
+    }
+  ]
+}

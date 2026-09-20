@@ -27,7 +27,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * so it is not a prop either.
  */
 export const toggleGroupVariants = cva([
-  'inline-flex items-center gap-1',
+  // Equal grid tracks let segments consume the whole control when its parent
+  // stretches it, while an intrinsic group still sizes itself to its content.
+  // A flex row left unused grey space after the last content-width segment.
+  'inline-grid grid-flow-col auto-cols-fr items-center gap-1',
   'rounded-lg bg-weak-50 p-1',
 ]);
 
@@ -42,9 +45,9 @@ export const toggleVariants = cva(
   ],
   {
     variants: {
-      /** Square, for a bar of icon-only segments. Figma's "Only Icon". */
+      /** Icon-only segments still fill their equal group track. */
       iconOnly: {
-        true: 'aspect-square px-0',
+        true: 'w-full px-0',
         false: '',
       },
       /** Figma's "Active" — the segment you are currently on. */

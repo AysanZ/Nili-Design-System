@@ -209,6 +209,36 @@
       }
     },
     {
+      "name": "AppStoreBadge",
+      "dir": "app-store-badge",
+      "exports": [
+        "APP_STORES",
+        "APP_STORE_BADGE_SIZES",
+        "APP_STORE_IDS",
+        "AppStoreBadge",
+        "AppStoreBadgeProps",
+        "AppStoreBadgeSize",
+        "AppStoreBadgeVariant",
+        "AppStoreBadgeVariantProps",
+        "AppStoreEntry",
+        "AppStoreId",
+        "appStoreBadgeVariants",
+        "getAppStore"
+      ],
+      "provides": [
+        "AppStoreBadge"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/cn"
+        ]
+      }
+    },
+    {
       "name": "Avatar",
       "dir": "avatar",
       "exports": [
@@ -427,6 +457,40 @@
         "shared": [
           "lib/cn",
           "lib/slot"
+        ]
+      }
+    },
+    {
+      "name": "CardProvider",
+      "dir": "card-provider",
+      "exports": [
+        "CARD_PROVIDERS",
+        "CARD_PROVIDER_IDS",
+        "CARD_PROVIDER_SIZES",
+        "CARD_PROVIDER_VARIANTS",
+        "CardProvider",
+        "CardProviderEntry",
+        "CardProviderId",
+        "CardProviderProps",
+        "CardProviderSize",
+        "CardProviderVariant",
+        "CardProviderVariantProps",
+        "cardProviderUrl",
+        "cardProviderVariants",
+        "getCardProvider",
+        "hasCardProvider"
+      ],
+      "provides": [
+        "CardProvider"
+      ],
+      "dependencies": {
+        "npm": [
+          "class-variance-authority"
+        ],
+        "registry": [],
+        "shared": [
+          "lib/assets",
+          "lib/cn"
         ]
       }
     },
@@ -698,6 +762,7 @@
       ],
       "dependencies": {
         "npm": [
+          "@floating-ui/react",
           "@remixicon/react",
           "class-variance-authority"
         ],
@@ -707,9 +772,9 @@
         ],
         "shared": [
           "hooks/use-controllable-state",
-          "hooks/use-dismissable",
           "hooks/use-id",
-          "lib/cn"
+          "lib/cn",
+          "lib/floating"
         ]
       }
     },
@@ -1239,19 +1304,24 @@
         "SidebarGroupProps",
         "SidebarHeader",
         "SidebarHeaderProps",
+        "SidebarIconButton",
+        "SidebarIconButtonProps",
         "SidebarItem",
         "SidebarItemProps",
         "SidebarProps",
+        "SidebarTrigger",
         "SidebarUser",
         "SidebarUserProps",
         "SidebarVariantProps",
         "sidebarFooterVariants",
         "sidebarGroupLabelVariants",
         "sidebarHeaderVariants",
+        "sidebarIconButtonVariants",
         "sidebarItemLabelVariants",
         "sidebarItemTrailingVariants",
         "sidebarItemVariants",
         "sidebarVariants",
+        "useSidebar",
         "useSidebarCollapsed"
       ],
       "provides": [
@@ -1260,6 +1330,7 @@
         "SidebarGroup",
         "SidebarGroupLabel",
         "SidebarHeader",
+        "SidebarIconButton",
         "SidebarItem",
         "SidebarItemLabel",
         "SidebarItemTrailing",
@@ -1274,6 +1345,7 @@
           "icon"
         ],
         "shared": [
+          "hooks/use-controllable-state",
           "lib/cn"
         ]
       }
@@ -1542,16 +1614,14 @@
         "textAreaControlVariants",
         "textAreaCounterVariants",
         "textAreaFieldVariants",
-        "textAreaFooterVariants",
-        "textAreaGripVariants"
+        "textAreaFooterVariants"
       ],
       "provides": [
         "TextArea",
         "TextAreaControl",
         "TextAreaCounter",
         "TextAreaField",
-        "TextAreaFooter",
-        "TextAreaGrip"
+        "TextAreaFooter"
       ],
       "dependencies": {
         "npm": [
@@ -1719,12 +1789,14 @@
         "TopbarUser",
         "TopbarUserProps",
         "topbarItemVariants",
+        "topbarListVariants",
         "topbarUserVariants",
         "topbarVariants"
       ],
       "provides": [
         "Topbar",
         "TopbarItem",
+        "TopbarList",
         "TopbarUser"
       ],
       "dependencies": {

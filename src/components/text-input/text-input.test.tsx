@@ -90,6 +90,42 @@ describe('TextInput', () => {
       expect(input).toHaveAttribute('autocomplete', 'email');
     });
 
+    it('rejects text in an amount field while allowing decimals', async () => {
+      const user = userEvent.setup();
+      render(<TextInput type="amount" label="Amount" />);
+      const input = screen.getByLabelText('Amount');
+
+      expect(input).toHaveAttribute('type', 'number');
+      expect(input).toHaveAttribute('step', 'any');
+      await user.type(input, 'letters');
+      expect(input).toHaveValue(null);
+      await user.clear(input);
+      await user.type(input, '12.5');
+      expect(input).toHaveValue(12.5);
+    });
+
+    it('adds native constraints for phone and card values', () => {
+      const { rerender } = render(
+        <TextInput type="phone" label="Phone" defaultValue="letters" />,
+      );
+      expect(screen.getByLabelText('Phone')).toBeInvalid();
+
+      rerender(<TextInput type="card" label="Card" defaultValue="1234 ABC" />);
+      expect(screen.getByLabelText('Card')).toBeInvalid();
+    });
+
+    it('uses native constraint validation for email and website values', () => {
+      const { rerender } = render(
+        <TextInput type="email" label="Email" defaultValue="not-an-email" />,
+      );
+      expect(screen.getByLabelText('Email')).toBeInvalid();
+
+      rerender(
+        <TextInput type="website" label="Website" defaultValue="not a url" />,
+      );
+      expect(screen.getByLabelText('Website')).toBeInvalid();
+    });
+
     it('pins Latin-valued types to LTR', () => {
       render(<TextInput type="website" label="Site" />);
       expect(screen.getByLabelText('Site')).toHaveAttribute('dir', 'ltr');
@@ -138,6 +174,20 @@ describe('TextInput', () => {
       );
       expect(screen.queryByText('⌘K')).not.toBeNull();
       expect(container.querySelector('[aria-hidden]')).not.toBeNull();
+    });
+
+    it('gives an attached button equal space on every edge', () => {
+      render(
+        <TextInput
+          type="button"
+          label="Share link"
+          button={<button type="button">Copy</button>}
+        />,
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Copy' }).parentElement,
+      ).toHaveClass('p-1');
     });
   });
 

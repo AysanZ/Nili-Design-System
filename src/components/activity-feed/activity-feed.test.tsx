@@ -65,14 +65,14 @@ describe('ActivityFeed', () => {
     expect(quote?.className).toContain('border-soft-200');
   });
 
-  it('marks unread items with a logical inset', () => {
+  it('exposes unread state without drawing a leading-edge line', () => {
     const { container } = render(
       <ActivityFeed label="Feed">
         <ActivityFeedItem title="One" unread />
       </ActivityFeed>,
     );
     expect(container.querySelector('[data-unread]')).not.toBeNull();
-    expect(container.innerHTML).toContain('before:start-0');
+    expect(container.innerHTML).not.toContain('before:start-0');
   });
 
   it('announces the selected tab', () => {

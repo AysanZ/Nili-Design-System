@@ -773,7 +773,7 @@
         "type": {
           "type": "TextInputType",
           "required": false,
-          "doc": "Figma's `Type`. Sets the input mode, autofill hint and direction for the kind of value being asked for; see {@link TextInputType}.",
+          "doc": "Figma's `Type`. Sets native validation, input mode, autofill hint and direction for the kind of value being asked for; see {@link TextInputType}.",
           "control": "select",
           "options": [
             "basic",

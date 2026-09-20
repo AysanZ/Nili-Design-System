@@ -5,6 +5,7 @@ import {
   FileUploadArea,
   FileUploadCard,
   FileFormatIcon,
+  ImageUpload,
   formatColorFor,
 } from '.';
 
@@ -89,5 +90,32 @@ describe('FileFormatIcon', () => {
   it('is decorative — the file name carries the meaning', () => {
     const { container } = render(<FileFormatIcon fileName="report.pdf" />);
     expect(container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
+  });
+});
+
+describe('ImageUpload', () => {
+  it('has a useful default width for aspect-ratio previews', () => {
+    const { container } = render(
+      <ImageUpload shape="16:9" onFiles={vi.fn()} label="Upload cover" />,
+    );
+
+    expect(container.querySelector('button')).toHaveClass(
+      'w-24',
+      'aspect-video',
+    );
+  });
+
+  it('lets consumers override the default preview width', () => {
+    const { container } = render(
+      <ImageUpload
+        shape="4:3"
+        previewClassName="w-full"
+        onFiles={vi.fn()}
+        label="Upload photo"
+      />,
+    );
+
+    expect(container.querySelector('button')).toHaveClass('w-full');
+    expect(container.querySelector('button')).not.toHaveClass('w-24');
   });
 });

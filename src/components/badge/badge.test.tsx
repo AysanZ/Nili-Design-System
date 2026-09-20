@@ -22,7 +22,15 @@ describe('Badge', () => {
 
   it('forwards its ref', () => {
     let node: HTMLSpanElement | null = null;
-    render(<Badge ref={(element) => { node = element; }}>Active</Badge>);
+    render(
+      <Badge
+        ref={(element) => {
+          node = element;
+        }}
+      >
+        Active
+      </Badge>,
+    );
     expect(node).toBeInstanceOf(HTMLSpanElement);
   });
 
@@ -56,5 +64,12 @@ describe('Badge', () => {
     // The dot is an empty aria-hidden span, so nothing is added to the text.
     expect(badge).toHaveTextContent(/^Online$/);
     expect(badge.querySelector('[aria-hidden="true"]')).not.toBeNull();
+  });
+
+  it('renders a compact standalone dot when it has no content', () => {
+    render(<Badge dot color="red" data-testid="notification-dot" />);
+    const dot = screen.getByTestId('notification-dot');
+    expect(dot).toHaveClass('size-2', 'p-0');
+    expect(dot).toBeEmptyDOMElement();
   });
 });

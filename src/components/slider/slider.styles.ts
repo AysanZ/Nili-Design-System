@@ -74,7 +74,7 @@ export const sliderThumbVariants = cva(
  * Positioned with a logical inset so it tracks the thumb in both directions.
  */
 export const sliderTooltipVariants = cva([
-  'pointer-events-none absolute bottom-full mb-2 -translate-x-1/2 rtl:translate-x-1/2',
+  'pointer-events-none absolute start-1/2 bottom-full mb-2 -translate-x-1/2 rtl:translate-x-1/2',
   'rounded-md bg-strong-950 px-2 py-1',
   'text-[11px] leading-4 font-medium tabular-nums text-static-white',
   'whitespace-nowrap shadow-xs',

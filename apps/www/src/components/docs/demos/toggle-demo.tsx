@@ -42,7 +42,11 @@ export function Example() {
   )
 }`}
       >
-        <ToggleGroup value={view} onValueChange={setView} ariaLabel={t('view.label')}>
+        <ToggleGroup
+          value={view}
+          onValueChange={setView}
+          ariaLabel={t('view.label')}
+        >
           <Toggle value="grid">Grid</Toggle>
           <Toggle value="list">List</Toggle>
           <Toggle value="table">Table</Toggle>
@@ -70,12 +74,18 @@ export function Example() {
 
       {/* icon only */}
       <ToggleGroup defaultValue="grid" ariaLabel={t('view.label')}>
-        <Toggle value="grid" iconOnly aria-label={t('view.grid')}>
-          <Icon icon={RiLayoutGridLine} />
-        </Toggle>
-        <Toggle value="list" iconOnly aria-label={t('view.list')}>
-          <Icon icon={RiListCheck} />
-        </Toggle>
+        <Toggle
+          value="grid"
+          iconOnly
+          startIcon={<Icon icon={RiLayoutGridLine} />}
+          aria-label={t('view.grid')}
+        />
+        <Toggle
+          value="list"
+          iconOnly
+          startIcon={<Icon icon={RiListCheck} />}
+          aria-label={t('view.list')}
+        />
       </ToggleGroup>
     </>
   )
@@ -100,15 +110,24 @@ export function Example() {
           <div className="flex flex-col gap-2">
             <DemoLabel>{t('icons.only')}</DemoLabel>
             <ToggleGroup defaultValue="grid" ariaLabel={t('view.label')}>
-              <Toggle value="grid" iconOnly aria-label="Grid">
-                <Icon icon={RiLayoutGridLine} />
-              </Toggle>
-              <Toggle value="list" iconOnly aria-label="List">
-                <Icon icon={RiListCheck} />
-              </Toggle>
-              <Toggle value="table" iconOnly aria-label={t('view.table')}>
-                <Icon icon={RiTableLine} />
-              </Toggle>
+              <Toggle
+                value="grid"
+                iconOnly
+                startIcon={<Icon icon={RiLayoutGridLine} />}
+                aria-label={t('view.grid')}
+              />
+              <Toggle
+                value="list"
+                iconOnly
+                startIcon={<Icon icon={RiListCheck} />}
+                aria-label={t('view.list')}
+              />
+              <Toggle
+                value="table"
+                iconOnly
+                startIcon={<Icon icon={RiTableLine} />}
+                aria-label={t('view.table')}
+              />
             </ToggleGroup>
           </div>
         </div>
@@ -187,7 +206,11 @@ export function Example() {
         <div className="flex w-full flex-col gap-4">
           <div className="flex flex-col gap-2">
             <DemoLabel>{t('disabled.whole')}</DemoLabel>
-            <ToggleGroup defaultValue="grid" disabled ariaLabel={t('view.label')}>
+            <ToggleGroup
+              defaultValue="grid"
+              disabled
+              ariaLabel={t('view.label')}
+            >
               <Toggle value="grid">Grid</Toggle>
               <Toggle value="list">List</Toggle>
               <Toggle value="table">Table</Toggle>

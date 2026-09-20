@@ -12,6 +12,25 @@ describe('DatePicker', () => {
     expect(screen.getByText(/۱۴۰۳/)).toBeInTheDocument();
   });
 
+  it('mirrors previous and next month icons in RTL', () => {
+    render(
+      <div dir="rtl">
+        <DatePicker
+          locale="fa"
+          defaultValue={march2024}
+          labels={{ previousMonth: 'ماه قبل', nextMonth: 'ماه بعد' }}
+        />
+      </div>,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'ماه قبل' }).querySelector('svg'),
+    ).toHaveClass('rtl:-scale-x-100');
+    expect(
+      screen.getByRole('button', { name: 'ماه بعد' }).querySelector('svg'),
+    ).toHaveClass('rtl:-scale-x-100');
+  });
+
   it('defaults to Gregorian otherwise', () => {
     render(<DatePicker locale="en" defaultValue={march2024} />);
     expect(screen.getByText(/2024/)).toBeInTheDocument();
@@ -103,5 +122,29 @@ describe('DateRangePicker', () => {
     );
     await user.click(screen.getByRole('button', { name: 'This week' }));
     expect(onChange).toHaveBeenCalledWith({ from, to });
+  });
+
+  it('keeps the preset divider out of the footer', () => {
+    const { container } = render(
+      <DateRangePicker
+        locale="en"
+        presets={[
+          {
+            label: 'This week',
+            range: { from: new Date(2024, 2, 1), to: new Date(2024, 2, 7) },
+          },
+        ]}
+        footer={<div data-testid="picker-footer">Actions</div>}
+      />,
+    );
+
+    const picker = container.firstElementChild;
+    const footer = screen.getByTestId('picker-footer');
+    const presetRow = screen.getByRole('button', {
+      name: 'This week',
+    }).parentElement?.parentElement;
+
+    expect(footer.parentElement).toBe(picker);
+    expect(presetRow).not.toContainElement(footer);
   });
 });

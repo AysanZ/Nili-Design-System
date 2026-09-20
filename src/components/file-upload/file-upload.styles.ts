@@ -110,9 +110,9 @@ export const imageUploadVariants = cva(
       shape: {
         avatar: 'size-20 rounded-full',
         company: 'size-20 rounded-xl',
-        square: 'aspect-square w-full rounded-xl',
-        '4:3': 'aspect-[4/3] w-full rounded-xl',
-        '16:9': 'aspect-video w-full rounded-xl',
+        square: 'aspect-square w-24 rounded-xl',
+        '4:3': 'aspect-[4/3] w-24 rounded-xl',
+        '16:9': 'aspect-video w-24 rounded-xl',
       },
     },
     defaultVariants: { shape: 'square' },

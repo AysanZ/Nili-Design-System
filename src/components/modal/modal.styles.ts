@@ -44,7 +44,10 @@ export const modalPanelVariants = cva(
 );
 
 export const modalHeaderVariants = cva(
-  'flex shrink-0 items-start gap-3.5 border-b border-soft-200',
+  // Cross-axis alignment belongs exclusively to the alignment variant.
+  // Keeping `items-start` here as well as `items-center` on the vertical
+  // variant lets Tailwind's generated rule order decide which one wins.
+  'flex shrink-0 gap-3.5 border-b border-soft-200',
   {
     variants: {
       /** Figma Medium (80) / Small (56) is header height, i.e. density. */

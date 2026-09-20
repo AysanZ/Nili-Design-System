@@ -76,4 +76,15 @@ describe('TextArea', () => {
     render(<TextArea label="Bio" showCount value="hi" onChange={() => {}} />);
     expect(screen.getByText('2')).toHaveAttribute('aria-live', 'polite');
   });
+
+  it('uses one native resize handle without flex overriding its height', () => {
+    const { container } = render(
+      <TextArea label="Bio" showCount countLimit={120} />,
+    );
+    const field = screen.getByLabelText('Bio');
+
+    expect(field).toHaveClass('resize-y');
+    expect(field).not.toHaveClass('flex-1');
+    expect(container.querySelector('svg')).toBeNull();
+  });
 });

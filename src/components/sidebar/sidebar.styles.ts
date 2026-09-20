@@ -91,7 +91,7 @@ export const sidebarGroupLabelVariants = cva(
  */
 export const sidebarItemVariants = cva(
   [
-    'relative flex h-10 w-full items-center gap-3 rounded-lg px-3 text-start outline-hidden',
+    'relative flex h-10 w-full items-center rounded-lg text-start outline-hidden',
     'text-[14px] leading-5 font-medium',
     'cursor-pointer transition-colors duration-200 ease-out motion-reduce:transition-none',
     '[&_[data-slot=icon]_svg]:size-5 [&_[data-slot=icon]]:shrink-0',
@@ -109,8 +109,11 @@ export const sidebarItemVariants = cva(
         false: 'text-sub-600 [&_[data-slot=icon]]:text-sub-600',
       },
       collapsed: {
-        true: 'justify-center px-0',
-        false: '',
+        // The zero-width label remains mounted for the collapse animation.
+        // Its gap must disappear too, otherwise that invisible 12px space
+        // shifts the icon away from the centre of the rail.
+        true: 'justify-center gap-0 px-0',
+        false: 'gap-3 px-3',
       },
     },
     defaultVariants: { active: false, collapsed: false },

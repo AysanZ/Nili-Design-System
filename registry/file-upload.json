@@ -506,6 +506,12 @@
           "doc": null,
           "control": "text",
           "default": ""
+        },
+        "previewClassName": {
+          "type": "string",
+          "required": false,
+          "doc": "Overrides the preview button size, e.g. `w-full` or `w-40`.",
+          "control": "text"
         }
       }
     },

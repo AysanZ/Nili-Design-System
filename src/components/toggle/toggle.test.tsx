@@ -16,9 +16,9 @@ function Bar(props: React.ComponentProps<typeof ToggleGroup>) {
 describe('Toggle', () => {
   it('is a radiogroup of radios, not pressed buttons', () => {
     render(<Bar defaultValue="list" />);
-    expect(
-      screen.getByRole('radiogroup', { name: 'View' }),
-    ).toBeInTheDocument();
+    const group = screen.getByRole('radiogroup', { name: 'View' });
+    expect(group).toBeInTheDocument();
+    expect(group).toHaveClass('inline-grid', 'grid-flow-col', 'auto-cols-fr');
     expect(screen.getAllByRole('radio')).toHaveLength(3);
     expect(screen.getByRole('radio', { name: 'List' })).toBeChecked();
   });
@@ -97,7 +97,12 @@ describe('Toggle', () => {
   it('renders an icon-only segment without its text', () => {
     render(
       <ToggleGroup label="Align" defaultValue="start">
-        <Toggle value="start" iconOnly aria-label="Align start">
+        <Toggle
+          value="start"
+          iconOnly
+          startIcon={<svg data-testid="align-start-icon" />}
+          aria-label="Align start"
+        >
           Align start
         </Toggle>
         <Toggle value="end" iconOnly aria-label="Align end">
@@ -107,6 +112,9 @@ describe('Toggle', () => {
     );
     const node = screen.getByRole('radio', { name: 'Align start' });
     expect(node).toHaveTextContent('');
+    expect(node).toHaveClass('w-full', 'px-0');
+    expect(node).not.toHaveClass('aspect-square');
+    expect(screen.getByTestId('align-start-icon')).toBeInTheDocument();
   });
 
   it('refuses to render outside a group', () => {

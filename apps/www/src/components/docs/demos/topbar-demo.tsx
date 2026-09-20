@@ -130,7 +130,7 @@ export function Example() {
       <DemoSection
         title={t('actions.title')}
         description={t('actions.body')}
-        code={`import { Topbar, TopbarItem, TopbarUser, CompactButton, Button, Icon } from "@nili/ui"
+        code={`import { Topbar, TopbarItem, TopbarUser, CompactButton, Button, Badge, Icon } from "@nili/ui"
 import { RiSearchLine, RiNotification3Line } from "@remixicon/react"
 
 export function Example() {
@@ -142,9 +142,12 @@ export function Example() {
           <CompactButton appearance="ghost" aria-label="Search">
             <Icon icon={RiSearchLine} />
           </CompactButton>
-          <CompactButton appearance="ghost" aria-label="Notifications">
-            <Icon icon={RiNotification3Line} />
-          </CompactButton>
+          <span className="relative inline-flex">
+            <CompactButton appearance="ghost" aria-label="Unread notifications">
+              <Icon icon={RiNotification3Line} />
+            </CompactButton>
+            <Badge dot color="red" aria-hidden className="absolute -end-0.5 -top-0.5" />
+          </span>
           <Button size="xs">New project</Button>
           <TopbarUser
             avatar={<Avatar size="xs" name="Ada Lovelace" tone="blue" />}
@@ -172,25 +175,32 @@ export function Example() {
               }
               actions={
                 <>
-                  <CompactButton appearance="ghost" aria-label={t('actions.search')}>
+                  <CompactButton
+                    appearance="ghost"
+                    aria-label={t('actions.search')}
+                  >
                     <Icon icon={RiSearchLine} />
                   </CompactButton>
-                  <span className="relative">
+                  <span className="relative inline-flex">
                     <CompactButton
                       appearance="ghost"
                       aria-label={t('actions.unread')}
                     >
                       <Icon icon={RiNotification3Line} />
                     </CompactButton>
-                    <span className="absolute -end-1 -top-1">
-                      <Badge size="small" color="red">
-                        3
-                      </Badge>
-                    </span>
+                    <Badge
+                      dot
+                      size="small"
+                      color="red"
+                      aria-hidden="true"
+                      className="absolute -end-0.5 -top-0.5 ring-2 ring-white-0"
+                    />
                   </span>
                   <Button size="xs">{t('actions.newProject')}</Button>
                   <TopbarUser
-                    avatar={<Avatar size="xs" name="Ada Lovelace" tone="blue" />}
+                    avatar={
+                      <Avatar size="xs" name="Ada Lovelace" tone="blue" />
+                    }
                     name="Ada Lovelace"
                   />
                 </>

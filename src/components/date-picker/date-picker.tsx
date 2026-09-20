@@ -147,11 +147,7 @@ function CalendarHeader({
         aria-label={labels.previousMonth ?? 'Previous month'}
         onClick={() => onStep(-1)}
       >
-        {/* No `mirrored`: only the button's position should flip under
-            RTL (via the browser's native bidi reorder), not the glyph
-            itself — the chevron already needs to point physically right
-            when this button lands on the right side. */}
-        <Icon icon={RiArrowLeftSLine} />
+        <Icon icon={RiArrowLeftSLine} mirrored />
       </CompactButton>
 
       <div className="flex items-center gap-2">
@@ -193,7 +189,7 @@ function CalendarHeader({
         aria-label={labels.nextMonth ?? 'Next month'}
         onClick={() => onStep(1)}
       >
-        <Icon icon={RiArrowRightSLine} />
+        <Icon icon={RiArrowRightSLine} mirrored />
       </CompactButton>
     </div>
   );
@@ -385,60 +381,58 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        className={cn(datePickerVariants(), 'flex-row gap-3', className)}
-        {...rest}
-      >
-        {presets && presets.length > 0 && (
-          <div className={periodRangeVariants()}>
-            {presets.map((preset) => (
-              <button
-                key={preset.label}
-                type="button"
-                onClick={() =>
-                  setRange(
-                    typeof preset.range === 'function'
-                      ? preset.range()
-                      : preset.range,
-                  )
-                }
-                className={periodRangeItemVariants()}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-        )}
+      <div ref={ref} className={cn(datePickerVariants(), className)} {...rest}>
+        <div className="flex gap-3">
+          {presets && presets.length > 0 && (
+            <div className={periodRangeVariants()}>
+              {presets.map((preset) => (
+                <button
+                  key={preset.label}
+                  type="button"
+                  onClick={() =>
+                    setRange(
+                      typeof preset.range === 'function'
+                        ? preset.range()
+                        : preset.range,
+                    )
+                  }
+                  className={periodRangeItemVariants()}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+          )}
 
-        <div className="flex flex-col gap-3">
-          <CalendarHeader
-            calendar={state.system}
-            locale={state.locale}
-            cursor={state.cursor}
-            onStep={state.step}
-            allowCalendarSwitch={allowCalendarSwitch}
-            onCalendarChange={state.changeCalendar}
-            labels={labels}
-          />
-          <CalendarGrid
-            calendar={state.system}
-            locale={state.locale}
-            cursor={state.cursor}
-            isSelected={(date) =>
-              Boolean(
-                (lo && isSameDay(lo, date)) || (hi && isSameDay(hi, date)),
-              )
-            }
-            isInRange={(date) => Boolean(lo && hi && date > lo && date < hi)}
-            rangeEdge={isEdge}
-            isDisabled={state.isDisabled}
-            isMarked={state.isMarked}
-            onSelect={select}
-            onHover={setHovered}
-          />
-          {footer}
+          <div className="flex flex-col gap-3">
+            <CalendarHeader
+              calendar={state.system}
+              locale={state.locale}
+              cursor={state.cursor}
+              onStep={state.step}
+              allowCalendarSwitch={allowCalendarSwitch}
+              onCalendarChange={state.changeCalendar}
+              labels={labels}
+            />
+            <CalendarGrid
+              calendar={state.system}
+              locale={state.locale}
+              cursor={state.cursor}
+              isSelected={(date) =>
+                Boolean(
+                  (lo && isSameDay(lo, date)) || (hi && isSameDay(hi, date)),
+                )
+              }
+              isInRange={(date) => Boolean(lo && hi && date > lo && date < hi)}
+              rangeEdge={isEdge}
+              isDisabled={state.isDisabled}
+              isMarked={state.isMarked}
+              onSelect={select}
+              onHover={setHovered}
+            />
+          </div>
         </div>
+        {footer}
       </div>
     );
   },

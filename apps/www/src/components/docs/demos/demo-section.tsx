@@ -2,6 +2,7 @@
 
 import { Fragment, type ReactNode } from 'react';
 import { CopyButton } from '@www/components/site/copy-button';
+import { SyntaxCode } from '@www/components/docs/syntax-code';
 import { cn } from '@www/lib/cn';
 import { demoChrome, useDemoText } from './demo-text';
 
@@ -101,7 +102,7 @@ export function DemoSection({
               dir="ltr"
               className="nili-scroll max-h-[280px] overflow-auto p-4 pe-14 font-mono text-[12px] leading-[1.75] text-strong-950"
             >
-              <code>{code}</code>
+              <SyntaxCode code={code} />
             </pre>
           </div>
         ) : null}

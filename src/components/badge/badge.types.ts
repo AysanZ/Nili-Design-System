@@ -19,7 +19,7 @@ export interface BadgeProps extends Omit<
   color?: BadgeColor;
   size?: BadgeSize;
   disabled?: boolean;
-  /** Renders a dot before the label. Mutually exclusive with `startIcon`. */
+  /** Renders a dot before the label, or a standalone dot without children. */
   dot?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;

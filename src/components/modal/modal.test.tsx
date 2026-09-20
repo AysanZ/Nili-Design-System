@@ -65,6 +65,21 @@ describe('Modal', () => {
       container.ownerDocument.querySelector('[aria-hidden="true"] svg'),
     ).not.toBeNull();
   });
+
+  it('draws only one divider when the footer follows the header directly', () => {
+    render(
+      <Modal
+        open
+        onOpenChange={vi.fn()}
+        title="Confirm"
+        footer={<button type="button">Apply</button>}
+      />,
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.querySelector('header')).toHaveClass('border-b-0');
+    expect(dialog.querySelector('footer')).toHaveClass('border-t');
+  });
 });
 
 describe('StatusModal', () => {
@@ -78,6 +93,11 @@ describe('StatusModal', () => {
         closeLabel="Close"
       />,
     );
-    expect(screen.getByRole('dialog')).toHaveAccessibleName('Saved');
+    const dialog = screen.getByRole('dialog');
+    const header = dialog.querySelector('header');
+
+    expect(dialog).toHaveAccessibleName('Saved');
+    expect(header).toHaveClass('flex-col', 'items-center', 'text-center');
+    expect(header).not.toHaveClass('items-start');
   });
 });

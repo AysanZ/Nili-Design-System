@@ -342,6 +342,8 @@ export interface ImageUploadProps extends Omit<
   hint?: ReactNode;
   actions?: ReactNode;
   alt?: string;
+  /** Overrides the preview button size, e.g. `w-full` or `w-40`. */
+  previewClassName?: string;
 }
 
 /** Avatar, logo or aspect-ratio image slot with a preview. */
@@ -357,6 +359,7 @@ export const ImageUpload = forwardRef<HTMLDivElement, ImageUploadProps>(
       hint,
       actions,
       alt = '',
+      previewClassName,
       className,
       ...rest
     },
@@ -374,14 +377,14 @@ export const ImageUpload = forwardRef<HTMLDivElement, ImageUploadProps>(
           type="button"
           onClick={() => inputRef.current?.click()}
           aria-label={label}
-          className={imageUploadVariants({ shape })}
+          className={cn(imageUploadVariants({ shape }), previewClassName)}
         >
           {src ? (
             <img src={src} alt={alt} className="size-full object-cover" />
           ) : (
             <Icon
               icon={RiUploadCloud2Line}
-              size={20}
+              size={24}
               className="text-soft-400"
             />
           )}

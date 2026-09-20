@@ -472,7 +472,11 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
           </div>
         )}
 
-        {footer}
+        {footer && (
+          <div data-slot="color-picker-footer" className="px-[15px] pb-[15px]">
+            {footer}
+          </div>
+        )}
       </div>
     );
   },

@@ -126,10 +126,20 @@ export const TEXT_INPUT_TYPE_PRESETS: Record<
   string,
   {
     htmlType?:
-      'text' | 'email' | 'tel' | 'url' | 'password' | 'search' | 'date';
+      | 'text'
+      | 'email'
+      | 'tel'
+      | 'url'
+      | 'password'
+      | 'search'
+      | 'date'
+      | 'number';
     inputMode?:
       'text' | 'email' | 'tel' | 'url' | 'numeric' | 'decimal' | 'search';
     autoComplete?: string;
+    /** Native constraint validation, overridable by the caller. */
+    pattern?: string;
+    step?: number | 'any';
     latin?: boolean;
     /**
      * Which edge the in-field `select` sits on for this type. Figma puts the
@@ -150,17 +160,29 @@ export const TEXT_INPUT_TYPE_PRESETS: Record<
     htmlType: 'tel',
     inputMode: 'tel',
     autoComplete: 'tel',
+    pattern: '[+0-9() .-]*',
     latin: true,
     selectSide: 'start',
   },
-  card: { inputMode: 'numeric', autoComplete: 'cc-number', latin: true },
+  card: {
+    inputMode: 'numeric',
+    autoComplete: 'cc-number',
+    pattern: '[0-9 -]*',
+    latin: true,
+  },
   website: {
     htmlType: 'url',
     inputMode: 'url',
     autoComplete: 'url',
     latin: true,
   },
-  amount: { inputMode: 'decimal', latin: true, selectSide: 'end' },
+  amount: {
+    htmlType: 'number',
+    inputMode: 'decimal',
+    step: 'any',
+    latin: true,
+    selectSide: 'end',
+  },
   date: { inputMode: 'numeric', latin: true },
   search: { htmlType: 'search', inputMode: 'search' },
   password: { htmlType: 'password', autoComplete: 'current-password' },

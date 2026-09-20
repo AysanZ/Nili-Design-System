@@ -1,16 +1,24 @@
 import {
   forwardRef,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
+import {
+  autoUpdate,
+  FloatingPortal,
+  useDismiss,
+  useFloating,
+  useInteractions,
+} from '@floating-ui/react';
 import { RiArrowDownSLine, RiCheckLine, RiSearchLine } from '@remixicon/react';
 import { cn } from '../../lib/cn';
+import { middlewareFor } from '../../lib/floating';
 import { useId } from '../../hooks/use-id';
 import { useControllableState } from '../../hooks/use-controllable-state';
-import { useDismissable } from '../../hooks/use-dismissable';
 import { Icon } from '../icon';
 import { Label } from '../key-components/label';
 import { HintText } from '../key-components/hint-text';
@@ -42,10 +50,9 @@ import type { DropdownProps, DropdownOption } from './dropdown.types';
  *
  * ## Positioning
  *
- * Absolute, anchored under the trigger, flipping above when there is no room
- * below. Deliberately simple: it does not handle nested scroll containers or
- * cross-iframe collision. A system that grows Popover and Combobox should move
- * this onto a real positioning engine.
+ * The menu is portalled out of clipping ancestors and measured against the
+ * trigger. Floating UI keeps it attached while scrolling, flips it when there
+ * is not enough room below and constrains its height to the viewport.
  */
 export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
   function Dropdown(
@@ -91,12 +98,45 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [cursor, setCursor] = useState(0);
-    const [flip, setFlip] = useState(false);
 
     const triggerRef = useRef<HTMLButtonElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
     const baseId = useId();
+
+    const floating = useFloating({
+      open,
+      onOpenChange: setOpen,
+      placement: 'bottom-start',
+      whileElementsMounted: autoUpdate,
+      middleware: middlewareFor({
+        gap: 4,
+        padding: 8,
+        constrainToViewport: true,
+        matchTriggerWidth: true,
+        hideWhenDetached: true,
+      }),
+    });
+    const dismiss = useDismiss(floating.context, {
+      outsidePressEvent: 'mousedown',
+    });
+    const { getFloatingProps } = useInteractions([dismiss]);
+
+    const setTrigger = useCallback(
+      (node: HTMLButtonElement | null) => {
+        triggerRef.current = node;
+        floating.refs.setReference(node);
+      },
+      [floating.refs],
+    );
+
+    const setMenu = useCallback(
+      (node: HTMLDivElement | null) => {
+        menuRef.current = node;
+        floating.refs.setFloating(node);
+      },
+      [floating.refs],
+    );
 
     const filtered = useMemo(() => {
       if (!query) return options;
@@ -123,18 +163,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       if (open && searchable) searchRef.current?.focus();
     }, [open, searchable]);
 
-    useDismissable(menuRef, {
-      open,
-      onDismiss: () => setOpen(false),
-      trapFocus: false,
-      lockScroll: false,
-      ignoreRefs: [triggerRef],
-    });
-
     const openMenu = () => {
-      const box = triggerRef.current?.getBoundingClientRect();
-      // Flip above when the menu would run past the viewport bottom.
-      if (box) setFlip(window.innerHeight - box.bottom < 280 && box.top > 280);
       setOpen(true);
       setCursor(
         Math.max(
@@ -216,7 +245,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
 
         <div ref={ref} className={cn('relative w-full', className)} {...rest}>
           <button
-            ref={triggerRef}
+            ref={setTrigger}
             type="button"
             role="combobox"
             aria-expanded={open}
@@ -257,127 +286,131 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
           </button>
 
           {open && (
-            <div
-              ref={menuRef}
-              className={cn(
-                dropdownMenuVariants(),
-                'absolute inset-x-0',
-                flip ? 'bottom-full mb-1' : 'top-full mt-1',
-                menuClassName,
-              )}
-            >
-              {searchable && (
-                <div className={dropdownSearchVariants()}>
-                  <Icon
-                    icon={RiSearchLine}
-                    size={16}
-                    className="text-soft-400"
-                  />
-                  <input
-                    ref={searchRef}
-                    value={query}
-                    placeholder={searchPlaceholder}
-                    onChange={(event) => {
-                      setQuery(event.target.value);
-                      setCursor(0);
-                    }}
-                    onKeyDown={onKeyDown}
-                    className="h-8 w-full bg-transparent text-[14px] text-strong-950 outline-none placeholder:text-soft-400"
-                  />
-                </div>
-              )}
-
+            <FloatingPortal>
               <div
-                id={`${baseId}-listbox`}
-                role="listbox"
-                className="flex flex-1 flex-col overflow-y-auto"
+                ref={setMenu}
+                style={floating.floatingStyles}
+                className={cn(dropdownMenuVariants(), menuClassName)}
+                {...getFloatingProps()}
               >
-                {filtered.length === 0 && (
-                  <p className="px-2 py-3 text-center text-[14px] text-soft-400">
-                    {emptyMessage}
-                  </p>
+                {searchable && (
+                  <div className={dropdownSearchVariants()}>
+                    <Icon
+                      icon={RiSearchLine}
+                      size={16}
+                      className="text-soft-400"
+                    />
+                    <input
+                      ref={searchRef}
+                      value={query}
+                      placeholder={searchPlaceholder}
+                      onChange={(event) => {
+                        setQuery(event.target.value);
+                        setCursor(0);
+                      }}
+                      onKeyDown={onKeyDown}
+                      className="h-8 w-full bg-transparent text-[14px] text-strong-950 outline-none placeholder:text-soft-400"
+                    />
+                  </div>
                 )}
 
-                {grouped.map(([group, items]) => (
-                  <div key={group || 'ungrouped'} className="flex flex-col">
-                    {group && (
-                      <span className={dropdownCaptionVariants()}>{group}</span>
-                    )}
-                    {items.map((option) => {
-                      flatIndex += 1;
-                      const index = flatIndex;
-                      const isSelected = option.value === selected;
-                      return (
-                        <div
-                          key={option.value}
-                          id={`${baseId}-option-${index}`}
-                          role="option"
-                          // Options are addressed by aria-activedescendant from
-                          // the combobox, which is the ARIA pattern for keeping
-                          // focus in the trigger or search field. tabIndex={-1}
-                          // makes them programmatically focusable without adding
-                          // 40 stops to the tab order; the keyboard contract
-                          // lives on the trigger's onKeyDown.
-                          tabIndex={-1}
-                          aria-selected={isSelected}
-                          aria-disabled={option.disabled || undefined}
-                          onClick={() => commit(option)}
-                          onKeyDown={onKeyDown}
-                          onMouseEnter={() => setCursor(index)}
-                          className={dropdownItemVariants({
-                            size: itemSize,
-                            selected: isSelected,
-                            active: index === cursor,
-                          })}
-                        >
-                          {option.startAdornment}
-                          <span className="flex min-w-0 flex-1 flex-col">
-                            <span className="flex min-w-0 items-center gap-1.5">
-                              <span className="truncate font-medium text-strong-950">
-                                {option.label}
+                <div
+                  id={`${baseId}-listbox`}
+                  role="listbox"
+                  className="flex flex-1 flex-col gap-1 overflow-y-auto"
+                >
+                  {filtered.length === 0 && (
+                    <p className="px-2 py-3 text-center text-[14px] text-soft-400">
+                      {emptyMessage}
+                    </p>
+                  )}
+
+                  {grouped.map(([group, items]) => (
+                    <div
+                      key={group || 'ungrouped'}
+                      className="flex flex-col gap-1"
+                    >
+                      {group && (
+                        <span className={dropdownCaptionVariants()}>
+                          {group}
+                        </span>
+                      )}
+                      {items.map((option) => {
+                        flatIndex += 1;
+                        const index = flatIndex;
+                        const isSelected = option.value === selected;
+                        return (
+                          <div
+                            key={option.value}
+                            id={`${baseId}-option-${index}`}
+                            role="option"
+                            // Options are addressed by aria-activedescendant from
+                            // the combobox, which is the ARIA pattern for keeping
+                            // focus in the trigger or search field. tabIndex={-1}
+                            // makes them programmatically focusable without adding
+                            // 40 stops to the tab order; the keyboard contract
+                            // lives on the trigger's onKeyDown.
+                            tabIndex={-1}
+                            aria-selected={isSelected}
+                            aria-disabled={option.disabled || undefined}
+                            onClick={() => commit(option)}
+                            onKeyDown={onKeyDown}
+                            onMouseEnter={() => setCursor(index)}
+                            className={dropdownItemVariants({
+                              size: itemSize,
+                              selected: isSelected,
+                              active: index === cursor,
+                            })}
+                          >
+                            {option.startAdornment}
+                            <span className="flex min-w-0 flex-1 flex-col">
+                              <span className="flex min-w-0 items-center gap-1.5">
+                                <span className="truncate font-medium text-strong-950">
+                                  {option.label}
+                                </span>
+                                {option.badge}
+                                {option.sublabel && (
+                                  <span className="truncate text-[12px] leading-4 text-sub-600">
+                                    {option.sublabel}
+                                  </span>
+                                )}
                               </span>
-                              {option.badge}
-                              {option.sublabel && (
+                              {itemSize === 'lg' && option.description && (
                                 <span className="truncate text-[12px] leading-4 text-sub-600">
-                                  {option.sublabel}
+                                  {option.description}
                                 </span>
                               )}
                             </span>
-                            {itemSize === 'lg' && option.description && (
-                              <span className="truncate text-[12px] leading-4 text-sub-600">
-                                {option.description}
+                            {option.shortcut && (
+                              <span
+                                aria-hidden
+                                className="ms-auto shrink-0 rounded-md border border-soft-200 bg-weak-50 px-1.5 py-0.5 text-[11px] leading-4 font-medium text-sub-600"
+                              >
+                                {option.shortcut}
                               </span>
                             )}
-                          </span>
-                          {option.shortcut && (
-                            <span
-                              aria-hidden
-                              className="ms-auto shrink-0 rounded-md border border-soft-200 bg-weak-50 px-1.5 py-0.5 text-[11px] leading-4 font-medium text-sub-600"
-                            >
-                              {option.shortcut}
-                            </span>
-                          )}
-                          {option.endAdornment}
-                          {isSelected && (
-                            <Icon
-                              icon={RiCheckLine}
-                              size={16}
-                              className="shrink-0 text-primary-base"
-                            />
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-
-              {footer && (
-                <div className="mt-1 border-t border-soft-200 pt-1">
-                  {footer}
+                            {option.endAdornment}
+                            {isSelected && (
+                              <Icon
+                                icon={RiCheckLine}
+                                size={16}
+                                className="shrink-0 text-primary-base"
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
+
+                {footer && (
+                  <div className="mt-1 border-t border-soft-200 pt-1">
+                    {footer}
+                  </div>
+                )}
+              </div>
+            </FloatingPortal>
           )}
         </div>
 

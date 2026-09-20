@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "npm": [
+      "@floating-ui/react",
       "@remixicon/react",
       "class-variance-authority"
     ],
@@ -34,9 +35,9 @@
     ],
     "shared": [
       "hooks/use-controllable-state",
-      "hooks/use-dismissable",
       "hooks/use-id",
-      "lib/cn"
+      "lib/cn",
+      "lib/floating"
     ]
   },
   "components": [

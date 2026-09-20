@@ -9,6 +9,7 @@ import { ComponentTabs } from '@www/components/docs/component-tabs';
 import { OverviewPanel } from '@www/components/docs/overview-panel';
 import { hasOverview } from '@www/components/docs/overview-slugs';
 import { PropsPanel } from '@www/components/docs/props-panel';
+import { SyntaxCode } from '@www/components/docs/syntax-code';
 import { CopyButton } from '@www/components/site/copy-button';
 import { isLocale, locales, type Locale } from '@www/i18n/config';
 import { getDictionary, translator } from '@www/i18n/dictionaries';
@@ -119,7 +120,11 @@ export default async function ComponentPage({
           label={t('comp.axesN')}
           locale={locale}
         />
-        <Stat value={propCount(entry)} label={t('comp.propsN')} locale={locale} />
+        <Stat
+          value={propCount(entry)}
+          label={t('comp.propsN')}
+          locale={locale}
+        />
         <Stat
           value={entry.files.length}
           label={t('comp.filesN')}
@@ -131,9 +136,9 @@ export default async function ComponentPage({
         dir="ltr"
         className="nili-scroll-none mt-5 flex w-fit max-w-full items-center gap-2.5 overflow-x-auto rounded-lg border border-soft-200 px-3 py-2"
       >
-        <code className="font-mono text-[12px] leading-4 whitespace-nowrap text-strong-950">
-          {importLine}
-        </code>
+        <div className="font-mono text-[12px] leading-4 whitespace-nowrap text-strong-950">
+          <SyntaxCode code={importLine} />
+        </div>
         <CopyButton
           value={importLine}
           label={t('comp.copy')}

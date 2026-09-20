@@ -1,7 +1,7 @@
-import type { CSSProperties, SVGProps } from 'react';
+import type { CSSProperties } from 'react';
 import {
   RiArrowRightUpLine,
-  RiGithubFill,
+  RiGlobalLine,
   RiLinkedinBoxFill,
   RiMailLine,
 } from '@remixicon/react';
@@ -11,39 +11,19 @@ import { Container } from '@www/components/site/container';
 import { cn } from '@www/lib/cn';
 import type { MessageKey, Translate } from '@www/i18n/dictionaries';
 
-/**
- * Figma's own mark, traced from the brand kit.
- *
- * Not in the Remix set — `RiFigmaFill` there is a generic four-square glyph
- * with no resemblance to Figma's logo, which is the "wrong icon" this
- * replaces. Drawn in the brand's four flat colours rather than `currentColor`
- * — unlike GitHub or LinkedIn, Figma's mark is defined by having more than one
- * colour, and a single-tone version would not read as the brand at all.
- */
-function FigmaMark(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M8 24c2.21 0 4-1.79 4-4v-4H8a4 4 0 0 0 0 8Z" fill="#0ACF83" />
-      <path d="M4 12a4 4 0 0 1 4-4h4v8H8a4 4 0 0 1-4-4Z" fill="#A259FF" />
-      <path d="M4 4a4 4 0 0 1 4-4h4v8H8a4 4 0 0 1-4-4Z" fill="#F24E1E" />
-      <path d="M12 0h4a4 4 0 0 1 0 8h-4V0Z" fill="#FF7262" />
-      <path d="M20 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" fill="#1ABCFE" />
-    </svg>
-  );
-}
-
 interface PersonLink {
   /**
    * The channel, not the address. A row of raw handles — an email, then two
    * profile URLs — reads as three strings you have to parse before you know
-   * which is which; "Email · LinkedIn · GitHub" reads as three destinations.
-   * The address still travels in `href`, where it belongs.
+   * which is which; "Email · Portfolio · LinkedIn" reads as three destinations.
+   * The address still travels in `href` and `title`, where it belongs.
    *
    * `null` means the channel names itself: LinkedIn is LinkedIn in every
    * locale, so only the generic one goes through `t`.
    */
   labelKey: MessageKey | null;
   label: string;
+  title: string;
   href: string;
   /**
    * Every link carries its own mark, so the row reads at a glance.
@@ -56,11 +36,7 @@ interface PersonLink {
    * component with no hooks, so the server can call it itself and send the
    * SVG — which is what the header already does with its search glyph.
    */
-  /**
-   * `IconComponent` covers the Remix set; Figma is not in it, so this widens
-   * to any SVG-rendering function and the mark below is drawn by hand.
-   */
-  icon: IconComponent | ((props: SVGProps<SVGSVGElement>) => React.JSX.Element);
+  icon: IconComponent;
 
   /**
    * The channel's own colour, used only on hover and focus.
@@ -71,15 +47,15 @@ interface PersonLink {
    * the link — it confirms what you are about to open rather than competing
    * for attention before you have decided.
    *
-   * GitHub's brand mark is black, which disappears on a dark page, so it takes
-   * the theme's own `strong-950` and flips with it. Email has no brand, so it
-   * takes the design system's primary.
+   * Email and personal websites have no fixed brand colour, so they take the
+   * design system's primary.
    */
   brand: string;
 }
 
 interface Person {
   initials: string;
+  image: string;
   name: string;
   role: MessageKey;
   bio: MessageKey;
@@ -89,57 +65,57 @@ interface Person {
 const PEOPLE: Person[] = [
   {
     initials: 'AZ',
+    image: '/avatars/aysan-zeinalvand.png?v=b2dcf5b2',
     name: 'Aysan Zeinalvand',
     role: 'az.role',
     bio: 'az.bio',
     links: [
       {
         labelKey: 'team.email',
-        label: 'hello@example.com',
-        href: 'mailto:hello@example.com',
+        label: 'Email',
+        title: 'aysanzeinalvand@gmail.com',
+        href: 'mailto:aysanzeinalvand@gmail.com',
         icon: RiMailLine,
         brand: 'var(--nili-primary-base)',
       },
       {
         labelKey: null,
-        label: 'LinkedIn',
-        href: '#',
-        icon: RiLinkedinBoxFill,
-        brand: '#0A66C2',
+        label: 'Portfolio',
+        title: 'aysanz.dev',
+        href: 'https://aysanz.dev',
+        icon: RiGlobalLine,
+        brand: 'var(--nili-primary-base)',
       },
       {
         labelKey: null,
-        label: 'GitHub',
-        href: '#',
-        icon: RiGithubFill,
-        brand: 'var(--nili-strong-950)',
+        label: 'LinkedIn',
+        title: 'linkedin.com/in/aysanzeinalvand',
+        href: 'https://www.linkedin.com/in/aysanzeinalvand',
+        icon: RiLinkedinBoxFill,
+        brand: '#0A66C2',
       },
     ],
   },
   {
     initials: 'BR',
+    image: '/avatars/behzad-rezazadeh.png',
     name: 'Behzad Rezazadeh',
     role: 'br.role',
     bio: 'br.bio',
     links: [
       {
         labelKey: 'team.email',
-        label: 'design@example.com',
-        href: 'mailto:design@example.com',
+        label: 'Email',
+        title: 'Behiwzad@gmail.com',
+        href: 'mailto:Behiwzad@gmail.com',
         icon: RiMailLine,
         brand: 'var(--nili-primary-base)',
       },
       {
         labelKey: null,
-        label: 'Figma',
-        href: '#',
-        icon: FigmaMark,
-        brand: '#A259FF',
-      },
-      {
-        labelKey: null,
         label: 'LinkedIn',
-        href: '#',
+        title: 'linkedin.com/in/behzad-rezazadeh-80a1942bb',
+        href: 'https://www.linkedin.com/in/behzad-rezazadeh-80a1942bb?utm_source=share_via&utm_content=profile&utm_medium=member_android',
         icon: RiLinkedinBoxFill,
         brand: '#0A66C2',
       },
@@ -179,6 +155,7 @@ export function TeamSection({ t }: { t: Translate }) {
                   size="md"
                   name={person.name}
                   initials={person.initials}
+                  src={person.image}
                 />
                 <div className="min-w-0">
                   <h4
@@ -221,8 +198,8 @@ export function TeamSection({ t }: { t: Translate }) {
                   screen is the channel name.
 
                   The arrow is the one background-swap-independent way to say
-                  "this leaves the site" — Figma, GitHub and a mailto: link all
-                  point somewhere that is not this page, and the 45° glyph is
+                  "this leaves the site" — profile, website and mailto: links
+                  all point somewhere that is not this page, and the 45° glyph is
                   the standard mark for that regardless of which corner of the
                   pill it sits in. It fades in and nudges toward its own
                   corner on hover so the motion reads as "opening", not as
@@ -230,12 +207,12 @@ export function TeamSection({ t }: { t: Translate }) {
               <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-soft-200 pt-4">
                 {person.links.map((link) => (
                   <a
-                    key={link.label}
+                    key={link.href}
                     href={link.href}
-                    title={link.label}
+                    title={link.title}
                     aria-label={t('team.contact')
                       .replace('{name}', person.name)
-                      .concat(` — ${link.label}`)}
+                      .concat(` — ${link.title}`)}
                     style={
                       {
                         '--brand': link.brand,

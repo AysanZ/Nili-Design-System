@@ -1,6 +1,7 @@
 'use client';
 
 import { CopyButton } from '@www/components/site/copy-button';
+import { SyntaxCode } from '@www/components/docs/syntax-code';
 import {
   defaultUsageExample,
   USAGE_EXAMPLES,
@@ -33,8 +34,7 @@ export function CodePanel({
   cliHint: string;
 }) {
   const code =
-    USAGE_EXAMPLES[slug] ??
-    defaultUsageExample(componentName, namedExports);
+    USAGE_EXAMPLES[slug] ?? defaultUsageExample(componentName, namedExports);
 
   return (
     <div className="flex flex-col gap-3">
@@ -55,7 +55,7 @@ export function CodePanel({
           dir="ltr"
           className="nili-scroll max-h-[560px] overflow-auto p-4 font-mono text-[12px] leading-[1.8] text-strong-950"
         >
-          <code>{code}</code>
+          <SyntaxCode code={code} />
         </pre>
       </div>
 

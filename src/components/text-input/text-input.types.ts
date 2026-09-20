@@ -8,11 +8,12 @@ export type TextInputSize = NonNullable<TextInputVariantProps['size']>;
  * Figma's `🧩 Type`, all twelve values.
  *
  * This is a **preset**, not a paint job. Each type carries the keyboard, the
- * autofill hint, the direction and the default adornments that go with the
- * kind of value being asked for — the things that are tedious to remember and
- * therefore usually wrong. `type="phone"` gets a numeric keypad on mobile and
- * `autocomplete="tel"`; `type="email"` gets an LTR field even in a Persian UI,
- * because an email address rendered right-to-left is unreadable.
+ * autofill hint, native validation, direction and default adornments that go
+ * with the kind of value being asked for — the things that are tedious to
+ * remember and therefore usually wrong. `type="phone"` gets a telephone
+ * keypad and a phone-number pattern; `type="amount"` rejects non-numeric
+ * input; `type="email"` gets an LTR field even in a Persian UI, because an
+ * email address rendered right-to-left is unreadable.
  *
  * Every default it sets can still be overridden by passing the prop yourself.
  */
@@ -36,8 +37,9 @@ export interface TextInputProps extends Omit<
 > {
   size?: TextInputSize;
   /**
-   * Figma's `Type`. Sets the input mode, autofill hint and direction for the
-   * kind of value being asked for; see {@link TextInputType}.
+   * Figma's `Type`. Sets native validation, input mode, autofill hint and
+   * direction for the kind of value being asked for; see
+   * {@link TextInputType}.
    *
    * The native `type` attribute is derived from it, which is why this prop
    * takes its name: two props called `type` on one input is how you get a

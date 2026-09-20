@@ -36,7 +36,10 @@ export const textAreaFieldVariants = cva(
 
 export const textAreaControlVariants = cva(
   [
-    'w-full flex-1 bg-transparent px-3 py-2.5 text-[14px] leading-5 text-strong-950',
+    // Do not use `flex-1` here. Native textarea resizing writes an inline
+    // height; flex-basis: 0 would override that height and make the browser's
+    // resize handle appear draggable without actually moving the field.
+    'w-full bg-transparent px-3 py-2.5 text-[14px] leading-5 text-strong-950',
     'outline-none placeholder:text-soft-400',
     'disabled:cursor-not-allowed disabled:text-sub-300',
   ],
@@ -62,7 +65,7 @@ export const textAreaControlVariants = cva(
  * with a counter looked a size taller than one without.
  */
 export const textAreaFooterVariants = cva(
-  'flex items-center justify-end gap-1.5 px-3 pb-2 text-[12px] leading-4',
+  'flex items-center justify-end px-3 pb-2 text-[12px] leading-4',
 );
 
 /**
@@ -89,14 +92,6 @@ export const textAreaCounterVariants = cva('tabular-nums', {
     { over: true, disabled: true, class: 'font-normal text-sub-300' },
   ],
   defaultVariants: { over: false, disabled: false },
-});
-
-/** Figma's resize grip, beside the count. Decorative — the handle is native. */
-export const textAreaGripVariants = cva('shrink-0', {
-  variants: {
-    disabled: { true: 'text-sub-300', false: 'text-soft-400' },
-  },
-  defaultVariants: { disabled: false },
 });
 
 export type TextAreaVariantProps = VariantProps<typeof textAreaFieldVariants>;

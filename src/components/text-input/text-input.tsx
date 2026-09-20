@@ -101,7 +101,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
        a form value. */
     const [revealed, setRevealed] = useState(false);
     const isPassword = (htmlType ?? preset.htmlType) === 'password';
-    const showReveal = isPassword && reveal && endIcon == null && button == null;
+    const showReveal =
+      isPassword && reveal && endIcon == null && button == null;
     const isLatin = latin ?? preset.latin ?? false;
 
     // The leading edge can be an emoji picker or an attached dropdown; the
@@ -170,9 +171,15 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <input
             ref={ref}
             id={inputId}
-            type={showReveal && revealed ? 'text' : htmlType ?? preset.htmlType ?? 'text'}
+            type={
+              showReveal && revealed
+                ? 'text'
+                : (htmlType ?? preset.htmlType ?? 'text')
+            }
             inputMode={rest.inputMode ?? preset.inputMode}
             autoComplete={rest.autoComplete ?? preset.autoComplete}
+            pattern={rest.pattern ?? preset.pattern}
+            step={rest.step ?? preset.step}
             required={required}
             disabled={disabled}
             aria-invalid={invalid || undefined}
@@ -223,7 +230,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                 'disabled:cursor-default disabled:text-disabled-300',
               )}
             >
-              {revealed ? <RiEyeOffLine aria-hidden /> : <RiEyeLine aria-hidden />}
+              {revealed ? (
+                <RiEyeOffLine aria-hidden />
+              ) : (
+                <RiEyeLine aria-hidden />
+              )}
             </button>
           )}
           {endAffix != null && (
@@ -243,7 +254,15 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             </span>
           )}
           {trailingAttached != null && (
-            <span className={textInputAttachedVariants({ side: 'end' })}>
+            <span
+              className={cn(
+                textInputAttachedVariants({ side: 'end' }),
+                // A button is shorter than the field and needs the same 4px
+                // breathing room on every edge. Selects intentionally stay
+                // flush because their surface is part of the field frame.
+                type === 'button' && 'p-1',
+              )}
+            >
               {trailingAttached}
             </span>
           )}

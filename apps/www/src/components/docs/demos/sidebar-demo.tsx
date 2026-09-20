@@ -96,64 +96,66 @@ export function Example() {
               collapsedAction={<SidebarTrigger />}
             />
 
-            <SidebarGroup label={t('group.main')}>
-              {NAV.slice(0, 3).map((item) => (
+            <div className="nili-scroll min-h-0 flex-1 overflow-y-auto">
+              <SidebarGroup label={t('group.main')}>
+                {NAV.slice(0, 3).map((item) => (
+                  <SidebarItem
+                    key={item.id}
+                    icon={<Icon icon={item.icon} />}
+                    active={active === item.id}
+                    onClick={() => setActive(item.id)}
+                  >
+                    {t(item.label)}
+                  </SidebarItem>
+                ))}
+              </SidebarGroup>
+
+              <SidebarGroup label={t('group.favs')}>
                 <SidebarItem
-                  key={item.id}
-                  icon={<Icon icon={item.icon} />}
-                  active={active === item.id}
-                  onClick={() => setActive(item.id)}
+                  icon={<Icon icon={RiFolderLine} />}
+                  shortcut="⌘1"
+                  onClick={() => setActive('design-system')}
+                  active={active === 'design-system'}
                 >
-                  {t(item.label)}
+                  {t('item.designSystem')}
                 </SidebarItem>
-              ))}
-            </SidebarGroup>
+                <SidebarItem
+                  icon={<Icon icon={RiFolderLine} />}
+                  shortcut="⌘2"
+                  onClick={() => setActive('marketing')}
+                  active={active === 'marketing'}
+                >
+                  {t('item.marketing')}
+                </SidebarItem>
+                <SidebarItem
+                  icon={<Icon icon={RiSettings3Line} />}
+                  trailing={
+                    <Badge size="small" color="red">
+                      2
+                    </Badge>
+                  }
+                  onClick={() => setActive('settings')}
+                  active={active === 'settings'}
+                >
+                  {t('item.settings')}
+                </SidebarItem>
+                <SidebarItem icon={<Icon icon={RiBarChartLine} />} disabled>
+                  {t('item.reportsSoon')}
+                </SidebarItem>
+              </SidebarGroup>
 
-            <SidebarGroup label={t('group.favs')}>
-              <SidebarItem
-                icon={<Icon icon={RiFolderLine} />}
-                shortcut="⌘1"
-                onClick={() => setActive('design-system')}
-                active={active === 'design-system'}
-              >
-                {t('item.designSystem')}
-              </SidebarItem>
-              <SidebarItem
-                icon={<Icon icon={RiFolderLine} />}
-                shortcut="⌘2"
-                onClick={() => setActive('marketing')}
-                active={active === 'marketing'}
-              >
-                {t('item.marketing')}
-              </SidebarItem>
-              <SidebarItem
-                icon={<Icon icon={RiSettings3Line} />}
-                trailing={
-                  <Badge size="small" color="red">
-                    2
-                  </Badge>
-                }
-                onClick={() => setActive('settings')}
-                active={active === 'settings'}
-              >
-                {t('item.settings')}
-              </SidebarItem>
-              <SidebarItem icon={<Icon icon={RiBarChartLine} />} disabled>
-                {t('item.reportsSoon')}
-              </SidebarItem>
-            </SidebarGroup>
-
-            <SidebarCard>
-              <p className="text-[13px] font-medium text-strong-950">
-                {t('card.trial')}
-              </p>
-              <p className="text-[12px] leading-4 text-sub-600">
-                {t('card.trialBody')}
-              </p>
-              <Button size="xs" fullWidth>
-                {t('card.upgrade')}
-              </Button>
-            </SidebarCard>
+              <SidebarCard>
+                <p className="text-[13px] font-medium text-strong-950">
+                  {t('card.trial')}
+                </p>
+                <p className="text-[12px] leading-4 text-sub-600">
+                  {t('card.trialBody')}
+                </p>
+                <Button size="xs" fullWidth>
+                  {t('card.upgrade')}
+                </Button>
+              </SidebarCard>
+            </div>
 
             <SidebarFooter>
               <SidebarUser
@@ -201,7 +203,7 @@ export function Example() {
             )}
           </DemoLabel>
           <div className="flex items-start gap-4">
-            <div className="h-[380px] overflow-hidden rounded-xl border border-soft-200">
+            <div className="h-[400px] overflow-hidden rounded-xl border border-soft-200">
               <Sidebar
                 collapsed={collapsed}
                 onCollapsedChange={setCollapsed}
@@ -220,21 +222,25 @@ export function Example() {
                   action={<SidebarTrigger />}
                   collapsedAction={<SidebarTrigger />}
                 />
-                <SidebarGroup label={t('group.main')}>
-                  {NAV.map((item) => (
-                    <SidebarItem
-                      key={item.id}
-                      icon={<Icon icon={item.icon} />}
-                      active={active === item.id}
-                      onClick={() => setActive(item.id)}
-                    >
-                      {t(item.label)}
-                    </SidebarItem>
-                  ))}
-                </SidebarGroup>
+                <div className="nili-scroll min-h-0 flex-1 overflow-y-auto">
+                  <SidebarGroup label={t('group.main')}>
+                    {NAV.map((item) => (
+                      <SidebarItem
+                        key={item.id}
+                        icon={<Icon icon={item.icon} />}
+                        active={active === item.id}
+                        onClick={() => setActive(item.id)}
+                      >
+                        {t(item.label)}
+                      </SidebarItem>
+                    ))}
+                  </SidebarGroup>
+                </div>
                 <SidebarFooter>
                   <SidebarUser
-                    avatar={<Avatar size="sm" name="Ada Lovelace" tone="blue" />}
+                    avatar={
+                      <Avatar size="sm" name="Ada Lovelace" tone="blue" />
+                    }
                     name="Ada Lovelace"
                     email="ada@nili.design"
                   />

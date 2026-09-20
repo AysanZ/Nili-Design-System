@@ -26,6 +26,20 @@ describe('Dropdown', () => {
     expect(onChange).toHaveBeenCalledWith('de');
   });
 
+  it('portals the menu outside clipping containers', async () => {
+    const user = userEvent.setup();
+    render(
+      <div data-testid="clipping-container" style={{ overflow: 'hidden' }}>
+        <Dropdown options={options} label="Country" />
+      </div>,
+    );
+
+    await user.click(screen.getByRole('combobox'));
+
+    const container = screen.getByTestId('clipping-container');
+    expect(container).not.toContainElement(screen.getByRole('listbox'));
+  });
+
   // Rich item content is the only reason not to use a native <select>, so the
   // keyboard contract has to be rebuilt to match.
   it('opens and commits with the keyboard', async () => {

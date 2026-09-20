@@ -27,7 +27,9 @@ const panel = (collapsed: boolean) => (
 describe('Sidebar', () => {
   it('names the navigation landmark', () => {
     render(panel(false));
-    expect(screen.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: 'Main' }),
+    ).toBeInTheDocument();
   });
 
   it('marks the current page with aria-current, not just a tint', () => {
@@ -41,7 +43,9 @@ describe('Sidebar', () => {
   it('renders a link when given an href and a button otherwise', () => {
     render(panel(false));
     expect(screen.getByRole('link', { name: 'Calendar' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Dashboard' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Dashboard' }),
+    ).toBeInTheDocument();
   });
 
   /*
@@ -51,9 +55,12 @@ describe('Sidebar', () => {
    */
   it('keeps every row named while collapsed', () => {
     render(panel(true));
-    expect(screen.getByRole('button', { name: 'Dashboard' })).toBeInTheDocument();
+    const item = screen.getByRole('button', { name: 'Dashboard' });
+    expect(item).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Calendar' })).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(item).toHaveClass('justify-center', 'gap-0', 'px-0');
+    expect(item).not.toHaveClass('gap-3', 'px-3');
   });
 
   /*
@@ -67,7 +74,9 @@ describe('Sidebar', () => {
       <Sidebar label="Main">
         <SidebarHeader
           title="Synergy"
-          action={<SidebarTrigger collapseLabel="Collapse" expandLabel="Expand" />}
+          action={
+            <SidebarTrigger collapseLabel="Collapse" expandLabel="Expand" />
+          }
           collapsedAction={
             <SidebarTrigger collapseLabel="Collapse" expandLabel="Expand" />
           }
@@ -86,7 +95,9 @@ describe('Sidebar', () => {
     const expand = screen.getByRole('button', { name: 'Expand' });
     expect(expand).toHaveAttribute('aria-expanded', 'false');
     // Still there, still named: the rail is not a different component.
-    expect(screen.getByRole('button', { name: 'Dashboard' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Dashboard' }),
+    ).toBeInTheDocument();
   });
 
   it('lets the app drive it instead, when asked', async () => {
@@ -102,14 +113,17 @@ describe('Sidebar', () => {
     );
     // A controlled panel does not move on its own; the prop is the source.
     await userEvent.click(screen.getByRole('button', { name: 'Expand' }));
-    expect(
-      screen.getByRole('button', { name: 'Expand' }),
-    ).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('button', { name: 'Expand' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
   });
 
   it('hides the account details but keeps the account reachable', () => {
     render(panel(true));
-    expect(screen.getByRole('button', { name: 'Olivia Rhye' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Olivia Rhye' }),
+    ).toBeInTheDocument();
     expect(screen.queryByText('olivia@husan.com')).toBeNull();
   });
 });

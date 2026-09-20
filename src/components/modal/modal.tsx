@@ -140,7 +140,10 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
       >
         {(title || leading || showClose) && (
           <header
-            className={modalHeaderVariants({ size: headerSize, alignment })}
+            className={cn(
+              modalHeaderVariants({ size: headerSize, alignment }),
+              !children && footer && 'border-b-0',
+            )}
           >
             {leading && <span className="shrink-0">{leading}</span>}
 

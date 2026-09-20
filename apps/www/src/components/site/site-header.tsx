@@ -1,8 +1,8 @@
-import { RiSearchLine } from '@remixicon/react';
 import Link from 'next/link';
 
 import { Container } from '@www/components/site/container';
 import { LangSwitcher } from '@www/components/site/lang-switcher';
+import { STORYBOOK_URL } from '@www/components/site/links';
 import { MobileNav } from '@www/components/site/mobile-nav';
 import { ThemeToggle } from '@www/components/site/theme-toggle';
 import type { Locale } from '@www/i18n/config';
@@ -14,9 +14,18 @@ import type { Translate } from '@www/i18n/dictionaries';
  * so the chrome costs almost nothing in JavaScript.
  */
 export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
-  const nav = [
+  const nav: {
+    href: string;
+    label: string;
+    external?: boolean;
+  }[] = [
     { href: `/${locale}/docs`, label: t('nav.docs') },
     { href: `/${locale}/components`, label: t('nav.comp') },
+    {
+      href: STORYBOOK_URL,
+      label: 'Storybook',
+      external: true,
+    },
     { href: `/${locale}#theming`, label: t('nav.theme') },
     { href: `/${locale}#access`, label: t('nav.access') },
     { href: `/${locale}#team`, label: t('nav.team') },
@@ -46,6 +55,8 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
             <Link
               key={item.href}
               href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
               className="rounded-md px-2.5 py-1.5 text-[14px] leading-5 text-sub-600 transition-colors hover:text-strong-950"
             >
               {item.label}
@@ -54,21 +65,6 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
         </nav>
 
         <div className="ms-auto flex items-center gap-1.5 sm:gap-2">
-          {/* Not a field yet — the search index arrives with the component
-              pages. Rendered as a `span` on purpose: an `<input>` that does
-              nothing is a trap for anyone tabbing through. */}
-          <span className="hidden items-center gap-2 rounded-lg border border-soft-200 bg-weak-50 px-2.5 py-1.5 lg:flex">
-            <span className="inline-flex text-soft-400 [&_svg]:size-4">
-              <RiSearchLine aria-hidden="true" />
-            </span>
-            <span className="text-[13px] leading-4 text-soft-400">
-              {t('search.ph')}
-            </span>
-            <kbd className="ms-6 rounded border border-soft-200 bg-white-0 px-1.5 py-0.5 font-mono text-[12px] leading-4 text-soft-400">
-              ⌘K
-            </kbd>
-          </span>
-
           <LangSwitcher current={locale} />
           <ThemeToggle label={t('f3.btn')} />
           <MobileNav

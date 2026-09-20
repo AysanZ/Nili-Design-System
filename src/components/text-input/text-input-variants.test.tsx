@@ -75,16 +75,52 @@ describe('CounterInput', () => {
   it('moves on arrow keys', async () => {
     render(<CounterInput defaultValue={5} {...labels} />);
     const spin = screen.getByRole('spinbutton');
-    spin.focus();
+    await userEvent.click(spin);
     await userEvent.keyboard('{ArrowUp}');
     expect(spin).toHaveAttribute('aria-valuenow', '6');
     await userEvent.keyboard('{ArrowDown}');
     expect(spin).toHaveAttribute('aria-valuenow', '5');
   });
 
+  it('accepts a number typed directly and commits it on blur', async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(
+      <CounterInput
+        defaultValue={2}
+        min={1}
+        max={10}
+        onValueChange={onValueChange}
+        {...labels}
+      />,
+    );
+    const spin = screen.getByRole('spinbutton');
+
+    await user.click(spin);
+    await user.keyboard('7');
+    await user.tab();
+
+    expect(onValueChange).toHaveBeenLastCalledWith(7);
+    expect(spin).toHaveAttribute('aria-valuenow', '7');
+    expect(spin).toHaveValue('7');
+  });
+
+  it('clamps and snaps a typed value to the configured range and step', async () => {
+    const user = userEvent.setup();
+    render(
+      <CounterInput defaultValue={2} min={2} max={10} step={2} {...labels} />,
+    );
+    const spin = screen.getByRole('spinbutton');
+
+    await user.clear(spin);
+    await user.type(spin, '99');
+    await user.tab();
+    expect(spin).toHaveValue('10');
+  });
+
   it('localizes the digits it shows', () => {
     render(<CounterInput defaultValue={16} locale="fa" {...labels} />);
-    expect(screen.getByRole('spinbutton')).toHaveTextContent('۱۶');
+    expect(screen.getByRole('spinbutton')).toHaveValue('۱۶');
   });
 });
 

@@ -22,7 +22,11 @@ export function MobileNav({
   menuLabel,
   closeLabel,
 }: {
-  items: { href: string; label: string }[];
+  items: {
+    href: string;
+    label: string;
+    external?: boolean;
+  }[];
   menuLabel: string;
   closeLabel: string;
 }) {
@@ -72,6 +76,8 @@ export function MobileNav({
             <Link
               key={item.href}
               href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
               className="rounded-md px-2.5 py-2 text-[14px] leading-5 text-sub-600 transition-colors hover:bg-weak-50 hover:text-strong-950"
             >
               {item.label}

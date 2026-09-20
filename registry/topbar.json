@@ -17,6 +17,7 @@
     "TopbarUser",
     "TopbarUserProps",
     "topbarItemVariants",
+    "topbarListVariants",
     "topbarUserVariants",
     "topbarVariants"
   ],
@@ -143,6 +144,15 @@
           "default": false
         }
       }
+    },
+    {
+      "name": "TopbarList",
+      "exported": false,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
     },
     {
       "name": "TopbarUser",

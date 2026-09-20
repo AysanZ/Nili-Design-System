@@ -1,0 +1,139 @@
+{
+  "dir": "app-store-badge",
+  "name": "AppStoreBadge",
+  "type": "registry:component",
+  "files": [
+    "src/components/app-store-badge/app-store-badge.data.ts",
+    "src/components/app-store-badge/app-store-badge.styles.ts",
+    "src/components/app-store-badge/app-store-badge.tsx",
+    "src/components/app-store-badge/app-store-badge.types.ts",
+    "src/components/app-store-badge/index.ts"
+  ],
+  "exports": [
+    "APP_STORES",
+    "APP_STORE_BADGE_SIZES",
+    "APP_STORE_IDS",
+    "AppStoreBadge",
+    "AppStoreBadgeProps",
+    "AppStoreBadgeSize",
+    "AppStoreBadgeVariant",
+    "AppStoreBadgeVariantProps",
+    "AppStoreEntry",
+    "AppStoreId",
+    "appStoreBadgeVariants",
+    "getAppStore"
+  ],
+  "dependencies": {
+    "npm": [
+      "class-variance-authority"
+    ],
+    "registry": [],
+    "shared": [
+      "lib/cn"
+    ]
+  },
+  "components": [
+    {
+      "name": "AppStoreBadge",
+      "exported": true,
+      "variants": {
+        "size": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "variant": [
+          "original",
+          "black",
+          "white"
+        ]
+      },
+      "defaultVariants": {
+        "size": "md",
+        "variant": "original"
+      },
+      "slots": [],
+      "extends": [
+        "Omit<ComponentPropsWithoutRef<'a'>, 'children' | 'color'>",
+        "AppStoreBadgeVariantProps"
+      ],
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "control": "slot",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "aria-label": {
+          "type": "string",
+          "control": "text",
+          "required": false,
+          "doc": null,
+          "source": "dom"
+        },
+        "store": {
+          "type": "AppStoreId",
+          "required": true,
+          "doc": "Which storefront. `APP_STORE_IDS` is the list.",
+          "control": "select",
+          "options": [
+            "amazon",
+            "apple",
+            "huawei",
+            "fdroid",
+            "galaxy",
+            "google",
+            "microsoft"
+          ]
+        },
+        "href": {
+          "type": "string",
+          "required": false,
+          "doc": "Makes it a link. Without it the badge renders as a non-interactive span.",
+          "control": "text"
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "doc": "Accessible name. Defaults to the badge's own sentence, e.g. \"Download on the App Store\" — which is what the badge says, so overriding it is usually a mistake.",
+          "control": "text"
+        },
+        "artwork": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "The store's official badge SVG, which replaces the built-in stand-in drawing entirely. Required before this ships to users: see the note at the top of `app-store-badge.data.ts`.",
+          "control": "slot"
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg' | 'xl'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "md",
+          "source": "cva",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "variant": {
+          "type": "'original' | 'black' | 'white'",
+          "required": false,
+          "doc": null,
+          "control": "select",
+          "default": "original",
+          "source": "cva",
+          "options": [
+            "original",
+            "black",
+            "white"
+          ]
+        }
+      }
+    }
+  ]
+}

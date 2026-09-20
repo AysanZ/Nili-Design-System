@@ -1,4 +1,5 @@
 import { Container } from '@www/components/site/container';
+import { SyntaxCode } from '@www/components/docs/syntax-code';
 import { Glow } from '@www/components/site/glow';
 import type { MessageKey, Translate } from '@www/i18n/dictionaries';
 
@@ -82,7 +83,7 @@ function CodeBlock({ children }: { children: string }) {
       dir="ltr"
       className="nili-scroll overflow-x-auto rounded-xl border border-soft-200 bg-white-0 p-4 font-mono text-[12px] leading-[1.8] text-strong-950"
     >
-      <code>{children}</code>
+      <SyntaxCode code={children} />
     </pre>
   );
 }

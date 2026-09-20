@@ -72,6 +72,18 @@ describe('ColorPicker', () => {
     await user.click(screen.getByRole('button', { name: '#1FC16B' }));
     expect(onChange).toHaveBeenCalledWith('#1FC16B');
   });
+
+  it('insets footer actions to align with the picker content', () => {
+    const { container } = render(
+      <ColorPicker footer={<button type="button">Apply</button>} />,
+    );
+
+    const footer = container.querySelector('[data-slot="color-picker-footer"]');
+    expect(footer).toHaveClass('px-[15px]', 'pb-[15px]');
+    expect(footer).toContainElement(
+      screen.getByRole('button', { name: 'Apply' }),
+    );
+  });
 });
 
 describe('ColorDot', () => {

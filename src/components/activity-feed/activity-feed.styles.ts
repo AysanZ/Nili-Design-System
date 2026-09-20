@@ -79,9 +79,9 @@ export const activityFeedItemVariants = cva(
   {
     variants: {
       unread: {
-        // A logical inset so the unread marker sits on the leading edge in
-        // both directions. Not in Figma; kept for existing callers.
-        true: 'before:absolute before:start-0 before:top-4 before:h-2 before:w-0.5 before:rounded-e-full before:bg-primary-base',
+        // Keep the state available to callers without drawing an extra
+        // leading-edge line; status can be communicated by the item badge.
+        true: '',
         false: '',
       },
     },

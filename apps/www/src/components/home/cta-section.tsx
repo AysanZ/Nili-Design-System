@@ -4,9 +4,17 @@ import { Button } from '@www/components/nili';
 import { Container } from '@www/components/site/container';
 import type { Translate } from '@www/i18n/dictionaries';
 
+const CONTACT_EMAIL = 'aysanzeinalvand@gmail.com';
+const WALKTHROUGH_EMAIL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  'Book a nili/ui walkthrough',
+)}`;
+
 export function CtaSection({ t }: { t: Translate }) {
   return (
-    <section id="contact" className="scroll-mt-16 border-t border-soft-200 bg-weak-50">
+    <section
+      id="contact"
+      className="scroll-mt-16 border-t border-soft-200 bg-weak-50"
+    >
       <Container className="flex flex-col gap-5 py-14 md:flex-row md:items-center md:justify-between md:py-20">
         <div>
           <h2 className="text-[22px] leading-[30px] font-semibold tracking-[-0.02em] text-strong-950 md:text-[26px] md:leading-9">
@@ -19,10 +27,10 @@ export function CtaSection({ t }: { t: Translate }) {
 
         <div className="flex shrink-0 flex-wrap items-center gap-2.5">
           <Button asChild color="neutral" startIcon={<RiMailLine />}>
-            <a href="mailto:hello@example.com">{t('cta.email')}</a>
+            <a href={`mailto:${CONTACT_EMAIL}`}>{t('cta.email')}</a>
           </Button>
           <Button asChild color="neutral" appearance="stroke">
-            <a href="#">{t('cta.book')}</a>
+            <a href={WALKTHROUGH_EMAIL}>{t('cta.book')}</a>
           </Button>
         </div>
       </Container>

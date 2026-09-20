@@ -161,6 +161,13 @@ describe('Slider', () => {
     expect(screen.getByText('۴۲')).toBeInTheDocument();
   });
 
+  it('centres the tooltip over the thumb', () => {
+    render(<Slider value={77} label="Volume" tooltip />);
+    const tooltip = screen.getByText('77');
+
+    expect(tooltip).toHaveClass('start-1/2', '-translate-x-1/2');
+  });
+
   it('takes it out of the tab order while disabled', () => {
     render(<Slider value={40} label="Volume" disabled />);
     expect(screen.getByRole('slider')).toHaveAttribute('tabindex', '-1');

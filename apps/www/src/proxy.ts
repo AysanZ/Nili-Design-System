@@ -45,6 +45,6 @@ export const config = {
   /* Everything except Next's own assets, the public folder and the files a
      crawler fetches from the root by convention. */
   matcher: [
-    '/((?!_next|favicon.ico|robots.txt|sitemap.xml|fonts|flags|avatars|card-providers).*)',
+    '/((?!_next|favicon.ico|icon.svg|robots.txt|sitemap.xml|fonts|flags|avatars|card-providers).*)',
   ],
 };

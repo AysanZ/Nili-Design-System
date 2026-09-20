@@ -118,6 +118,35 @@
   }
 }
 
+/* Storybook's pink is reserved for its icon, while the control itself stays
+   white like a lightweight external destination. This stays site-only: it is
+   campaign chrome, not a new Button colour in the design-system API. Kept
+   outside a Tailwind layer so it deliberately wins over the neutral Button's
+   background state classes. */
+.storybook-cta {
+  border-color: var(--nili-soft-200);
+  background-color: var(--nili-static-white);
+  color: var(--nili-static-black);
+  box-shadow: var(--nili-shadow-button-xs);
+}
+
+.storybook-cta svg {
+  color: #ff4785;
+}
+
+.storybook-cta:hover {
+  border-color: #ffb3cc;
+  background-color: #fff5f8;
+}
+
+.storybook-cta:focus-visible {
+  border-color: #ff4785;
+  background-color: var(--nili-static-white);
+  box-shadow:
+    0 0 0 2px var(--nili-static-white),
+    0 0 0 4px #ff8fbb;
+}
+
 /* ────────────────────────────────────────────────────────────────
    Scroll surfaces
 

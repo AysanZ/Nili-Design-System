@@ -307,7 +307,11 @@ export const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
               <Icon icon={isMuted ? RiVolumeMuteFill : RiVolumeUpFill} />
             </button>
 
-            <div dir="ltr" className="hidden w-20 sm:block">
+            <div
+              dir="ltr"
+              data-slot="video-volume"
+              className="me-2 hidden w-20 sm:block"
+            >
               <Slider
                 value={isMuted ? 0 : volume}
                 min={0}

@@ -149,7 +149,7 @@
         "dot": {
           "type": "boolean",
           "required": false,
-          "doc": "Renders a dot before the label. Mutually exclusive with `startIcon`.",
+          "doc": "Renders a dot before the label, or a standalone dot without children.",
           "control": "boolean",
           "default": false
         },

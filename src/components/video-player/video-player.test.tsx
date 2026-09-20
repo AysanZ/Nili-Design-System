@@ -41,7 +41,7 @@ describe('VideoPlayer', () => {
   });
 
   it('names every control', () => {
-    render(player());
+    const { container } = render(player());
     expect(
       screen.getAllByRole('button', { name: 'Play' }).length,
     ).toBeGreaterThan(0);
@@ -49,6 +49,9 @@ describe('VideoPlayer', () => {
     expect(
       screen.getByRole('button', { name: 'Full screen' }),
     ).toBeInTheDocument();
+    expect(container.querySelector('[data-slot="video-volume"]')).toHaveClass(
+      'me-2',
+    );
   });
 
   it('plays and reflects the media element, not a prop', async () => {

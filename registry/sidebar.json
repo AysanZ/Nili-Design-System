@@ -18,19 +18,24 @@
     "SidebarGroupProps",
     "SidebarHeader",
     "SidebarHeaderProps",
+    "SidebarIconButton",
+    "SidebarIconButtonProps",
     "SidebarItem",
     "SidebarItemProps",
     "SidebarProps",
+    "SidebarTrigger",
     "SidebarUser",
     "SidebarUserProps",
     "SidebarVariantProps",
     "sidebarFooterVariants",
     "sidebarGroupLabelVariants",
     "sidebarHeaderVariants",
+    "sidebarIconButtonVariants",
     "sidebarItemLabelVariants",
     "sidebarItemTrailingVariants",
     "sidebarItemVariants",
     "sidebarVariants",
+    "useSidebar",
     "useSidebarCollapsed"
   ],
   "dependencies": {
@@ -42,6 +47,7 @@
       "icon"
     ],
     "shared": [
+      "hooks/use-controllable-state",
       "lib/cn"
     ]
   },
@@ -84,6 +90,19 @@
           "control": "boolean",
           "default": false,
           "source": "cva"
+        },
+        "defaultCollapsed": {
+          "type": "boolean",
+          "required": false,
+          "doc": "Starting state while uncontrolled.",
+          "control": "boolean",
+          "default": false
+        },
+        "onCollapsedChange": {
+          "type": "(collapsed: boolean) => void",
+          "required": false,
+          "doc": "Fires on every toggle, controlled or not.",
+          "control": "handler"
         },
         "label": {
           "type": "string",
@@ -214,6 +233,12 @@
           "doc": "Figma's workspace switcher, on the trailing edge. Hidden on the rail.",
           "control": "slot"
         },
+        "collapsedAction": {
+          "type": "ReactNode",
+          "required": false,
+          "doc": "What the header shows instead of the logo once collapsed. Usually a `SidebarTrigger`, so there is a way back out of the rail — otherwise the only control that expands it is the one that just disappeared.",
+          "control": "slot"
+        },
         "collapsed": {
           "type": "'true' | 'false'",
           "required": false,
@@ -223,6 +248,15 @@
           "source": "cva"
         }
       }
+    },
+    {
+      "name": "SidebarIconButton",
+      "exported": true,
+      "variants": {},
+      "defaultVariants": {},
+      "slots": [],
+      "extends": [],
+      "props": {}
     },
     {
       "name": "SidebarItem",
