@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { RiGithubFill } from '@remixicon/react';
 
 import { Container } from '@www/components/site/container';
 import { LangSwitcher } from '@www/components/site/lang-switcher';
@@ -26,11 +27,6 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
       label: 'Storybook',
       external: true,
     },
-    {
-      href: GITHUB_URL,
-      label: 'GitHub',
-      external: true,
-    },
     { href: `/${locale}#theming`, label: t('nav.theme') },
     { href: `/${locale}#access`, label: t('nav.access') },
     { href: `/${locale}#team`, label: t('nav.team') },
@@ -38,7 +34,7 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-soft-200 bg-white-0/85 backdrop-blur-xl">
-      <Container className="flex h-[var(--site-header-h)] items-center gap-3 sm:gap-4">
+      <Container className="flex h-[var(--site-header-h)] items-center gap-2 sm:gap-4">
         {/* The wordmark is a Latin lockup and stays one in every locale, so it
             is pinned to `ltr` — otherwise "nili/ui" reorders under `dir=rtl`
             and reads "ui/nili". */}
@@ -69,8 +65,18 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
           ))}
         </nav>
 
-        <div className="ms-auto flex items-center gap-1.5 sm:gap-2">
+        <div className="ms-auto flex items-center gap-1 min-[360px]:gap-1.5 sm:gap-2">
           <LangSwitcher current={locale} />
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            title="GitHub"
+            className="grid size-8 shrink-0 place-items-center rounded-lg border border-soft-200 text-sub-600 transition-colors hover:bg-weak-50 hover:text-strong-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-base [&_svg]:size-4"
+          >
+            <RiGithubFill aria-hidden="true" />
+          </a>
           <ThemeToggle label={t('f3.btn')} />
           <MobileNav
             items={nav}

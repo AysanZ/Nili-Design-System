@@ -1,149 +1,84 @@
 # Deploying nili.aysanz.dev
 
-Follows the runbook's "Adding the next project → Containerised" recipe
-exactly, filled in for this site. Read alongside `aysanz.dev — server runbook`
-for the parts this doesn't repeat (what `/opt/edge` is, why Caddy owns 80/443
-alone, the CDN-proxy-toggle trap, etc).
+The website runs as `nili-web-1` in `/opt/nili` on the server. Caddy routes
+`nili.aysanz.dev` to port 3000 over the existing `edge` Docker network.
 
-## What ships
+## Automatic deployment
 
-`apps/www/Dockerfile` — three-stage build, **built from the repository root**,
-producing `ghcr.io/aysanz/nili-www`. It has to be the root because `apps/www`
-imports `@nili/ui` straight from `src/index.ts`, not from a published
-package — the Dockerfile's own header comment says why, and `next.config.ts`'s
-`outputFileTracingRoot` is the other half of that same fact.
+`.github/workflows/deploy-nili.yml` runs for relevant changes on `main` and
+can also be started from GitHub Actions with **Run workflow**.
 
-```
-deploy/nili/
-  docker-compose.prod.yml   the service — mirrors /opt/alidade's shape
-  .env.example              → becomes /opt/nili/.env on the box
-  Caddyfile.snippet         the block to add to /opt/edge/Caddyfile
+1. Test deployment failure and rollback behavior.
+2. Build `apps/www/Dockerfile` from the repository root.
+3. Publish `ghcr.io/aysanz/nili-design-system` with the commit's first 12
+   characters and `latest` as tags. Image labels record the source repository
+   and full commit SHA.
+4. Connect to the server and download `deploy.sh` and the Compose file from
+   that exact commit.
+5. Pull and verify the image, back up the current configuration, then update
+   only the `web` service. Wait for container health and check all four locales.
+6. Verify the public website before marking the `production` deployment successful.
 
-.github/workflows/deploy-nili.yml   builds, pushes, deploys on every push to
-                                     main that touches apps/www, src/, or
-                                     registry/
-```
+The package is created by this repository's `GITHUB_TOKEN`, so the workflow
+inherits package access. This replaces the older `nili-www` package, which
+rejected this repository's workflow token. No personal access token or public
+package visibility is required. Registry credentials are stored in a temporary
+Docker configuration and removed after deployment.
 
-## One-time server setup
+## GitHub environment
 
-```bash
-mkdir -p /opt/nili
-```
+Set these secrets under **Settings → Environments → production**:
 
-Copy `deploy/nili/docker-compose.prod.yml` to `/opt/nili/docker-compose.prod.yml`
-and `deploy/nili/.env.example` to `/opt/nili/.env` (fetch both with `curl`
-from the repo, the same way `/opt/alidade`'s config arrived — see the
-runbook's "Terminal paste mangling" note on why curl beats pasting a heredoc):
+| Secret     | Value                               |
+| ---------- | ----------------------------------- |
+| `SSH_HOST` | Server hostname or IP               |
+| `SSH_USER` | Deployment user, with Docker access |
+| `SSH_KEY`  | Private SSH key for that user       |
+| `SSH_PORT` | SSH port, normally `22`             |
 
-```bash
-curl -fsSL -o /opt/nili/docker-compose.prod.yml \
-  https://raw.githubusercontent.com/AysanZ/nili-ui/main/deploy/nili/docker-compose.prod.yml
-curl -fsSL -o /opt/nili/.env \
-  https://raw.githubusercontent.com/AysanZ/nili-ui/main/deploy/nili/.env.example
-```
+The environment's deployment URL is `https://nili.aysanz.dev`.
 
-(Replace `nili-ui` above with whatever this repository is actually named on
-GitHub — the runbook's own examples use `AysanZ/alidade`; this one wasn't
-given.)
+## Server prerequisites
 
-Make the GHCR package public the same way `alidade-api` and `alidade-web`
-are, once the first push has created it — GitHub → your profile → Packages →
-`nili-www` → Package settings → Change visibility.
+The server needs Bash, curl, Python 3, Docker, and Docker Compose with `--wait`
+support. `/opt/nili/.env` and `/opt/nili/docker-compose.prod.yml` must exist and
+be writable by the deployment user. Use the files in this directory for a new
+installation; preserve existing environment settings on a running installation.
 
-Add the Caddy block from `deploy/nili/Caddyfile.snippet` to
-`/opt/edge/Caddyfile`, then validate and reload:
+`IMAGE` selects the image repository and `TAG` selects the release. The deploy
+script updates both and synchronizes the Compose file on every release.
+It preserves other environment values.
 
-```bash
-cd /opt/edge
-docker compose exec caddy caddy validate --config /etc/caddy/Caddyfile
-docker compose restart caddy
+The existing Caddy route remains:
+
+```caddyfile
+nili.aysanz.dev {
+    reverse_proxy nili-web-1:3000
+}
 ```
 
-No DNS change: the wildcard `*` A record already covers `nili.aysanz.dev`.
+Only Caddy publishes ports. The website keeps its 256 MB memory limit.
 
-## GitHub setup
+## Rollback
 
-Same four secrets the runbook's §1 describes for Alidade, added again for
-**this** repository (secrets belong to a repo, not to the server) —
-GitHub → this repo → Settings → Environments → New environment →
-`production`:
+If deployment or locale checks fail, the script restores the previous `.env`
+and Compose file and starts the previous image. Images are retained locally;
+the workflow does not prune images belonging to other services.
 
-| Secret     | Value                                          |
-| ---------- | ----------------------------------------------- |
-| `SSH_HOST` | `185.110.190.42`                                 |
-| `SSH_USER` | `deploy`                                         |
-| `SSH_KEY`  | the deploy key's private half, `BEGIN`/`END` included |
-| `SSH_PORT` | `22`                                             |
+Each successful deployment prints its backup directory under
+`/opt/nili/rollback.*`. To restore one manually, use that exact directory:
 
-If the Alidade deploy key from the runbook's §1 already exists on the laptop
-(`~/.ssh/aysanz_deploy`), reuse it — one `deploy` user, one key, both repos'
-`production` environments point at the same value. Only generate a new one if
-that key doesn't exist yet:
-
-```bash
-ssh-keygen -t ed25519 -C "github-deploy" -f ~/.ssh/aysanz_deploy -N ""
-ssh-copy-id -i ~/.ssh/aysanz_deploy.pub deploy@185.110.190.42
-```
-
-## First deploy
-
-Push to `main` with a change under `apps/www/`, `src/`, or `registry/`, or
-trigger it by hand: Actions → "Deploy nili.aysanz.dev" → Run workflow.
-
-The workflow builds the image, pushes `:latest` and `:<short-sha>`, then SSHes
-in and runs the same three lines the runbook documents for a manual deploy —
-write the tag into `.env`, `pull`, `up -d`.
-
-## Operating it
-
-Everything from here on is the runbook's own sections, unchanged, with
-`/opt/alidade` → `/opt/nili` and the compose file name adjusted:
-
-**Manual deploy**
 ```bash
 cd /opt/nili
-docker compose --env-file .env -f docker-compose.prod.yml pull
-docker compose --env-file .env -f docker-compose.prod.yml up -d
+cp -p rollback.XXXXXX/.env .env
+cp -p rollback.XXXXXX/docker-compose.prod.yml docker-compose.prod.yml
+docker compose --env-file .env -f docker-compose.prod.yml up -d --no-deps --pull never --wait web
 ```
 
-**Rollback**
+## Local checks
+
 ```bash
-cd /opt/nili
-sed -i 's|^TAG=.*|TAG=PREVIOUS_SHA|' .env
-docker compose --env-file .env -f docker-compose.prod.yml up -d
+bash -n deploy/nili/deploy.sh
+python3 -B -m unittest discover -s deploy/nili -p 'test_*.py'
+docker compose --env-file deploy/nili/.env.example -f deploy/nili/docker-compose.prod.yml config --quiet
 ```
-
-**Health**
-```bash
-curl -s https://nili.aysanz.dev
-docker compose -f /opt/nili/docker-compose.prod.yml ps
-docker stats --no-stream --format "table {{.Name}}\t{{.MemUsage}}"
-```
-
-**Logs**
-```bash
-cd /opt/nili && docker compose -f docker-compose.prod.yml logs -f web
-```
-
-## Sizing
-
-`docker-compose.prod.yml` sets `mem_limit: 256m`. That is a guess, not a
-measurement — there is nothing in the runbook's "Measured footprint" table for
-a Next.js `standalone` server, only Alidade's three containers and Caddy. Once
-this is live, `docker stats` on `nili-web-1` for a day of real traffic is the
-number to replace it with. The runbook's existing "Idle, no visitors" total
-(614 MB used, 1.3 GB available) has room for this to run considerably higher
-than 256m if it turns out to need it — the 2 GB box was sized with exactly
-this kind of second static-ish site in mind.
-
-## Why this isn't `sites/nili/` after all
-
-The runbook reserves `/opt/edge/sites/nili/` for a *static* export — build
-output copied in, served straight by Caddy, no container of its own. This app
-can't take that path, and not just because of the no-flash theme script:
-`src/proxy.ts` is real Next middleware — it reads the request's
-`Accept-Language` header to pick a locale for a bare `/` — and middleware
-needs the Node runtime `next start` provides. `next export` refuses to build
-at all with middleware present. So it follows the "Containerised" recipe
-instead, the same shape as Alidade, and `sites/nili/` stays reserved and
-empty as the runbook already shows it.

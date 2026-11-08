@@ -18,6 +18,7 @@ on:
       - 'public/**'
       - 'package.json'
       - 'package-lock.json'
+      - 'deploy/nili/**'
       - '.github/workflows/deploy-nili.yml'
   workflow_dispatch: {}
 
@@ -27,7 +28,8 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/aysanz/nili-www
+  # Created by this repository's GITHUB_TOKEN, so package access is inherited.
+  IMAGE: ghcr.io/aysanz/nili-design-system
 
 jobs:
   build-and-push:
@@ -40,6 +42,9 @@ jobs:
       tag: ${{ steps.tag.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check deployment rollback behavior
+        run: python3 -B -m unittest discover -s deploy/nili -p 'test_*.py'
 
       - name: Short SHA
         id: tag
@@ -66,6 +71,9 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ steps.tag.outputs.sha }}
             ${{ env.IMAGE }}:latest
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -73,24 +81,51 @@ jobs:
     name: Deploy
     needs: build-and-push
     runs-on: ubuntu-latest
-    environment: production
+    permissions:
+      contents: read
+      packages: read
+    environment:
+      name: production
+      url: https://nili.aysanz.dev
     steps:
-      # Matches the manual recipe in the runbook exactly, so a hand-run
-      # deploy and this workflow never disagree about what "deployed" means:
-      # write TAG into .env, pull, up -d. The same three lines are what
-      # §"Rollback" says to run by hand with a different TAG.
+      - name: Check deployment credentials
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          for name in SSH_HOST SSH_USER SSH_KEY SSH_PORT; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing production secret: $name"
+              exit 1
+            fi
+          done
+
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          DEPLOY_IMAGE: ${{ env.IMAGE }}
+          DEPLOY_TAG: ${{ needs.build-and-push.outputs.tag }}
+          DEPLOY_REVISION: ${{ github.sha }}
+          DEPLOY_REPOSITORY: ${{ github.repository }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          envs: DEPLOY_IMAGE,DEPLOY_TAG,DEPLOY_REVISION,DEPLOY_REPOSITORY,GHCR_USER,GHCR_TOKEN
           script: |
             set -euo pipefail
-            cd /opt/nili
-            sed -i "s|^TAG=.*|TAG=${{ needs.build-and-push.outputs.tag }}|" .env
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker compose --env-file .env -f docker-compose.prod.yml pull
-            docker compose --env-file .env -f docker-compose.prod.yml up -d
-            docker image prune -af --filter "until=168h" >/dev/null 2>&1 || true
+            release_dir=$(mktemp -d /tmp/nili-release.XXXXXX)
+            trap 'rm -rf "$release_dir"' EXIT
+            source_url="https://raw.githubusercontent.com/$DEPLOY_REPOSITORY/$DEPLOY_REVISION/deploy/nili"
+            curl -fsSL --retry 3 "$source_url/deploy.sh" -o "$release_dir/deploy.sh"
+            curl -fsSL --retry 3 "$source_url/docker-compose.prod.yml" -o "$release_dir/docker-compose.prod.yml"
+            bash "$release_dir/deploy.sh" "$release_dir/docker-compose.prod.yml"
+
+      - name: Verify public site
+        run: |
+          curl --fail --silent --show-error --retry 6 --retry-delay 5 --retry-all-errors --max-time 15 https://nili.aysanz.dev/en -o /dev/null

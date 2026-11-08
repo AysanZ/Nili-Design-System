@@ -56,7 +56,7 @@ export function LangSwitcher({ current }: { current: Locale }) {
           lang={locale}
           hrefLang={locale}
           aria-current={locale === current ? 'true' : undefined}
-          className="px-2 py-1.5 text-[12px] leading-4 text-sub-600 uppercase transition-colors hover:bg-weak-50 aria-[current]:bg-strong-950 aria-[current]:text-white-0"
+          className="px-1 py-1.5 text-[12px] leading-4 text-sub-600 uppercase transition-colors hover:bg-weak-50 min-[360px]:px-2 aria-[current]:bg-strong-950 aria-[current]:text-white-0"
         >
           {locale}
         </a>

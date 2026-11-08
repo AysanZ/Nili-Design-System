@@ -8,7 +8,7 @@
 
 services:
   web:
-    image: ghcr.io/aysanz/nili-www:${TAG:-latest}
+    image: ${IMAGE:-ghcr.io/aysanz/nili-design-system}:${TAG:-latest}
     container_name: nili-web-1
     restart: unless-stopped
     networks:
@@ -21,7 +21,13 @@ services:
     # `next start` in standalone mode has no separate health endpoint; the
     # root path is enough to confirm the Node process is up and serving.
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3000/en', r => process.exit(r.statusCode < 500 ? 0 : 1)).on('error', () => process.exit(1))"]
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "require('http').get('http://127.0.0.1:3000/en', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
