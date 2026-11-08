@@ -2,7 +2,10 @@
 
 A React design system for Persian and English interfaces, built with TypeScript and Tailwind CSS. Nili brings RTL support, consistent typography, and customizable themes to reusable UI components.
 
-[Website & Docs](https://nili.aysanz.dev) · [Storybook](https://nili-storybook.aysanz.dev)
+| Website & Docs | Storybook |
+| :---: | :---: |
+| [![Nili website preview](docs/images/website-preview.png)](https://nili.aysanz.dev) | [![Nili Storybook component preview](docs/images/storybook-preview.png)](https://nili-storybook.aysanz.dev) |
+| [**Visit the website ↗**](https://nili.aysanz.dev)<br>Discover Nili and read the docs. | [**Open Storybook ↗**](https://nili-storybook.aysanz.dev)<br>Explore components and try their variants. |
 
 ## Features
 
