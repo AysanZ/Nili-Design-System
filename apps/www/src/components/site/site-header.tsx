@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Container } from '@www/components/site/container';
 import { LangSwitcher } from '@www/components/site/lang-switcher';
-import { STORYBOOK_URL } from '@www/components/site/links';
+import { GITHUB_URL, STORYBOOK_URL } from '@www/components/site/links';
 import { MobileNav } from '@www/components/site/mobile-nav';
 import { ThemeToggle } from '@www/components/site/theme-toggle';
 import type { Locale } from '@www/i18n/config';
@@ -24,6 +24,11 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
     {
       href: STORYBOOK_URL,
       label: 'Storybook',
+      external: true,
+    },
+    {
+      href: GITHUB_URL,
+      label: 'GitHub',
       external: true,
     },
     { href: `/${locale}#theming`, label: t('nav.theme') },
@@ -50,7 +55,7 @@ export function SiteHeader({ locale, t }: { locale: Locale; t: Translate }) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.href}

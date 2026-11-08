@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 /**
- * The header navigation, below `md`.
+ * The header navigation, below `lg`.
  *
  * The links were simply `hidden md:flex`, which on a phone left the header
  * with a wordmark, a language switcher and a theme button and no way to reach
@@ -47,7 +47,7 @@ export function MobileNav({
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
